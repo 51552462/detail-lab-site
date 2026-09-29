@@ -155,6 +155,13 @@ menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{butt
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&button.getAttribute('aria-expanded')==='true'){button.setAttribute('aria-expanded','false');menu.classList.remove('is-open');button.focus();}});
 const decisionFields=[...document.querySelectorAll('[data-offer][data-topic]')];
 function buildDecisionSummary(){
+  const summary=document.getElementById('decision-summary');
+  if(!decisionFields.some(field=>field.value.trim())){
+    summary.textContent='먼저 A의 확인한 조건을 한 칸 이상 적어 주세요.';
+    summary.hidden=false;
+    summary.scrollIntoView({block:'nearest',behavior:'smooth'});
+    return false;
+  }
   const lines=['직장 선택 기록 · 직접 작성한 내용',''];
   const topics=[...new Set(decisionFields.map(field=>field.dataset.topic))];
   topics.forEach(topic=>{
@@ -165,13 +172,13 @@ function buildDecisionSummary(){
   lines.push('중요한 조건: '+(document.getElementById('decision-priority').value.trim()||'직접 적어 주세요'));
   lines.push('결정 전 질문: '+(document.getElementById('decision-question').value.trim()||'비어 있는 조건 중 하나를 골라 물어보세요'));
   lines.push('첫 주: 면접에서 들은 설명과 실제 일과·정산·교육이 같은지 다시 확인하세요.');
-  const summary=document.getElementById('decision-summary');
   summary.textContent=lines.join('\n');
   summary.hidden=false;
   summary.scrollIntoView({block:'nearest',behavior:'smooth'});
+  return true;
 }
 document.getElementById('decision-build').addEventListener('click',buildDecisionSummary);
-document.getElementById('decision-print').addEventListener('click',()=>{buildDecisionSummary();window.print();});
+document.getElementById('decision-print').addEventListener('click',()=>{if(buildDecisionSummary())window.print();});
 </script>
 </body>
 </html>
