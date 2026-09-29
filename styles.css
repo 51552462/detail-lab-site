@@ -23,8 +23,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .hero-grid { position: absolute; inset: 0px; opacity: 0.12; background-image: linear-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.16) 1px, transparent 1px); background-size: 80px 80px; mask-image: linear-gradient(90deg, black, transparent 70%); }
 .hero-inner { position: relative; z-index: 2; width: min(calc(100% - 48px), var(--max)); margin: 64px auto 0px; }
 .eyebrow, .kicker { margin: 0px 0px 24px; color: var(--blue-light); font-size: 0.77rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
-.hero h1 { max-width: 920px; margin: 0px; font-size: clamp(3rem, 5.6vw, 5.65rem); line-height: 1.09; letter-spacing: -0.065em; font-weight: 750; }
-.hero h1 em { color: var(--blue-light); font-style: normal; }
+.hero h1, .hero h2 { max-width: 920px; margin: 0px; font-size: clamp(3rem, 5.6vw, 5.65rem); line-height: 1.09; letter-spacing: -0.065em; font-weight: 750; }
+.hero h1 em, .hero h2 em { color: var(--blue-light); font-style: normal; }
 .hero-copy { max-width: 660px; margin: 32px 0px 0px; color: rgba(255, 255, 255, 0.74); font-size: 1.08rem; line-height: 1.8; }
 .hero-actions { display: flex; align-items: center; gap: 28px; margin-top: 36px; }
 .button { min-height: 54px; padding: 0px 24px; display: inline-flex; align-items: center; justify-content: center; gap: 22px; text-decoration: none; font-weight: 750; line-height: 1; transition: transform 0.2s, background 0.2s, color 0.2s; }
@@ -206,7 +206,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .nav-shell, .hero-inner, .section, .privacy-strip { width: min(calc(100% - 32px), var(--max)); }
   .hero { min-height: 720px; padding-top: 118px; }
   .hero-image { object-position: 62% center; opacity: 0.65; }
-  .hero h1 { font-size: clamp(2.55rem, 12vw, 3.4rem); line-height: 1.12; }
+  .hero h1, .hero h2 { font-size: clamp(2.55rem, 12vw, 3.4rem); line-height: 1.12; }
   .hero-copy { font-size: 0.98rem; line-height: 1.72; }
   .hero-actions { align-items: stretch; flex-direction: column; gap: 18px; }
   .observe-card { min-height: 0px; padding: 24px; }
