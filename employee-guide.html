@@ -9,7 +9,7 @@
   <link rel="canonical" href="https://detail-lab-site.onrender.com/employee-guide.html">
   <meta name="theme-color" content="#070a10">
   <link rel="stylesheet" href="styles.css?v=20260927-r1">
-  <link rel="stylesheet" href="areas.css?v=20260929-products">
+  <link rel="stylesheet" href="areas.css?v=20260929-story">
 <style>
   .decision-sheet{display:grid;gap:16px;margin:24px 0 38px;padding:24px;border:1px solid rgba(255,255,255,.18);border-radius:16px;background:#171c25}
   .decision-sheet label{display:grid;gap:8px;font-weight:600}
@@ -23,7 +23,7 @@
   .decision-summary{margin:16px 0 0;padding:22px;background:#fff;color:#223047;border-radius:12px;white-space:pre-wrap;line-height:1.6}
   .decision-summary[hidden]{display:none}
   @media(max-width:620px){.decision-pair{grid-template-columns:1fr}}
-  @media print{.site-header,.subhero,.copy-cta-row,.cross-scope,footer,.decision-sheet button,.offer-intro,.offer-detail,.copy-scene,.copy-why,.copy-compare,.copy-note,.copy-faq,.copy-cta{display:none!important}.sub-section{padding:0}.decision-sheet{background:white;color:black;border:0;padding:0}.decision-sheet textarea{background:white;color:black;border:1px solid #555}.decision-sheet .decision-topic{color:black}.decision-summary{border:1px solid #555}body{background:white;color:black}}
+  @media print{.site-header,.subhero,.copy-cta-row,.cross-scope,footer,.decision-sheet button,.offer-intro,.offer-detail,.copy-scene,.copy-why,.copy-compare,.copy-note,.copy-faq,.copy-cta,.making-note,.action-panel{display:none!important}.sub-section{padding:0}.decision-sheet{background:white;color:black;border:0;padding:0}.decision-sheet textarea{background:white;color:black;border:1px solid #555}.decision-sheet .decision-topic{color:black}.decision-summary{border:1px solid #555}body{background:white;color:black}}
 </style>
 </head>
 <body class="subpage">
@@ -82,6 +82,10 @@
     <div class="copy-row" role="row"><span role="cell">점장·매니저</span><span role="cell">오늘 일을 본인 선에서 닫을 수 있는지</span><span role="cell">오늘 결정 중에 점장님 선에서 끝나는 건 어느 정도인가요?</span></div>
     <div class="copy-row" role="row"><span role="cell">직장</span><span role="cell">같은 일을 다음 사람에게 어떻게 넘긴다고 했는지</span><span role="cell">같은 일을 다음 사람에게 넘길 때 어떤 방식을 쓰시나요?</span></div>
   </div>
+  <aside class="making-note">
+    <span>이 기록지를 만든 기준</span>
+    <p>면접의 인상만으로는 하루 일과와 정산 절차를 비교하기 어렵습니다. 처음에는 답을 듣지 못한 칸을 비워 두고, A·B의 확인된 내용과 질문을 나란히 보는 방식으로 만들었습니다. 직장의 순위는 계산하지 않습니다.</p>
+  </aside>
   <div class="offer-detail" id="process">
     <div class="section-head"><p class="kicker">사용 순서</p><h2>면접 전부터 첫 주까지</h2></div>
     <ol class="offer-steps">
@@ -116,9 +120,14 @@
     </div>
   </div>
   <div class="offer-result"><h3>결과의 쓰임</h3><p>내가 적은 사실, 비어 있는 조건, 결정 전 질문을 한 화면에서 확인합니다. 어느 직장이 더 좋다는 자동 판정은 하지 않습니다. 계약·임금의 법적 판단이 필요하면 전문 상담을 받으세요.</p></div>
-  <div class="copy-cta-row">
-    <a class="button button-primary" href="#worksheet">A·B 선택 기록지 작성하기</a>
-    <a class="button button-outline" href="/trainer-self-check.html">이미 일하는 곳 점검하기</a>
+  <div class="action-panel">
+    <p class="kicker">다음 면접 전에</p>
+    <h2>가장 중요한 조건 하나를 먼저 적어 보세요</h2>
+    <p>면접 뒤 들은 답을 A에 채우고, 모르는 칸에서 질문을 고르세요. 다른 제안이 생기면 B에 적어 비교하고 필요한 기록은 직접 PDF로 저장할 수 있습니다.</p>
+    <div class="copy-cta-row">
+      <a class="button button-primary" href="#worksheet">직장 선택 기록지 작성하기</a>
+      <a class="button button-outline" href="/trainer-self-check.html">현재 근무 조건 확인하기</a>
+    </div>
   </div>
   <div class="copy-faq">
     <h3>자주 묻는 질문</h3>
@@ -139,6 +148,7 @@
     <a href="/industry.html"><strong>업종별 적용</strong><span>끝없는 인수인계가 간판만 바꿔 반복되는지</span><b aria-hidden="true">↗</b></a>
     <a href="/matching.html"><strong>트레이너·회원 매칭</strong><span>이제는 제대로 만나야 하는 한 주</span><b aria-hidden="true">↗</b></a>
   </div>
+  <a class="origin-link" href="/#about">디테일랩이 이 기준을 만들게 된 이유 보기 →</a>
 </section>
 </main>
 <footer class="site-footer">
