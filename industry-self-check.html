@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>업종 코어 자가진단 · 디테일랩</title>
+<meta name="description" content="대표 개입이 반복되는 구조를 12문으로 확인합니다. 업종 정식 신청이 아닙니다.">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="업종 코어 자가진단 · 디테일랩">
+<meta property="og:description" content="대표 개입이 반복되는 구조를 12문으로 확인합니다. 업종 정식 신청이 아닙니다.">
+<meta property="og:image" content="og-owner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="업종 코어 자가진단 · 디테일랩">
+<meta name="twitter:image" content="og-owner.png">
+<style>
+  :root{
+    --bg: #12141A;
+    --panel: #1A1D24;
+    --panel-border: rgba(255,255,255,0.08);
+    --ink: #ECEDEF;
+    --ink-dim: #9AA3AF;
+    --ink-faint: #5C6570;
+    --accent: #D9622B;
+    --accent-ink: #1C0D06;
+    --accent-soft: rgba(217,98,43,0.14);
+    --danger: #E4572E;
+    --danger-soft: rgba(228,87,46,0.16);
+    --caution: #E3A008;
+    --caution-soft: rgba(227,160,8,0.16);
+    --stable: #3FA34D;
+    --stable-soft: rgba(63,163,77,0.16);
+    --radius: 14px;
+    --maxw: 560px;
+  }
+  * { box-sizing: border-box; }
+  html,body{
+    margin:0; padding:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .app{ min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:28px 20px 60px; }
+  .brandline{ width:100%; max-width:var(--maxw); display:flex; align-items:center; justify-content:space-between; font-size:12px; color:var(--ink-faint); margin-bottom:28px; }
+  .brandline .mark{ color: var(--ink-dim); font-weight:600; }
+  .screen{ width:100%; max-width:var(--maxw); }
+
+  .intro h1{ font-size:29px; line-height:1.32; font-weight:800; letter-spacing:-0.01em; margin:0 0 14px; }
+  .intro p.lead{ font-size:15px; line-height:1.6; color:var(--ink-dim); margin:0 0 28px; }
+  .facts{ display:flex; gap:10px; margin-bottom:32px; flex-wrap:wrap; }
+  .fact{ background:var(--panel); border:1px solid var(--panel-border); border-radius:10px; padding:10px 14px; font-size:13px; color:var(--ink-dim); }
+  .fact b{ color:var(--ink); font-weight:700; }
+  .cat-preview{ display:flex; flex-direction:column; gap:8px; margin-bottom:32px; }
+  .cat-preview-item{ display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--ink-dim); }
+  .cat-preview-item .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+
+  button.primary{ width:100%; background:var(--accent); color:var(--accent-ink); border:none; border-radius:12px; padding:16px; font-size:16px; font-weight:700; cursor:pointer; transition:transform .12s ease; }
+  button.primary:active{ transform:scale(0.98); }
+  .fineprint{ font-size:12px; color:var(--ink-faint); text-align:center; margin-top:14px; line-height:1.5; }
+
+  .progress-wrap{ display:flex; gap:5px; margin-bottom:28px; }
+  .progress-dot{ flex:1; height:4px; border-radius:2px; background:var(--panel-border); }
+  .progress-dot.done{ background:var(--accent); }
+  .progress-dot.current{ background:var(--ink-faint); }
+  .q-meta{ font-size:12.5px; color:var(--accent); font-weight:700; margin-bottom:10px; }
+  .q-text{ font-size:21px; line-height:1.45; font-weight:700; margin:0 0 24px; }
+  .options{ display:flex; flex-direction:column; gap:10px; }
+  .option-btn{ text-align:left; background:var(--panel); border:1px solid var(--panel-border); color:var(--ink); border-radius:var(--radius); padding:16px; font-size:14.5px; line-height:1.5; cursor:pointer; transition:border-color .12s ease, background .12s ease; }
+  .option-btn:hover{ border-color: rgba(217,98,43,0.5); }
+  .option-btn:active{ background: var(--accent-soft); }
+  .nav-row{ display:flex; justify-content:space-between; align-items:center; margin-top:22px; }
+  .back-link{ color:var(--ink-faint); font-size:13px; cursor:pointer; background:none; border:none; padding:8px 0; }
+  .back-link:hover{ color:var(--ink-dim); }
+
+  .result-band{ display:inline-block; font-size:12.5px; font-weight:700; padding:6px 12px; border-radius:100px; margin-bottom:14px; }
+  .band-stable{ background:var(--stable-soft); color:var(--stable); }
+  .band-caution{ background:var(--caution-soft); color:var(--caution); }
+  .band-danger{ background:var(--danger-soft); color:var(--danger); }
+  .score-row{ display:flex; align-items:baseline; gap:10px; margin-bottom:6px; }
+  .score-num{ font-size:52px; font-weight:800; letter-spacing:-0.02em; font-variant-numeric: tabular-nums; }
+  .score-suffix{ font-size:16px; color:var(--ink-dim); }
+  .result-headline{ font-size:16px; line-height:1.6; color:var(--ink-dim); margin:0 0 28px; }
+
+  .cat-block{ margin-bottom:28px; }
+  .cat-block h3{ font-size:13px; font-weight:700; color:var(--ink-faint); margin:0 0 12px; }
+  .cat-item{ margin-bottom:14px; }
+  .cat-item-top{ display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px; }
+  .cat-item-top .name{ color:var(--ink); font-weight:600; }
+  .cat-item-top .pct{ color:var(--ink-dim); font-variant-numeric: tabular-nums; }
+  .cat-bar-track{ height:8px; background:var(--panel); border:1px solid var(--panel-border); border-radius:5px; overflow:hidden; }
+  .cat-bar-fill{ height:100%; border-radius:5px; }
+
+  .insight-box{ background:var(--panel); border:1px solid var(--panel-border); border-left:3px solid var(--danger); border-radius:10px; padding:16px 18px; font-size:14px; line-height:1.65; color:var(--ink-dim); margin-bottom:20px; }
+  .insight-box .cat-name{ color:var(--danger); font-weight:700; }
+
+  .manual-box{ background:var(--panel); border:1px solid var(--panel-border); border-left:3px solid var(--accent); border-radius:10px; padding:18px; margin-bottom:28px; }
+  .manual-box h4{ margin:0 0 10px; font-size:14px; color:var(--ink); }
+  .manual-box ul{ margin:0; padding-left:18px; font-size:13.5px; line-height:1.8; color:var(--ink-dim); }
+
+  .compare-box{ background:var(--panel); border:1px solid var(--panel-border); border-radius:12px; padding:18px; margin-bottom:28px; font-size:13.5px; color:var(--ink-dim); line-height:1.6; }
+  .compare-box b{ color:var(--ink); }
+
+  .result-actions{ display:flex; flex-direction:column; gap:10px; }
+  button.secondary{ width:100%; background:transparent; color:var(--ink-dim); border:1px solid var(--panel-border); border-radius:12px; padding:14px; font-size:14.5px; font-weight:600; cursor:pointer; }
+  button.secondary:hover{ border-color:var(--ink-faint); color:var(--ink); }
+  a.cta-link{ text-decoration:none; display:block; }
+
+  .toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--panel); border:1px solid var(--panel-border); color:var(--ink); padding:10px 18px; border-radius:10px; font-size:13px; opacity:0; pointer-events:none; transition:opacity .2s ease; }
+  .toast.show{ opacity:1; }
+  .field{ width:100%; margin:0 0 14px; }
+  .field label{ display:block; font-size:12.5px; color:var(--ink-dim); margin-bottom:6px; }
+  .field input{ width:100%; background:var(--panel); border:1px solid var(--panel-border); color:var(--ink); border-radius:10px; padding:12px 14px; font-size:15px; }
+  .hidden{ position:absolute; left:-9999px; }
+
+  @media (max-width:420px){ .intro h1{ font-size:24px; } .q-text{ font-size:19px; } .score-num{ font-size:44px; } }
+</style>
+</head>
+<body>
+<div class="app">
+  
+  <div class="brandline"><span class="mark">디테일랩</span><span>업종 리서치 · 코어 확인</span></div>
+  <div class="screen" id="screen"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const CATEGORIES = ["대표 개입","반복 질문","문서화된 범위","완료 시점"];
+
+const QUESTIONS = [
+  { cat:0, text:"최근 7일, 손님이 앞에서 기다릴 때 대표가 직접 답을 말한 횟수는 어느 쪽인가요?", options:[
+    {t:"0~1회, 직원 선에서 대부분 끝냈다", s:3},
+    {t:"2~3회", s:2},
+    {t:"4~6회", s:1},
+    {t:"매일 여러 번, 거의 대표가 말했다", s:0},
+  ]},
+  { cat:0, text:"최근 4주, 직원이 “잠깐만요, 대표님께 물어볼게요”라고 한 장면은 몇 번인가요?", options:[
+    {t:"거의 없었다", s:3},
+    {t:"1~2번", s:2},
+    {t:"주 1회 이상", s:1},
+    {t:"손님이 올 때마다 반복됐다", s:0},
+  ]},
+  { cat:0, text:"대표가 자리를 비운 하루 동안, 손님 응대가 막힌 일은 몇 건이었나요?", options:[
+    {t:"0건, 직원이 범위 안에서 말했다", s:3},
+    {t:"1건 정도", s:2},
+    {t:"2~3건", s:1},
+    {t:"하루가 그 질문들로 붙잡혔다", s:0},
+  ]},
+  { cat:1, text:"같은 종류의 손님 질문(시간 변경, 예외, 할인 등)이 일주일 안에 다시 돌아온 횟수는?", options:[
+    {t:"거의 다시 안 돌아온다", s:3},
+    {t:"주 1회 안팎", s:2},
+    {t:"주 2~3회", s:1},
+    {t:"같은 말이 매일 다시 열린다", s:0},
+  ]},
+  { cat:1, text:"최근 4주, 손님에게 직원마다 다른 답을 준 장면은 있었나요?", options:[
+    {t:"없었다", s:3},
+    {t:"한 번 있었다", s:2},
+    {t:"여러 번 있었다", s:1},
+    {t:"손님이 어느 직원을 만나느냐에 따라 답이 갈린다", s:0},
+  ]},
+  { cat:1, text:"반복되는 응대 한 종류를, 숫자로 세고 있나요?", options:[
+    {t:"세고 있고 이번 주 숫자도 말할 수 있다", s:3},
+    {t:"대략은 알지만 숫자는 없다", s:2},
+    {t:"느낌만 있다", s:1},
+    {t:"세어 본 적이 없다", s:0},
+  ]},
+  { cat:2, text:"대표 부재 중에도 직원이 말해도 되는 범위가 문서로 있나요?", options:[
+    {t:"있고 직원이 그 문장을 쓴다", s:3},
+    {t:"대략 있지만 실제와 다르다", s:2},
+    {t:"머릿속에만 있다", s:1},
+    {t:"없다. 그때그때 묻는다", s:0},
+  ]},
+  { cat:2, text:"할인·예외·일정 변경을 이번 달 직원 선에서 끝낸 비율은?", options:[
+    {t:"대부분 직원 선에서 끝냈다", s:3},
+    {t:"절반 정도", s:2},
+    {t:"거의 대표가 마무리했다", s:1},
+    {t:"전부 대표가 말했다", s:0},
+  ]},
+  { cat:2, text:"역할(누가 정하고 누가 실행하는지)이 손님 응대에서 보이나요?", options:[
+    {t:"손님이 봐도 누가 말하는지 분명하다", s:3},
+    {t:"안에서는 알지만 손님 앞에서는 흔들린다", s:2},
+    {t:"직원마다 다르게 움직인다", s:1},
+    {t:"매번 누가 할지 그때 정한다", s:0},
+  ]},
+  { cat:3, text:"일이 끝났다고 보는 시점(완료 기준)이 적혀 있나요?", options:[
+    {t:"있고 다음 사람도 그 시점을 쓴다", s:3},
+    {t:"대략 있지만 사람마다 다르다", s:2},
+    {t:"처리 중이라고만 남긴다", s:1},
+    {t:"완료라는 말이 없다", s:0},
+  ]},
+  { cat:3, text:"교대 메모가 다음 사람의 행동으로 읽히나요?", options:[
+    {t:"다음 사람이 읽고 바로 움직인다", s:3},
+    {t:"반은 되고 반은 다시 묻는다", s:2},
+    {t:"기록은 있는데 행동이 없다", s:1},
+    {t:"메모 자체가 거의 없다", s:0},
+  ]},
+  { cat:3, text:"문서가 있어도 실제 응대와 얼마나 다른가요?", options:[
+    {t:"문서대로 한다", s:3},
+    {t:"가끔 다르다", s:2},
+    {t:"자주 다르다", s:1},
+    {t:"문서는 장식이고 현장은 따로 굴러간다", s:0},
+  ]},
+];
+
+const INSIGHTS = [
+  "손님 앞의 판단이 대표에게 자주 돌아옵니다. 업종 이름이 달라도, 코어에서는 같은 종류의 막힘입니다.",
+  "같은 질문이 다시 열린다는 것은, 한 번의 답이 다음 사람의 행동이 되지 않았다는 신호입니다.",
+  "말해도 되는 범위가 문서가 아니면, 친절한 사람이 예외를 새로 엽니다.",
+  "완료 시점이 없으면 일은 처리 중으로만 남고, 다음 교대가 처음부터 다시 묻습니다.",
+];
+
+const MANUALS = [
+  { h:"참고용 · 대표 개입", items:[
+    "이번 주, 손님이 기다릴 때 대표가 말한 장면을 날짜만 적기",
+    "직원 선에서 말해도 되는 문장 한 줄을 정하기",
+    "이건 베타 준비 단계 참고입니다. 업종 정식 진단이 아닙니다.",
+  ]},
+  { h:"참고용 · 반복 질문", items:[
+    "다시 돌아온 질문 종류를 하나만 고르기",
+    "그 질문에 대한 답을 다음 사람이 읽게 한 줄로 남기기",
+    "이건 베타 준비 단계 참고입니다. 업종 정식 진단이 아닙니다.",
+  ]},
+  { h:"참고용 · 문서 범위", items:[
+    "할인·예외·시간 변경 중 하나만이라도 직원 문장을 적기",
+    "그 문장을 교대 때 읽히는지 이틀만 보기",
+    "이건 베타 준비 단계 참고입니다. 업종 정식 진단이 아닙니다.",
+  ]},
+  { h:"참고용 · 완료 시점", items:[
+    "처리 중 대신 ‘무엇이면 끝인지’ 한 줄을 적기",
+    "다음 근무자가 그 줄을 보고 움직였는지 표시하기",
+    "이건 베타 준비 단계 참고입니다. 업종 정식 진단이 아닙니다.",
+  ]},
+];
+
+const state = { idx:0, answers:new Array(QUESTIONS.length).fill(null), texts:new Array(QUESTIONS.length).fill('') };
+const screen = document.getElementById('screen');
+const toastEl = document.getElementById('toast');
+
+function showToast(msg){ toastEl.textContent = msg; toastEl.classList.add('show'); setTimeout(()=>toastEl.classList.remove('show'), 1800); }
+
+function renderIntro(){
+  const showInterest = location.hash === '#interest';
+  screen.innerHTML = `
+    <div class="intro">
+      <h1>이 가게의 짧은 기다림도, 같은 구조로 보이나요?</h1>
+      <p class="lead">업종 고유 문항은 아직 없습니다. 사례가 없어서 만들지 않았습니다. 아래 12문은 대표 개입·반복 질문·문서 범위·완료 시점만 봅니다. 결과는 베타 준비 단계 참고용이며, 업종 정식 진단 신청이 아닙니다.</p>
+      <div class="facts">
+        <div class="fact"><b>12</b> 문항</div>
+        <div class="fact"><b>관심</b> 이메일만</div>
+        <div class="fact"><b>신청</b> 아님</div>
+      </div>
+      <button class="primary" onclick="startQuiz()">코어 12문 시작</button>
+      <p class="fineprint">헬스·PT 센터 운영 자가진단과는 문항이 다릅니다. 응답은 이 화면에서만 계산됩니다.</p>
+      <div id="interest" class="manual-box" style="margin-top:28px">
+        <h4>새 업종 소식 받기 (관심 등록)</h4>
+        <p style="margin:0 0 14px;font-size:13.5px;color:var(--ink-dim);line-height:1.6">어떤 업종인지 한 줄과 이메일만 받습니다. 진단 데이터가 아닙니다. 정식 모집이 아닙니다.</p>
+        <a class="primary" style="display:block;text-align:center;text-decoration:none;padding:15px;border-radius:12px;background:var(--accent);color:#06201d;font-weight:700" href="https://papaya-twilight-5e494e.netlify.app/industry-self-check#interest">기존 접수 페이지에서 관심 남기기</a>
+        <p class="fineprint">관심 등록은 기존 디테일랩 접수 페이지에서 진행됩니다. 입력 내용은 이 화면에 저장하지 않습니다.</p>
+      </div>
+    </div>
+  `;
+  if(showInterest) document.getElementById('interest').scrollIntoView();
+}
+
+function startQuiz(){ state.idx = 0; renderQuestion(); }
+
+function renderProgress(){
+  return `<div class="progress-wrap">${QUESTIONS.map((_,i)=>{
+    let cls='progress-dot'; if(i<state.idx) cls+=' done'; else if(i===state.idx) cls+=' current';
+    return `<div class="${cls}"></div>`;
+  }).join('')}</div>`;
+}
+
+function renderQuestion(){
+  const q = QUESTIONS[state.idx];
+  screen.innerHTML = `
+    ${renderProgress()}
+    <div class="q-meta">${state.idx+1} / ${QUESTIONS.length} · ${CATEGORIES[q.cat]}</div>
+    <div class="q-text">${q.text}</div>
+    <div class="options">${q.options.map((o,oi)=>`<button class="option-btn" onclick="answer(${oi})">${o.t}</button>`).join('')}</div>
+    <div class="nav-row">${state.idx>0?`<button class="back-link" onclick="goBack()">← 이전 질문</button>`:`<span></span>`}</div>
+  `;
+}
+
+function answer(oi){
+  const q = QUESTIONS[state.idx];
+  state.answers[state.idx] = q.options[oi].s;
+  state.texts[state.idx] = q.options[oi].t;
+  if(state.idx < QUESTIONS.length-1){ state.idx+=1; renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function goBack(){ if(state.idx>0){ state.idx-=1; renderQuestion(); } }
+
+function renderResult(){
+  const rows = QUESTIONS.map((q,i)=>`<div class="cat-item"><div class="cat-item-top"><span class="name">${q.text}</span></div><p style="margin:0;color:var(--ink-dim);font-size:13.5px;line-height:1.5">${state.texts[i]||''}</p></div>`).join('');
+  screen.innerHTML = `
+    <div class="result">
+      <div class="result-band band-caution">참고용 · 실제 진단 아님</div>
+      <p class="result-headline">이건 가설이며 실제 진단이 아닙니다. 점수·안정/주의/위험 밴드가 없습니다. 업종 정식 진단 신청도 아닙니다.</p>
+      <div class="cat-block"><h3>이번 답변 (항목 단위)</h3>${rows}</div>
+      <div class="insight-box"><span class="cat-name">참고 가설</span><br><br>${INSIGHTS.map(t=>t).join('<br><br>')}</div>
+      <div class="manual-box">
+        <h4>30일 실험 문장 형식 (초안)</h4>
+        <ul><li>누가(역할) / 언제부터 30일 / 무엇을 바꾸나(반복업무 1개) / 무엇을 기록하나 / 완료 조건(유지·수정·중단)</li></ul>
+      </div>
+      <div class="result-actions">
+        <a class="cta-link" href="/owner-structure-check"><button class="primary">헬스·PT라면 운영 자가진단</button></a>
+        <a class="cta-link" href="https://papaya-twilight-5e494e.netlify.app/industry-self-check#interest"><button class="secondary">새 업종 소식 받기</button></a>
+        <button class="secondary" onclick="copyResult()">결과 텍스트로 복사하기</button>
+        <button class="secondary" onclick="renderIntro()">처음부터 다시 하기</button>
+      </div>
+    </div>
+  `;
+}
+
+function copyResult(){
+  const lines = ['[업종 코어 자가진단 · 참고용 · 실제 진단 아님]','', ...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`),'','by 디테일랩'];
+  const text = lines.join('\n');
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>showToast('결과가 복사되었습니다'));
+  }else{ showToast('복사를 지원하지 않는 환경입니다'); }
+}
+
+renderIntro();
+</script>
+</body>
+</html>

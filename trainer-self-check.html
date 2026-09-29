@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>트레이너 근무환경 자가점검 · 디테일랩</title>
+<meta name="description" content="이 센터, 계속 다녀도 될까요? 12문항, 2분, 무료 자가점검.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="트레이너 근무환경 자가점검 · 디테일랩">
+<meta property="og:description" content="이 센터, 계속 다녀도 될까요? 12문항, 2분, 무료 자가점검.">
+<meta property="og:image" content="og-trainer.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="트레이너 근무환경 자가점검 · 디테일랩">
+<meta name="twitter:image" content="og-trainer.png">
+<style>
+  :root{
+    --bg: #10141b;
+    --bg-soft: #171c25;
+    --panel: #1b212c;
+    --panel-border: rgba(255,255,255,0.08);
+    --ink: #ECEDEF;
+    --ink-dim: #9AA3AF;
+    --ink-faint: #5C6570;
+    --accent: #00A99D;
+    --accent-soft: rgba(0,169,157,0.14);
+    --danger: #E4572E;
+    --danger-soft: rgba(228,87,46,0.16);
+    --caution: #E3A008;
+    --caution-soft: rgba(227,160,8,0.16);
+    --stable: #3FA34D;
+    --stable-soft: rgba(63,163,77,0.16);
+    --radius: 14px;
+    --maxw: 560px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html,body{
+    margin:0; padding:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .app{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 20px 60px;
+  }
+
+  .brandline{
+    width: 100%;
+    max-width: var(--maxw);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--ink-faint);
+    margin-bottom: 28px;
+  }
+  .brandline .mark{
+    color: var(--ink-dim);
+    font-weight: 600;
+  }
+
+  .screen{
+    width: 100%;
+    max-width: var(--maxw);
+  }
+
+  /* ---------- Intro ---------- */
+  .intro h1{
+    font-size: 30px;
+    line-height: 1.32;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+  }
+  .intro p.lead{
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-dim);
+    margin: 0 0 28px;
+  }
+
+  .facts{
+    display:flex;
+    gap: 10px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .fact{
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--ink-dim);
+  }
+  .fact b{ color: var(--ink); font-weight: 700; }
+
+  .cat-preview{
+    display:flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .cat-preview-item{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--ink-dim);
+  }
+  .cat-preview-item .dot{
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  button.primary{
+    width: 100%;
+    background: var(--accent);
+    color: #06201d;
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.12s ease, opacity 0.12s ease;
+  }
+  button.primary:active{ transform: scale(0.98); }
+
+  .fineprint{
+    font-size: 12px;
+    color: var(--ink-faint);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.5;
+  }
+
+  /* ---------- Quiz ---------- */
+  .progress-wrap{
+    display:flex;
+    gap: 5px;
+    margin-bottom: 28px;
+  }
+  .progress-dot{
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--panel-border);
+    overflow: hidden;
+  }
+  .progress-dot.done{ background: var(--accent); }
+  .progress-dot.current{ background: var(--ink-faint); }
+
+  .q-meta{
+    font-size: 12.5px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 0.01em;
+  }
+  .q-text{
+    font-size: 21px;
+    line-height: 1.45;
+    font-weight: 700;
+    margin: 0 0 24px;
+  }
+
+  .options{
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .option-btn{
+    text-align:left;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    color: var(--ink);
+    border-radius: var(--radius);
+    padding: 16px 16px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    cursor: pointer;
+    transition: border-color 0.12s ease, background 0.12s ease;
+  }
+  .option-btn:hover{ border-color: rgba(0,169,157,0.5); }
+  .option-btn:active{ background: var(--accent-soft); }
+
+  .nav-row{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    margin-top: 22px;
+  }
+  .back-link{
+    color: var(--ink-faint);
+    font-size: 13px;
+    cursor: pointer;
+    background:none; border:none;
+    padding: 8px 0;
+  }
+  .back-link:hover{ color: var(--ink-dim); }
+
+  /* ---------- Result ---------- */
+  .result-band{
+    display:inline-block;
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 100px;
+    margin-bottom: 14px;
+  }
+  .band-stable{ background: var(--stable-soft); color: var(--stable); }
+  .band-caution{ background: var(--caution-soft); color: var(--caution); }
+  .band-danger{ background: var(--danger-soft); color: var(--danger); }
+
+  .score-row{
+    display:flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .score-num{
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .score-suffix{
+    font-size: 16px;
+    color: var(--ink-dim);
+  }
+
+  .result-headline{
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-dim);
+    margin: 0 0 28px;
+  }
+
+  .cat-block{
+    margin-bottom: 28px;
+  }
+  .cat-block h3{
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-faint);
+    text-transform: none;
+    margin: 0 0 12px;
+  }
+  .cat-item{
+    margin-bottom: 14px;
+  }
+  .cat-item-top{
+    display:flex;
+    justify-content: space-between;
+    font-size: 13.5px;
+    margin-bottom: 6px;
+  }
+  .cat-item-top .name{ color: var(--ink); font-weight: 600; }
+  .cat-item-top .pct{ color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+  .cat-bar-track{
+    height: 8px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .cat-bar-fill{
+    height: 100%;
+    border-radius: 5px;
+  }
+
+  .insight-box{
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-left: 3px solid var(--danger);
+    border-radius: 10px;
+    padding: 16px 18px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-dim);
+    margin-bottom: 28px;
+  }
+  .insight-box b{ color: var(--ink); }
+  .insight-box .cat-name{ color: var(--danger); font-weight: 700; }
+
+  .compare-box{
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 28px;
+    font-size: 13.5px;
+    color: var(--ink-dim);
+    line-height: 1.6;
+  }
+  .compare-box b{ color: var(--ink); }
+
+  .result-actions{
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  button.secondary{
+    width: 100%;
+    background: transparent;
+    color: var(--ink-dim);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button.secondary:hover{ border-color: var(--ink-faint); color: var(--ink); }
+
+  .toast{
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    color: var(--ink);
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .toast.show{ opacity: 1; }
+
+  @media (max-width: 420px){
+    .intro h1{ font-size: 25px; }
+    .q-text{ font-size: 19px; }
+    .score-num{ font-size: 44px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="brandline">
+    <span class="mark">디테일랩</span>
+    <span>트레이너 자가점검</span>
+  </div>
+
+  <div class="screen" id="screen"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const CATEGORIES = [
+  "급여·정산 구조",
+  "회원 배정·할당",
+  "회원 이관·분쟁 처리",
+  "교육·성장 경로",
+  "운영기준·매뉴얼",
+  "조직 안정성"
+];
+
+const QUESTIONS = [
+  { cat:0, text:"이번 달 실수령액이 얼마인지, 정산 전에 미리 계산할 수 있나요?", options:[
+    {t:"수수료율·기준을 정확히 알고 있어 계산 가능하다", s:3},
+    {t:"대략은 알지만 정확한 금액은 정산일에 봐야 안다", s:2},
+    {t:"수수료 기준이 자주 바뀌거나 애매하다", s:1},
+    {t:"정산 방식 자체를 제대로 설명 들은 적이 없다", s:0},
+  ]},
+  { cat:0, text:"PT 매출 외 부가 업무(청소, 상담, 대기)에 대한 보상 기준이 있나요?", options:[
+    {t:"명확히 정해져 있고 대체로 지켜진다", s:3},
+    {t:"있긴 하지만 가끔 안 지켜진다", s:2},
+    {t:"사실상 없고 관행으로 떠맡는다", s:1},
+    {t:"이런 걸 생각해본 적도 없다", s:0},
+  ]},
+  { cat:1, text:"신규 회원이 들어오면 트레이너 배정 기준이 있나요?", options:[
+    {t:"명확한 기준(순번, 실적 등)이 있다", s:3},
+    {t:"대표·점장 재량이지만 대체로 공정하다", s:2},
+    {t:"특정 트레이너에게 몰리거나 쏠림이 있다", s:1},
+    {t:"기준을 알 수 없고 불만이 반복된다", s:0},
+  ]},
+  { cat:1, text:"이번 달 목표 PT 세션 수 또는 매출 목표가 현실적으로 달성 가능한가요?", options:[
+    {t:"달성 가능한 수준이고 근거도 납득된다", s:3},
+    {t:"빠듯하지만 가능은 하다", s:2},
+    {t:"거의 매달 미달이고 압박만 있다", s:1},
+    {t:"목표 자체가 통보식이고 근거를 모른다", s:0},
+  ]},
+  { cat:2, text:"담당하던 회원이 다른 트레이너나 센터로 옮길 때 절차가 있나요?", options:[
+    {t:"절차·기록이 있고 트레이너 의견도 반영된다", s:3},
+    {t:"절차는 있지만 형식적이다", s:2},
+    {t:"그때그때 다르고 트레이너는 통보만 받는다", s:1},
+    {t:"이런 일이 생겨도 아무 설명이 없다", s:0},
+  ]},
+  { cat:2, text:"회원과의 트러블(환불, 컴플레인)이 생기면 센터가 어떻게 대응하나요?", options:[
+    {t:"사실관계 확인 후 트레이너를 보호하는 편이다", s:3},
+    {t:"상황에 따라 다르다", s:2},
+    {t:"대체로 트레이너 책임으로 처리된다", s:1},
+    {t:"트레이너와 상의 없이 일방적으로 처리된다", s:0},
+  ]},
+  { cat:3, text:"입사 후 실질적인 교육이나 OJT를 받은 적이 있나요?", options:[
+    {t:"체계적인 교육 과정이 있었다", s:3},
+    {t:"간단히 있었지만 부족했다", s:2},
+    {t:"선배가 짬짬이 알려주는 정도였다", s:1},
+    {t:"아무 교육 없이 바로 투입됐다", s:0},
+  ]},
+  { cat:3, text:"이 센터에서 1년 뒤 내 역할이나 직급이 어떻게 바뀔지 그려지나요?", options:[
+    {t:"명확한 승진·성장 경로가 있다", s:3},
+    {t:"대략 있지만 사람에 따라 다르다", s:2},
+    {t:"거의 없고 계속 같은 포지션일 것 같다", s:1},
+    {t:"생각해본 적도 없다", s:0},
+  ]},
+  { cat:4, text:"센터에 트레이너용 업무 매뉴얼이나 운영 기준 문서가 있나요?", options:[
+    {t:"있고 실제로 참고한다", s:3},
+    {t:"있지만 안 본 지 오래됐다", s:2},
+    {t:"예전에 만들다 만 것 같은 게 있다", s:1},
+    {t:"없다", s:0},
+  ]},
+  { cat:4, text:"대표·점장이 며칠 자리를 비워도 매장이 평소처럼 돌아갈까요?", options:[
+    {t:"그렇다, 시스템이 있어서 큰 문제 없다", s:3},
+    {t:"어느 정도는 돌아가지만 티가 난다", s:2},
+    {t:"꽤 혼란스러워질 것 같다", s:1},
+    {t:"대표 없이는 거의 마비될 것 같다", s:0},
+  ]},
+  { cat:5, text:"최근 6개월 사이 그만둔 동료 트레이너가 몇 명인가요?", options:[
+    {t:"없거나 1명 이하", s:3},
+    {t:"2명 정도", s:2},
+    {t:"3~4명", s:1},
+    {t:"5명 이상 / 셀 수 없다", s:0},
+  ]},
+  { cat:5, text:"동료가 그만둘 때 이유를 주변에서 대체로 알고 있나요?", options:[
+    {t:"대부분 납득 가능한 개인 사유였다", s:3},
+    {t:"일부는 근무 환경 때문이었다", s:2},
+    {t:"대부분 급여·대우 문제였다", s:1},
+    {t:"다들 쉬쉬하고 이유를 말 안 한다", s:0},
+  ]},
+];
+
+const INSIGHTS = [
+  "돈이 얼마 들어올지 모르고 일하는 상태입니다. 이건 트레이너 개인의 문제가 아니라 정산 구조의 문제일 가능성이 큽니다.",
+  "배정과 목표가 불투명하면 트레이너끼리 경쟁이 아니라 불신이 쌓이기 쉽습니다.",
+  "이런 상황이 반복되면 트레이너는 매번 '내가 잘못한 건가'를 혼자 판단해야 합니다.",
+  "지금 하는 일이 다음 커리어로 이어지는지, 스스로도 확신하기 어려운 상태일 수 있습니다.",
+  "센터가 대표 한 사람의 기억과 판단에 의존하고 있다는 신호입니다. 대표가 바뀌면 트레이너도 다시 처음부터 적응해야 합니다.",
+  "이직이 잦다는 건 급여나 개인 성향 문제만이 아니라, 구조적인 이유가 있다는 신호일 수 있습니다.",
+];
+
+const state = { idx: 0, answers: new Array(QUESTIONS.length).fill(null) };
+
+const screen = document.getElementById('screen');
+const toastEl = document.getElementById('toast');
+
+function showToast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  setTimeout(()=> toastEl.classList.remove('show'), 1800);
+}
+
+function renderIntro(){
+  screen.innerHTML = `
+    <div class="intro">
+      <h1>이 센터, 계속 다녀도 될까요?</h1>
+      <p class="lead">12개 질문, 약 2분. 급여·배정·교육·조직 안정성까지, 지금 일하는 곳의 구조적 신호를 점검합니다.</p>
+
+      <div class="facts">
+        <div class="fact"><b>12</b> 문항</div>
+        <div class="fact"><b>6</b> 영역</div>
+        <div class="fact"><b>2분</b> 소요</div>
+      </div>
+
+      <div class="cat-preview">
+        ${CATEGORIES.map(c => `<div class="cat-preview-item"><span class="dot"></span>${c}</div>`).join('')}
+      </div>
+
+      <button class="primary" onclick="startQuiz()">진단 시작</button>
+      <p class="fineprint">응답은 저장되지 않고 이 화면에서만 계산됩니다.<br>결과는 참고용이며 확정적인 결론이 아닙니다.</p>
+    </div>
+  `;
+}
+
+function startQuiz(){
+  state.idx = 0;
+  renderQuestion();
+}
+
+function renderProgress(){
+  const dots = QUESTIONS.map((_, i) => {
+    let cls = 'progress-dot';
+    if (i < state.idx) cls += ' done';
+    else if (i === state.idx) cls += ' current';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+  return `<div class="progress-wrap">${dots}</div>`;
+}
+
+function renderQuestion(){
+  const q = QUESTIONS[state.idx];
+  const catLabel = CATEGORIES[q.cat];
+  screen.innerHTML = `
+    ${renderProgress()}
+    <div class="q-meta">${state.idx + 1} / ${QUESTIONS.length} · ${catLabel}</div>
+    <div class="q-text">${q.text}</div>
+    <div class="options">
+      ${q.options.map((o, oi) => `<button class="option-btn" onclick="answer(${oi})">${o.t}</button>`).join('')}
+    </div>
+    <div class="nav-row">
+      ${state.idx > 0 ? `<button class="back-link" onclick="goBack()">← 이전 질문</button>` : `<span></span>`}
+    </div>
+  `;
+}
+
+function answer(optionIndex){
+  const q = QUESTIONS[state.idx];
+  state.answers[state.idx] = q.options[optionIndex].s;
+  if (state.idx < QUESTIONS.length - 1){
+    state.idx += 1;
+    renderQuestion();
+  } else {
+    renderResult();
+  }
+}
+
+function goBack(){
+  if (state.idx > 0){
+    state.idx -= 1;
+    renderQuestion();
+  }
+}
+
+function computeCategoryScores(){
+  const totals = new Array(CATEGORIES.length).fill(0);
+  const maxPerCat = new Array(CATEGORIES.length).fill(0);
+  QUESTIONS.forEach((q, i) => {
+    totals[q.cat] += state.answers[i];
+    maxPerCat[q.cat] += 3;
+  });
+  return { totals, maxPerCat };
+}
+
+function bandFor(pct){
+  if (pct >= 80) return { key:'stable', label:'안정형', cls:'band-stable', color:'var(--stable)' };
+  if (pct >= 50) return { key:'caution', label:'주의형', cls:'band-caution', color:'var(--caution)' };
+  return { key:'danger', label:'위험형', cls:'band-danger', color:'var(--danger)' };
+}
+
+function barColorFor(pct){
+  if (pct >= 80) return 'var(--stable)';
+  if (pct >= 50) return 'var(--caution)';
+  return 'var(--danger)';
+}
+
+function renderResult(){
+  const { totals, maxPerCat } = computeCategoryScores();
+  const totalScore = totals.reduce((a,b)=>a+b, 0);
+  const totalMax = maxPerCat.reduce((a,b)=>a+b, 0);
+  const overallPct = Math.round((totalScore / totalMax) * 100);
+  const band = bandFor(overallPct);
+
+  const catPcts = totals.map((t, i) => Math.round((t / maxPerCat[i]) * 100));
+  const weakestIdx = catPcts.indexOf(Math.min(...catPcts));
+
+  const overallText = {
+    stable: "지금 센터는 트레이너 입장에서 봤을 때 구조가 갖춰진 편입니다. 다만 가장 낮은 영역은 계속 지켜볼 필요가 있습니다.",
+    caution: "몇몇 영역은 괜찮지만, 일부는 사람(대표·동료)의 개인기로 버티고 있는 상태에 가깝습니다. 그 사람이 빠지면 흔들릴 수 있습니다.",
+    danger: "여러 영역에서 구조적인 신호가 뚜렷합니다. 지금 느끼는 불안이 기분 탓이 아닐 가능성이 큽니다.",
+  }[band.key];
+
+  screen.innerHTML = `
+    <div class="result">
+      <div class="result-band ${band.cls}">${band.label}</div>
+      <div class="score-row">
+        <div class="score-num">${overallPct}</div>
+        <div class="score-suffix">/ 100</div>
+      </div>
+      <p class="result-headline">${overallText}</p>
+
+      <div class="cat-block">
+        <h3>영역별 점수</h3>
+        ${CATEGORIES.map((c, i) => `
+          <div class="cat-item">
+            <div class="cat-item-top">
+              <span class="name">${c}</span>
+              <span class="pct">${catPcts[i]}%</span>
+            </div>
+            <div class="cat-bar-track">
+              <div class="cat-bar-fill" style="width:${catPcts[i]}%; background:${barColorFor(catPcts[i])};"></div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="insight-box">
+        <span class="cat-name">가장 취약한 영역 — ${CATEGORIES[weakestIdx]}</span><br><br>
+        ${INSIGHTS[weakestIdx]}
+      </div>
+
+      <div class="result-actions">
+        <button class="secondary" onclick="copyResult(${overallPct}, '${band.label}', ${JSON.stringify(catPcts)})">결과 텍스트로 복사하기</button>
+        <button class="secondary" onclick="renderIntro()">처음부터 다시 하기</button>
+      </div>
+    </div>
+  `;
+}
+
+function copyResult(pct, bandLabel, catPcts){
+  const lines = [
+    `[트레이너 근무환경 자가점검 결과]`,
+    `종합 ${pct}점 · ${bandLabel}`,
+    ``,
+    ...CATEGORIES.map((c, i) => `${c}: ${catPcts[i]}%`),
+    ``,
+    `by 디테일랩`
+  ];
+  const text = lines.join('\\n');
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=> showToast('결과가 복사되었습니다'));
+  } else {
+    showToast('복사를 지원하지 않는 환경입니다');
+  }
+}
+
+renderIntro();
+</script>
+
+</body>
+</html>

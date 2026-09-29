@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>센터 구조 자가진단 · 디테일랩</title>
+<meta name="description" content="대표 없이 며칠이나 버틸까요? 12문항, 2분, 무료 자가진단.">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="센터 구조 자가진단 · 디테일랩">
+<meta property="og:description" content="대표 없이 며칠이나 버틸까요? 12문항, 2분, 무료 자가진단.">
+<meta property="og:image" content="og-owner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="센터 구조 자가진단 · 디테일랩">
+<meta name="twitter:image" content="og-owner.png">
+<style>
+  :root{
+    --bg: #12141A;
+    --panel: #1A1D24;
+    --panel-border: rgba(255,255,255,0.08);
+    --ink: #ECEDEF;
+    --ink-dim: #9AA3AF;
+    --ink-faint: #5C6570;
+    --accent: #D9622B;
+    --accent-ink: #1C0D06;
+    --accent-soft: rgba(217,98,43,0.14);
+    --danger: #E4572E;
+    --danger-soft: rgba(228,87,46,0.16);
+    --caution: #E3A008;
+    --caution-soft: rgba(227,160,8,0.16);
+    --stable: #3FA34D;
+    --stable-soft: rgba(63,163,77,0.16);
+    --radius: 14px;
+    --maxw: 560px;
+  }
+  * { box-sizing: border-box; }
+  html,body{
+    margin:0; padding:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .app{ min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:28px 20px 60px; }
+  .brandline{ width:100%; max-width:var(--maxw); display:flex; align-items:center; justify-content:space-between; font-size:12px; color:var(--ink-faint); margin-bottom:28px; }
+  .brandline .mark{ color: var(--ink-dim); font-weight:600; }
+  .screen{ width:100%; max-width:var(--maxw); }
+
+  .intro h1{ font-size:29px; line-height:1.32; font-weight:800; letter-spacing:-0.01em; margin:0 0 14px; }
+  .intro p.lead{ font-size:15px; line-height:1.6; color:var(--ink-dim); margin:0 0 28px; }
+  .facts{ display:flex; gap:10px; margin-bottom:32px; flex-wrap:wrap; }
+  .fact{ background:var(--panel); border:1px solid var(--panel-border); border-radius:10px; padding:10px 14px; font-size:13px; color:var(--ink-dim); }
+  .fact b{ color:var(--ink); font-weight:700; }
+  .cat-preview{ display:flex; flex-direction:column; gap:8px; margin-bottom:32px; }
+  .cat-preview-item{ display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--ink-dim); }
+  .cat-preview-item .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+
+  button.primary{ width:100%; background:var(--accent); color:var(--accent-ink); border:none; border-radius:12px; padding:16px; font-size:16px; font-weight:700; cursor:pointer; transition:transform .12s ease; }
+  button.primary:active{ transform:scale(0.98); }
+  .fineprint{ font-size:12px; color:var(--ink-faint); text-align:center; margin-top:14px; line-height:1.5; }
+
+  .progress-wrap{ display:flex; gap:5px; margin-bottom:28px; }
+  .progress-dot{ flex:1; height:4px; border-radius:2px; background:var(--panel-border); }
+  .progress-dot.done{ background:var(--accent); }
+  .progress-dot.current{ background:var(--ink-faint); }
+  .q-meta{ font-size:12.5px; color:var(--accent); font-weight:700; margin-bottom:10px; }
+  .q-text{ font-size:21px; line-height:1.45; font-weight:700; margin:0 0 24px; }
+  .options{ display:flex; flex-direction:column; gap:10px; }
+  .option-btn{ text-align:left; background:var(--panel); border:1px solid var(--panel-border); color:var(--ink); border-radius:var(--radius); padding:16px; font-size:14.5px; line-height:1.5; cursor:pointer; transition:border-color .12s ease, background .12s ease; }
+  .option-btn:hover{ border-color: rgba(217,98,43,0.5); }
+  .option-btn:active{ background: var(--accent-soft); }
+  .nav-row{ display:flex; justify-content:space-between; align-items:center; margin-top:22px; }
+  .back-link{ color:var(--ink-faint); font-size:13px; cursor:pointer; background:none; border:none; padding:8px 0; }
+  .back-link:hover{ color:var(--ink-dim); }
+
+  .result-band{ display:inline-block; font-size:12.5px; font-weight:700; padding:6px 12px; border-radius:100px; margin-bottom:14px; }
+  .band-stable{ background:var(--stable-soft); color:var(--stable); }
+  .band-caution{ background:var(--caution-soft); color:var(--caution); }
+  .band-danger{ background:var(--danger-soft); color:var(--danger); }
+  .score-row{ display:flex; align-items:baseline; gap:10px; margin-bottom:6px; }
+  .score-num{ font-size:52px; font-weight:800; letter-spacing:-0.02em; font-variant-numeric: tabular-nums; }
+  .score-suffix{ font-size:16px; color:var(--ink-dim); }
+  .result-headline{ font-size:16px; line-height:1.6; color:var(--ink-dim); margin:0 0 28px; }
+
+  .cat-block{ margin-bottom:28px; }
+  .cat-block h3{ font-size:13px; font-weight:700; color:var(--ink-faint); margin:0 0 12px; }
+  .cat-item{ margin-bottom:14px; }
+  .cat-item-top{ display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px; }
+  .cat-item-top .name{ color:var(--ink); font-weight:600; }
+  .cat-item-top .pct{ color:var(--ink-dim); font-variant-numeric: tabular-nums; }
+  .cat-bar-track{ height:8px; background:var(--panel); border:1px solid var(--panel-border); border-radius:5px; overflow:hidden; }
+  .cat-bar-fill{ height:100%; border-radius:5px; }
+
+  .insight-box{ background:var(--panel); border:1px solid var(--panel-border); border-left:3px solid var(--danger); border-radius:10px; padding:16px 18px; font-size:14px; line-height:1.65; color:var(--ink-dim); margin-bottom:20px; }
+  .insight-box .cat-name{ color:var(--danger); font-weight:700; }
+
+  .manual-box{ background:var(--panel); border:1px solid var(--panel-border); border-left:3px solid var(--accent); border-radius:10px; padding:18px; margin-bottom:28px; }
+  .manual-box h4{ margin:0 0 10px; font-size:14px; color:var(--ink); }
+  .manual-box ul{ margin:0; padding-left:18px; font-size:13.5px; line-height:1.8; color:var(--ink-dim); }
+
+  .compare-box{ background:var(--panel); border:1px solid var(--panel-border); border-radius:12px; padding:18px; margin-bottom:28px; font-size:13.5px; color:var(--ink-dim); line-height:1.6; }
+  .compare-box b{ color:var(--ink); }
+
+  .result-actions{ display:flex; flex-direction:column; gap:10px; }
+  button.secondary{ width:100%; background:transparent; color:var(--ink-dim); border:1px solid var(--panel-border); border-radius:12px; padding:14px; font-size:14.5px; font-weight:600; cursor:pointer; }
+  button.secondary:hover{ border-color:var(--ink-faint); color:var(--ink); }
+  a.cta-link{ text-decoration:none; display:block; }
+
+  .toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--panel); border:1px solid var(--panel-border); color:var(--ink); padding:10px 18px; border-radius:10px; font-size:13px; opacity:0; pointer-events:none; transition:opacity .2s ease; }
+  .toast.show{ opacity:1; }
+
+  @media (max-width:420px){ .intro h1{ font-size:24px; } .q-text{ font-size:19px; } .score-num{ font-size:44px; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="brandline"><span class="mark">디테일랩</span><span>대표·점장 자가진단</span></div>
+  <div class="screen" id="screen"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const CATEGORIES = ["리더십·의사결정","역할·권한","운영·매뉴얼·고객경험","재무·정산·내부통제"];
+
+const QUESTIONS = [
+  { cat:0, text:"본인이 3일 이상 자리를 비우면 센터 운영에 문제가 생기나요?", options:[
+    {t:"전혀 없다, 부매니저가 다 처리한다", s:3},
+    {t:"약간의 혼선은 있지만 큰 문제는 없다", s:2},
+    {t:"예약·정산·클레임 등에서 티가 난다", s:1},
+    {t:"거의 마비 수준이 된다", s:0},
+  ]},
+  { cat:0, text:"센터의 중요한 결정(가격, 프로모션, 채용)을 본인 외에 누가 내릴 수 있나요?", options:[
+    {t:"팀장급도 일정 권한 안에서 결정 가능하다", s:3},
+    {t:"상의는 하지만 최종 결정은 항상 나", s:2},
+    {t:"사실상 나만 결정할 수 있다", s:1},
+    {t:"결정 기준 자체가 없어서 매번 감으로 정한다", s:0},
+  ]},
+  { cat:0, text:"이번 달, 내가 직접 처리하지 않아도 됐던 문제가 몇 건이나 있었나요?", options:[
+    {t:"대부분(70% 이상)이 직원 선에서 해결됐다", s:3},
+    {t:"절반 정도", s:2},
+    {t:"거의 대부분 내가 나서야 했다", s:1},
+    {t:"전부 내가 처리했다", s:0},
+  ]},
+  { cat:1, text:"직원별로 누가 무슨 업무를 담당하는지 문서로 정리돼 있나요?", options:[
+    {t:"있고 신규 직원 교육에도 쓴다", s:3},
+    {t:"대략 있지만 실제와는 다르다", s:2},
+    {t:"머릿속에만 있다", s:1},
+    {t:"없다, 그때그때 시킨다", s:0},
+  ]},
+  { cat:1, text:"직원이 그만두면 그 업무의 인수인계가 얼마나 매끄럽게 되나요?", options:[
+    {t:"문서·매뉴얼 기반으로 대체로 매끄럽다", s:3},
+    {t:"어느 정도 되지만 시간이 걸린다", s:2},
+    {t:"거의 처음부터 다시 만들어야 한다", s:1},
+    {t:"인수인계라는 개념이 없다", s:0},
+  ]},
+  { cat:1, text:"직원 간 업무 범위가 겹치거나, 반대로 아무도 안 하는 업무가 있나요?", options:[
+    {t:"없다, 역할이 명확하다", s:3},
+    {t:"가끔 있지만 큰 문제는 안 된다", s:2},
+    {t:"자주 발생하고 갈등의 원인이 된다", s:1},
+    {t:"매번 누가 할지 그때그때 정한다", s:0},
+  ]},
+  { cat:2, text:"신규 회원 등록부터 첫 PT까지의 프로세스가 매뉴얼로 정리돼 있나요?", options:[
+    {t:"있고 모든 직원이 동일하게 적용한다", s:3},
+    {t:"있지만 직원마다 조금씩 다르게 한다", s:2},
+    {t:"예전에 만들다 만 문서가 있다", s:1},
+    {t:"없다, 각자 알아서 한다", s:0},
+  ]},
+  { cat:2, text:"시설·장비 점검(청소, 고장, 안전)이 정기적으로 이뤄지나요?", options:[
+    {t:"체크리스트 기반으로 정기 점검한다", s:3},
+    {t:"눈에 띄면 그때그때 고친다", s:2},
+    {t:"회원이 불만을 제기해야 알게 된다", s:1},
+    {t:"특별히 정해진 게 없다", s:0},
+  ]},
+  { cat:2, text:"회원 컴플레인이 들어오면 대응 기준(환불, 보상 등)이 있나요?", options:[
+    {t:"명확한 기준이 있고 직원도 알고 있다", s:3},
+    {t:"대략 있지만 케이스마다 다르게 처리된다", s:2},
+    {t:"사실상 내가 그때그때 판단한다", s:1},
+    {t:"기준 없이 감정적으로 처리될 때가 많다", s:0},
+  ]},
+  { cat:3, text:"이번 달 매출·지출을 지금 바로 숫자로 말할 수 있나요?", options:[
+    {t:"실시간으로 파악하고 있다", s:3},
+    {t:"대략은 알지만 정확한 숫자는 확인이 필요하다", s:2},
+    {t:"월말 정산 때나 알게 된다", s:1},
+    {t:"정확히 파악이 안 된다", s:0},
+  ]},
+  { cat:3, text:"현금·카드 매출, 회원권 환불 등에서 직원의 실수나 부정을 막을 장치가 있나요?", options:[
+    {t:"이중 확인·시스템 기록 등 장치가 있다", s:3},
+    {t:"어느 정도 있지만 허점이 있다", s:2},
+    {t:"전적으로 신뢰에 의존한다", s:1},
+    {t:"특별한 장치가 없다", s:0},
+  ]},
+  { cat:3, text:"회원권 환불·정지 등 재무에 영향 있는 결정 기준이 문서화돼 있나요?", options:[
+    {t:"명확한 규정이 있고 일관되게 적용된다", s:3},
+    {t:"있지만 예외가 잦다", s:2},
+    {t:"관행으로만 존재한다", s:1},
+    {t:"없다, 그때그때 협상한다", s:0},
+  ]},
+];
+
+const INSIGHTS = [
+  "대표가 빠지면 운영이 멈추는 구조입니다. 직원 역량 문제가 아니라 결정권이 한 사람에게 몰려 있다는 신호입니다.",
+  "누가 무엇을 담당하는지가 문서가 아니라 기억에 의존하고 있습니다. 직원이 한 명만 바뀌어도 같은 문제가 반복될 구조입니다.",
+  "표준 프로세스가 없다는 건, 지금 잘 되고 있어도 그게 누구 덕분인지 알 수 없다는 뜻입니다. 그 사람이 그만두면 품질이 같이 빠집니다.",
+  "숫자를 실시간으로 모른다는 건 문제가 생겨도 늦게 발견한다는 뜻입니다. 붕괴는 대부분 재무 신호가 가장 먼저, 가장 조용히 나타납니다.",
+];
+
+const MANUALS = [
+  { h:"이번 주 안에 할 수 있는 최소 조치 — 리더십·의사결정", items:[
+    "이번 주 내가 처리한 일 중 '위임 가능했던 것' 3개 적어보기",
+    "그 일에 대해 '이 정도까지는 직원이 결정 가능'을 한 줄로 정하기",
+    "다음 부재 시 누가 대신 결정할지 이름 하나 지정하기",
+  ]},
+  { h:"이번 주 안에 할 수 있는 최소 조치 — 역할·권한", items:[
+    "직원별 담당 업무를 한 줄씩 적어 목록 만들기",
+    "겹치는 업무, 비어있는 업무 표시하기",
+    "신입 인수인계 시 확인할 체크리스트 3가지 만들기",
+  ]},
+  { h:"이번 주 안에 할 수 있는 최소 조치 — 운영·매뉴얼", items:[
+    "신규 회원 등록~첫 PT까지 과정을 5단계로 쪼개 적기",
+    "각 단계별 '누가, 무엇을' 하는지 한 줄씩 채우기",
+    "이번 주 신규 회원 1명에게 그대로 적용해보고 안 맞는 부분 표시하기",
+  ]},
+  { h:"이번 주 안에 할 수 있는 최소 조치 — 재무·내부통제", items:[
+    "이번 달 매출·지출을 오늘 기준으로 확인해서 적어두기",
+    "환불·정지 기준을 한 문장으로 정해두기",
+    "현금 처리 시 이중 확인(사진, 서명 등) 1가지 추가하기",
+  ]},
+];
+
+const state = { idx:0, answers:new Array(QUESTIONS.length).fill(null), texts:new Array(QUESTIONS.length).fill('') };
+const screen = document.getElementById('screen');
+const toastEl = document.getElementById('toast');
+
+function showToast(msg){ toastEl.textContent = msg; toastEl.classList.add('show'); setTimeout(()=>toastEl.classList.remove('show'), 1800); }
+
+function renderIntro(){
+  screen.innerHTML = `
+    <div class="intro">
+      <h1>지금 이 센터, 대표님 없으면 며칠이나 버틸까요?</h1>
+      <p class="lead">매출을 올리는 진단이 아닙니다. 지금 조용히 무너지고 있는 구조를 먼저 찾는 12문항, 약 2분 자가진단입니다.</p>
+      <div class="facts">
+        <div class="fact"><b>12</b> 문항</div>
+        <div class="fact"><b>4</b> 영역</div>
+        <div class="fact"><b>2분</b> 소요</div>
+      </div>
+      <div class="cat-preview">
+        ${CATEGORIES.map(c=>`<div class="cat-preview-item"><span class="dot"></span>${c}</div>`).join('')}
+      </div>
+      <button class="primary" onclick="startQuiz()">진단 시작</button>
+      <p class="fineprint">응답은 저장되지 않고 이 화면에서만 계산됩니다.<br>결과는 참고용이며 확정적인 결론이나 법률·회계 자문이 아닙니다.</p>
+    </div>
+  `;
+}
+
+function startQuiz(){ state.idx = 0; renderQuestion(); }
+
+function renderProgress(){
+  return `<div class="progress-wrap">${QUESTIONS.map((_,i)=>{
+    let cls='progress-dot'; if(i<state.idx) cls+=' done'; else if(i===state.idx) cls+=' current';
+    return `<div class="${cls}"></div>`;
+  }).join('')}</div>`;
+}
+
+function renderQuestion(){
+  const q = QUESTIONS[state.idx];
+  screen.innerHTML = `
+    ${renderProgress()}
+    <div class="q-meta">${state.idx+1} / ${QUESTIONS.length} · ${CATEGORIES[q.cat]}</div>
+    <div class="q-text">${q.text}</div>
+    <div class="options">${q.options.map((o,oi)=>`<button class="option-btn" onclick="answer(${oi})">${o.t}</button>`).join('')}</div>
+    <div class="nav-row">${state.idx>0?`<button class="back-link" onclick="goBack()">← 이전 질문</button>`:`<span></span>`}</div>
+  `;
+}
+
+function answer(oi){
+  const q = QUESTIONS[state.idx];
+  state.answers[state.idx] = q.options[oi].s;
+  state.texts[state.idx] = q.options[oi].t;
+  if(state.idx < QUESTIONS.length-1){ state.idx+=1; renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function goBack(){ if(state.idx>0){ state.idx-=1; renderQuestion(); } }
+
+function renderResult(){
+  const rows = QUESTIONS.map((q,i)=>`<div class="cat-item"><div class="cat-item-top"><span class="name">${q.text}</span></div><p style="margin:0;color:var(--ink-dim);font-size:13.5px;line-height:1.5">${state.texts[i]||''}</p></div>`).join('');
+  screen.innerHTML = `
+    <div class="result">
+      <div class="result-band band-caution">참고용 · 실제 진단 아님</div>
+      <p class="result-headline">이건 가설이며 실제 진단이 아닙니다. 점수·안정/주의/위험 밴드가 없습니다. 확정 결론이나 법률·회계 자문이 아닙니다.</p>
+      <div class="cat-block"><h3>이번 답변 (항목 단위)</h3>${rows}</div>
+      <div class="insight-box"><span class="cat-name">참고 가설</span><br><br>${INSIGHTS.map(t=>t).join('<br><br>')}</div>
+      <div class="result-actions">
+        <a class="cta-link" target="_blank" rel="noopener noreferrer" href="https://wary-crocus-59c.notion.site/3c5f6ead7401804e87d7fbb6d086bba2">
+          <button class="primary">베타 신청하기</button>
+        </a>
+        <button class="secondary" onclick="copyResult()">결과 텍스트로 복사하기</button>
+        <button class="secondary" onclick="renderIntro()">처음부터 다시 하기</button>
+      </div>
+    </div>
+  `;
+}
+
+function copyResult(){
+  const lines = ['[센터 구조 자가진단 · 참고용 · 실제 진단 아님]', '', ...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`), '', 'by 디테일랩'];
+  const text = lines.join('\n');
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>showToast('결과가 복사되었습니다'));
+  }else{ showToast('복사를 지원하지 않는 환경입니다'); }
+}
+
+renderIntro();
+</script>
+</body>
+</html>

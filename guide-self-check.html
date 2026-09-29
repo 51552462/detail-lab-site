@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>인수인계 자가진단 · 디테일랩</title>
+<meta name="description" content="교대할 때 놓치는 칸을 12문으로 확인합니다. 인사평가 도구가 아닙니다.">
+<meta name="robots" content="noindex,nofollow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="인수인계 자가진단 · 디테일랩">
+<meta property="og:description" content="교대할 때 놓치는 칸을 12문으로 확인합니다. 인사평가 도구가 아닙니다.">
+<meta property="og:image" content="og-owner.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="인수인계 자가진단 · 디테일랩">
+<meta name="twitter:image" content="og-owner.png">
+<style>
+  :root{
+    --bg: #12141A;
+    --panel: #1A1D24;
+    --panel-border: rgba(255,255,255,0.08);
+    --ink: #ECEDEF;
+    --ink-dim: #9AA3AF;
+    --ink-faint: #5C6570;
+    --accent: #D9622B;
+    --accent-ink: #1C0D06;
+    --accent-soft: rgba(217,98,43,0.14);
+    --danger: #E4572E;
+    --danger-soft: rgba(228,87,46,0.16);
+    --caution: #E3A008;
+    --caution-soft: rgba(227,160,8,0.16);
+    --stable: #3FA34D;
+    --stable-soft: rgba(63,163,77,0.16);
+    --radius: 14px;
+    --maxw: 560px;
+  }
+  * { box-sizing: border-box; }
+  html,body{
+    margin:0; padding:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .app{ min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:28px 20px 60px; }
+  .brandline{ width:100%; max-width:var(--maxw); display:flex; align-items:center; justify-content:space-between; font-size:12px; color:var(--ink-faint); margin-bottom:28px; }
+  .brandline .mark{ color: var(--ink-dim); font-weight:600; }
+  .screen{ width:100%; max-width:var(--maxw); }
+
+  .intro h1{ font-size:29px; line-height:1.32; font-weight:800; letter-spacing:-0.01em; margin:0 0 14px; }
+  .intro p.lead{ font-size:15px; line-height:1.6; color:var(--ink-dim); margin:0 0 28px; }
+  .facts{ display:flex; gap:10px; margin-bottom:32px; flex-wrap:wrap; }
+  .fact{ background:var(--panel); border:1px solid var(--panel-border); border-radius:10px; padding:10px 14px; font-size:13px; color:var(--ink-dim); }
+  .fact b{ color:var(--ink); font-weight:700; }
+  .cat-preview{ display:flex; flex-direction:column; gap:8px; margin-bottom:32px; }
+  .cat-preview-item{ display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--ink-dim); }
+  .cat-preview-item .dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+
+  button.primary{ width:100%; background:var(--accent); color:var(--accent-ink); border:none; border-radius:12px; padding:16px; font-size:16px; font-weight:700; cursor:pointer; transition:transform .12s ease; }
+  button.primary:active{ transform:scale(0.98); }
+  .fineprint{ font-size:12px; color:var(--ink-faint); text-align:center; margin-top:14px; line-height:1.5; }
+
+  .progress-wrap{ display:flex; gap:5px; margin-bottom:28px; }
+  .progress-dot{ flex:1; height:4px; border-radius:2px; background:var(--panel-border); }
+  .progress-dot.done{ background:var(--accent); }
+  .progress-dot.current{ background:var(--ink-faint); }
+  .q-meta{ font-size:12.5px; color:var(--accent); font-weight:700; margin-bottom:10px; }
+  .q-text{ font-size:21px; line-height:1.45; font-weight:700; margin:0 0 24px; }
+  .options{ display:flex; flex-direction:column; gap:10px; }
+  .option-btn{ text-align:left; background:var(--panel); border:1px solid var(--panel-border); color:var(--ink); border-radius:var(--radius); padding:16px; font-size:14.5px; line-height:1.5; cursor:pointer; transition:border-color .12s ease, background .12s ease; }
+  .option-btn:hover{ border-color: rgba(217,98,43,0.5); }
+  .option-btn:active{ background: var(--accent-soft); }
+  .nav-row{ display:flex; justify-content:space-between; align-items:center; margin-top:22px; }
+  .back-link{ color:var(--ink-faint); font-size:13px; cursor:pointer; background:none; border:none; padding:8px 0; }
+  .back-link:hover{ color:var(--ink-dim); }
+
+  .result-band{ display:inline-block; font-size:12.5px; font-weight:700; padding:6px 12px; border-radius:100px; margin-bottom:14px; }
+  .band-stable{ background:var(--stable-soft); color:var(--stable); }
+  .band-caution{ background:var(--caution-soft); color:var(--caution); }
+  .band-danger{ background:var(--danger-soft); color:var(--danger); }
+  .score-row{ display:flex; align-items:baseline; gap:10px; margin-bottom:6px; }
+  .score-num{ font-size:52px; font-weight:800; letter-spacing:-0.02em; font-variant-numeric: tabular-nums; }
+  .score-suffix{ font-size:16px; color:var(--ink-dim); }
+  .result-headline{ font-size:16px; line-height:1.6; color:var(--ink-dim); margin:0 0 28px; }
+
+  .cat-block{ margin-bottom:28px; }
+  .cat-block h3{ font-size:13px; font-weight:700; color:var(--ink-faint); margin:0 0 12px; }
+  .cat-item{ margin-bottom:14px; }
+  .cat-item-top{ display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px; }
+  .cat-item-top .name{ color:var(--ink); font-weight:600; }
+  .cat-item-top .pct{ color:var(--ink-dim); font-variant-numeric: tabular-nums; }
+  .cat-bar-track{ height:8px; background:var(--panel); border:1px solid var(--panel-border); border-radius:5px; overflow:hidden; }
+  .cat-bar-fill{ height:100%; border-radius:5px; }
+
+  .insight-box{ background:var(--panel); border:1px solid var(--panel-border); border-left:3px solid var(--danger); border-radius:10px; padding:16px 18px; font-size:14px; line-height:1.65; color:var(--ink-dim); margin-bottom:20px; }
+  .insight-box .cat-name{ color:var(--danger); font-weight:700; }
+
+  .manual-box{ background:var(--panel); border:1px solid var(--panel-border); border-left:3px solid var(--accent); border-radius:10px; padding:18px; margin-bottom:28px; }
+  .manual-box h4{ margin:0 0 10px; font-size:14px; color:var(--ink); }
+  .manual-box ul{ margin:0; padding-left:18px; font-size:13.5px; line-height:1.8; color:var(--ink-dim); }
+
+  .compare-box{ background:var(--panel); border:1px solid var(--panel-border); border-radius:12px; padding:18px; margin-bottom:28px; font-size:13.5px; color:var(--ink-dim); line-height:1.6; }
+  .compare-box b{ color:var(--ink); }
+
+  .result-actions{ display:flex; flex-direction:column; gap:10px; }
+  button.secondary{ width:100%; background:transparent; color:var(--ink-dim); border:1px solid var(--panel-border); border-radius:12px; padding:14px; font-size:14.5px; font-weight:600; cursor:pointer; }
+  button.secondary:hover{ border-color:var(--ink-faint); color:var(--ink); }
+  a.cta-link{ text-decoration:none; display:block; }
+
+  .toast{ position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--panel); border:1px solid var(--panel-border); color:var(--ink); padding:10px 18px; border-radius:10px; font-size:13px; opacity:0; pointer-events:none; transition:opacity .2s ease; }
+  .toast.show{ opacity:1; }
+
+  @media (max-width:420px){ .intro h1{ font-size:24px; } .q-text{ font-size:19px; } .score-num{ font-size:44px; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="brandline"><span class="mark">디테일랩</span><span>인수인계 · 인사평가 아님</span></div>
+  <div class="screen" id="screen"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const CATEGORIES = ["넘긴 방식","빈칸","예외"];
+
+const QUESTIONS = [
+  { cat:0, text:"최근 7일, 교대 인수인계가 구두로만 이뤄진 횟수는?", options:[
+    {t:"0~1회, 대부분 한 장이 있었다", s:3},
+    {t:"2~3회", s:2},
+    {t:"4~5회", s:1},
+    {t:"거의 매번 말로만 넘겼다", s:0},
+  ]},
+  { cat:0, text:"다음 근무자가 확인해야 할 항목이 문서로 있나요?", options:[
+    {t:"있고 다음 사람이 그 칸을 본다", s:3},
+    {t:"대략 있지만 비는 칸이 있다", s:2},
+    {t:"단톡·머릿속에만 있다", s:1},
+    {t:"없다", s:0},
+  ]},
+  { cat:0, text:"교대 5분 전에 한 장을 채우나요?", options:[
+    {t:"매 교대 채운다", s:3},
+    {t:"바쁠 때는 건너뛴다", s:2},
+    {t:"거의 안 채운다", s:1},
+    {t:"그런 한 장이 없다", s:0},
+  ]},
+  { cat:0, text:"다음 사람이 회원 앞에서 그 한 장을 읽고 움직이나요?", options:[
+    {t:"읽고 바로 안내한다", s:3},
+    {t:"반은 되고 반은 다시 묻는다", s:2},
+    {t:"기록은 있는데 행동이 없다", s:1},
+    {t:"회원 앞에서 처음부터 다시 묻는다", s:0},
+  ]},
+  { cat:1, text:"최근 4주, 인수인계 누락으로 재작업·재확인이 발생한 횟수는?", options:[
+    {t:"0~1회", s:3},
+    {t:"2~3회", s:2},
+    {t:"주 1회 이상", s:1},
+    {t:"거의 매일 같은 일을 다시 한다", s:0},
+  ]},
+  { cat:1, text:"메모가 “처리 중”으로만 남은 비율은?", options:[
+    {t:"거의 없다. 다음 행동이 적혀 있다", s:3},
+    {t:"가끔 처리 중으로 끝난다", s:2},
+    {t:"절반 이상이 처리 중이다", s:1},
+    {t:"대부분 처리 중으로 퇴근한다", s:0},
+  ]},
+  { cat:1, text:"지금 해도 되는 다음 행동이 적힌 비율은?", options:[
+    {t:"대부분 적혀 있다", s:3},
+    {t:"절반 정도", s:2},
+    {t:"거의 없다", s:1},
+    {t:"없다", s:0},
+  ]},
+  { cat:1, text:"다시 확인하는 시점이 적힌 비율은?", options:[
+    {t:"대부분 시점이 있다", s:3},
+    {t:"절반 정도", s:2},
+    {t:"거의 없다", s:1},
+    {t:"없다", s:0},
+  ]},
+  { cat:1, text:"최근 7일, 같은 회원이 같은 질문을 두 번 한 횟수는?", options:[
+    {t:"없었다", s:3},
+    {t:"1번", s:2},
+    {t:"2~3번", s:1},
+    {t:"여러 번, 교대마다 반복됐다", s:0},
+  ]},
+  { cat:1, text:"기구·시설이 “나중에 보기”로만 넘어가고, 사용 중지 범위가 없었던 횟수(4주)는?", options:[
+    {t:"없었다", s:3},
+    {t:"1번", s:2},
+    {t:"2~3번", s:1},
+    {t:"반복됐다", s:0},
+  ]},
+  { cat:2, text:"최근 4주, 적혀 있지 않은 예외를 근무자가 새로 연 횟수는?", options:[
+    {t:"없었다", s:3},
+    {t:"1번", s:2},
+    {t:"여러 번", s:1},
+    {t:"친절한 사람이 조건을 자주 새로 연다", s:0},
+  ]},
+  { cat:2, text:"담당자가 출근한 뒤, 밤에 열린 예외를 닫는지 확인하나요?", options:[
+    {t:"확인하고 표시한다", s:3},
+    {t:"가끔 한다", s:2},
+    {t:"거의 안 한다", s:1},
+    {t:"예외가 열린 줄도 모른다", s:0},
+  ]},
+];
+
+const INSIGHTS = [
+  "넘기는 방식이 말로만 남으면, 다음 사람은 회원 앞에서 처음부터 다시 묻습니다.",
+  "처리 중·나중에 보기만 있으면 다음 행동이 없습니다. 새는 지점은 보통 이 칸입니다.",
+  "적혀 있지 않은 순간 예외가 열립니다. 다음 날 다른 사람이 그 조건을 모릅니다.",
+];
+
+const MANUALS = [
+  { h:"30일 실험 초안 · 넘긴 방식", items:[
+    "교대 시 체크리스트 1장을 담당자가 매 교대 작성한다",
+    "다음 근무자가 확인 표시를 한다",
+    "4주 뒤 같은 문의가 되돌아온 횟수를 비교한다",
+  ]},
+  { h:"30일 실험 초안 · 빈칸", items:[
+    "넘어온 일 / 다음 행동 / 확인 시점을 한 장에만 적는다",
+    "처리 중이라는 말만 남기지 않는다",
+    "4주 뒤 재작업 발생 건수를 비교한다",
+  ]},
+  { h:"30일 실험 초안 · 예외", items:[
+    "새 조건은 적힌 안내 문장만 쓰고 만들지 않는다",
+    "담당자 출근 뒤 예외가 열렸는지 확인한다",
+    "4주 뒤 임의 예외 횟수를 비교한다",
+  ]},
+];
+
+const state = { idx:0, answers:new Array(QUESTIONS.length).fill(null), texts:new Array(QUESTIONS.length).fill('') };
+const screen = document.getElementById('screen');
+const toastEl = document.getElementById('toast');
+
+function showToast(msg){ toastEl.textContent = msg; toastEl.classList.add('show'); setTimeout(()=>toastEl.classList.remove('show'), 1800); }
+
+function renderIntro(){
+  screen.innerHTML = `
+    <div class="intro">
+      <h1>일이 다음 사람에게 끝나지 않고 돕니다</h1>
+      <p class="lead">인사평가·징계·처우 도구가 아닙니다. 끝없는 인수인계 — 넘어온 일, 다음 행동, 확인 시점이 비는지 12문으로 봅니다. 직원 지침서(직장 고르기)와 다른 도구입니다. 약 5분입니다.</p>
+      <div class="facts">
+        <div class="fact"><b>12</b> 문항</div>
+        <div class="fact"><b>저장</b> 안 함</div>
+        <div class="fact"><b>평가</b> 아님</div>
+      </div>
+      <div class="cat-preview">
+        ${CATEGORIES.map(c=>`<div class="cat-preview-item"><span class="dot"></span>${c}</div>`).join('')}
+      </div>
+      <button class="primary" onclick="startQuiz()">진단 시작</button>
+      <p class="fineprint">응답은 저장되지 않고 이 화면에서만 계산됩니다.<br>결과는 참고용이며 확정적인 결론이나 법률·회계 자문이 아닙니다.</p>
+    </div>
+  `;
+}
+
+function startQuiz(){ state.idx = 0; renderQuestion(); }
+
+function renderProgress(){
+  return `<div class="progress-wrap">${QUESTIONS.map((_,i)=>{
+    let cls='progress-dot'; if(i<state.idx) cls+=' done'; else if(i===state.idx) cls+=' current';
+    return `<div class="${cls}"></div>`;
+  }).join('')}</div>`;
+}
+
+function renderQuestion(){
+  const q = QUESTIONS[state.idx];
+  screen.innerHTML = `
+    ${renderProgress()}
+    <div class="q-meta">${state.idx+1} / ${QUESTIONS.length} · ${CATEGORIES[q.cat]}</div>
+    <div class="q-text">${q.text}</div>
+    <div class="options">${q.options.map((o,oi)=>`<button class="option-btn" onclick="answer(${oi})">${o.t}</button>`).join('')}</div>
+    <div class="nav-row">${state.idx>0?`<button class="back-link" onclick="goBack()">← 이전 질문</button>`:`<span></span>`}</div>
+  `;
+}
+
+function answer(oi){
+  const q = QUESTIONS[state.idx];
+  state.answers[state.idx] = q.options[oi].s;
+  state.texts[state.idx] = q.options[oi].t;
+  if(state.idx < QUESTIONS.length-1){ state.idx+=1; renderQuestion(); }
+  else{ renderResult(); }
+}
+
+function goBack(){ if(state.idx>0){ state.idx-=1; renderQuestion(); } }
+
+function renderResult(){
+  const rows = QUESTIONS.map((q,i)=>`<div class="cat-item"><div class="cat-item-top"><span class="name">${q.text}</span></div><p style="margin:0;color:var(--ink-dim);font-size:13.5px;line-height:1.5">${state.texts[i]||''}</p></div>`).join('');
+  screen.innerHTML = `
+    <div class="result">
+      <div class="result-band band-caution">참고용 · 인사평가 아님 · 실제 진단 아님</div>
+      <p class="result-headline">이건 가설이며 실제 진단이 아닙니다. 점수·안정/주의/위험 밴드가 없습니다. 노무·징계·처우 기준이 아닙니다.</p>
+      <div class="compare-box"><b>인수인계 흐름</b><br>넘어온 일 → 다음 사람이 하는 일 → 다시 확인하는 때. 빈칸이 있으면 같은 회원이 같은 질문을 두 번 합니다.</div>
+      <div class="cat-block"><h3>이번 답변 (항목 단위)</h3>${rows}</div>
+      <div class="insight-box"><span class="cat-name">참고 가설</span><br><br>${INSIGHTS.map(t=>t).join('<br><br>')}</div>
+      <div class="result-actions">
+        <a class="cta-link" target="_blank" rel="noopener noreferrer" href="https://wary-crocus-59c.notion.site/3c5f6ead7401804e87d7fbb6d086bba2">
+          <button class="primary">전체 운영 진단도 보고 싶다면</button>
+        </a>
+        <button class="secondary" onclick="copyResult()">결과 텍스트로 복사하기</button>
+        <button class="secondary" onclick="renderIntro()">처음부터 다시 하기</button>
+      </div>
+    </div>
+  `;
+}
+
+function copyResult(){
+  const lines = ['[인수인계 자가진단 · 참고용 · 인사평가 아님]', '', ...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`), '', 'by 디테일랩'];
+  const text = lines.join('\n');
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(()=>showToast('결과가 복사되었습니다'));
+  }else{ showToast('복사를 지원하지 않는 환경입니다'); }
+}
+
+renderIntro();
+</script>
+</body>
+</html>
