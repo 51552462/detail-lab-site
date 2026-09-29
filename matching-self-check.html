@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>트레이너·회원 만남 확인 · 디테일랩</title>
-<meta name="description" content="회원과 트레이너가 각자 답해 일정·설명·피드백의 어긋남을 봅니다. 점수·자동추천·건강정보 없음.">
-<meta name="robots" content="noindex,nofollow">
+<title>트레이너·회원 수업 조건 대조 · 디테일랩</title>
+<meta name="description" content="회원과 트레이너가 각자 7개 질문에 답하고 동의한 뒤, 수업 일정과 설명·피드백 조건을 함께 확인합니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://detail-lab-site.onrender.com/matching-self-check.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="트레이너·회원 만남 확인 · 디테일랩">
-<meta property="og:description" content="회원과 트레이너가 각자 답해 일정·설명·피드백의 어긋남을 봅니다. 점수·자동추천·건강정보 없음.">
+<meta property="og:title" content="트레이너·회원 수업 조건 대조 · 디테일랩">
+<meta property="og:description" content="같은 기기에서 각자 답하고, 함께 수업 조건을 확인하세요.">
 <meta property="og:image" content="og-trainer.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="트레이너·회원 만남 확인 · 디테일랩">
@@ -349,19 +350,29 @@
     .q-text{ font-size: 19px; }
     .score-num{ font-size: 44px; }
   }
+  @media print{
+    html,body{background:#fff;color:#111}
+    .app{padding:0;min-height:auto}
+    .brandline,.result-actions,.toast{display:none!important}
+    .screen{max-width:none}
+    .result-headline,.compare-box,.pair-row,.pair-row strong,.pair-row em{color:#111}
+    .compare-box,.pair-row{background:#fff;border:1px solid #888;break-inside:avoid}
+  }
 .pair-consent{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--panel-border);border-radius:10px;color:var(--ink-dim);font-size:13px;line-height:1.5}.pair-consent input{width:18px;height:18px;flex-shrink:0;accent-color:var(--accent)}.pair-grid{display:grid;gap:12px;margin-bottom:24px}.pair-row{display:grid;gap:5px;padding:15px;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;color:var(--ink-dim);font-size:13px}.pair-row strong{color:var(--ink);font-size:15px}.pair-row em{font-style:normal;color:var(--accent)}
 </style>
 </head>
 <body>
 
+<main id="main">
 <div class="app">
   <div class="brandline">
     <span class="mark">디테일랩</span>
-    <span>만남 확인 · 점수·추천·건강정보 없음</span>
+    <span>수업 조건 대조 · 무료</span>
   </div>
 
   <div class="screen" id="screen"></div>
 </div>
+</main>
 
 <div class="toast" id="toast"></div>
 
@@ -406,8 +417,8 @@ function renderIntro(){
   if (preset === "member" || preset === "trainer") { pickRole(preset); return; }
   screen.innerHTML = `
     <div class="intro">
-      <h1>목표는 같아 보여도,<br>한 주가 어디서 어긋나나요?</h1>
-      <p class="lead">회원과 트레이너가 각자 답합니다. 점수·자동 추천·건강정보 수집이 없습니다. 한 사람만 답하면 자기 답만 보입니다. 두 사람이 각자 동의하고 같은 기기에서 이어서 답하면 항목을 나란히 볼 수 있습니다.</p>
+      <h1>첫 수업 전에<br>서로의 한 주를 맞춰 보세요</h1>
+      <p class="lead">회원과 트레이너가 한 기기에서 차례로 7문에 답하고 각각 공유에 동의하면, 가능한 일정과 수업 방식을 나란히 볼 수 있습니다. 무료이며 답은 서버로 전송되지 않습니다.</p>
       <div class="facts">
         <div class="fact"><b>회원</b> 7문</div>
         <div class="fact"><b>트레이너</b> 7문</div>
@@ -415,7 +426,7 @@ function renderIntro(){
       </div>
       <button class="primary" onclick="pickRole('member')">회원용 시작</button>
       <button class="secondary" style="margin-top:10px" onclick="pickRole('trainer')">트레이너용 시작</button>
-      <p class="fineprint">예전 대표·직원용 주소는 더 이상 이 상품이 아닙니다. 역할을 다시 고르면 됩니다.</p>
+      <p class="fineprint">새로고침하거나 화면을 닫으면 답변이 사라집니다. 수업 예약이나 상대 소개는 이 도구에서 진행하지 않습니다.</p>
     </div>
   `;
 }
@@ -435,8 +446,8 @@ function renderRoleIntro(){
     <div class="intro">
       <h1>${isMember ? "회원이 보는 한 주" : "트레이너가 보는 한 주"}</h1>
       <p class="lead">${isMember
-        ? "7문입니다. 병력·체성분 질문이 아닙니다. 점수로 사람을 고르지 않습니다."
-        : "7문입니다. 일정·수업 방식만 묻습니다. 건강·신체 조건 문항이 없습니다."}</p>
+        ? "가능한 일정과 선호하는 수업 방식을 골라 주세요. 건강정보는 묻지 않습니다."
+        : "현재 제공할 수 있는 일정과 수업 방식을 골라 주세요. 건강정보는 묻지 않습니다."}</p>
       <div class="facts">
         <div class="fact"><b>${bank().length}</b> 문항</div>
         <div class="fact"><b>대조</b> 두 사람 동의 후 같은 기기</div>
@@ -543,8 +554,8 @@ function renderResult(){
   const otherLabel = state.role === "member" ? "트레이너" : "회원";
   screen.innerHTML = `
     <div class="result">
-      <div class="result-band band-caution">${state.role === "member" ? "회원 답변" : "트레이너 답변"} · 점수 없음</div>
-      <p class="result-headline">현재는 본인의 답만 보입니다. 같은 기기에서 두 사람이 각각 화면 공유에 동의하면 일정·수업 방식의 항목별 대조를 볼 수 있습니다. 서버 전송과 자동 추천은 없습니다.</p>
+      <div class="result-band band-caution">${state.role === "member" ? "회원 답변" : "트레이너 답변"}</div>
+      <p class="result-headline">아래 답을 확인한 뒤 상대에게 보여 줘도 되는지 결정하세요. 두 사람이 각각 동의해야 조건 대조가 열립니다.</p>
       <div class="cat-block"><h3>이번 답변 · 화면을 닫으면 사라짐</h3>${rows}</div>
       <div class="result-actions">
         <label class="pair-consent"><input type="checkbox" id="pair-consent"> 내 답의 항목을 상대방에게 보여 주는 데 동의합니다. 같은 기기에서 이어서 확인합니다.</label>
@@ -597,13 +608,19 @@ function renderPairResult(){
   const rows = comparePair(member,trainer).map(([label,left,right,read]) =>
     `<div class="pair-row"><strong>${label}</strong><span>회원: ${left}</span><span>트레이너: ${right}</span><em>${read}</em></div>`).join("");
   screen.innerHTML = `<div class="result">
-    <div class="result-band band-caution">양측 동의 · 항목 대조 시안</div>
+    <div class="result-band band-caution">두 사람의 수업 조건 대조</div>
     <h1>함께 확인할 한 주</h1>
-    <p class="result-headline">일정과 응답 방식만 나란히 본 결과입니다. 빈 시간이 실제로 남아 있는지, 첫 수업에서 호흡이 맞는지, 취소·변경 기준은 여기서 알 수 없습니다. 이 결과는 매칭·추천·계약을 보장하지 않습니다.</p>
+    <p class="result-headline">두 사람이 고른 답을 나란히 정리했습니다. 공통 요일과 시간대가 있더라도 실제 빈 수업 시간은 직접 확인하세요.</p>
     <div class="pair-grid" aria-label="회원과 트레이너의 항목별 대조">${rows}</div>
-    <div class="compare-box">회원의 목표와 트레이너의 수업 제약은 같은 척도로 평가할 수 없어 점수에 넣지 않았습니다. 첫 대화에서 목표·특정 요일의 밀집·변경 가능성을 따로 확인하세요.</div>
-    <div class="result-actions"><button class="secondary" onclick="clearPair()">대조 결과와 답변 지우기</button></div>
+    <div class="compare-box"><strong>첫 대화에서 확인할 4가지</strong><br>① 실제 예약 가능한 요일·시간은 언제인가요?<br>② 주당 횟수와 수업 기간은 서로 가능한가요?<br>③ 수업 장소·비용·변경·취소 기준은 무엇인가요?<br>④ 첫 수업에서 설명과 피드백은 어떻게 맞춰 볼까요?<br><br>회원의 목표와 트레이너의 제약은 별도로 이야기해 주세요. 이 표는 추천 점수나 계약 판단이 아닙니다.</div>
+    <div class="result-actions"><button class="primary" onclick="copyPairResult()">대조 결과 복사하기</button><button class="secondary" onclick="window.print()">인쇄·PDF로 저장</button><button class="secondary" onclick="clearPair()">대조 결과와 답변 지우기</button></div>
   </div>`;
+}
+
+function copyPairResult(){
+  const lines=['[디테일랩 · 트레이너·회원 수업 조건 대조]','',...comparePair(state.pair.member,state.pair.trainer).map(([label,left,right,read])=>`${label}\n회원: ${left}\n트레이너: ${right}\n확인: ${read}`),'','첫 대화: 실제 예약 시간 / 주당 횟수·기간 / 장소·비용·취소 기준 / 설명·피드백 방식'];
+  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(lines.join('\n')).then(()=>showToast('대조 결과가 복사되었습니다')).catch(()=>showToast('복사하지 못했습니다'));
+  else showToast('복사를 지원하지 않는 환경입니다');
 }
 
 function clearPair(){

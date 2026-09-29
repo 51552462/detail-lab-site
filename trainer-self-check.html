@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>트레이너 근무환경 자가점검 · 디테일랩</title>
-<meta name="description" content="이 센터, 계속 다녀도 될까요? 12문항, 2분, 무료 자가점검.">
+<meta name="description" content="트레이너가 일하는 곳의 정산·회원 배정·교육·운영 기준을 12문으로 확인하고 다음 질문을 정리합니다.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://detail-lab-site.onrender.com/trainer-self-check.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="트레이너 근무환경 자가점검 · 디테일랩">
-<meta property="og:description" content="이 센터, 계속 다녀도 될까요? 12문항, 2분, 무료 자가점검.">
+<meta property="og:description" content="정산·배정·교육 조건을 12문으로 확인하고 다음 질문을 정리하세요.">
 <meta property="og:image" content="og-trainer.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="트레이너 근무환경 자가점검 · 디테일랩">
@@ -349,6 +351,7 @@
 </head>
 <body>
 
+<main id="main">
 <div class="app">
   <div class="brandline">
     <span class="mark">디테일랩</span>
@@ -357,6 +360,7 @@
 
   <div class="screen" id="screen"></div>
 </div>
+</main>
 
 <div class="toast" id="toast"></div>
 
@@ -445,16 +449,16 @@ const QUESTIONS = [
   ]},
 ];
 
-const INSIGHTS = [
-  "돈이 얼마 들어올지 모르고 일하는 상태입니다. 이건 트레이너 개인의 문제가 아니라 정산 구조의 문제일 가능성이 큽니다.",
-  "배정과 목표가 불투명하면 트레이너끼리 경쟁이 아니라 불신이 쌓이기 쉽습니다.",
-  "이런 상황이 반복되면 트레이너는 매번 '내가 잘못한 건가'를 혼자 판단해야 합니다.",
-  "지금 하는 일이 다음 커리어로 이어지는지, 스스로도 확신하기 어려운 상태일 수 있습니다.",
-  "센터가 대표 한 사람의 기억과 판단에 의존하고 있다는 신호입니다. 대표가 바뀌면 트레이너도 다시 처음부터 적응해야 합니다.",
-  "이직이 잦다는 건 급여나 개인 성향 문제만이 아니라, 구조적인 이유가 있다는 신호일 수 있습니다.",
+const FOLLOWUPS = [
+  "정산 전에 금액을 계산할 수 있도록 어떤 기준과 자료를 확인해야 하나요?",
+  "회원 배정과 목표를 누가 어떤 기준으로 정하는지 확인해 보세요.",
+  "회원 인계나 불만 접수 시 누구에게 언제 알리고 어떻게 기록하는지 물어보세요.",
+  "입사 후 교육과 다음 역할에 관해 실제 일정과 담당자가 있는지 확인해 보세요.",
+  "대표 부재 때 따를 수 있는 운영 기준과 질문할 사람을 확인해 보세요.",
+  "동료의 퇴사 이유를 추측하기보다, 현재 인수인계와 채용 공백을 어떻게 다루는지 확인해 보세요."
 ];
 
-const state = { idx: 0, answers: new Array(QUESTIONS.length).fill(null) };
+const state = { idx: 0, answers: new Array(QUESTIONS.length).fill(null), texts: new Array(QUESTIONS.length).fill('') };
 
 const screen = document.getElementById('screen');
 const toastEl = document.getElementById('toast');
@@ -468,21 +472,21 @@ function showToast(msg){
 function renderIntro(){
   screen.innerHTML = `
     <div class="intro">
-      <h1>이 센터, 계속 다녀도 될까요?</h1>
-      <p class="lead">12개 질문, 약 2분. 급여·배정·교육·조직 안정성까지, 지금 일하는 곳의 구조적 신호를 점검합니다.</p>
+      <h1>지금 일하는 곳에서<br>먼저 확인할 조건은?</h1>
+      <p class="lead">급여 설명, 회원 배정, 교육, 운영 기준을 12문으로 돌아보고 내가 고른 답과 다음에 물을 질문을 정리합니다. 약 3분, 무료입니다.</p>
 
       <div class="facts">
         <div class="fact"><b>12</b> 문항</div>
         <div class="fact"><b>6</b> 영역</div>
-        <div class="fact"><b>2분</b> 소요</div>
+        <div class="fact"><b>3분</b> 내외</div>
       </div>
 
       <div class="cat-preview">
         ${CATEGORIES.map(c => `<div class="cat-preview-item"><span class="dot"></span>${c}</div>`).join('')}
       </div>
 
-      <button class="primary" onclick="startQuiz()">진단 시작</button>
-      <p class="fineprint">응답은 저장되지 않고 이 화면에서만 계산됩니다.<br>결과는 참고용이며 확정적인 결론이 아닙니다.</p>
+      <button class="primary" onclick="startQuiz()">근무 조건 확인하기</button>
+      <p class="fineprint">답변은 서버로 전송되지 않습니다. 근무지 등급이나 이직 결정을 자동으로 판정하지 않으며 법적 판단을 제공하지 않습니다.</p>
     </div>
   `;
 }
@@ -521,6 +525,7 @@ function renderQuestion(){
 function answer(optionIndex){
   const q = QUESTIONS[state.idx];
   state.answers[state.idx] = q.options[optionIndex].s;
+  state.texts[state.idx] = q.options[optionIndex].t;
   if (state.idx < QUESTIONS.length - 1){
     state.idx += 1;
     renderQuestion();
@@ -536,89 +541,35 @@ function goBack(){
   }
 }
 
-function computeCategoryScores(){
-  const totals = new Array(CATEGORIES.length).fill(0);
-  const maxPerCat = new Array(CATEGORIES.length).fill(0);
-  QUESTIONS.forEach((q, i) => {
-    totals[q.cat] += state.answers[i];
-    maxPerCat[q.cat] += 3;
-  });
-  return { totals, maxPerCat };
-}
-
-function bandFor(pct){
-  if (pct >= 80) return { key:'stable', label:'안정형', cls:'band-stable', color:'var(--stable)' };
-  if (pct >= 50) return { key:'caution', label:'주의형', cls:'band-caution', color:'var(--caution)' };
-  return { key:'danger', label:'위험형', cls:'band-danger', color:'var(--danger)' };
-}
-
-function barColorFor(pct){
-  if (pct >= 80) return 'var(--stable)';
-  if (pct >= 50) return 'var(--caution)';
-  return 'var(--danger)';
-}
-
 function renderResult(){
-  const { totals, maxPerCat } = computeCategoryScores();
-  const totalScore = totals.reduce((a,b)=>a+b, 0);
-  const totalMax = maxPerCat.reduce((a,b)=>a+b, 0);
-  const overallPct = Math.round((totalScore / totalMax) * 100);
-  const band = bandFor(overallPct);
-
-  const catPcts = totals.map((t, i) => Math.round((t / maxPerCat[i]) * 100));
-  const weakestIdx = catPcts.indexOf(Math.min(...catPcts));
-
-  const overallText = {
-    stable: "지금 센터는 트레이너 입장에서 봤을 때 구조가 갖춰진 편입니다. 다만 가장 낮은 영역은 계속 지켜볼 필요가 있습니다.",
-    caution: "몇몇 영역은 괜찮지만, 일부는 사람(대표·동료)의 개인기로 버티고 있는 상태에 가깝습니다. 그 사람이 빠지면 흔들릴 수 있습니다.",
-    danger: "여러 영역에서 구조적인 신호가 뚜렷합니다. 지금 느끼는 불안이 기분 탓이 아닐 가능성이 큽니다.",
-  }[band.key];
+  const totals=CATEGORIES.map((_,cat)=>QUESTIONS.reduce((sum,q,i)=>sum+(q.cat===cat?state.answers[i]:0),0));
+  const focus=totals.indexOf(Math.min(...totals));
 
   screen.innerHTML = `
     <div class="result">
-      <div class="result-band ${band.cls}">${band.label}</div>
-      <div class="score-row">
-        <div class="score-num">${overallPct}</div>
-        <div class="score-suffix">/ 100</div>
-      </div>
-      <p class="result-headline">${overallText}</p>
-
+      <div class="result-band band-caution">내 답변 정리</div>
+      <p class="result-headline">여섯 주제 중 답변에서 확인할 내용이 가장 많이 남은 것은 <strong>${CATEGORIES[focus]}</strong>입니다. 이 주제는 먼저 질문해 볼 순서일 뿐, 센터의 등급이나 이직 판단이 아닙니다.</p>
+      <div class="insight-box"><span class="cat-name">다음에 확인할 질문</span><br><br>${FOLLOWUPS[focus]}</div>
       <div class="cat-block">
-        <h3>영역별 점수</h3>
-        ${CATEGORIES.map((c, i) => `
-          <div class="cat-item">
-            <div class="cat-item-top">
-              <span class="name">${c}</span>
-              <span class="pct">${catPcts[i]}%</span>
-            </div>
-            <div class="cat-bar-track">
-              <div class="cat-bar-fill" style="width:${catPcts[i]}%; background:${barColorFor(catPcts[i])};"></div>
-            </div>
-          </div>
-        `).join('')}
+        <h3>내가 고른 12개 답</h3>
+        ${QUESTIONS.map((q,i)=>`<div class="cat-item"><div class="cat-item-top"><span class="name">${q.text}</span></div><p>${state.texts[i]}</p></div>`).join('')}
       </div>
-
-      <div class="insight-box">
-        <span class="cat-name">가장 취약한 영역 — ${CATEGORIES[weakestIdx]}</span><br><br>
-        ${INSIGHTS[weakestIdx]}
-      </div>
-
       <div class="result-actions">
-        <button class="secondary" onclick="copyResult(${overallPct}, '${band.label}', ${JSON.stringify(catPcts)})">결과 텍스트로 복사하기</button>
+        <button class="primary" onclick="copyResult()">내 답변과 질문 복사하기</button>
         <button class="secondary" onclick="renderIntro()">처음부터 다시 하기</button>
       </div>
     </div>
   `;
 }
 
-function copyResult(pct, bandLabel, catPcts){
+function copyResult(){
+  const totals=CATEGORIES.map((_,cat)=>QUESTIONS.reduce((sum,q,i)=>sum+(q.cat===cat?state.answers[i]:0),0));
+  const focus=totals.indexOf(Math.min(...totals));
   const lines = [
-    `[트레이너 근무환경 자가점검 결과]`,
-    `종합 ${pct}점 · ${bandLabel}`,
+    `[디테일랩 · 트레이너 근무 조건 확인]`,
+    `먼저 물을 질문: ${FOLLOWUPS[focus]}`,
     ``,
-    ...CATEGORIES.map((c, i) => `${c}: ${catPcts[i]}%`),
-    ``,
-    `by 디테일랩`
+    ...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]}`)
   ];
   const text = lines.join('\\n');
   if (navigator.clipboard && navigator.clipboard.writeText){

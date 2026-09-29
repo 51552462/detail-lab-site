@@ -1,4 +1,4 @@
-/* Brand-first home: identity, then four doors, then diagnosis dump. */
+/* Brand home and product pages. */
 .brand-hero {
   min-height: 88svh;
   padding: 140px max(24px, calc((100vw - var(--max)) / 2)) 80px;
@@ -41,7 +41,7 @@
 #diagnosis { scroll-margin-top: 76px; }
 #doors { scroll-margin-top: 76px; }
 
-/* The four brand areas share one navigation while only the centre beta is available. */
+/* Four customer-facing product areas. */
 .category-overview { padding-top: 100px; border-top: 1px solid var(--line); }
 .category-overview .section-head { margin-bottom: 46px; }
 .category-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); }
@@ -84,6 +84,24 @@
 .subhero-inner > p:not(.kicker) { max-width: 690px; color: rgba(255,255,255,.76); font-size: 1.1rem; }
 .subhero-link { display: inline-block; margin-top: 24px; color: white; font-weight: 700; text-underline-offset: 6px; }
 .sub-section { padding-top: 110px; padding-bottom: 110px; }
+.offer-intro{margin:0 0 80px;padding:40px;border:1px solid #c6d4e8;background:#eaf0fa}
+.offer-intro .kicker{margin:0 0 14px;color:#1459c4;font-weight:800}
+.offer-intro h2{margin:0 0 18px;font-size:clamp(1.9rem,3.5vw,3rem);letter-spacing:-.05em;line-height:1.2}
+.offer-intro>p:not(.kicker){max-width:780px;margin:0 0 28px;color:#42536b;line-height:1.7}
+.offer-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;border:1px solid #ccd7e8;background:#ccd7e8}
+.offer-facts div{min-width:0;padding:22px;background:white}
+.offer-facts b{display:block;margin-bottom:8px;color:#1459c4;font-size:.83rem}
+.offer-facts span{font-size:.95rem;line-height:1.55;color:#42536b}
+.offer-intro>.button{margin-top:28px}
+.offer-detail{margin:76px 0 28px}
+.offer-detail .section-head{margin-bottom:28px}
+.offer-steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin:0;padding:1px;background:var(--line)}
+.offer-steps li{padding:24px;background:#fff}
+.offer-steps b{display:block;margin-bottom:14px;color:#1459c4}
+.offer-steps span{color:#526075;font-size:.93rem;line-height:1.6}
+.offer-result{max-width:960px;margin:28px 0;padding:27px 30px;border-left:4px solid #1459c4;background:#fff}
+.offer-result h3{margin:0 0 9px;font-size:1.2rem}
+.offer-result p{margin:0;color:#526075;line-height:1.7}
 .sub-section-ink { width: 100%; max-width: none; padding-left: max(24px, calc((100vw - var(--max)) / 2)); padding-right: max(24px, calc((100vw - var(--max)) / 2)); color: white; background: #101b2b; }
 .sub-section-ink .section-head > p:last-of-type { color: #bac8db; }
 .sub-section-ink .button { display: inline-flex; margin-top: 26px; }
@@ -217,6 +235,7 @@
 .match-criteria h3 { margin: 0 0 13px; font-size: 1.25rem; }
 .match-criteria p { margin: 0; color: #526075; font-size: .94rem; }
 @media (max-width: 1050px) {
+  .offer-facts,.offer-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
   .category-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .category-card:nth-child(2) { border-right: 0; }
   .category-card:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
@@ -237,6 +256,10 @@
   .site-nav { gap: 6px; }
 }
 @media (max-width: 620px) {
+  .offer-intro{padding:26px 20px;margin-bottom:56px}
+  .offer-facts,.offer-steps{grid-template-columns:1fr}
+  .offer-facts div{padding:16px}
+  .offer-steps li{padding:20px}
   .category-card { padding: 28px 24px; }
   .subhero { padding: 116px 16px 74px; }
   .subhero-inner > p:not(.kicker) { font-size: 1rem; }
@@ -268,4 +291,3 @@
   .care-track li:last-child { border-bottom: 0; }
   .footer-areas { justify-content: flex-start; }
 }
-
