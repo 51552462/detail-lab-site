@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>인수인계 자가진단 · 디테일랩</title>
-<meta name="description" content="교대할 때 놓치는 칸을 12문으로 확인합니다. 인사평가 도구가 아닙니다.">
+<title>교대 인수인계 점검 · 디테일랩</title>
+<meta name="description" content="교대할 때 놓치는 칸을 12문으로 확인하고 7일 확인 카드를 받으세요. 인사평가 도구가 아닙니다.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://detail-lab-site.onrender.com/guide-self-check.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="인수인계 자가진단 · 디테일랩">
-<meta property="og:description" content="교대할 때 놓치는 칸을 12문으로 확인합니다. 인사평가 도구가 아닙니다.">
-<meta property="og:image" content="og-owner.png">
+<meta property="og:title" content="교대 인수인계 점검 · 디테일랩">
+<meta property="og:description" content="교대할 때 놓치는 칸을 12문으로 확인하고 7일 확인 카드를 받으세요. 인사평가 도구가 아닙니다.">
+<meta property="og:image" content="https://detail-lab-site.onrender.com/og-industry.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="인수인계 자가진단 · 디테일랩">
-<meta name="twitter:image" content="og-owner.png">
+<meta name="twitter:description" content="교대할 때 놓치는 칸을 12문으로 확인하고 7일 확인 카드를 받으세요. 인사평가 도구가 아닙니다.">
+<meta name="twitter:title" content="교대 인수인계 점검 · 디테일랩">
+<meta name="twitter:image" content="https://detail-lab-site.onrender.com/og-industry.png">
 <style>
   :root{
     --bg: #12141A;
@@ -21,7 +22,7 @@
     --panel-border: rgba(255,255,255,0.08);
     --ink: #ECEDEF;
     --ink-dim: #9AA3AF;
-    --ink-faint: #5C6570;
+    --ink-faint: #8A94A3;
     --accent: #D9622B;
     --accent-ink: #1C0D06;
     --accent-soft: rgba(217,98,43,0.14);
@@ -112,19 +113,26 @@
   .toast.show{ opacity:1; }
 
   @media (max-width:420px){ .intro h1{ font-size:24px; } .q-text{ font-size:19px; } .score-num{ font-size:44px; } }
+  .fineprint a{ color:var(--ink-dim); text-underline-offset:3px; }
+  .fineprint a:hover{ color:var(--ink); }
+  .brandline a.mark{ text-decoration:none; }
+  .brandline a.mark:hover{ color:var(--ink); }
+  .home-link{ display:block; padding:10px; text-align:center; color:var(--ink-dim); font-size:13px; text-underline-offset:4px; }
+  [tabindex="-1"]:focus{ outline:none; }
 </style>
 </head>
 <body>
 <main id="main">
 <div class="app">
-  <div class="brandline"><span class="mark">디테일랩</span><span>인수인계 · 인사평가 아님</span></div>
+  <div class="brandline"><a class="mark" href="/" aria-label="디테일랩 홈으로">디테일랩</a><span>인수인계 · 인사평가 아님</span></div>
   <div class="screen" id="screen"></div>
+  <noscript><p class="fineprint">이 도구는 브라우저에서 JavaScript가 켜져 있어야 작동합니다. <a href="/">디테일랩 처음으로</a></p></noscript>
 </div>
 </main>
 <div class="toast" id="toast"></div>
 
 <script>
-const CATEGORIES = ["넘긴 방식","빈칸","예외"];
+const CATEGORIES = ["교대 때 전달하는 방식","다음 행동과 확인 시점","예외를 남기는 방식"];
 
 const QUESTIONS = [
   { cat:0, text:"최근 7일, 교대 인수인계가 구두로만 이뤄진 횟수는?", options:[
@@ -223,7 +231,60 @@ const state = { idx:0, answers:new Array(QUESTIONS.length).fill(null), texts:new
 const screen = document.getElementById('screen');
 const toastEl = document.getElementById('toast');
 
-function showToast(msg){ toastEl.textContent = msg; toastEl.classList.add('show'); setTimeout(()=>toastEl.classList.remove('show'), 1800); }
+function showToast(msg){ toastEl.textContent = msg; toastEl.classList.add('show'); setTimeout(()=>toastEl.classList.remove('show'), 2600); }
+
+// 답을 고른 뒤 화면이 바뀌어도 키보드·스크린리더 사용자가 새 화면의 처음으로 이동하도록 한다.
+let interacted = false;
+document.addEventListener('click', () => { interacted = true; }, true);
+function focusScreen(){
+  if (!interacted) return;
+  const target = screen.querySelector('.q-text, h1, .result-headline');
+  if (target){ target.setAttribute('tabindex', '-1'); target.focus(); }
+}
+
+// 영역마다 문항 수가 다르므로(4·6·2문항) 합계가 아니라 가장 좋은 답 대비 비율로 비교한다.
+function analyze(){
+  const totals = CATEGORIES.map((_, cat) => QUESTIONS.reduce((sum, q, i) => sum + (q.cat === cat ? state.answers[i] : 0), 0));
+  const counts = CATEGORIES.map((_, cat) => QUESTIONS.filter(q => q.cat === cat).length);
+  const ratios = totals.map((sum, i) => sum / (counts[i] * 3));
+  const focus = ratios.indexOf(Math.min(...ratios));
+  return { focus, allBest: ratios[focus] === 1, same: CATEGORIES.filter((_, i) => ratios[i] === ratios[focus]) };
+}
+
+function selectionBasis(a){
+  if (a.allBest) return '고른 12개 답이 모두 가장 안정적인 쪽이라 먼저 손볼 주제를 정하지 않았습니다. 이 결과는 내 기억에 따른 것이므로, 실제 교대 한 번을 골라 답한 대로 이어지는지 확인해 보세요.';
+  const sameCat = QUESTIONS.map((q, i) => ({ q, i })).filter(({ q }) => q.cat === a.focus);
+  const example = sameCat.reduce((x, y) => state.answers[x.i] <= state.answers[y.i] ? x : y);
+  let tie = '';
+  if (a.same.length > 1){
+    const which = a.same.length === CATEGORIES.length ? '모든 영역이 같은 정도로 나왔습니다.' : `같은 정도로 나온 주제: ${a.same.join(', ')}.`;
+    tie = ` ${which} 화면 순서상 앞의 주제를 먼저 보여 줄 뿐이니, 어느 것부터 볼지는 직접 고르세요.`;
+  }
+  return `영역별로 고른 답을 가장 좋은 답과 견주어 먼저 표시한 주제는 ${CATEGORIES[a.focus]}입니다. 내 답 중 다시 살펴볼 장면: ${example.q.text} → ${state.texts[example.i]}.${tie} 이 결과는 실제 원인이나 직원의 책임을 판정한 값이 아닙니다.`;
+}
+
+function copyText(text, okMessage){
+  const fallback = () => {
+    const box = document.createElement('textarea');
+    box.value = text; box.setAttribute('readonly', ''); box.style.cssText = 'position:fixed;left:-9999px;top:0';
+    document.body.appendChild(box); box.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    box.remove();
+    showToast(ok ? okMessage : '복사하지 못했습니다. 화면의 글을 직접 선택해 복사해 주세요.');
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(() => showToast(okMessage), fallback);
+  } else {
+    fallback();
+  }
+}
+
+const STEADY_CARD = { h:"답한 대로 이어지는지 확인", items:[
+  "이번 주 교대 한 번을 골라, 넘긴 내용이 다음 사람의 행동으로 이어졌는지 확인하세요.",
+  "'처리 중'으로 끝난 메모가 있었다면 다음 행동·담당자·확인 시각이 적혀 있는지 보세요.",
+  "7일 뒤 같은 회원이 같은 질문을 다시 한 횟수를 세어 보세요.",
+]};
 
 function renderIntro(){
   screen.innerHTML = `
@@ -263,6 +324,7 @@ function renderQuestion(){
     <div class="options">${q.options.map((o,oi)=>`<button class="option-btn" onclick="answer(${oi})">${o.t}</button>`).join('')}</div>
     <div class="nav-row">${state.idx>0?`<button class="back-link" onclick="goBack()">← 이전 질문</button>`:`<span></span>`}</div>
   `;
+  focusScreen();
 }
 
 function answer(oi){
@@ -277,33 +339,35 @@ function goBack(){ if(state.idx>0){ state.idx-=1; renderQuestion(); } }
 
 function renderResult(){
   const rows = QUESTIONS.map((q,i)=>`<div class="cat-item"><div class="cat-item-top"><span class="name">${q.text}</span></div><p style="margin:0;color:var(--ink-dim);font-size:13.5px;line-height:1.5">${state.texts[i]||''}</p></div>`).join('');
-  const totals=CATEGORIES.map((_,cat)=>QUESTIONS.reduce((sum,q,i)=>sum+(q.cat===cat?state.answers[i]:0),0));
-  const focus=totals.indexOf(Math.min(...totals));
-  const card=MANUALS[focus];
+  const a = analyze();
+  const card = a.allBest ? STEADY_CARD : MANUALS[a.focus];
+  const headline = a.allBest
+    ? '이번 답변에서는 먼저 손볼 주제가 드러나지 않았습니다. 대신 답한 대로 실제 교대가 이어지는지 확인하는 카드를 드립니다.'
+    : `이번 답변에서 먼저 확인할 주제는 <strong>${CATEGORIES[a.focus]}</strong>입니다. 답변을 정리한 순서이며 실제 원인이나 직원의 책임을 판정한 것은 아닙니다.`;
   screen.innerHTML = `
     <div class="result">
       <div class="result-band band-caution">내 답변으로 만든 7일 확인 카드</div>
-      <p class="result-headline">이번 답변에서 먼저 확인할 주제는 <strong>${CATEGORIES[focus]}</strong>입니다. 답변을 정리한 순서이며 실제 원인이나 직원의 책임을 판정한 것은 아닙니다.</p>
-      <div class="compare-box"><strong>누가 실제로 써 보나요?</strong><br>운영자가 담당자·완료 기준을 정한 뒤, 교대하는 직원과 이 기록으로 다음 일을 이어받을 수 있는지 확인하세요. 답만으로 직원의 책임을 판단하지 않습니다.</div>
+      <p class="result-headline">${headline}</p>
+      <div class="compare-box"><strong>왜 이 주제가 나왔나요?</strong><br>${selectionBasis(a)}</div>
       <div class="manual-box"><h4>7일 동안 해볼 일 · ${card.h}</h4><ul>${card.items.map(item=>`<li>${item}</li>`).join('')}</ul></div>
+      <div class="compare-box"><strong>누가 실제로 써 보나요?</strong><br>운영자가 담당자·완료 기준을 정한 뒤, 교대하는 직원과 이 기록으로 다음 일을 이어받을 수 있는지 확인하세요. 답만으로 직원의 책임을 판단하지 않습니다.</div>
       <div class="cat-block"><h3>내가 고른 12개 답</h3>${rows}</div>
       <div class="result-actions">
         <button class="primary" onclick="copyResult()">7일 카드와 답변 복사하기</button>
         <a class="feedback-link" href="/feedback.html?area=industry&point=result" target="_blank" rel="noopener noreferrer">교대 확인 카드 의견 남기기 →</a>
         <button class="secondary" onclick="renderIntro()">처음부터 다시 하기</button>
+        <a class="home-link" href="/industry.html">가게 점검 12문 보기</a>
       </div>
     </div>
   `;
+  focusScreen();
 }
 
 function copyResult(){
-  const totals=CATEGORIES.map((_,cat)=>QUESTIONS.reduce((sum,q,i)=>sum+(q.cat===cat?state.answers[i]:0),0));
-  const card=MANUALS[totals.indexOf(Math.min(...totals))];
-  const lines = ['[디테일랩 · 인수인계 확인]','',`7일 동안 해볼 일: ${card.h}`,'확인할 사람: 운영자가 담당자·완료 기준을 정하고 교대 직원과 함께 써 보세요.',...card.items.map((item,i)=>`${i+1}. ${item}`),'','7일 뒤 실제 사용 의견: https://detail-lab-site.onrender.com/feedback.html?area=industry&point=later','',...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
-  const text = lines.join('\n');
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(text).then(()=>showToast('결과가 복사되었습니다'));
-  }else{ showToast('복사를 지원하지 않는 환경입니다'); }
+  const a = analyze();
+  const card = a.allBest ? STEADY_CARD : MANUALS[a.focus];
+  const lines = ['[디테일랩 · 인수인계 확인]','',`7일 동안 해볼 일: ${card.h}`,'확인할 사람: 운영자가 담당자·완료 기준을 정하고 교대 직원과 함께 써 보세요.',...card.items.map((item,i)=>`${i+1}. ${item}`),'',`주제 선정 근거: ${selectionBasis(a)}`,'','7일 뒤 실제 사용 의견: https://detail-lab-site.onrender.com/feedback.html?area=industry&point=later','',...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
+  copyText(lines.join('\n'), '결과가 복사되었습니다');
 }
 
 renderIntro();

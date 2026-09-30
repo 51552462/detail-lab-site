@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>트레이너 근무환경 자가점검 · 디테일랩</title>
+<title>트레이너 근무 조건 확인 · 디테일랩</title>
 <meta name="description" content="트레이너가 일하는 곳의 정산·회원 배정·교육·운영 기준을 12문으로 확인하고 다음 질문을 정리합니다.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://detail-lab-site.onrender.com/trainer-self-check.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="트레이너 근무환경 자가점검 · 디테일랩">
+<meta property="og:title" content="트레이너 근무 조건 확인 · 디테일랩">
 <meta property="og:description" content="정산·배정·교육 조건을 12문으로 확인하고 다음 질문을 정리하세요.">
-<meta property="og:image" content="og-trainer.png">
+<meta property="og:image" content="https://detail-lab-site.onrender.com/og-employee.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="트레이너 근무환경 자가점검 · 디테일랩">
-<meta name="twitter:image" content="og-trainer.png">
+<meta name="twitter:description" content="정산·배정·교육 조건을 12문으로 확인하고 다음 질문을 정리하세요.">
+<meta name="twitter:title" content="트레이너 근무 조건 확인 · 디테일랩">
+<meta name="twitter:image" content="https://detail-lab-site.onrender.com/og-employee.png">
 <style>
   :root{
     --bg: #10141b;
@@ -22,7 +23,7 @@
     --panel-border: rgba(255,255,255,0.08);
     --ink: #ECEDEF;
     --ink-dim: #9AA3AF;
-    --ink-faint: #5C6570;
+    --ink-faint: #8A94A3;
     --accent: #00A99D;
     --accent-soft: rgba(0,169,157,0.14);
     --danger: #E4572E;
@@ -293,7 +294,7 @@
     margin-bottom: 28px;
   }
   .insight-box b{ color: var(--ink); }
-  .insight-box .cat-name{ color: var(--danger); font-weight: 700; }
+  .insight-box .cat-name{ color: #F27A54; font-weight: 700; }
 
   .compare-box{
     background: var(--panel);
@@ -348,6 +349,12 @@
     .q-text{ font-size: 19px; }
     .score-num{ font-size: 44px; }
   }
+  .fineprint a{ color:var(--ink-dim); text-underline-offset:3px; }
+  .fineprint a:hover{ color:var(--ink); }
+  .brandline a.mark{ text-decoration:none; }
+  .brandline a.mark:hover{ color:var(--ink); }
+  .home-link{ display:block; padding:10px; text-align:center; color:var(--ink-dim); font-size:13px; text-underline-offset:4px; }
+  [tabindex="-1"]:focus{ outline:none; }
 </style>
 </head>
 <body>
@@ -355,11 +362,12 @@
 <main id="main">
 <div class="app">
   <div class="brandline">
-    <span class="mark">디테일랩</span>
+    <a class="mark" href="/" aria-label="디테일랩 홈으로">디테일랩</a>
     <span>트레이너 자가점검</span>
   </div>
 
   <div class="screen" id="screen"></div>
+  <noscript><p class="fineprint">이 도구는 브라우저에서 JavaScript가 켜져 있어야 작동합니다. <a href="/">디테일랩 처음으로</a></p></noscript>
 </div>
 </main>
 
@@ -467,7 +475,54 @@ const toastEl = document.getElementById('toast');
 function showToast(msg){
   toastEl.textContent = msg;
   toastEl.classList.add('show');
-  setTimeout(()=> toastEl.classList.remove('show'), 1800);
+  setTimeout(()=> toastEl.classList.remove('show'), 2600);
+}
+
+// 답을 고른 뒤 화면이 바뀌어도 키보드·스크린리더 사용자가 새 화면의 처음으로 이동하도록 한다.
+let interacted = false;
+document.addEventListener('click', () => { interacted = true; }, true);
+function focusScreen(){
+  if (!interacted) return;
+  const target = screen.querySelector('.q-text, h1, .result-headline');
+  if (target){ target.setAttribute('tabindex', '-1'); target.focus(); }
+}
+
+// 영역마다 문항 수가 같지 않아도 비교되도록 가장 좋은 답 대비 비율로 주제를 고른다.
+function analyze(){
+  const totals = CATEGORIES.map((_, cat) => QUESTIONS.reduce((sum, q, i) => sum + (q.cat === cat ? state.answers[i] : 0), 0));
+  const counts = CATEGORIES.map((_, cat) => QUESTIONS.filter(q => q.cat === cat).length);
+  const ratios = totals.map((sum, i) => sum / (counts[i] * 3));
+  const focus = ratios.indexOf(Math.min(...ratios));
+  return { focus, allBest: ratios[focus] === 1, same: CATEGORIES.filter((_, i) => ratios[i] === ratios[focus]) };
+}
+
+function copyText(text, okMessage){
+  const fallback = () => {
+    const box = document.createElement('textarea');
+    box.value = text; box.setAttribute('readonly', ''); box.style.cssText = 'position:fixed;left:-9999px;top:0';
+    document.body.appendChild(box); box.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    box.remove();
+    showToast(ok ? okMessage : '복사하지 못했습니다. 화면의 글을 직접 선택해 복사해 주세요.');
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(() => showToast(okMessage), fallback);
+  } else {
+    fallback();
+  }
+}
+
+const STEADY_FOLLOWUP = "들은 설명이 계약서·공지·메시지 같은 문서에도 같은 내용으로 남아 있는지 확인해 보세요.";
+
+function focusNote(a){
+  if (a.allBest) return '이번 답변에서는 먼저 손볼 조건이 드러나지 않았습니다. 고른 답이 모두 가장 안정적인 쪽입니다. 이 답은 내 기억에 따른 것이니, 들은 설명과 실제가 같은지는 문서로 확인해 두세요.';
+  let tie = '';
+  if (a.same.length > 1){
+    const which = a.same.length === CATEGORIES.length ? '모든 영역이 같은 정도로 나왔습니다.' : `같은 정도로 나온 주제: ${a.same.join(', ')}.`;
+    tie = ` ${which} 화면 순서상 앞의 주제를 먼저 보여 줄 뿐이니, 가장 급한 주제는 직접 고르세요.`;
+  }
+  return `이번 답변으로 고른 첫 확인 주제는 ${CATEGORIES[a.focus]}입니다.${tie} 센터의 등급이나 이직 판단은 아닙니다.`;
 }
 
 function renderIntro(){
@@ -522,6 +577,7 @@ function renderQuestion(){
       ${state.idx > 0 ? `<button class="back-link" onclick="goBack()">← 이전 질문</button>` : `<span></span>`}
     </div>
   `;
+  focusScreen();
 }
 
 function answer(optionIndex){
@@ -544,15 +600,15 @@ function goBack(){
 }
 
 function renderResult(){
-  const totals=CATEGORIES.map((_,cat)=>QUESTIONS.reduce((sum,q,i)=>sum+(q.cat===cat?state.answers[i]:0),0));
-  const focus=totals.indexOf(Math.min(...totals));
+  const a = analyze();
+  const followup = a.allBest ? STEADY_FOLLOWUP : FOLLOWUPS[a.focus];
 
   screen.innerHTML = `
     <div class="result">
       <div class="result-band band-caution">내 답변 정리</div>
-      <p class="result-headline">이번 답변으로 고른 첫 확인 주제는 <strong>${CATEGORIES[focus]}</strong>입니다. 같은 정도의 주제가 여럿일 수 있으며, 센터의 등급이나 이직 판단은 아닙니다.</p>
+      <p class="result-headline">${focusNote(a)}</p>
       <div class="compare-box"><strong>누구에게 확인하나요?</strong><br>이 결과는 트레이너가 고른 답입니다. 급여·배정·교육·운영 기준의 실제 조건은 센터 담당자에게 묻고, 중요한 답은 관련 문서에서도 확인하세요.</div>
-      <div class="insight-box"><span class="cat-name">다음에 확인할 질문</span><br><br>${FOLLOWUPS[focus]}</div>
+      <div class="insight-box"><span class="cat-name">다음에 확인할 질문</span><br><br>${followup}</div>
       <div class="cat-block">
         <h3>내가 고른 12개 답</h3>
         ${QUESTIONS.map((q,i)=>`<div class="cat-item"><div class="cat-item-top"><span class="name">${q.text}</span></div><p>${state.texts[i]}</p></div>`).join('')}
@@ -561,27 +617,23 @@ function renderResult(){
         <button class="primary" onclick="copyResult()">내 답변과 질문 복사하기</button>
         <a class="feedback-link" href="/feedback.html?area=employee&point=result" target="_blank" rel="noopener noreferrer">근무 조건 질문이 쓸모 있었는지 남기기 →</a>
         <button class="secondary" onclick="renderIntro()">처음부터 다시 하기</button>
+        <a class="home-link" href="/employee-guide.html">직장 선택 기록지 보기</a>
       </div>
     </div>
   `;
+  focusScreen();
 }
 
 function copyResult(){
-  const totals=CATEGORIES.map((_,cat)=>QUESTIONS.reduce((sum,q,i)=>sum+(q.cat===cat?state.answers[i]:0),0));
-  const focus=totals.indexOf(Math.min(...totals));
+  const a = analyze();
   const lines = [
-    `[디테일랩 · 트레이너 근무 조건 확인]`,
-    `먼저 물을 질문: ${FOLLOWUPS[focus]}`,
-    `확인할 사람: 센터 담당자에게 실제 조건을 묻고 관련 문서에서 확인하세요.`,
-    ``,
+    '[디테일랩 · 트레이너 근무 조건 확인]',
+    `먼저 물을 질문: ${a.allBest ? STEADY_FOLLOWUP : FOLLOWUPS[a.focus]}`,
+    '확인할 사람: 센터 담당자에게 실제 조건을 묻고 관련 문서에서 확인하세요.',
+    '',
     ...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]}`)
   ];
-  const text = lines.join('\\n');
-  if (navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(text).then(()=> showToast('결과가 복사되었습니다'));
-  } else {
-    showToast('복사를 지원하지 않는 환경입니다');
-  }
+  copyText(lines.join('\n'), '결과가 복사되었습니다');
 }
 
 renderIntro();

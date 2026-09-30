@@ -10,10 +10,11 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="트레이너·회원 수업 조건 대조 · 디테일랩">
 <meta property="og:description" content="같은 기기에서 각자 답하고, 함께 수업 조건을 확인하세요.">
-<meta property="og:image" content="og-trainer.png">
+<meta property="og:image" content="https://detail-lab-site.onrender.com/og-matching.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="트레이너·회원 만남 확인 · 디테일랩">
-<meta name="twitter:image" content="og-trainer.png">
+<meta name="twitter:description" content="같은 기기에서 각자 답하고, 함께 수업 조건을 확인하세요.">
+<meta name="twitter:title" content="트레이너·회원 수업 조건 대조 · 디테일랩">
+<meta name="twitter:image" content="https://detail-lab-site.onrender.com/og-matching.png">
 <style>
   :root{
     --bg: #10141b;
@@ -22,7 +23,7 @@
     --panel-border: rgba(255,255,255,0.08);
     --ink: #ECEDEF;
     --ink-dim: #9AA3AF;
-    --ink-faint: #5C6570;
+    --ink-faint: #8A94A3;
     --accent: #00A99D;
     --accent-soft: rgba(0,169,157,0.14);
     --danger: #E4572E;
@@ -195,7 +196,7 @@
   }
   .option-btn:hover{ border-color: rgba(0,169,157,0.5); }
   .option-btn:active{ background: var(--accent-soft); }
-  .option-btn.on{ border-color: rgba(217,98,43,0.85); background: var(--accent-soft); }
+  .option-btn.on{ border-color: rgba(0,169,157,0.95); background: var(--accent-soft); }
   .multi-hint{ font-size:13px; color:var(--ink-dim); margin:-8px 0 16px; }
 
   .nav-row{
@@ -360,6 +361,12 @@
     .compare-box,.pair-row{background:#fff;border:1px solid #888;break-inside:avoid}
   }
 .pair-consent{display:flex;gap:10px;align-items:flex-start;padding:12px;border:1px solid var(--panel-border);border-radius:10px;color:var(--ink-dim);font-size:13px;line-height:1.5}.pair-consent input{width:18px;height:18px;flex-shrink:0;accent-color:var(--accent)}.pair-grid{display:grid;gap:12px;margin-bottom:24px}.pair-row{display:grid;gap:5px;padding:15px;background:var(--panel);border:1px solid var(--panel-border);border-radius:10px;color:var(--ink-dim);font-size:13px}.pair-row strong{color:var(--ink);font-size:15px}.pair-row em{font-style:normal;color:var(--accent)}
+  .fineprint a{ color:var(--ink-dim); text-underline-offset:3px; }
+  .fineprint a:hover{ color:var(--ink); }
+  .brandline a.mark{ text-decoration:none; }
+  .brandline a.mark:hover{ color:var(--ink); }
+  .home-link{ display:block; padding:10px; text-align:center; color:var(--ink-dim); font-size:13px; text-underline-offset:4px; }
+  [tabindex="-1"]:focus{ outline:none; }
 </style>
 </head>
 <body>
@@ -367,11 +374,12 @@
 <main id="main">
 <div class="app">
   <div class="brandline">
-    <span class="mark">디테일랩</span>
+    <a class="mark" href="/" aria-label="디테일랩 홈으로">디테일랩</a>
     <span>수업 조건 대조 · 무료</span>
   </div>
 
   <div class="screen" id="screen"></div>
+  <noscript><p class="fineprint">이 도구는 브라우저에서 JavaScript가 켜져 있어야 작동합니다. <a href="/">디테일랩 처음으로</a></p></noscript>
 </div>
 </main>
 
@@ -379,11 +387,12 @@
 
 <script>
 const DAYS = ["월","화","수","목","금","토","일"];
+const TIMES = ["오전","오후","저녁"];
 
 const MEMBER_Q = [
   { text:"지금 목표에 가장 가까운 것은?", options:["체중관리","근력","자세","기타"] },
-  { text:"가능한 요일은?", options:DAYS, multi:true },
-  { text:"가능한 시간대는?", options:["오전","오후","저녁"] },
+  { text:"가능한 요일은?", options:DAYS, multi:true, hint:"가능한 요일을 모두 고른 뒤 다음으로 갑니다." },
+  { text:"가능한 시간대는?", options:TIMES, multi:true, hint:"수업할 수 있는 시간대를 모두 고른 뒤 다음으로 갑니다." },
   { text:"주당 몇 회를 원하나요?", options:["1회","2회","3회 이상"] },
   { text:"설명은 어느 쪽이 편한가요?", options:["짧고 핵심만","원리까지","상황마다 다름"] },
   { text:"피드백은 얼마나 자주 듣고 싶나요?", options:["동작마다","세트마다","수업 끝"] },
@@ -391,8 +400,8 @@ const MEMBER_Q = [
 ];
 
 const TRAINER_Q = [
-  { text:"가능한 요일은?", options:DAYS, multi:true },
-  { text:"가능한 시간대는?", options:["오전","오후","저녁"] },
+  { text:"가능한 요일은?", options:DAYS, multi:true, hint:"수업할 수 있는 요일을 모두 고른 뒤 다음으로 갑니다." },
+  { text:"가능한 시간대는?", options:TIMES, multi:true, hint:"수업할 수 있는 시간대를 모두 고른 뒤 다음으로 갑니다." },
   { text:"한 회원과 주당 몇 회까지 가능한가요?", options:["1회","2회","3회 이상"] },
   { text:"수업 방식은 어느 쪽에 가깝나요?", options:["짧고 핵심만","원리설명","회원 반응 따라"] },
   { text:"피드백 빈도는?", options:["동작마다","세트마다","수업 끝"] },
@@ -406,11 +415,41 @@ const screen = document.getElementById("screen");
 const toastEl = document.getElementById("toast");
 
 function bank(){ return state.role === "member" ? MEMBER_Q : TRAINER_Q; }
+function otherRole(){ return state.role === "member" ? "trainer" : "member"; }
+function roleName(role){ return role === "member" ? "회원" : "트레이너"; }
+function roleTopic(role){ return role === "member" ? "회원은" : "트레이너는"; }
+function roleSubject(role){ return role === "member" ? "회원이" : "트레이너가"; }
 
 function showToast(msg){
   toastEl.textContent = msg;
   toastEl.classList.add("show");
-  setTimeout(()=> toastEl.classList.remove("show"), 1800);
+  setTimeout(()=> toastEl.classList.remove("show"), 2600);
+}
+
+// 화면이 바뀌어도 키보드·스크린리더 사용자가 새 화면의 처음으로 이동하도록 한다.
+let interacted = false;
+document.addEventListener("click", () => { interacted = true; }, true);
+function focusScreen(){
+  if (!interacted) return;
+  const target = screen.querySelector(".q-text, h1, .result-headline");
+  if (target){ target.setAttribute("tabindex", "-1"); target.focus(); }
+}
+
+function copyText(text, okMessage){
+  const fallback = () => {
+    const box = document.createElement("textarea");
+    box.value = text; box.setAttribute("readonly", ""); box.style.cssText = "position:fixed;left:-9999px;top:0";
+    document.body.appendChild(box); box.select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    box.remove();
+    showToast(ok ? okMessage : "복사하지 못했습니다. 화면의 글을 직접 선택해 복사해 주세요.");
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(() => showToast(okMessage), fallback);
+  } else {
+    fallback();
+  }
 }
 
 function renderIntro(){
@@ -419,7 +458,7 @@ function renderIntro(){
   screen.innerHTML = `
     <div class="intro">
       <h1>첫 수업 전에<br>서로의 한 주를 맞춰 보세요</h1>
-      <p class="lead">회원과 트레이너가 한 기기에서 차례로 7문에 답하고 각각 공유에 동의하면, 가능한 일정과 수업 방식을 나란히 볼 수 있습니다. 무료이며 답은 서버로 전송되지 않습니다.</p>
+      <p class="lead">이미 수업을 논의 중인 회원과 트레이너가 한 기기에서 차례로 7문에 답하고 각각 공유에 동의하면, 가능한 일정과 수업 방식을 나란히 볼 수 있습니다. 무료이며 답은 서버로 전송되지 않습니다.</p>
       <div class="facts">
         <div class="fact"><b>회원</b> 7문</div>
         <div class="fact"><b>트레이너</b> 7문</div>
@@ -427,9 +466,10 @@ function renderIntro(){
       </div>
       <button class="primary" onclick="pickRole('member')">회원용 시작</button>
       <button class="secondary" style="margin-top:10px" onclick="pickRole('trainer')">트레이너용 시작</button>
-      <p class="fineprint">새로고침하거나 화면을 닫으면 답변이 사라집니다. 수업 예약이나 상대 소개는 이 도구에서 진행하지 않습니다.</p>
+      <p class="fineprint">새로고침하거나 화면을 닫으면 답변이 사라집니다. 수업 예약이나 상대 소개는 이 도구에서 진행하지 않습니다. <a href="/matching.html">사용 순서 보기</a></p>
     </div>
   `;
+  focusScreen();
 }
 
 function pickRole(role){
@@ -443,22 +483,25 @@ function pickRole(role){
 
 function renderRoleIntro(){
   const isMember = state.role === "member";
+  const waiting = state.pair[otherRole()] ? `<p class="fineprint">${roleTopic(otherRole())} 이미 답하고 공유에 동의했습니다. 그 답은 지금 화면에 나오지 않고, 내가 답하고 동의한 뒤 함께 나옵니다.</p>` : "";
   screen.innerHTML = `
     <div class="intro">
       <h1>${isMember ? "회원이 보는 한 주" : "트레이너가 보는 한 주"}</h1>
       <p class="lead">${isMember
         ? "가능한 일정과 선호하는 수업 방식을 골라 주세요. 건강정보는 묻지 않습니다."
         : "현재 제공할 수 있는 일정과 수업 방식을 골라 주세요. 건강정보는 묻지 않습니다."}</p>
-      <p class="fineprint">각자 자신의 답을 보여 줄지 결정합니다. 디테일랩은 답을 서버에서 받거나 상대를 대신 연결하지 않습니다. <a href="/#people">디테일랩을 만든 사람과 일하는 방식</a></p>
+      ${waiting}
+      <p class="fineprint">각자 자신의 답을 상대에게 보여 줄지 결정합니다. 디테일랩은 답을 서버에서 받거나 상대를 대신 연결하지 않습니다. <a href="/#people">디테일랩을 만든 사람과 일하는 방식</a></p>
       <p class="fineprint"><a href="/feedback.html?area=matching&point=page">시작이 어려웠던 이유 남기기</a></p>
       <div class="facts">
         <div class="fact"><b>${bank().length}</b> 문항</div>
         <div class="fact"><b>대조</b> 두 사람 동의 후 같은 기기</div>
       </div>
       <button class="primary" onclick="startQuiz()">시작</button>
-      <p class="fineprint"><button class="back-link" onclick="state.role=''; history.replaceState({},'',location.pathname); renderIntro()">역할 다시 고르기</button></p>
+      <p class="fineprint"><button class="back-link" onclick="state.role=''; state.pair={member:null,trainer:null}; history.replaceState({},'',location.pathname); renderIntro()">역할 다시 고르기</button></p>
     </div>
   `;
+  focusScreen();
 }
 
 function startQuiz(){
@@ -479,51 +522,50 @@ function renderProgress(){
 
 function renderQuestion(){
   const q = bank()[state.idx];
-  const catLabel = state.role === "member" ? "회원" : "트레이너";
+  const head = `
+      ${renderProgress()}
+      <div class="q-meta">${state.idx + 1} / ${bank().length} · ${roleName(state.role)}</div>
+      <div class="q-text">${q.text}</div>`;
+  const back = `<div class="nav-row">
+        ${state.idx > 0 ? `<button class="back-link" onclick="goBack()">← 이전 질문</button>` : `<span></span>`}
+      </div>`;
   if (q.multi) {
     const buttons = q.options.map((label) => {
-      const on = state.multiSel.indexOf(label) !== -1 ? " on" : "";
-      return `<button type="button" class="option-btn${on}" onclick="toggleMulti('${label}')">${label}</button>`;
+      const on = state.multiSel.indexOf(label) !== -1;
+      return `<button type="button" class="option-btn${on ? " on" : ""}" aria-pressed="${on}" onclick="toggleMulti(this,'${label}')">${label}</button>`;
     }).join("");
-    screen.innerHTML = `
-      ${renderProgress()}
-      <div class="q-meta">${state.idx + 1} / ${bank().length} · ${catLabel}</div>
-      <div class="q-text">${q.text}</div>
-      <p class="multi-hint">해당하는 요일을 모두 고른 뒤 다음으로 갑니다.</p>
+    screen.innerHTML = `${head}
+      <p class="multi-hint">${q.hint}</p>
       <div class="options">${buttons}</div>
       <button class="primary" style="margin-top:18px" onclick="commitMulti()">다음</button>
-      <div class="nav-row">
-        ${state.idx > 0 ? `<button class="back-link" onclick="goBack()">← 이전 질문</button>` : `<span></span>`}
+      ${back}`;
+  } else {
+    screen.innerHTML = `${head}
+      <div class="options">
+        ${q.options.map((label, oi) => `<button class="option-btn" onclick="answer(${oi})">${label}</button>`).join("")}
       </div>
-    `;
-    return;
+      ${back}`;
   }
-  screen.innerHTML = `
-    ${renderProgress()}
-    <div class="q-meta">${state.idx + 1} / ${bank().length} · ${catLabel}</div>
-    <div class="q-text">${q.text}</div>
-    <div class="options">
-      ${q.options.map((label, oi) => `<button class="option-btn" onclick="answer(${oi})">${label}</button>`).join("")}
-    </div>
-    <div class="nav-row">
-      ${state.idx > 0 ? `<button class="back-link" onclick="goBack()">← 이전 질문</button>` : `<span></span>`}
-    </div>
-  `;
+  focusScreen();
 }
 
-function toggleMulti(label){
+// 여러 개를 고르는 질문은 화면을 다시 그리지 않고 눌린 버튼만 바꿔 키보드 위치를 유지한다.
+function toggleMulti(btn, label){
   const i = state.multiSel.indexOf(label);
   if (i === -1) state.multiSel.push(label);
   else state.multiSel.splice(i, 1);
-  renderQuestion();
+  const on = i === -1;
+  btn.classList.toggle("on", on);
+  btn.setAttribute("aria-pressed", String(on));
 }
 
 function commitMulti(){
+  const q = bank()[state.idx];
   if (!state.multiSel.length) {
-    showToast("요일을 하나 이상 골라 주세요.");
+    showToast("하나 이상 골라 주세요.");
     return;
   }
-  state.texts[state.idx] = state.multiSel.join("·");
+  state.texts[state.idx] = q.options.filter(label => state.multiSel.indexOf(label) !== -1).join("·");
   state.multiSel = [];
   advance();
 }
@@ -554,28 +596,28 @@ function goBack(){
 
 function renderResult(){
   const rows = bank().map((q,i)=>`<div class="cat-item"><div class="cat-item-top"><span class="name">${q.text}</span></div><p style="margin:0;color:var(--ink-dim);font-size:13.5px;line-height:1.5">${state.texts[i]||""}</p></div>`).join("");
-  const otherLabel = state.role === "member" ? "트레이너" : "회원";
+  const other = otherRole();
+  const ready = !!state.pair[other];
   screen.innerHTML = `
     <div class="result">
-      <div class="result-band band-caution">${state.role === "member" ? "회원 답변" : "트레이너 답변"}</div>
+      <div class="result-band band-caution">${roleName(state.role)} 답변</div>
       <p class="result-headline">아래 답을 확인한 뒤 상대에게 보여 줘도 되는지 결정하세요. 두 사람이 각각 동의해야 조건 대조가 열립니다.</p>
       <div class="cat-block"><h3>이번 답변 · 화면을 닫으면 사라짐</h3>${rows}</div>
       <div class="result-actions">
-        <label class="pair-consent"><input type="checkbox" id="pair-consent"> 내 답의 항목을 상대방에게 보여 주는 데 동의합니다. 같은 기기에서 이어서 확인합니다.</label>
-        <button class="primary" onclick="acceptPair()">동의하고 ${otherLabel}에게 기기 넘기기${state.pair[otherRole()] ? " · 대조 보기" : ""}</button>
-        <button class="secondary" onclick="copyResult()">내 결과 복사하기</button>
+        <label class="pair-consent"><input type="checkbox" id="pair-consent"> 내 답을 상대방이 볼 수 있게 하는 데 동의합니다. 이 기기 화면에서만 보이며 어디에도 전송되지 않습니다.</label>
+        <button class="primary" onclick="acceptPair()">${ready ? "동의하고 두 사람의 대조 보기" : `동의하고 ${roleName(other)}에게 기기 넘기기`}</button>
+        <button class="secondary" onclick="copyResult()">내 답만 복사하기</button>
         <a class="feedback-link" href="/feedback.html?area=matching&point=result" target="_blank" rel="noopener noreferrer">답을 고르거나 공유하기 어려웠던 점 남기기 →</a>
         <button class="secondary" onclick="clearPair()">답변 모두 지우고 처음부터</button>
       </div>
     </div>
   `;
+  focusScreen();
 }
-
-function otherRole(){ return state.role === "member" ? "trainer" : "member"; }
 
 function acceptPair(){
   if (!document.getElementById("pair-consent").checked) {
-    showToast("항목 공유에 동의해야 이어서 볼 수 있습니다.");
+    showToast("답을 보여 주는 데 동의해야 이어서 볼 수 있습니다.");
     return;
   }
   state.pair[state.role] = [...state.texts];
@@ -583,27 +625,41 @@ function acceptPair(){
   if (state.pair[otherRole()]) renderPairResult();
   else {
     const next = otherRole();
-    screen.innerHTML = `<div class="intro"><h1>이제 ${next === "member" ? "회원" : "트레이너"} 차례입니다</h1>
-      <p class="lead">첫 번째 답은 이 화면이 열려 있는 동안만 메모리에 있습니다. 상대방에게 화면을 넘기기 전에 개인 답을 볼 수 있으며, 두 번째 사람도 별도로 동의해야 대조가 보입니다. 새로고침하거나 닫으면 지워집니다.</p>
-      <button class="primary" onclick="pickRole('${next}')">내 질문 시작</button>
-      <button class="secondary" style="margin-top:10px" onclick="clearPair()">모두 지우기</button></div>`;
+    screen.innerHTML = `<div class="intro"><h1>이제 ${roleName(next)}에게<br>기기를 넘겨 주세요</h1>
+      <p class="lead">${roleName(state.role)}의 답은 ${roleSubject(next)} 답하고 동의하기 전까지 화면에 나오지 않습니다. 이 답은 화면이 열려 있는 동안 이 기기의 메모리에만 있고, 새로고침하거나 닫으면 지워집니다.</p>
+      <button class="primary" onclick="pickRole('${next}')">${roleName(next)} 질문 시작</button>
+      <button class="secondary" style="margin-top:10px" onclick="clearPair()">모두 지우고 처음으로</button></div>`;
+    focusScreen();
   }
 }
 
+function overlap(member, trainer){
+  const shared = (a, b) => a.split("·").filter(item => b.split("·").indexOf(item) !== -1);
+  return { days: shared(member[1], trainer[0]), times: shared(member[2], trainer[1]) };
+}
+
 function comparePair(member,trainer){
-  const sharedDays = member[1].split("·").filter(day => trainer[0].split("·").includes(day));
+  const both = overlap(member, trainer);
   const frequency = ["1회","2회","3회 이상"];
   const length = ["1개월","3개월","6개월 이상"];
   const explanation = member[4] === "상황마다 다름" || trainer[3] === "회원 반응 따라"
     ? "첫 수업에서 확인" : member[4] === trainer[3] || (member[4] === "원리까지" && trainer[3] === "원리설명") ? "표현상 가까움" : "설명 방식 대화 필요";
   return [
-    ["요일",member[1],trainer[0],sharedDays.length ? "공통 요일: "+sharedDays.join("·") : "공통 요일 없음"],
-    ["시간대",member[2],trainer[1],member[2] === trainer[1] ? "같은 시간대" : "시간대 조율 필요"],
-    ["주당 횟수",member[3],trainer[2],frequency.indexOf(member[3]) <= frequency.indexOf(trainer[2]) ? "가능 범위로 보임 · 실제 빈 시간 확인" : "희망 횟수 초과"],
+    ["요일",member[1],trainer[0],both.days.length ? "겹치는 요일: "+both.days.join("·") : "겹치는 요일 없음 · 조율 필요"],
+    ["시간대",member[2],trainer[1],both.times.length ? "겹치는 시간대: "+both.times.join("·") : "겹치는 시간대 없음 · 조율 필요"],
+    ["주당 횟수",member[3],trainer[2],frequency.indexOf(member[3]) <= frequency.indexOf(trainer[2]) ? "가능 범위로 보임 · 실제 빈 시간 확인" : "회원이 원하는 횟수가 트레이너 가능 횟수보다 많음 · 조율 필요"],
     ["대면 가능 기간",member[6],trainer[6],member[6] === "미정" || trainer[6] === "미정" ? "기간 확인 필요" : length.indexOf(member[6]) <= length.indexOf(trainer[6]) ? "기간 범위로 보임" : "기간 조율 필요"],
     ["설명 방식",member[4],trainer[3],explanation],
     ["피드백 빈도",member[5],trainer[4],member[5] === trainer[4] ? "표현상 같음" : "첫 수업에서 맞춰 보기"]
   ];
+}
+
+function overlapNote(member, trainer){
+  const both = overlap(member, trainer);
+  if (both.days.length && both.times.length){
+    return `겹치는 요일 ${both.days.join("·")}, 겹치는 시간대 ${both.times.join("·")}. 요일과 시간대를 따로 물었기 때문에 이 둘을 합친 시간이 실제로 비어 있는지는 트레이너의 예약표로 확인해야 합니다.`;
+  }
+  return "겹치는 요일이나 시간대가 없습니다. 첫 대화에서 가능한 범위를 넓힐 수 있는지 서로 물어보세요.";
 }
 
 function renderPairResult(){
@@ -614,18 +670,20 @@ function renderPairResult(){
   screen.innerHTML = `<div class="result">
     <div class="result-band band-caution">두 사람의 수업 조건 대조</div>
     <h1>함께 확인할 한 주</h1>
-    <p class="result-headline">두 사람이 각자 동의한 답을 나란히 정리했습니다. 공통 요일과 시간대가 있더라도 실제 빈 수업 시간은 트레이너에게 직접 확인하세요.</p>
+    <p class="result-headline">두 사람이 각자 동의한 답을 나란히 정리했습니다. 겹치는 요일과 시간대가 있더라도 실제 빈 수업 시간은 트레이너에게 직접 확인하세요.</p>
     <div class="pair-grid" aria-label="회원과 트레이너의 항목별 대조">${rows}</div>
+    <div class="compare-box"><strong>먼저 이야기해 볼 시간</strong><br>${overlapNote(member, trainer)}</div>
     <div class="compare-box"><strong>서로 말하고 시작할 내용</strong><br>회원이 고른 목표: ${member[0]}<br>트레이너가 고른 제약: ${trainer[5]}<br>두 답의 구체적인 뜻을 첫 대화에서 확인하세요.</div>
     <div class="compare-box"><strong>첫 대화에서 확인할 4가지</strong><br>① 실제 예약 가능한 요일·시간은 언제인가요?<br>② 주당 횟수와 수업 기간은 서로 가능한가요?<br>③ 수업 장소·비용·변경·취소 기준은 무엇인가요?<br>④ 첫 수업에서 설명과 피드백은 어떻게 맞춰 볼까요?<br><br>이 표는 추천 점수나 계약 판단이 아닙니다.</div>
-    <div class="result-actions"><button class="primary" onclick="copyPairResult()">대조 결과 복사하기</button><button class="secondary" onclick="window.print()">인쇄·PDF로 저장</button><a class="feedback-link" href="/feedback.html?area=matching&point=result" target="_blank" rel="noopener noreferrer">두 사람의 대조가 쓸모 있었는지 남기기 →</a><button class="secondary" onclick="clearPair()">대조 결과와 답변 지우기</button></div>
+    <div class="result-actions"><button class="primary" onclick="copyPairResult()">대조 결과 복사하기</button><button class="secondary" onclick="window.print()">인쇄·PDF로 저장</button><a class="feedback-link" href="/feedback.html?area=matching&point=result" target="_blank" rel="noopener noreferrer">두 사람의 대조가 쓸모 있었는지 남기기 →</a><button class="secondary" onclick="clearPair()">대조 결과와 답변 지우기</button><a class="home-link" href="/matching.html">수업 조건 대조 설명으로 돌아가기</a></div>
   </div>`;
+  focusScreen();
 }
 
 function copyPairResult(){
-  const lines=['[디테일랩 · 트레이너·회원 수업 조건 대조]','두 사람이 각자 공유에 동의한 답입니다. 실제 예약 시간과 비용은 서로 직접 확인하세요.','',...comparePair(state.pair.member,state.pair.trainer).map(([label,left,right,read])=>`${label}\n회원: ${left}\n트레이너: ${right}\n확인: ${read}`),'',`회원이 고른 목표: ${state.pair.member[0]}`,`트레이너가 고른 제약: ${state.pair.trainer[5]}`,'','첫 대화: 실제 예약 시간 / 주당 횟수·기간 / 장소·비용·취소 기준 / 설명·피드백 방식'];
-  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(lines.join('\n')).then(()=>showToast('대조 결과가 복사되었습니다')).catch(()=>showToast('복사하지 못했습니다'));
-  else showToast('복사를 지원하지 않는 환경입니다');
+  const member = state.pair.member, trainer = state.pair.trainer;
+  const lines=['[디테일랩 · 트레이너·회원 수업 조건 대조]','두 사람이 각자 공유에 동의한 답입니다. 실제 예약 시간과 비용은 서로 직접 확인하세요.','',...comparePair(member,trainer).map(([label,left,right,read])=>`${label}\n회원: ${left}\n트레이너: ${right}\n확인: ${read}`),'',`먼저 이야기해 볼 시간: ${overlapNote(member, trainer)}`,'',`회원이 고른 목표: ${member[0]}`,`트레이너가 고른 제약: ${trainer[5]}`,'','첫 대화: 실제 예약 시간 / 주당 횟수·기간 / 장소·비용·취소 기준 / 설명·피드백 방식'];
+  copyText(lines.join('\n'), '대조 결과가 복사되었습니다');
 }
 
 function clearPair(){
@@ -636,21 +694,14 @@ function clearPair(){
 }
 
 function copyResult(){
-  const roleLabel = state.role === "member" ? "회원" : "트레이너";
   const lines = [
-    "[디테일랩 · 수업 조건 대조 · " + roleLabel + "]",
+    "[디테일랩 · 수업 조건 대조 · " + roleName(state.role) + "]",
     "",
     ...bank().map((q,i)=> q.text + "\n→ " + (state.texts[i]||"")),
     "",
-    "이 복사본은 본인이 직접 공유할 때만 상대에게 보입니다.",
-    "by 디테일랩"
+    "이 복사본은 본인이 직접 공유할 때만 상대에게 보입니다."
   ];
-  const copied = lines.join("\n");
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(copied).then(()=>showToast("결과가 복사되었습니다")).catch(()=>showToast("복사하지 못했습니다"));
-  } else {
-    showToast("복사를 지원하지 않는 환경입니다");
-  }
+  copyText(lines.join("\n"), "결과가 복사되었습니다");
 }
 
 renderIntro();

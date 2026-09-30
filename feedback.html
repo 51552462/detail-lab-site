@@ -6,8 +6,8 @@
   <title>디테일랩에 의견 남기기 | 사용과 신청을 망설인 이유</title>
   <meta name="description" content="디테일랩의 네 가지 도구를 보고 무엇을 이해했는지, 어디서 사용이나 신청을 멈췄는지 알려 주세요.">
   <meta name="robots" content="noindex,follow">
-  <link rel="stylesheet" href="styles.css?v=20260930-copy">
-  <link rel="stylesheet" href="areas.css?v=20260930-action">
+  <link rel="stylesheet" href="styles.css?v=20260930-r2">
+  <link rel="stylesheet" href="areas.css?v=20260930-r2">
   <style>
     .response-hero{padding:132px max(24px,calc((100vw - var(--max))/2)) 68px;background:#132035;color:white}
     .response-hero .kicker{color:#8bb4ff}
@@ -38,6 +38,11 @@
     .prepared .button{margin:0}
     .prepared .button-outline{background:white}
     .prepared .status{margin-top:12px;font-size:.85rem}
+    .send-steps{list-style:none;margin:0 0 26px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .send-steps li{padding:14px;background:#f1f5fb;border-top:3px solid #1459c4}
+    .send-steps b{display:block;margin-bottom:4px;color:#173c70;font-size:.9rem}
+    .send-steps span{color:#42536b;font-size:.85rem;line-height:1.5}
+    @media(max-width:620px){.send-steps{grid-template-columns:1fr}}
     @media(max-width:800px){.response-main{grid-template-columns:1fr}.response-aside{order:-1}}
     @media(max-width:620px){.response-hero{padding-top:110px}.response-main{padding-top:35px}.response-form,.response-aside{padding:23px}.prepared .copy-cta-row{display:flex;flex-direction:column;align-items:stretch}.prepared .button{text-align:center}}
   </style>
@@ -57,12 +62,17 @@
   <section class="response-hero" aria-labelledby="response-title">
     <p class="kicker">디테일랩에 남기는 의견</p>
     <h1 id="response-title">어디에서 이해됐고,<br>어디에서 멈췄나요?</h1>
-    <p>도구를 쓰기 전이라도 괜찮습니다. 무엇을 제공하는 브랜드로 보였는지, 사용·신청을 결정할 때 부족했던 것을 알려 주세요. 긍정적인 답을 기대하지 않습니다.</p>
+    <p>도구를 쓰기 전이라도 괜찮습니다. 무엇을 제공하는 브랜드로 보였는지, 사용·신청을 결정할 때 부족했던 것을 알려 주세요. 좋았던 점만 듣기를 기대하지 않습니다. 약 1분이 걸립니다.</p>
   </section>
   <div class="section response-main">
     <div class="response-form">
       <h2>지금의 판단을 남겨 주세요</h2>
-      <p>필수 선택 네 개와 선택 질문 두 개, 짧은 의견 한 칸입니다. 이름, 센터명, 직원·회원 정보는 적지 마세요.</p>
+      <p>필수 선택 세 개와 선택 질문 세 개, 짧은 의견 한 칸입니다. 이름, 센터명, 직원·회원 정보는 적지 마세요.</p>
+      <ol class="send-steps" aria-label="의견이 도착하는 순서">
+        <li><b>답 고르기</b><span>아래에서 답을 고르면 보낼 내용이 만들어집니다.</span></li>
+        <li><b>직접 보내기</b><span>이메일 앱에서 보내거나, 내용을 복사해 detailab@naver.com으로 보냅니다.</span></li>
+        <li><b>도착</b><span>메일을 보내야 도착합니다. 이 화면은 보냈는지 알 수 없습니다.</span></li>
+      </ol>
       <form id="response-form">
         <label for="area">어떤 페이지를 보셨나요?</label>
         <select id="area" required>
@@ -73,9 +83,9 @@
           <option value="employee">직장 선택 기록지</option>
           <option value="matching">수업 조건 대조</option>
         </select>
-        <label for="impression">디테일랩이 어떤 곳으로 보였나요?</label>
-        <select id="impression" required>
-          <option value="">가장 가까운 생각을 선택해 주세요</option>
+        <label for="impression">디테일랩이 어떤 곳으로 보였나요? <span class="form-help">선택</span></label>
+        <select id="impression">
+          <option value="">답하지 않아도 됩니다</option>
           <option>무엇을 받는지 분명했다</option>
           <option>내 문제와 관련 있어 보이지만 차이가 모호했다</option>
           <option>무엇을 제공하는지 이해하기 어려웠다</option>
@@ -130,13 +140,14 @@
       </form>
       <div class="prepared" id="prepared" hidden role="status">
         <h3>보낼 내용을 확인해 주세요</h3>
-        <p>아래 내용을 고치려면 위 입력을 바꾼 뒤 다시 확인하세요. 메일 앱에서 전송을 완료해야 의견이 도착합니다.</p>
+        <p>아래 내용을 고치려면 위 입력을 바꾼 뒤 다시 확인하세요. 아직 보낸 것이 아닙니다. 메일 앱에서 ‘보내기’까지 눌러야 의견이 도착합니다.</p>
         <textarea id="prepared-text" readonly aria-label="이메일로 보낼 의견"></textarea>
         <div class="copy-cta-row">
           <a class="button button-primary" id="email-link" href="mailto:detailab@naver.com">이메일 앱에서 보내기</a>
           <button class="button button-outline" id="copy-response" type="button">내용 복사하기</button>
+          <button class="button button-outline" id="copy-address" type="button">받는 주소 복사하기</button>
         </div>
-        <p class="status" id="copy-status" aria-live="polite">메일 앱이 열리지 않으면 내용을 복사해 detailab@naver.com으로 직접 보내 주세요.</p>
+        <p class="status" id="copy-status" aria-live="polite">이메일 앱이 열리지 않으면 내용을 복사해 네이버·지메일 등 쓰시는 메일에서 detailab@naver.com으로 보내 주세요.</p>
       </div>
     </div>
     <aside class="response-aside">
@@ -172,7 +183,7 @@ form.addEventListener('submit',event=>{
     '[디테일랩 · 고객 의견]',
     '본 페이지: '+label,
     '의견을 남긴 위치: '+point,
-    '브랜드 인상: '+document.getElementById('impression').value,
+    '브랜드 인상: '+(document.getElementById('impression').value||'응답 없음'),
     '실제 행동(본인 응답): '+document.getElementById('decision').value,
     '다음 행동(의향): '+(document.getElementById('next-action').value||'아직 정하지 않음'),
     '가장 걸린 점: '+document.getElementById('barrier').value,
@@ -182,12 +193,24 @@ form.addEventListener('submit',event=>{
   preparedText.value=message;
   emailLink.href='mailto:detailab@naver.com?subject='+encodeURIComponent('[디테일랩 의견] '+label)+'&body='+encodeURIComponent(message);
   prepared.hidden=false;
-  copyStatus.textContent='메일 앱이 열리지 않으면 내용을 복사해 detailab@naver.com으로 직접 보내 주세요.';
+  copyStatus.textContent='이메일 앱이 열리지 않으면 내용을 복사해 네이버·지메일 등 쓰시는 메일에서 detailab@naver.com으로 보내 주세요.';
   prepared.scrollIntoView({block:'start',behavior:'smooth'});
 });
-document.getElementById('copy-response').addEventListener('click',async()=>{
-  try{await navigator.clipboard.writeText(preparedText.value);copyStatus.textContent='내용을 복사했습니다. detailab@naver.com으로 직접 보내 주세요.';}
-  catch{preparedText.focus();preparedText.select();copyStatus.textContent='내용을 선택했습니다. 직접 복사해 detailab@naver.com으로 보내 주세요.';}
+function copyText(text,okMessage,failMessage,fallbackField){
+  const fail=()=>{
+    if(fallbackField){fallbackField.focus();fallbackField.select();}
+    let ok=false;
+    if(fallbackField){try{ok=document.execCommand('copy');}catch(e){ok=false;}}
+    copyStatus.textContent=ok?okMessage:failMessage;
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(()=>{copyStatus.textContent=okMessage;},fail);
+  else fail();
+}
+document.getElementById('copy-response').addEventListener('click',()=>{
+  copyText(preparedText.value,'내용을 복사했습니다. 메일 앱이나 쓰시는 메일에 붙여 넣어 detailab@naver.com으로 보내 주세요.','복사하지 못했습니다. 위 상자의 내용을 직접 선택해 복사한 뒤 detailab@naver.com으로 보내 주세요.',preparedText);
+});
+document.getElementById('copy-address').addEventListener('click',()=>{
+  copyText('detailab@naver.com','받는 주소를 복사했습니다: detailab@naver.com','복사하지 못했습니다. 받는 주소는 detailab@naver.com 입니다.',null);
 });
 </script>
 </body>

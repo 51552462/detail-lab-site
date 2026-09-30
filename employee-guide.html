@@ -7,23 +7,43 @@
   <meta name="description" content="헬스·PT 트레이너와 직원이 면접에서 들은 조건을 기록하고 두 직장의 일과·정산·교육·결정 권한을 비교하는 무료 선택 기록지입니다.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://detail-lab-site.onrender.com/employee-guide.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://detail-lab-site.onrender.com/employee-guide.html">
+  <meta property="og:title" content="직원 지침서 | 디테일랩">
+  <meta property="og:description" content="헬스·PT 트레이너와 직원이 면접에서 들은 조건을 기록하고 두 직장의 일과·정산·교육·결정 권한을 비교하는 무료 선택 기록지입니다.">
+  <meta property="og:image" content="https://detail-lab-site.onrender.com/og-employee.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="직원 지침서 | 디테일랩">
+  <meta name="twitter:description" content="헬스·PT 트레이너와 직원이 면접에서 들은 조건을 기록하고 두 직장의 일과·정산·교육·결정 권한을 비교하는 무료 선택 기록지입니다.">
+  <meta name="twitter:image" content="https://detail-lab-site.onrender.com/og-employee.png">
   <meta name="theme-color" content="#070a10">
-  <link rel="stylesheet" href="styles.css?v=20260930-copy">
-  <link rel="stylesheet" href="areas.css?v=20260930-action">
+  <link rel="stylesheet" href="styles.css?v=20260930-r2">
+  <link rel="stylesheet" href="areas.css?v=20260930-r2">
 <style>
-  .decision-sheet{display:grid;gap:16px;margin:24px 0 38px;padding:24px;border:1px solid rgba(255,255,255,.18);border-radius:16px;background:#171c25}
-  .decision-sheet label{display:grid;gap:8px;font-weight:600}
-  .decision-sheet textarea{width:100%;min-height:72px;padding:12px;border:1px solid #576173;border-radius:8px;background:#10141b;color:#eceeee;font:inherit;resize:vertical}
-  .decision-sheet textarea:focus-visible{outline:3px solid #00a99d}
+  .decision-sheet{display:grid;gap:22px;margin:24px 0 38px;padding:28px;border:1px solid #c6d4e8;background:#fff;color:#243044}
+  .decision-sheet h3{margin:4px 0 0;font-size:1.15rem;color:#173c70}
+  .decision-fields{display:grid;gap:22px}
+  .decision-sheet label{display:grid;gap:8px;font-weight:700;color:#173c70;font-size:.92rem}
+  .decision-sheet label .hint{font-weight:500;color:#526075;font-size:.82rem}
+  .decision-sheet textarea,.decision-sheet input[type=text]{width:100%;padding:12px;border:1px solid #8496b0;border-radius:0;background:#fff;color:#07101e;font:inherit;line-height:1.5}
+  .decision-sheet textarea{min-height:76px;resize:vertical}
+  .decision-sheet textarea:focus-visible,.decision-sheet input:focus-visible{outline:3px solid #1459c4;outline-offset:1px}
+  .decision-names{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .decision-sheet fieldset{margin:0;padding:0;border:0;min-width:0}
+  .decision-sheet legend{padding:0;margin:0 0 10px;color:#07101e;font-weight:800}
   .decision-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-  .decision-pair label{font-size:.9rem}
-  .decision-sheet h3{margin:16px 0 0}
-  .decision-sheet .decision-topic{margin:0;color:#cbd4e1}
+  .decision-cell{display:grid;gap:8px;align-content:start;min-width:0}
+  .decision-sheet .decision-check{display:flex;gap:8px;align-items:center;font-weight:600;font-size:.86rem;color:#42536b}
+  .decision-sheet .decision-check input{width:18px;height:18px;flex:none;accent-color:#1459c4}
+  .decision-actions{display:flex;flex-wrap:wrap;gap:12px}
   .decision-sheet .button{cursor:pointer}
-  .decision-summary{margin:16px 0 0;padding:22px;background:#fff;color:#223047;border-radius:12px;white-space:pre-wrap;line-height:1.6}
+  .decision-sheet .button-outline{color:#1459c4;border-color:#1459c4}
+  .decision-sheet .button-outline:hover{background:#eaf0fa}
+  .decision-status{margin:-8px 0 0;color:#42536b;font-size:.88rem;min-height:1.2em}
+  .decision-summary{margin:0;padding:22px;background:#f1f5fb;border-left:4px solid #1459c4;color:#07101e;white-space:pre-wrap;line-height:1.7;font-size:.95rem}
   .decision-summary[hidden]{display:none}
-  @media(max-width:620px){.decision-pair{grid-template-columns:1fr}}
-  @media print{.site-header,.subhero,.copy-cta-row,.cross-scope,footer,.decision-sheet button,.offer-intro,.offer-detail,.copy-scene,.copy-why,.copy-compare,.copy-note,.copy-faq,.copy-cta,.making-note,.people-note,.action-panel,.feedback-ask,.result-feedback{display:none!important}.sub-section{padding:0}.decision-sheet{background:white;color:black;border:0;padding:0}.decision-sheet textarea{background:white;color:black;border:1px solid #555}.decision-sheet .decision-topic{color:black}.decision-summary{border:1px solid #555}body{background:white;color:black}}
+  @media(max-width:620px){.decision-pair,.decision-names{grid-template-columns:1fr}.decision-sheet{padding:22px 18px}}
+  @media print{.site-header,.subhero,.copy-cta-row,.cross-scope,footer,.decision-actions,.decision-status,.decision-fields,.offer-intro,.offer-detail,.copy-scene,.copy-why,.copy-compare,.copy-note,.copy-faq,.copy-cta,.making-note,.people-note,.action-panel,.feedback-ask,.result-feedback,.copy-use>h2,.copy-use>p,.section-head,.offer-result{display:none!important}.sub-section{padding:0}.decision-sheet{background:white;color:black;border:0;padding:0;margin:0}.decision-summary{border:0;padding:0;background:white;font-size:12pt}body{background:white;color:black}}
 </style>
 </head>
 <body class="subpage">
@@ -56,7 +76,7 @@
     <div class="offer-facts">
       <div><b>대상</b><span>입사·이직을 고민하는 트레이너와 직원</span></div>
       <div><b>입력</b><span>면접 전 질문 또는 면접에서 들은 조건</span></div>
-      <div><b>받는 것</b><span>면접 전 질문 또는 제안별 기록·미확인 조건</span></div>
+      <div><b>받는 것</b><span>제안별 기록, 들은 말과 문서 확인의 구분, 결정 전에 물어볼 질문</span></div>
       <div><b>비용·시간</b><span>무료 · 직접 작성 · 인쇄/PDF 가능</span></div>
     </div>
     <a class="button button-primary" href="#worksheet">선택 기록지 작성하기</a>
@@ -74,7 +94,7 @@
     <h2>입사 전 확인할 다섯 가지</h2>
     <p>구체적으로 답을 들을 수 있는 질문부터 골라 기록지에 옮겨 보세요.</p>
   </div>
-  <div class="copy-compare copy-3 guide-sheet" role="table" aria-label="고를 때 보는 자리">
+  <div class="copy-compare copy-3 guide-sheet" role="table" aria-label="면접에서 확인할 다섯 가지 조건">
     <div class="copy-row copy-head" role="row"><span role="columnheader">확인할 조건</span><span role="columnheader">기록할 내용</span><span role="columnheader">면접에서 물어볼 것</span></div>
     <div class="copy-row" role="row"><span role="cell">근무 일정·일과</span><span role="cell">근무일·휴무와 수업 외 업무</span><span role="cell">주로 언제 근무하고, 수업이 없는 시간에는 무엇을 하나요?</span></div>
     <div class="copy-row" role="row"><span role="cell">급여·정산</span><span role="cell">급여 산정 방식과 정산·지급 시점</span><span role="cell">급여는 어떤 기준으로 계산하고 언제 정산하나요?</span></div>
@@ -83,12 +103,12 @@
     <div class="copy-row" role="row"><span role="cell">인수인계</span><span role="cell">다음 근무자에게 남기는 정보와 방식</span><span role="cell">교대할 때 처리 중인 회원 요청은 어떻게 넘기나요?</span></div>
   </div>
   <aside class="making-note" id="employee-making">
-    <span>직장 선택 기록지를 만든 과정</span>
-    <h3>두 제안이 없어도 면접 전에 시작할 수 있게 했습니다</h3>
+    <span>직장 선택 기록지를 이렇게 만든 이유</span>
+    <h3>두 제안이 없어도 면접 전에 시작할 수 있습니다</h3>
     <dl>
-      <div><dt>고민한 선택</dt><dd>PT샵 운영자가 정해야 하는 일과·정산·교육 기준은 구직자가 입사 전에 물어볼 조건이기도 합니다. 하지만 처음부터 두 곳의 제안을 요구하면 면접 전에는 쓸 수 없습니다.</dd></div>
-      <div><dt>고친 점</dt><dd>중요한 조건이나 질문 하나만 적어도 결과를 열 수 있게 했습니다. 아직 들은 답이 없으면 준비할 질문을, 한 곳만 적었으면 그 제안의 내용과 빈칸을 보여 줍니다.</dd></div>
-      <div><dt>결정 전에 할 일</dt><dd>들은 말과 문서로 확인한 내용을 직접 구분해 적고, 모르는 조건은 다시 물어보세요. A·B를 입력해도 직장의 순위를 매기지 않습니다.</dd></div>
+      <div><dt>왜 한 곳만 적어도 되나요</dt><dd>PT샵 운영자가 정해야 하는 일과·정산·교육 기준은 구직자가 입사 전에 물어볼 조건이기도 합니다. 그런데 처음부터 두 곳의 제안을 요구하면 면접 전에는 쓸 수 없습니다.</dd></div>
+      <div><dt>그래서 이렇게 합니다</dt><dd>조건마다 들은 내용을 적고 ‘문서·메시지로 확인함’을 표시하면, 들은 말과 확인한 내용이 나뉘어 나옵니다. 빈칸이나 들은 말뿐인 조건은 결정 전에 물을 질문으로 바뀝니다. 한 곳만 적으면 그 제안의 내용과 빈칸을, 두 곳을 적으면 나란히 보여 주며 순위는 매기지 않습니다.</dd></div>
+      <div><dt>쓰는 사람이 할 일</dt><dd>모르는 조건은 채워 넣지 말고 채용 담당자에게 다시 물어보세요. 결정은 본인이 합니다.</dd></div>
     </dl>
   </aside>
   <aside class="people-note" aria-labelledby="employee-people-title">
@@ -103,37 +123,37 @@
     <div class="section-head"><p class="kicker">사용 순서</p><h2>면접 전부터 첫 주까지</h2></div>
     <ol class="offer-steps">
       <li><b>01 · 질문 고르기</b><span>면접 전이라면 중요한 조건이나 물어볼 질문 하나만 적어도 됩니다. 위 다섯 질문에서 고르세요.</span></li>
-      <li><b>02 · 들은 내용 기록</b><span>A·B 제안에서 들은 답을 적고 문서에서 확인했다면 그 사실도 함께 적습니다. 모르면 빈칸으로 둡니다.</span></li>
-      <li><b>03 · 비교 결과</b><span>두 곳에서 확인된 조건과 미확인 칸을 나란히 봅니다. 결정 전 물을 질문을 직접 정합니다.</span></li>
+      <li><b>02 · 들은 내용 기록</b><span>A·B 제안에서 들은 답을 적고, 문서나 메시지로 확인했다면 ‘확인함’에 표시합니다. 모르면 빈칸으로 둡니다.</span></li>
+      <li><b>03 · 정리 결과</b><span>조건마다 확인 상태를 나란히 보고, 빈칸과 들은 말뿐인 조건이 결정 전에 물을 질문으로 나옵니다.</span></li>
       <li><b>04 · 첫 주 확인</b><span>입사 후 설명과 다른 점이 있으면 기록을 다시 보고 담당자에게 확인합니다.</span></li>
     </ol>
   </div>
   <div class="copy-use" id="worksheet">
     <h2>직장 선택 기록지 · 한 곳부터 두 곳까지</h2>
-    <p>A는 첫 번째 직장, B는 비교할 다른 직장입니다. 면접 전이라면 맨 아래 중요한 조건이나 질문부터 적어도 됩니다. 제안을 받았다면 들은 내용과 문서에서 확인한 내용을 구분하고, 모르는 칸은 비워 두세요. 입력은 새로고침하면 사라지므로 필요한 기록은 직접 PDF로 저장하세요.</p>
+    <p>A는 첫 번째 직장, B는 비교할 다른 직장입니다. 면접 전이라면 맨 아래 중요한 조건이나 질문부터 적어도 됩니다. 제안을 받았다면 들은 내용을 적고, 문서·메시지로 확인한 조건에는 표시하세요. 모르는 칸은 비워 두세요. 입력한 내용은 이 브라우저에만 있고 새로고침하면 사라지므로, 필요하면 복사하거나 PDF로 저장하세요.</p>
     <div class="decision-sheet" id="decision-sheet">
-      <h3>제안별로 확인한 내용</h3>
-      <p class="decision-topic">① 근무일·일과·수업 외 업무</p>
-      <div class="decision-pair"><label>A<textarea data-offer="A" data-topic="근무일·일과·수업 외 업무" placeholder="근무일·휴무 및 수업 외 업무"></textarea></label><label>B<textarea data-offer="B" data-topic="근무일·일과·수업 외 업무" placeholder="다른 제안의 일정, 없으면 비워두기"></textarea></label></div>
-      <p class="decision-topic">② 급여 산정·정산 시점</p>
-      <div class="decision-pair"><label>A<textarea data-offer="A" data-topic="급여 산정·정산 시점" placeholder="급여 산정 방식, 정산일, 확인할 문서"></textarea></label><label>B<textarea data-offer="B" data-topic="급여 산정·정산 시점"></textarea></label></div>
-      <p class="decision-topic">③ 입사 첫 주 교육·피드백</p>
-      <div class="decision-pair"><label>A<textarea data-offer="A" data-topic="입사 첫 주 교육·피드백" placeholder="누가, 무엇을, 언제 알려 주는가"></textarea></label><label>B<textarea data-offer="B" data-topic="입사 첫 주 교육·피드백"></textarea></label></div>
-      <p class="decision-topic">④ 대표 부재 시 결정하는 사람</p>
-      <div class="decision-pair"><label>A<textarea data-offer="A" data-topic="대표 부재 시 결정하는 사람"></textarea></label><label>B<textarea data-offer="B" data-topic="대표 부재 시 결정하는 사람"></textarea></label></div>
-      <p class="decision-topic">⑤ 인수인계 방식</p>
-      <div class="decision-pair"><label>A<textarea data-offer="A" data-topic="인수인계 방식"></textarea></label><label>B<textarea data-offer="B" data-topic="인수인계 방식"></textarea></label></div>
-      <p class="decision-topic">⑥ 이동·대기·준비에 드는 시간</p>
-      <div class="decision-pair"><label>A<textarea data-offer="A" data-topic="이동·대기·준비 시간"></textarea></label><label>B<textarea data-offer="B" data-topic="이동·대기·준비 시간"></textarea></label></div>
-      <label>결정 전에 직접 확인할 질문<textarea id="decision-question" placeholder="예: 수업 외 업무는 하루 평균 얼마나 되나요?"></textarea></label>
-      <label>내가 중요하게 보는 조건<textarea id="decision-priority" placeholder="예: 교육 시간, 일정 예측 가능성"></textarea></label>
-      <button class="button button-primary" type="button" id="decision-build">내 기록 정리하기</button>
+      <noscript><p>기록지는 브라우저에서 JavaScript가 켜져 있어야 작동합니다.</p></noscript>
+      <div class="decision-fields">
+        <div class="decision-names">
+          <label>A 제안 이름 <span class="hint">선택 · 나만 알아볼 메모</span><input type="text" id="offer-name-A" maxlength="24" placeholder="예: 첫 번째 센터" autocomplete="off"></label>
+          <label>B 제안 이름 <span class="hint">선택 · 나만 알아볼 메모</span><input type="text" id="offer-name-B" maxlength="24" placeholder="예: 두 번째 센터" autocomplete="off"></label>
+        </div>
+        <h3>제안별로 확인한 내용</h3>
+        <div id="decision-topics"></div>
+        <label>결정 전에 직접 확인할 질문<textarea id="decision-question" placeholder="예: 수업 외 업무는 하루 평균 얼마나 되나요?"></textarea></label>
+        <label>내가 중요하게 보는 조건<textarea id="decision-priority" placeholder="예: 교육 시간, 일정 예측 가능성"></textarea></label>
+      </div>
+      <div class="decision-actions">
+        <button class="button button-primary" type="button" id="decision-build">내 기록 정리하기</button>
+        <button class="button button-outline" type="button" id="decision-copy">정리한 내용 복사하기</button>
+        <button class="button button-outline" type="button" id="decision-print">인쇄·PDF 저장</button>
+      </div>
+      <p class="decision-status" id="decision-status" role="status" aria-live="polite"></p>
       <div class="decision-summary" id="decision-summary" role="status" hidden></div>
       <a class="result-feedback" href="/feedback.html?area=employee&point=result" target="_blank" rel="noopener noreferrer">기록지를 써 보고 어려웠던 점 남기기 →</a>
-      <button class="button button-outline" type="button" id="decision-print">기록지 인쇄·PDF 저장</button>
     </div>
   </div>
-  <div class="offer-result"><h3>결과의 쓰임</h3><p>내가 적은 사실, 비어 있는 조건, 결정 전 질문을 한 화면에서 확인합니다. 어느 직장이 더 좋다는 자동 판정은 하지 않습니다. 계약·임금의 법적 판단이 필요하면 전문 상담을 받으세요.</p></div>
+  <div class="offer-result"><h3>결과의 쓰임</h3><p>내가 적은 내용, 문서로 확인한 조건과 들은 말뿐인 조건, 결정 전에 물을 질문을 한 화면에서 확인합니다. 복사하거나 인쇄·PDF로 저장할 수 있습니다. 어느 직장이 더 좋다는 자동 판정은 하지 않습니다. 계약·임금의 법적 판단이 필요하면 전문 상담을 받으세요.</p></div>
   <div class="action-panel">
     <p class="kicker">제안을 결정하기 전에</p>
     <h2>들었지만 확인하지 못한 조건 하나를 적어 보세요</h2>
@@ -183,42 +203,105 @@ const menu=document.querySelector('[data-menu]');
 button.addEventListener('click',()=>{const open=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!open));menu.classList.toggle('is-open',!open);});
 menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{button.setAttribute('aria-expanded','false');menu.classList.remove('is-open');}));
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&button.getAttribute('aria-expanded')==='true'){button.setAttribute('aria-expanded','false');menu.classList.remove('is-open');button.focus();}});
-const decisionFields=[...document.querySelectorAll('[data-offer][data-topic]')];
+const TOPICS=[
+  {label:'근무일·일과·수업 외 업무',ph:'근무일·휴무 및 수업 외 업무',ask:'주로 언제 근무하고, 수업이 없는 시간에는 무엇을 하나요?'},
+  {label:'급여 산정·정산 시점',ph:'급여 산정 방식, 정산일, 확인할 문서',ask:'급여는 어떤 기준으로 계산하고 언제 정산하나요?'},
+  {label:'입사 첫 주 교육·피드백',ph:'누가, 무엇을, 언제 알려 주는가',ask:'입사 첫 주에는 누가 어떤 내용을 알려 주나요?'},
+  {label:'대표 부재 시 결정하는 사람',ph:'대표가 없을 때 회원 요청을 처리하는 사람',ask:'회원 요청 중 제가 답할 수 있는 범위는 어디까지인가요?'},
+  {label:'인수인계 방식',ph:'교대할 때 남기는 정보와 방식',ask:'교대할 때 처리 중인 회원 요청은 어떻게 넘기나요?'},
+  {label:'이동·대기·준비에 드는 시간',ph:'수업 사이 대기·준비·이동',ask:'수업 사이 대기·준비·이동 시간은 어떻게 다뤄지나요?'}
+];
+const CIRCLED=['①','②','③','④','⑤','⑥'];
+const OFFERS=['A','B'];
+const topicsBox=document.getElementById('decision-topics');
+topicsBox.innerHTML=TOPICS.map((t,i)=>`<fieldset class="decision-topic"><legend>${CIRCLED[i]} ${t.label}</legend><div class="decision-pair">${OFFERS.map(o=>`<div class="decision-cell"><label>${o} 제안에서 들은 내용<textarea data-offer="${o}" data-topic="${i}" placeholder="${o==='A'?t.ph:(i===0?'다른 제안이 없으면 비워 두세요':'')}"></textarea></label><label class="decision-check"><input type="checkbox" data-verify="${o}" data-topic="${i}"> 문서·메시지로 확인함</label></div>`).join('')}</div></fieldset>`).join('');
+
+const statusEl=document.getElementById('decision-status');
+const summaryEl=document.getElementById('decision-summary');
+
+function readCell(offer,i){
+  const text=topicsBox.querySelector(`textarea[data-offer="${offer}"][data-topic="${i}"]`).value.trim();
+  const checked=topicsBox.querySelector(`input[data-verify="${offer}"][data-topic="${i}"]`).checked;
+  return {text,verified:!!text&&checked};
+}
+function offerLabel(offer){
+  const name=document.getElementById('offer-name-'+offer).value.trim();
+  return name?`${offer}·${name}`:offer;
+}
+function cellLine(cell){
+  if(!cell.text)return '확인 필요 (빈칸)';
+  return cell.text+(cell.verified?' [문서·메시지로 확인]':' [들은 말]');
+}
+
 function buildDecisionSummary(){
-  const summary=document.getElementById('decision-summary');
-  if(!decisionFields.some(field=>field.value.trim())&&!document.getElementById('decision-question').value.trim()&&!document.getElementById('decision-priority').value.trim()){
-    summary.textContent='면접 전이라면 중요한 조건이나 물어볼 질문 하나를, 면접 후라면 들은 답 하나를 적어 주세요.';
-    summary.hidden=false;
-    summary.scrollIntoView({block:'nearest',behavior:'smooth'});
+  const rows=TOPICS.map((t,i)=>({t,i,A:readCell('A',i),B:readCell('B',i)}));
+  const question=document.getElementById('decision-question').value.trim();
+  const priority=document.getElementById('decision-priority').value.trim();
+  const used=OFFERS.filter(o=>rows.some(r=>r[o].text));
+  statusEl.textContent='';
+  if(!used.length&&!question&&!priority){
+    summaryEl.textContent='면접 전이라면 중요한 조건이나 물어볼 질문 하나를, 면접 후라면 들은 답 하나를 적어 주세요.';
+    summaryEl.hidden=false;
+    summaryEl.scrollIntoView({block:'nearest',behavior:'smooth'});
     return false;
   }
   const lines=['직장 선택 기록 · 직접 작성한 내용',''];
-  const topics=[...new Set(decisionFields.map(field=>field.dataset.topic))];
-  const hasA=decisionFields.some(field=>field.dataset.offer==='A'&&field.value.trim());
-  const hasB=decisionFields.some(field=>field.dataset.offer==='B'&&field.value.trim());
-  if(!hasA&&!hasB){
-    lines.push('면접 전 준비 · 아직 들은 조건이 없으므로 중요한 질문부터 확인하세요.','');
+  if(!used.length){
+    lines.push('면접 전 준비 · 아직 들은 조건이 없으므로 아래 질문부터 물어보세요.','');
+    rows.forEach(r=>lines.push(`${CIRCLED[r.i]} ${r.t.label}: ${r.t.ask}`));
+    lines.push('');
   }else{
-    lines.push(hasA&&hasB?'두 제안에서 들은 내용과 빈칸':'입력한 제안의 내용과 아직 확인할 조건','');
-    topics.forEach(topic=>{
-      const a=decisionFields.find(field=>field.dataset.topic===topic&&field.dataset.offer==='A').value.trim();
-      const b=decisionFields.find(field=>field.dataset.topic===topic&&field.dataset.offer==='B').value.trim();
-      lines.push(topic);
-      if(hasA)lines.push('A: '+(a||'확인 필요'));
-      if(hasB)lines.push('B: '+(b||'확인 필요'));
+    lines.push(used.length===2?'두 제안에서 들은 내용과 확인 상태':'입력한 제안의 내용과 확인 상태','');
+    rows.forEach(r=>{
+      lines.push(`${CIRCLED[r.i]} ${r.t.label}`);
+      used.forEach(o=>lines.push(`${offerLabel(o)}: ${cellLine(r[o])}`));
       lines.push('');
     });
+    lines.push('확인 상태 요약');
+    used.forEach(o=>{
+      const verified=rows.filter(r=>r[o].verified).length;
+      const heard=rows.filter(r=>r[o].text&&!r[o].verified).length;
+      const blank=rows.filter(r=>!r[o].text).length;
+      lines.push(`${offerLabel(o)}: 문서·메시지로 확인 ${verified}개 · 들은 말만 ${heard}개 · 빈칸 ${blank}개`);
+    });
+    lines.push('');
+    lines.push('결정 전에 물어볼 질문');
+    const asks=[];
+    rows.forEach(r=>{
+      const open=used.filter(o=>!r[o].verified);
+      if(open.length)asks.push(`- ${CIRCLED[r.i]} ${r.t.label} (${open.map(o=>`${offerLabel(o)} ${r[o].text?'들은 말만':'빈칸'}`).join(', ')}): ${r.t.ask}`);
+    });
+    lines.push(...(asks.length?asks:['- 적은 조건이 모두 문서·메시지로 확인되었습니다. 입사 후 첫 주에 실제 일과·정산·교육이 같은지 다시 확인하세요.']));
+    lines.push('');
   }
-  lines.push('중요한 조건: '+(document.getElementById('decision-priority').value.trim()||'직접 적어 주세요'));
-  lines.push('결정 전 질문: '+(document.getElementById('decision-question').value.trim()||'비어 있는 조건 중 하나를 골라 물어보세요'));
-  lines.push('확인할 상대: 채용 담당자에게 비어 있는 조건을 묻고, 들은 말과 문서 내용을 직접 구분하세요.');
+  lines.push('직접 적은 질문: '+(question||'적지 않음'));
+  lines.push('중요하게 보는 조건: '+(priority||'적지 않음'));
+  lines.push('확인할 상대: 채용 담당자에게 빈칸과 들은 말뿐인 조건을 묻고, 들은 말과 문서 내용을 직접 구분하세요.');
   lines.push('첫 주: 면접에서 들은 설명과 실제 일과·정산·교육이 같은지 다시 확인하세요.');
-  summary.textContent=lines.join('\n');
-  summary.hidden=false;
-  summary.scrollIntoView({block:'nearest',behavior:'smooth'});
+  summaryEl.textContent=lines.join('\n');
+  summaryEl.hidden=false;
+  summaryEl.scrollIntoView({block:'nearest',behavior:'smooth'});
   return true;
 }
+
+function copyDecisionSummary(){
+  const text=summaryEl.textContent;
+  const done=()=>{statusEl.textContent='정리한 내용을 복사했습니다.';};
+  const fallback=()=>{
+    const box=document.createElement('textarea');
+    box.value=text;box.setAttribute('readonly','');box.style.cssText='position:fixed;left:-9999px;top:0';
+    document.body.appendChild(box);box.select();
+    let ok=false;
+    try{ok=document.execCommand('copy');}catch(e){ok=false;}
+    box.remove();
+    statusEl.textContent=ok?'정리한 내용을 복사했습니다.':'복사하지 못했습니다. 정리한 내용을 직접 선택해 복사해 주세요.';
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(done,fallback);
+  else fallback();
+}
+
 document.getElementById('decision-build').addEventListener('click',buildDecisionSummary);
+document.getElementById('decision-copy').addEventListener('click',()=>{if(buildDecisionSummary())copyDecisionSummary();});
 document.getElementById('decision-print').addEventListener('click',()=>{if(buildDecisionSummary())window.print();});
 </script>
 </body>
