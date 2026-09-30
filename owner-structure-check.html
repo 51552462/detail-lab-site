@@ -278,6 +278,14 @@ function answer(oi){
 
 function goBack(){ if(state.idx>0){ state.idx-=1; renderQuestion(); } }
 
+function selectionBasis(totals,focus){
+  const same=totals.map((sum,i)=>sum===totals[focus]?CATEGORIES[i]:null).filter(Boolean);
+  const selected=QUESTIONS.map((q,i)=>({q,i})).filter(({q})=>q.cat===focus);
+  const example=selected.reduce((a,b)=>state.answers[a.i]<=state.answers[b.i]?a:b);
+  const tie=same.length>1?`같은 수준으로 나온 주제는 ${same.join('·')}입니다. 화면 순서상 ${CATEGORIES[focus]}을 먼저 보여 주므로, 실제로 먼저 다룰 일은 직접 고르세요.`:'';
+  return `각 영역의 세 답을 묶어 비교해 ${CATEGORIES[focus]}을 먼저 표시했습니다. 내 답 중 다시 살펴볼 장면: ${example.q.text} → ${state.texts[example.i]}. ${tie}이 결과는 현장의 위험도를 측정한 값이 아닙니다.`;
+}
+
 function renderResult(){
   const rows = QUESTIONS.map((q,i)=>`<div class="cat-item"><div class="cat-item-top"><span class="name">${q.text}</span></div><p style="margin:0;color:var(--ink-dim);font-size:13.5px;line-height:1.5">${state.texts[i]||''}</p></div>`).join('');
   const totals=CATEGORIES.map((_,cat)=>QUESTIONS.reduce((sum,q,i)=>sum+(q.cat===cat?state.answers[i]:0),0));
@@ -287,6 +295,7 @@ function renderResult(){
     <div class="result">
       <div class="result-band band-caution">내 답변으로 만든 이번 주 카드</div>
       <p class="result-headline">이번 답변에서 먼저 살펴볼 주제는 <strong>${CATEGORIES[focus]}</strong>입니다. 답변의 우선순위를 정리한 것으로 원인이나 위험도를 확정하지 않습니다.</p>
+      <div class="compare-box"><strong>왜 이 주제가 나왔나요?</strong><br>${selectionBasis(totals,focus)}</div>
       <div class="manual-box"><h4>${card.h.replace('이번 주 안에 할 수 있는 최소 조치 — ','')}</h4><ul>${card.items.map(item=>`<li>${item}</li>`).join('')}</ul></div>
       <div class="cat-block"><h3>내가 고른 12개 답</h3>${rows}</div>
       <div class="result-actions">
@@ -301,7 +310,8 @@ function renderResult(){
 function copyResult(){
   const totals=CATEGORIES.map((_,cat)=>QUESTIONS.reduce((sum,q,i)=>sum+(q.cat===cat?state.answers[i]:0),0));
   const card=MANUALS[totals.indexOf(Math.min(...totals))];
-  const lines = ['[디테일랩 · 센터 운영 확인]','',card.h,...card.items.map((item,i)=>`${i+1}. ${item}`),'',...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
+  const focus=totals.indexOf(Math.min(...totals));
+  const lines = ['[디테일랩 · 센터 운영 확인]','',`주제 선정 근거: ${selectionBasis(totals,focus)}`,'',card.h,...card.items.map((item,i)=>`${i+1}. ${item}`),'',...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
   const text = lines.join('\n');
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(text).then(()=>showToast('결과가 복사되었습니다'));

@@ -91,12 +91,14 @@
 .build-record{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:50px;padding:40px;background:#132035;color:#fff}
 .build-record .kicker{color:#8bb4ff}
 .build-record h3{margin:14px 0 0;font-size:clamp(1.4rem,2.4vw,2.25rem);line-height:1.25;letter-spacing:-.04em}
+.build-record .build-record-intro{margin:20px 0 0;color:#cbd7e9;font-size:.9rem;line-height:1.65}
 .build-record ol{list-style:none;margin:0;padding:0}
 .build-record li{padding:15px 0;border-bottom:1px solid rgba(255,255,255,.18)}
 .build-record li:first-child{padding-top:0}
 .build-record li:last-child{border-bottom:0;padding-bottom:0}
 .build-record b{display:block;margin-bottom:6px;color:#8bb4ff}
 .build-record span{color:#cbd7e9;font-size:.94rem;line-height:1.6}
+.build-record a{display:inline-block;margin-top:8px;color:#a9c8ff;font-size:.86rem;font-weight:700;text-underline-offset:4px}
 .brand-story>.value-link{margin-top:25px}
 .footer-areas { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 12px 24px; }
 .footer-areas a { color: var(--blue-light); font-size: .85rem; text-underline-offset: 5px; }
@@ -131,6 +133,11 @@
 .making-note{max-width:960px;margin:34px 0 0;padding:24px 28px;border-left:4px solid #2b72ff;background:#eaf0fa}
 .making-note span{display:block;margin-bottom:10px;color:#1459c4;font-size:.82rem;font-weight:800}
 .making-note p{margin:0;color:#42536b;line-height:1.7}
+.making-note h3{margin:0 0 16px;color:#173c70;font-size:clamp(1.15rem,2vw,1.42rem);line-height:1.38;letter-spacing:-.025em}
+.making-note dl{margin:0;display:grid;gap:0}
+.making-note dl div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:20px;padding:12px 0;border-top:1px solid #cbd8ee}
+.making-note dt{color:#1459c4;font-size:.88rem;font-weight:800}
+.making-note dd{margin:0;color:#42536b;font-size:.92rem;line-height:1.65}
 .action-panel{margin:60px 0 0;padding:38px 40px;background:#132035;color:#fff}
 .action-panel .kicker{margin:0 0 14px;color:#8bb4ff}
 .action-panel h2{max-width:800px;margin:0 0 15px;font-size:clamp(1.65rem,3vw,2.7rem);line-height:1.22;letter-spacing:-.045em}
@@ -295,6 +302,7 @@
 }
 @media (max-width: 620px) {
   .making-note{padding:21px 19px}
+  .making-note dl div{grid-template-columns:1fr;gap:5px}
   .action-panel{padding:28px 20px}
   .brand-story{padding-top:78px;padding-bottom:78px}
   .brand-story-grid article{padding:26px 22px}
