@@ -243,7 +243,7 @@ function renderIntro(){
         ${CATEGORIES.map(c=>`<div class="cat-preview-item"><span class="dot"></span>${c}</div>`).join('')}
       </div>
       <button class="primary" onclick="startQuiz()">운영 흐름 확인하기</button>
-      <p class="fineprint">답변은 서버에 저장되지 않습니다. 실제 운영 진단을 신청하려면 결과 화면의 신청 버튼을 이용하세요.</p>
+      <p class="fineprint">이 자가점검은 브라우저가 답을 정리하며 디테일랩이 입력을 읽지 않습니다. 사람이 검토하는 18문 운영 진단은 결과 화면에서 별도로 신청할 수 있습니다. <a href="/#people">디테일랩을 만든 사람과 일하는 방식</a></p>
     </div>
   `;
 }
@@ -283,7 +283,7 @@ function selectionBasis(totals,focus){
   const selected=QUESTIONS.map((q,i)=>({q,i})).filter(({q})=>q.cat===focus);
   const example=selected.reduce((a,b)=>state.answers[a.i]<=state.answers[b.i]?a:b);
   const tie=same.length>1?`같은 수준으로 나온 주제는 ${same.join('·')}입니다. 화면 순서상 ${CATEGORIES[focus]}을 먼저 보여 주므로, 실제로 먼저 다룰 일은 직접 고르세요.`:'';
-  return `각 영역의 세 답을 묶어 비교해 ${CATEGORIES[focus]}을 먼저 표시했습니다. 내 답 중 다시 살펴볼 장면: ${example.q.text} → ${state.texts[example.i]}. ${tie}이 결과는 현장의 위험도를 측정한 값이 아닙니다.`;
+  return `각 영역의 세 답을 묶어 비교해 ${CATEGORIES[focus]}을 먼저 표시했습니다. 내 답 중 다시 살펴볼 장면: ${example.q.text} → ${state.texts[example.i]}. ${tie ? tie+' ' : ''}이 결과는 현장의 위험도를 측정한 값이 아닙니다.`;
 }
 
 function renderResult(){
@@ -297,6 +297,7 @@ function renderResult(){
       <p class="result-headline">이번 답변에서 먼저 살펴볼 주제는 <strong>${CATEGORIES[focus]}</strong>입니다. 답변의 우선순위를 정리한 것으로 원인이나 위험도를 확정하지 않습니다.</p>
       <div class="compare-box"><strong>왜 이 주제가 나왔나요?</strong><br>${selectionBasis(totals,focus)}</div>
       <div class="manual-box"><h4>${card.h.replace('이번 주 안에 할 수 있는 최소 조치 — ','')}</h4><ul>${card.items.map(item=>`<li>${item}</li>`).join('')}</ul></div>
+      <div class="compare-box"><strong>사람과 함께 확인할 것</strong><br>이 결과에는 센터 대표·관리자가 고른 답만 담겨 있습니다. 실제로 업무를 맡을 직원에게 가능한 범위를 확인하고, 바꿀 일은 센터에서 결정하세요. 디테일랩의 사람 검토는 아래 18문 진단을 별도로 신청한 경우에 진행합니다.</div>
       <div class="cat-block"><h3>내가 고른 12개 답</h3>${rows}</div>
       <div class="result-actions">
         <a class="cta-link" target="_blank" rel="noopener noreferrer" href="https://wary-crocus-59c.notion.site/3c5f6ead7401804e87d7fbb6d086bba2">무료 센터 운영 진단 신청하기</a>
@@ -311,7 +312,7 @@ function copyResult(){
   const totals=CATEGORIES.map((_,cat)=>QUESTIONS.reduce((sum,q,i)=>sum+(q.cat===cat?state.answers[i]:0),0));
   const card=MANUALS[totals.indexOf(Math.min(...totals))];
   const focus=totals.indexOf(Math.min(...totals));
-  const lines = ['[디테일랩 · 센터 운영 확인]','',`주제 선정 근거: ${selectionBasis(totals,focus)}`,'',card.h,...card.items.map((item,i)=>`${i+1}. ${item}`),'',...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
+  const lines = ['[디테일랩 · 센터 운영 확인]','',`주제 선정 근거: ${selectionBasis(totals,focus)}`,'확인할 사람: 센터에서 실제 업무를 맡는 직원에게 가능한 범위를 확인하세요. 디테일랩의 사람 검토는 별도 18문 진단 신청 시 진행합니다.','',card.h,...card.items.map((item,i)=>`${i+1}. ${item}`),'',...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
   const text = lines.join('\n');
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(text).then(()=>showToast('결과가 복사되었습니다'));

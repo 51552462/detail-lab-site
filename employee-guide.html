@@ -9,7 +9,7 @@
   <link rel="canonical" href="https://detail-lab-site.onrender.com/employee-guide.html">
   <meta name="theme-color" content="#070a10">
   <link rel="stylesheet" href="styles.css?v=20260930-copy">
-  <link rel="stylesheet" href="areas.css?v=20260930-copy">
+  <link rel="stylesheet" href="areas.css?v=20260930-who">
 <style>
   .decision-sheet{display:grid;gap:16px;margin:24px 0 38px;padding:24px;border:1px solid rgba(255,255,255,.18);border-radius:16px;background:#171c25}
   .decision-sheet label{display:grid;gap:8px;font-weight:600}
@@ -23,7 +23,7 @@
   .decision-summary{margin:16px 0 0;padding:22px;background:#fff;color:#223047;border-radius:12px;white-space:pre-wrap;line-height:1.6}
   .decision-summary[hidden]{display:none}
   @media(max-width:620px){.decision-pair{grid-template-columns:1fr}}
-  @media print{.site-header,.subhero,.copy-cta-row,.cross-scope,footer,.decision-sheet button,.offer-intro,.offer-detail,.copy-scene,.copy-why,.copy-compare,.copy-note,.copy-faq,.copy-cta,.making-note,.action-panel{display:none!important}.sub-section{padding:0}.decision-sheet{background:white;color:black;border:0;padding:0}.decision-sheet textarea{background:white;color:black;border:1px solid #555}.decision-sheet .decision-topic{color:black}.decision-summary{border:1px solid #555}body{background:white;color:black}}
+  @media print{.site-header,.subhero,.copy-cta-row,.cross-scope,footer,.decision-sheet button,.offer-intro,.offer-detail,.copy-scene,.copy-why,.copy-compare,.copy-note,.copy-faq,.copy-cta,.making-note,.people-note,.action-panel{display:none!important}.sub-section{padding:0}.decision-sheet{background:white;color:black;border:0;padding:0}.decision-sheet textarea{background:white;color:black;border:1px solid #555}.decision-sheet .decision-topic{color:black}.decision-summary{border:1px solid #555}body{background:white;color:black}}
 </style>
 </head>
 <body class="subpage">
@@ -91,6 +91,14 @@
       <div><dt>결정 전에 할 일</dt><dd>들은 말과 문서로 확인한 내용을 직접 구분해 적고, 모르는 조건은 다시 물어보세요. A·B를 입력해도 직장의 순위를 매기지 않습니다.</dd></div>
     </dl>
   </aside>
+  <aside class="people-note" aria-labelledby="employee-people-title">
+    <h3 id="employee-people-title">누구의 답을 기준으로 선택하나요?</h3>
+    <dl>
+      <div><dt>구직자</dt><dd>중요한 조건을 고르고 면접에서 들은 말과 문서로 확인한 내용을 직접 기록합니다. 결정은 본인이 합니다.</dd></div>
+      <div><dt>채용 담당자</dt><dd>근무일, 수업 외 업무, 정산·교육 방식처럼 빈칸으로 남은 조건을 설명하고 확인할 상대입니다.</dd></div>
+      <div><dt>디테일랩</dt><dd>운영자 관점의 질문을 구직자가 물어볼 말로 바꾼 기록지를 제공합니다. 입력한 제안을 보거나 직장의 순위를 매기지 않습니다.</dd></div>
+    </dl>
+  </aside>
   <div class="offer-detail" id="process">
     <div class="section-head"><p class="kicker">사용 순서</p><h2>면접 전부터 첫 주까지</h2></div>
     <ol class="offer-steps">
@@ -155,7 +163,7 @@
     <a href="/industry.html"><strong>업종별 적용</strong><span>반복 문의와 교대를 12문으로 점검</span><b aria-hidden="true">↗</b></a>
     <a href="/matching.html"><strong>트레이너·회원 매칭</strong><span>수업할 두 사람의 조건 대조</span><b aria-hidden="true">↗</b></a>
   </div>
-  <a class="origin-link" href="/#about">디테일랩이 이 기준을 만들게 된 이유 보기 →</a>
+  <a class="origin-link" href="/#people">디테일랩을 만든 사람과 일하는 방식 보기 →</a>
 </section>
 </main>
 <footer class="site-footer">
@@ -198,6 +206,7 @@ function buildDecisionSummary(){
   }
   lines.push('중요한 조건: '+(document.getElementById('decision-priority').value.trim()||'직접 적어 주세요'));
   lines.push('결정 전 질문: '+(document.getElementById('decision-question').value.trim()||'비어 있는 조건 중 하나를 골라 물어보세요'));
+  lines.push('확인할 상대: 채용 담당자에게 비어 있는 조건을 묻고, 들은 말과 문서 내용을 직접 구분하세요.');
   lines.push('첫 주: 면접에서 들은 설명과 실제 일과·정산·교육이 같은지 다시 확인하세요.');
   summary.textContent=lines.join('\n');
   summary.hidden=false;
