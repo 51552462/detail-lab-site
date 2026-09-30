@@ -312,6 +312,7 @@
     flex-direction: column;
     gap: 10px;
   }
+  .feedback-link{display:block;padding:10px;text-align:center;color:var(--accent);font-size:13px;font-weight:700;text-underline-offset:4px}
   button.secondary{
     width: 100%;
     background: transparent;
@@ -487,6 +488,7 @@ function renderIntro(){
 
       <button class="primary" onclick="startQuiz()">근무 조건 확인하기</button>
       <p class="fineprint">답변은 서버로 전송되지 않아 디테일랩이 읽지 않습니다. 내가 고른 답을 정리하는 도구이며 실제 근무 조건은 센터 담당자에게 확인하세요. <a href="/#people">디테일랩을 만든 사람과 일하는 방식</a></p>
+      <p class="fineprint"><a href="/feedback.html?area=employee&point=page">시작 전에 부족했던 설명 남기기</a></p>
     </div>
   `;
 }
@@ -557,6 +559,7 @@ function renderResult(){
       </div>
       <div class="result-actions">
         <button class="primary" onclick="copyResult()">내 답변과 질문 복사하기</button>
+        <a class="feedback-link" href="/feedback.html?area=employee&point=result" target="_blank" rel="noopener noreferrer">근무 조건 질문이 쓸모 있었는지 남기기 →</a>
         <button class="secondary" onclick="renderIntro()">처음부터 다시 하기</button>
       </div>
     </div>

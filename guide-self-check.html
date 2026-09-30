@@ -103,6 +103,7 @@
   .compare-box b{ color:var(--ink); }
 
   .result-actions{ display:flex; flex-direction:column; gap:10px; }
+  .feedback-link{display:block;padding:10px;text-align:center;color:var(--accent);font-size:13px;font-weight:700;text-underline-offset:4px}
   button.secondary{ width:100%; background:transparent; color:var(--ink-dim); border:1px solid var(--panel-border); border-radius:12px; padding:14px; font-size:14.5px; font-weight:600; cursor:pointer; }
   button.secondary:hover{ border-color:var(--ink-faint); color:var(--ink); }
   a.cta-link{ text-decoration:none; display:block; }
@@ -239,6 +240,7 @@ function renderIntro(){
       </div>
       <button class="primary" onclick="startQuiz()">인수인계 점검 시작</button>
       <p class="fineprint">답변은 서버에 저장되지 않아 디테일랩이 읽지 않습니다. 운영자가 전달 기준을 정하고 실제 교대 담당자와 확인하는 도구입니다. <a href="/#people">디테일랩을 만든 사람과 일하는 방식</a></p>
+      <p class="fineprint"><a href="/feedback.html?area=industry&point=page">시작 전에 부족했던 설명 남기기</a></p>
     </div>
   `;
 }
@@ -287,6 +289,7 @@ function renderResult(){
       <div class="cat-block"><h3>내가 고른 12개 답</h3>${rows}</div>
       <div class="result-actions">
         <button class="primary" onclick="copyResult()">7일 카드와 답변 복사하기</button>
+        <a class="feedback-link" href="/feedback.html?area=industry&point=result" target="_blank" rel="noopener noreferrer">교대 확인 카드 의견 남기기 →</a>
         <button class="secondary" onclick="renderIntro()">처음부터 다시 하기</button>
       </div>
     </div>
@@ -296,7 +299,7 @@ function renderResult(){
 function copyResult(){
   const totals=CATEGORIES.map((_,cat)=>QUESTIONS.reduce((sum,q,i)=>sum+(q.cat===cat?state.answers[i]:0),0));
   const card=MANUALS[totals.indexOf(Math.min(...totals))];
-  const lines = ['[디테일랩 · 인수인계 확인]','',`7일 동안 해볼 일: ${card.h}`,'확인할 사람: 운영자가 담당자·완료 기준을 정하고 교대 직원과 함께 써 보세요.',...card.items.map((item,i)=>`${i+1}. ${item}`),'',...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
+  const lines = ['[디테일랩 · 인수인계 확인]','',`7일 동안 해볼 일: ${card.h}`,'확인할 사람: 운영자가 담당자·완료 기준을 정하고 교대 직원과 함께 써 보세요.',...card.items.map((item,i)=>`${i+1}. ${item}`),'','7일 뒤 실제 사용 의견: https://detail-lab-site.onrender.com/feedback.html?area=industry&point=later','',...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
   const text = lines.join('\n');
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(text).then(()=>showToast('결과가 복사되었습니다'));

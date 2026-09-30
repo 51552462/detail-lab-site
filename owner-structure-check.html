@@ -103,6 +103,7 @@
   .compare-box b{ color:var(--ink); }
 
   .result-actions{ display:flex; flex-direction:column; gap:10px; }
+  .feedback-link{display:block;padding:10px;text-align:center;color:var(--accent);font-size:13px;font-weight:700;text-underline-offset:4px}
   button.secondary{ width:100%; background:transparent; color:var(--ink-dim); border:1px solid var(--panel-border); border-radius:12px; padding:14px; font-size:14.5px; font-weight:600; cursor:pointer; }
   button.secondary:hover{ border-color:var(--ink-faint); color:var(--ink); }
   a.cta-link{ text-decoration:none; display:block; padding:16px; border-radius:12px; background:var(--accent); color:var(--accent-ink); font-weight:700; text-align:center; }
@@ -244,6 +245,7 @@ function renderIntro(){
       </div>
       <button class="primary" onclick="startQuiz()">운영 흐름 확인하기</button>
       <p class="fineprint">이 자가점검은 브라우저가 답을 정리하며 디테일랩이 입력을 읽지 않습니다. 사람이 검토하는 18문 운영 진단은 결과 화면에서 별도로 신청할 수 있습니다. <a href="/#people">디테일랩을 만든 사람과 일하는 방식</a></p>
+      <p class="fineprint"><a href="/feedback.html?area=center&point=page">시작 전에 부족했던 설명 남기기</a></p>
     </div>
   `;
 }
@@ -302,6 +304,7 @@ function renderResult(){
       <div class="result-actions">
         <a class="cta-link" target="_blank" rel="noopener noreferrer" href="https://wary-crocus-59c.notion.site/3c5f6ead7401804e87d7fbb6d086bba2">무료 센터 운영 진단 신청하기</a>
         <button class="secondary" onclick="copyResult()">이번 주 카드와 답변 복사하기</button>
+        <a class="feedback-link" href="/feedback.html?area=center&point=result" target="_blank" rel="noopener noreferrer">결과가 쓸모 있었는지 의견 남기기 →</a>
         <button class="secondary" onclick="renderIntro()">처음부터 다시 하기</button>
       </div>
     </div>

@@ -314,6 +314,7 @@
     flex-direction: column;
     gap: 10px;
   }
+  .feedback-link{display:block;padding:10px;text-align:center;color:var(--accent);font-size:13px;font-weight:700;text-underline-offset:4px}
   a.cta-link{ text-decoration:none; display:block; }
   button.secondary{
     width: 100%;
@@ -449,6 +450,7 @@ function renderRoleIntro(){
         ? "가능한 일정과 선호하는 수업 방식을 골라 주세요. 건강정보는 묻지 않습니다."
         : "현재 제공할 수 있는 일정과 수업 방식을 골라 주세요. 건강정보는 묻지 않습니다."}</p>
       <p class="fineprint">각자 자신의 답을 보여 줄지 결정합니다. 디테일랩은 답을 서버에서 받거나 상대를 대신 연결하지 않습니다. <a href="/#people">디테일랩을 만든 사람과 일하는 방식</a></p>
+      <p class="fineprint"><a href="/feedback.html?area=matching&point=page">시작이 어려웠던 이유 남기기</a></p>
       <div class="facts">
         <div class="fact"><b>${bank().length}</b> 문항</div>
         <div class="fact"><b>대조</b> 두 사람 동의 후 같은 기기</div>
@@ -562,6 +564,7 @@ function renderResult(){
         <label class="pair-consent"><input type="checkbox" id="pair-consent"> 내 답의 항목을 상대방에게 보여 주는 데 동의합니다. 같은 기기에서 이어서 확인합니다.</label>
         <button class="primary" onclick="acceptPair()">동의하고 ${otherLabel}에게 기기 넘기기${state.pair[otherRole()] ? " · 대조 보기" : ""}</button>
         <button class="secondary" onclick="copyResult()">내 결과 복사하기</button>
+        <a class="feedback-link" href="/feedback.html?area=matching&point=result" target="_blank" rel="noopener noreferrer">답을 고르거나 공유하기 어려웠던 점 남기기 →</a>
         <button class="secondary" onclick="clearPair()">답변 모두 지우고 처음부터</button>
       </div>
     </div>
@@ -615,7 +618,7 @@ function renderPairResult(){
     <div class="pair-grid" aria-label="회원과 트레이너의 항목별 대조">${rows}</div>
     <div class="compare-box"><strong>서로 말하고 시작할 내용</strong><br>회원이 고른 목표: ${member[0]}<br>트레이너가 고른 제약: ${trainer[5]}<br>두 답의 구체적인 뜻을 첫 대화에서 확인하세요.</div>
     <div class="compare-box"><strong>첫 대화에서 확인할 4가지</strong><br>① 실제 예약 가능한 요일·시간은 언제인가요?<br>② 주당 횟수와 수업 기간은 서로 가능한가요?<br>③ 수업 장소·비용·변경·취소 기준은 무엇인가요?<br>④ 첫 수업에서 설명과 피드백은 어떻게 맞춰 볼까요?<br><br>이 표는 추천 점수나 계약 판단이 아닙니다.</div>
-    <div class="result-actions"><button class="primary" onclick="copyPairResult()">대조 결과 복사하기</button><button class="secondary" onclick="window.print()">인쇄·PDF로 저장</button><button class="secondary" onclick="clearPair()">대조 결과와 답변 지우기</button></div>
+    <div class="result-actions"><button class="primary" onclick="copyPairResult()">대조 결과 복사하기</button><button class="secondary" onclick="window.print()">인쇄·PDF로 저장</button><a class="feedback-link" href="/feedback.html?area=matching&point=result" target="_blank" rel="noopener noreferrer">두 사람의 대조가 쓸모 있었는지 남기기 →</a><button class="secondary" onclick="clearPair()">대조 결과와 답변 지우기</button></div>
   </div>`;
 }
 
