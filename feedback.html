@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>디테일랩에 의견 남기기 | 사용과 신청을 망설인 이유</title>
-  <meta name="description" content="디테일랩의 네 가지 도구를 보고 무엇을 이해했는지, 어디서 사용이나 신청을 멈췄는지 알려 주세요.">
+  <title>디테일랩에 의견 남기기 | 무엇이 이해되고 어디서 멈췄나요?</title>
+  <meta name="description" content="디테일랩의 네 가지 도구를 본 뒤 느낀 점과 사용을 망설인 이유를 익명으로 남겨 주세요.">
   <meta name="robots" content="noindex,follow">
   <link rel="stylesheet" href="styles.css?v=20260930-r2">
   <link rel="stylesheet" href="areas.css?v=20260930-r2">
@@ -14,37 +14,20 @@
     .response-hero h1{max-width:850px;margin:18px 0;font-size:clamp(2.15rem,4.5vw,4.2rem);line-height:1.18;letter-spacing:-.05em}
     .response-hero p:last-child{max-width:760px;color:#cbd7e9;line-height:1.7}
     .response-main{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(250px,.6fr);gap:44px;padding-top:68px;padding-bottom:100px}
-    .response-form{padding:34px;background:#fff;border:1px solid #d3dfed}
-    .response-form h2{margin:0 0 12px;font-size:clamp(1.4rem,2.4vw,2rem);letter-spacing:-.035em}
-    .response-form>p{margin:0 0 25px;color:#526075;line-height:1.65}
-    .response-form label{display:block;margin:20px 0 8px;font-weight:800;color:#173c70;font-size:.94rem}
-    .response-form label:first-of-type{margin-top:0}
-    .response-form select,.response-form textarea,.response-form input{width:100%;padding:13px 14px;border:1px solid #b9c9dc;border-radius:5px;background:white;color:#15243d;font:inherit}
-    .response-form textarea{min-height:112px;resize:vertical;line-height:1.55}
-    .response-form select:focus-visible,.response-form textarea:focus-visible,.response-form input:focus-visible,.response-form a:focus-visible,.response-form button:focus-visible{outline:3px solid #6ea1ff;outline-offset:2px}
-    .response-form .form-help{margin:7px 0 0;color:#65748a;font-size:.82rem;line-height:1.5}
-    .response-form .button{margin-top:24px;cursor:pointer}
+    .response-card{padding:34px;background:#fff;border:1px solid #d3dfed}
+    .response-card h2{margin:0 0 15px;font-size:clamp(1.4rem,2.4vw,2rem);letter-spacing:-.035em}
+    .response-card p,.response-card li{color:#42536b;line-height:1.7}
+    .response-card ol{padding-left:22px;margin:19px 0 25px}
+    .response-card li{margin-bottom:8px}
+    .response-card .button{display:inline-block;margin:5px 0 15px}
+    .response-card .fine-print{margin-bottom:0;font-size:.88rem;color:#5c6e84}
     .response-aside{align-self:start;padding:29px;background:#eaf0fa;border:1px solid #ccdaeb}
     .response-aside h2{margin:0 0 15px;font-size:1.2rem}
     .response-aside p,.response-aside li{color:#42536b;font-size:.92rem;line-height:1.7}
     .response-aside ul{margin:0 0 18px;padding-left:20px}
     .response-aside a{color:#1459c4;font-weight:800;text-underline-offset:4px}
-    .prepared{margin-top:28px;padding:23px;background:#f1f5fb;border-left:4px solid #2b72ff}
-    .prepared[hidden]{display:none}
-    .prepared h3{margin:0 0 9px;font-size:1.1rem}
-    .prepared p{margin:0 0 14px;color:#42536b;line-height:1.6}
-    .prepared textarea{min-height:240px;font-size:.87rem;background:white}
-    .prepared .copy-cta-row{margin-top:16px}
-    .prepared .button{margin:0}
-    .prepared .button-outline{background:white}
-    .prepared .status{margin-top:12px;font-size:.85rem}
-    .send-steps{list-style:none;margin:0 0 26px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-    .send-steps li{padding:14px;background:#f1f5fb;border-top:3px solid #1459c4}
-    .send-steps b{display:block;margin-bottom:4px;color:#173c70;font-size:.9rem}
-    .send-steps span{color:#42536b;font-size:.85rem;line-height:1.5}
-    @media(max-width:620px){.send-steps{grid-template-columns:1fr}}
     @media(max-width:800px){.response-main{grid-template-columns:1fr}.response-aside{order:-1}}
-    @media(max-width:620px){.response-hero{padding-top:110px}.response-main{padding-top:35px}.response-form,.response-aside{padding:23px}.prepared .copy-cta-row{display:flex;flex-direction:column;align-items:stretch}.prepared .button{text-align:center}}
+    @media(max-width:620px){.response-hero{padding-top:110px}.response-main{padding-top:35px}.response-card,.response-aside{padding:23px}.response-card .button{display:block;text-align:center}}
   </style>
 </head>
 <body class="subpage">
@@ -62,93 +45,20 @@
   <section class="response-hero" aria-labelledby="response-title">
     <p class="kicker">디테일랩에 남기는 의견</p>
     <h1 id="response-title">어디에서 이해됐고,<br>어디에서 멈췄나요?</h1>
-    <p>도구를 쓰기 전이라도 괜찮습니다. 무엇을 제공하는 브랜드로 보였는지, 사용·신청을 결정할 때 부족했던 것을 알려 주세요. 좋았던 점만 듣기를 기대하지 않습니다. 약 1분이 걸립니다.</p>
+    <p>도구를 쓰기 전이라도 괜찮습니다. 무엇을 제공하는 곳으로 보였는지, 사용이나 신청을 결정할 때 부족했던 것을 알려 주세요.</p>
   </section>
   <div class="section response-main">
-    <div class="response-form">
-      <h2>지금의 판단을 남겨 주세요</h2>
-      <p>필수 선택 세 개와 선택 질문 세 개, 짧은 의견 한 칸입니다. 이름, 센터명, 직원·회원 정보는 적지 마세요.</p>
-      <ol class="send-steps" aria-label="의견이 도착하는 순서">
-        <li><b>답 고르기</b><span>아래에서 답을 고르면 보낼 내용이 만들어집니다.</span></li>
-        <li><b>직접 보내기</b><span>이메일 앱에서 보내거나, 내용을 복사해 detailab@naver.com으로 보냅니다.</span></li>
-        <li><b>도착</b><span>메일을 보내야 도착합니다. 이 화면은 보냈는지 알 수 없습니다.</span></li>
+    <div class="response-card">
+      <h2>익명 의견 남기기</h2>
+      <p>아래 버튼을 누르면 의견 양식이 열립니다. 페이지를 본 인상, 실제로 어디까지 했는지, 가장 걸린 점과 다음 행동을 선택해 주세요. 유료 이용을 판단할 때 필요한 정보도 선택해서 남길 수 있습니다.</p>
+      <p id="area-hint" hidden></p>
+      <ol>
+        <li>양식의 <strong>어떤 페이지를 봤나요?</strong>에서 방금 본 영역을 선택해 주세요.</li>
+        <li>자유 의견은 한 문장만 적어도 됩니다. 이름·연락처·사업장·직원·회원 정보는 적지 마세요.</li>
+        <li>양식의 <strong>제출</strong> 버튼을 눌러야 의견이 접수됩니다.</li>
       </ol>
-      <form id="response-form">
-        <label for="area">어떤 페이지를 보셨나요?</label>
-        <select id="area" required>
-          <option value="">선택해 주세요</option>
-          <option value="brand">브랜드 전체</option>
-          <option value="center">센터 운영 진단</option>
-          <option value="industry">가게 점검·인수인계</option>
-          <option value="employee">직장 선택 기록지</option>
-          <option value="matching">수업 조건 대조</option>
-        </select>
-        <label for="impression">디테일랩이 어떤 곳으로 보였나요? <span class="form-help">선택</span></label>
-        <select id="impression">
-          <option value="">답하지 않아도 됩니다</option>
-          <option>무엇을 받는지 분명했다</option>
-          <option>내 문제와 관련 있어 보이지만 차이가 모호했다</option>
-          <option>무엇을 제공하는지 이해하기 어려웠다</option>
-          <option>신뢰할 근거가 부족했다</option>
-          <option>내 상황과 관계가 없었다</option>
-        </select>
-        <label for="decision">실제로 어디까지 하셨나요?</label>
-        <select id="decision" required>
-          <option value="">현재 행동을 선택해 주세요</option>
-          <option>페이지를 읽었다</option>
-          <option>도구를 시작했지만 결과를 보지 못했다</option>
-          <option>도구 결과를 확인했다</option>
-          <option>무료 진단을 신청했다</option>
-          <option>사용이나 신청을 보류했다</option>
-        </select>
-        <p class="form-help">여기서 고른 행동은 의견일 뿐입니다. 실제 신청 완료 여부는 신청 접수 기록으로만 확인합니다.</p>
-        <label for="next-action">다음에는 무엇을 하고 싶으신가요? <span class="form-help">선택</span></label>
-        <select id="next-action">
-          <option value="">아직 정하지 않았다</option>
-          <option>지금 도구를 쓰거나 무료 진단을 신청한다</option>
-          <option>결과를 보관하고 실제 일에 적용한다</option>
-          <option>설명이나 근거를 더 본 뒤 결정한다</option>
-          <option>나중에 다시 살펴본다</option>
-          <option>더 진행하지 않는다</option>
-        </select>
-        <label for="barrier">다음 행동을 결정할 때 가장 걸린 점은?</label>
-        <select id="barrier" required>
-          <option value="">한 가지만 선택해 주세요</option>
-          <option>걸린 점 없이 진행했다</option>
-          <option>결과나 제공 범위가 불분명했다</option>
-          <option>내 상황에 맞는지 확신이 없었다</option>
-          <option>실제 사용 사례와 근거가 부족했다</option>
-          <option>시간·입력 과정이 부담됐다</option>
-          <option>답변 공유나 개인정보가 걱정됐다</option>
-          <option>지금은 필요하지 않다</option>
-          <option>다른 이유가 있다</option>
-        </select>
-        <label for="paid-condition">나중에 유료 상품을 검토한다면 먼저 필요한 것은? <span class="form-help">선택</span></label>
-        <select id="paid-condition">
-          <option value="">지금은 답하지 않아도 됩니다</option>
-          <option>결과 예시와 제공 범위</option>
-          <option>실제 사용 사례와 검증 근거</option>
-          <option>가격·환불·사후 지원 조건</option>
-          <option>내 상황에 맞춘 상담 가능 여부</option>
-          <option>유료 이용을 고려하지 않는다</option>
-        </select>
-        <p class="form-help">현재 페이지의 무료 사용·신청과 별개인 가정 질문입니다. 선택해도 구매 신청이 되지 않습니다.</p>
-        <label for="comment">어떤 설명이나 결과가 있었다면 달라졌을까요? <span class="form-help">선택</span></label>
-        <textarea id="comment" maxlength="250" placeholder="한 문장으로 남겨도 됩니다. 실제 사람·사업장 이름은 빼 주세요."></textarea>
-        <p class="form-help">의견은 이 브라우저에서 이메일 내용으로 정리됩니다. 화면의 버튼을 눌러 메일 앱에서 직접 보내야 디테일랩에 도착합니다. 메일을 보내면 발신 이메일 주소가 함께 전달됩니다.</p>
-        <button class="button button-primary" type="submit">보낼 내용 확인하기</button>
-      </form>
-      <div class="prepared" id="prepared" hidden role="status">
-        <h3>보낼 내용을 확인해 주세요</h3>
-        <p>아래 내용을 고치려면 위 입력을 바꾼 뒤 다시 확인하세요. 아직 보낸 것이 아닙니다. 메일 앱에서 ‘보내기’까지 눌러야 의견이 도착합니다.</p>
-        <textarea id="prepared-text" readonly aria-label="이메일로 보낼 의견"></textarea>
-        <div class="copy-cta-row">
-          <a class="button button-primary" id="email-link" href="mailto:detailab@naver.com">이메일 앱에서 보내기</a>
-          <button class="button button-outline" id="copy-response" type="button">내용 복사하기</button>
-          <button class="button button-outline" id="copy-address" type="button">받는 주소 복사하기</button>
-        </div>
-        <p class="status" id="copy-status" aria-live="polite">이메일 앱이 열리지 않으면 내용을 복사해 네이버·지메일 등 쓰시는 메일에서 detailab@naver.com으로 보내 주세요.</p>
-      </div>
+      <a class="button button-primary" href="https://wary-crocus-59c.notion.site/1ee8a0d648944e8abf0d7da9897ae80e" target="_blank" rel="noopener noreferrer">의견 양식 열기 →</a>
+      <p class="fine-print">양식은 Notion에서 열리며, 답변은 디테일랩의 비공개 접수함으로 전달됩니다. 로그인은 필요하지 않습니다. 여기에 남긴 응답만으로 도구 사용 완료나 진단 신청이 자동 확인되지는 않습니다.</p>
     </div>
     <aside class="response-aside">
       <h2>어떤 의견이 도움이 되나요?</h2>
@@ -157,7 +67,7 @@
         <li>“결과를 봤지만 다음 교대에 쓸 방법을 모르겠다.”</li>
         <li>“두 사람이 같은 기기를 써야 해서 시작하지 못했다.”</li>
       </ul>
-      <p>위 문장은 실제 고객 의견이 아닌 작성 예시입니다. 받은 의견은 공개 후기나 성과로 사용하지 않고, 설명과 도구를 고칠 때 살핍니다.</p>
+      <p>위 문장은 실제 고객 의견이 아닌 작성 예시입니다. 받은 의견을 공개 후기나 성과로 사용하지 않고, 설명과 도구를 고칠 때 살핍니다.</p>
       <a href="/#doors">네 가지 도구 다시 보기 →</a>
     </aside>
   </div>
@@ -168,50 +78,9 @@ const button=document.querySelector('[data-menu-button]'),menu=document.querySel
 button.addEventListener('click',()=>{const open=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!open));menu.classList.toggle('is-open',!open);});
 menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{button.setAttribute('aria-expanded','false');menu.classList.remove('is-open');}));
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&button.getAttribute('aria-expanded')==='true'){button.setAttribute('aria-expanded','false');menu.classList.remove('is-open');button.focus();}});
-const form=document.getElementById('response-form'),area=document.getElementById('area'),prepared=document.getElementById('prepared'),preparedText=document.getElementById('prepared-text'),emailLink=document.getElementById('email-link'),copyStatus=document.getElementById('copy-status');
-const allowedAreas=['brand','center','industry','employee','matching'];
-const context=new URLSearchParams(location.search);
-if(allowedAreas.includes(context.get('area')))area.value=context.get('area');
-const allowedPoints=['home','page','result','later'];
-const point=allowedPoints.includes(context.get('point'))?context.get('point'):'direct';
-form.addEventListener('input',()=>{prepared.hidden=true;});
-form.addEventListener('submit',event=>{
-  event.preventDefault();
-  if(!form.reportValidity())return;
-  const label=area.selectedOptions[0].textContent;
-  const message=[
-    '[디테일랩 · 고객 의견]',
-    '본 페이지: '+label,
-    '의견을 남긴 위치: '+point,
-    '브랜드 인상: '+(document.getElementById('impression').value||'응답 없음'),
-    '실제 행동(본인 응답): '+document.getElementById('decision').value,
-    '다음 행동(의향): '+(document.getElementById('next-action').value||'아직 정하지 않음'),
-    '가장 걸린 점: '+document.getElementById('barrier').value,
-    '유료 검토 조건(가정): '+(document.getElementById('paid-condition').value||'응답 없음'),
-    '더 필요했던 것: '+(document.getElementById('comment').value.trim()||'없음')
-  ].join('\n');
-  preparedText.value=message;
-  emailLink.href='mailto:detailab@naver.com?subject='+encodeURIComponent('[디테일랩 의견] '+label)+'&body='+encodeURIComponent(message);
-  prepared.hidden=false;
-  copyStatus.textContent='이메일 앱이 열리지 않으면 내용을 복사해 네이버·지메일 등 쓰시는 메일에서 detailab@naver.com으로 보내 주세요.';
-  prepared.scrollIntoView({block:'start',behavior:'smooth'});
-});
-function copyText(text,okMessage,failMessage,fallbackField){
-  const fail=()=>{
-    if(fallbackField){fallbackField.focus();fallbackField.select();}
-    let ok=false;
-    if(fallbackField){try{ok=document.execCommand('copy');}catch(e){ok=false;}}
-    copyStatus.textContent=ok?okMessage:failMessage;
-  };
-  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(()=>{copyStatus.textContent=okMessage;},fail);
-  else fail();
-}
-document.getElementById('copy-response').addEventListener('click',()=>{
-  copyText(preparedText.value,'내용을 복사했습니다. 메일 앱이나 쓰시는 메일에 붙여 넣어 detailab@naver.com으로 보내 주세요.','복사하지 못했습니다. 위 상자의 내용을 직접 선택해 복사한 뒤 detailab@naver.com으로 보내 주세요.',preparedText);
-});
-document.getElementById('copy-address').addEventListener('click',()=>{
-  copyText('detailab@naver.com','받는 주소를 복사했습니다: detailab@naver.com','복사하지 못했습니다. 받는 주소는 detailab@naver.com 입니다.',null);
-});
+const areas={brand:'브랜드 전체',center:'센터 운영 진단',industry:'업종별 적용',employee:'직원 지침서',matching:'트레이너·회원 매칭'};
+const area=new URLSearchParams(location.search).get('area');
+if(Object.hasOwn(areas,area)){const hint=document.getElementById('area-hint');hint.textContent='방금 보신 영역: '+areas[area]+'. 양식에서 같은 항목을 선택해 주세요.';hint.hidden=false;}
 </script>
 </body>
 </html>
