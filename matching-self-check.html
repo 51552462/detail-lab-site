@@ -580,7 +580,7 @@ function answer(optionIndex){
 function advance(){
   if (state.idx < bank().length - 1){
     state.idx += 1;
-    state.multiSel = [];
+    state.multiSel = bank()[state.idx].multi ? (state.texts[state.idx]||"").split("·").filter(Boolean) : [];
     renderQuestion();
   } else {
     renderResult();
