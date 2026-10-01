@@ -391,3 +391,11 @@
 @media (max-width: 420px) {
   .brand-hero h1 { font-size: 2rem; }
 }
+
+/* Give small text links a touch target of at least 44px on phones. */
+@media (max-width: 720px) {
+  .build-record li a,
+  .footer-areas a,
+  .privacy-strip a { display: inline-flex; align-items: center; min-height: 44px; }
+  .build-record li a { margin-top: 4px; }
+}
