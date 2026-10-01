@@ -8,6 +8,7 @@ import json
 import os
 import sys
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 
 
@@ -78,14 +79,19 @@ def main():
         "anthropic-version": "2023-06-01",
         "Content-Type": "application/json",
     }, payload)
+    session_id = result.get("claude_code_session_id", "")
     session_url = result.get("claude_code_session_url", "")
+    parsed = urlsplit(session_url)
     if not (
-        session_url.startswith("https://claude.ai/code/session_")
-        or session_url.startswith("https://claude.ai/code/session/")
+        isinstance(session_id, str)
+        and session_id.startswith("session_")
+        and parsed.scheme == "https"
+        and parsed.hostname == "claude.ai"
+        and parsed.path.startswith("/code")
     ):
         raise ValueError(
-            "Claude 응답에서 실행 세션 URL을 확인하지 못함 "
-            f"(응답 필드: {', '.join(sorted(result))})"
+            "Claude 응답에서 실행 세션을 확인하지 못함 "
+            f"(응답 필드: {', '.join(sorted(result))}, 주소 경로: {parsed.path[:24]})"
         )
     summary(f"Claude 후속 검수 시작: {session_url} (대상 main {sha})")
     return 0
