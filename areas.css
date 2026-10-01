@@ -386,3 +386,8 @@
 /* Secondary buttons on light panels need dark text (white text was invisible). */
 .offer-intro .button-outline, .prepared .button-outline { color: #1459c4; border-color: #1459c4; background: transparent; }
 .offer-intro .button-outline:hover, .prepared .button-outline:hover { background: #eaf0fa; color: #0f4aa5; border-color: #0f4aa5; }
+
+/* Keep the hero headline from leaving a single word on its own line on phones. */
+@media (max-width: 420px) {
+  .brand-hero h1 { font-size: 2rem; }
+}

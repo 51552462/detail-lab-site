@@ -18,7 +18,7 @@
   <meta name="twitter:image" content="https://detail-lab-site.onrender.com/og-employee.png">
   <meta name="theme-color" content="#070a10">
   <link rel="stylesheet" href="styles.css?v=20260930-r2">
-  <link rel="stylesheet" href="areas.css?v=20260930-r2">
+  <link rel="stylesheet" href="areas.css?v=20261001-r1">
 <style>
   .decision-sheet{display:grid;gap:22px;margin:24px 0 38px;padding:28px;border:1px solid #c6d4e8;background:#fff;color:#243044}
   .decision-sheet h3{margin:4px 0 0;font-size:1.15rem;color:#173c70}
@@ -35,6 +35,11 @@
   .decision-cell{display:grid;gap:8px;align-content:start;min-width:0}
   .decision-sheet .decision-check{display:flex;gap:8px;align-items:center;font-weight:600;font-size:.86rem;color:#42536b}
   .decision-sheet .decision-check input{width:18px;height:18px;flex:none;accent-color:#1459c4}
+  .decision-sheet:not(.show-b) .offer-b{display:none}
+  .decision-sheet:not(.show-b) .decision-pair,.decision-sheet:not(.show-b) .decision-names{grid-template-columns:1fr}
+  #decision-topics{display:grid;gap:22px}
+  .decision-sheet .decision-toggle{font-weight:700;color:#173c70;font-size:.95rem}
+  .decision-sheet .decision-toggle .hint{font-weight:500;color:#526075;font-size:.82rem}
   .decision-actions{display:flex;flex-wrap:wrap;gap:12px}
   .decision-sheet .button{cursor:pointer}
   .decision-sheet .button-outline{color:#1459c4;border-color:#1459c4}
@@ -130,13 +135,14 @@
   </div>
   <div class="copy-use" id="worksheet">
     <h2>직장 선택 기록지 · 한 곳부터 두 곳까지</h2>
-    <p>A는 첫 번째 직장, B는 비교할 다른 직장입니다. 면접 전이라면 맨 아래 중요한 조건이나 질문부터 적어도 됩니다. 제안을 받았다면 들은 내용을 적고, 문서·메시지로 확인한 조건에는 표시하세요. 모르는 칸은 비워 두세요. 입력한 내용은 이 브라우저에만 있고 새로고침하면 사라지므로, 필요하면 복사하거나 PDF로 저장하세요.</p>
+    <p>A는 첫 번째 직장입니다. 제안이 두 곳이면 ‘두 번째 제안(B)도 비교하기’를 체크하세요. 면접 전이라면 맨 아래 중요한 조건이나 질문부터 적어도 됩니다. 제안을 받았다면 들은 내용을 적고, 문서·메시지로 확인한 조건에는 표시하세요. 모르는 칸은 비워 두세요. 입력한 내용은 이 브라우저에만 있고 새로고침하면 사라지므로, 필요하면 복사하거나 PDF로 저장하세요.</p>
     <div class="decision-sheet" id="decision-sheet">
       <noscript><p>기록지는 브라우저에서 JavaScript가 켜져 있어야 작동합니다.</p></noscript>
       <div class="decision-fields">
+        <label class="decision-check decision-toggle"><input type="checkbox" id="show-b"> 두 번째 제안(B)도 비교하기 <span class="hint">제안이 한 곳이면 체크하지 않아도 됩니다</span></label>
         <div class="decision-names">
           <label>A 제안 이름 <span class="hint">선택 · 나만 알아볼 메모</span><input type="text" id="offer-name-A" maxlength="24" placeholder="예: 첫 번째 센터" autocomplete="off"></label>
-          <label>B 제안 이름 <span class="hint">선택 · 나만 알아볼 메모</span><input type="text" id="offer-name-B" maxlength="24" placeholder="예: 두 번째 센터" autocomplete="off"></label>
+          <label class="offer-b">B 제안 이름 <span class="hint">선택 · 나만 알아볼 메모</span><input type="text" id="offer-name-B" maxlength="24" placeholder="예: 두 번째 센터" autocomplete="off"></label>
         </div>
         <h3>제안별로 확인한 내용</h3>
         <div id="decision-topics"></div>
@@ -171,7 +177,7 @@
     <h3>자주 묻는 질문</h3>
     <dl>
       <dt>한 곳만 고려하는데도 쓸 수 있나요?</dt>
-      <dd>네. A에만 적고 나머지는 비워 두세요. 모르는 조건을 질문으로 정리하는 데 쓸 수 있습니다.</dd>
+      <dd>네. ‘두 번째 제안(B)도 비교하기’를 체크하지 않고 A에만 적으세요. 모르는 조건을 질문으로 정리하는 데 쓸 수 있습니다.</dd>
       <dt>면접 전이고 아직 들은 조건이 없어도 되나요?</dt>
       <dd>네. 중요한 조건이나 물어볼 질문 하나부터 적어 결과를 열 수 있습니다. 면접 뒤 들은 답을 A에 추가하세요.</dd>
       <dt>내가 적은 내용이 서버에 저장되나요?</dt>
@@ -214,12 +220,16 @@ const TOPICS=[
 const CIRCLED=['①','②','③','④','⑤','⑥'];
 const OFFERS=['A','B'];
 const topicsBox=document.getElementById('decision-topics');
-topicsBox.innerHTML=TOPICS.map((t,i)=>`<fieldset class="decision-topic"><legend>${CIRCLED[i]} ${t.label}</legend><div class="decision-pair">${OFFERS.map(o=>`<div class="decision-cell"><label>${o} 제안에서 들은 내용<textarea data-offer="${o}" data-topic="${i}" placeholder="${o==='A'?t.ph:(i===0?'다른 제안이 없으면 비워 두세요':'')}"></textarea></label><label class="decision-check"><input type="checkbox" data-verify="${o}" data-topic="${i}"> 문서·메시지로 확인함</label></div>`).join('')}</div></fieldset>`).join('');
+topicsBox.innerHTML=TOPICS.map((t,i)=>`<fieldset class="decision-topic"><legend>${CIRCLED[i]} ${t.label}</legend><div class="decision-pair">${OFFERS.map(o=>`<div class="decision-cell${o==='B'?' offer-b':''}"><label>${o} 제안에서 들은 내용<textarea data-offer="${o}" data-topic="${i}" placeholder="${o==='A'?t.ph:(i===0?'다른 제안이 없으면 비워 두세요':'')}"></textarea></label><label class="decision-check"><input type="checkbox" data-verify="${o}" data-topic="${i}"> 문서·메시지로 확인함</label></div>`).join('')}</div></fieldset>`).join('');
 
 const statusEl=document.getElementById('decision-status');
 const summaryEl=document.getElementById('decision-summary');
 
+const sheetEl=document.getElementById('decision-sheet');
+const showB=document.getElementById('show-b');
+showB.addEventListener('change',()=>{sheetEl.classList.toggle('show-b',showB.checked);});
 function readCell(offer,i){
+  if(offer==='B'&&!showB.checked)return {text:'',verified:false};
   const text=topicsBox.querySelector(`textarea[data-offer="${offer}"][data-topic="${i}"]`).value.trim();
   const checked=topicsBox.querySelector(`input[data-verify="${offer}"][data-topic="${i}"]`).checked;
   return {text,verified:!!text&&checked};

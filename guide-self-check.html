@@ -42,6 +42,7 @@
     color: var(--ink);
     font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", "Segoe UI", sans-serif;
     -webkit-font-smoothing: antialiased;
+    word-break: keep-all; overflow-wrap: break-word;
   }
   .app{ min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:28px 20px 60px; }
   .brandline{ width:100%; max-width:var(--maxw); display:flex; align-items:center; justify-content:space-between; font-size:12px; color:var(--ink-faint); margin-bottom:28px; }
@@ -119,6 +120,10 @@
   .brandline a.mark:hover{ color:var(--ink); }
   .home-link{ display:block; padding:10px; text-align:center; color:var(--ink-dim); font-size:13px; text-underline-offset:4px; }
   [tabindex="-1"]:focus{ outline:none; }
+  .why-box summary{ cursor:pointer; color:var(--ink); font-weight:700; }
+  .why-box[open] summary{ margin-bottom:8px; }
+  .why-box p{ margin:0; }
+  .why-box summary:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
 </style>
 </head>
 <body>
@@ -348,8 +353,8 @@ function renderResult(){
     <div class="result">
       <div class="result-band band-caution">내 답변으로 만든 7일 확인 카드</div>
       <p class="result-headline">${headline}</p>
-      <div class="compare-box"><strong>왜 이 주제가 나왔나요?</strong><br>${selectionBasis(a)}</div>
       <div class="manual-box"><h4>7일 동안 해볼 일 · ${card.h}</h4><ul>${card.items.map(item=>`<li>${item}</li>`).join('')}</ul></div>
+      <details class="compare-box why-box"><summary>왜 이 주제가 나왔나요?</summary><p>${selectionBasis(a)}</p></details>
       <div class="compare-box"><strong>누가 실제로 써 보나요?</strong><br>운영자가 담당자·완료 기준을 정한 뒤, 교대하는 직원과 이 기록으로 다음 일을 이어받을 수 있는지 확인하세요. 답만으로 직원의 책임을 판단하지 않습니다.</div>
       <div class="cat-block"><h3>내가 고른 12개 답</h3>${rows}</div>
       <div class="result-actions">
