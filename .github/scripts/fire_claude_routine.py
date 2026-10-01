@@ -84,7 +84,7 @@ def main():
     parsed = urlsplit(session_url)
     if not (
         isinstance(session_id, str)
-        and session_id.startswith("session_")
+        and bool(session_id)
         and parsed.scheme == "https"
         and parsed.hostname == "claude.ai"
         and parsed.path.startswith("/code")
