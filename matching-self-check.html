@@ -658,7 +658,7 @@ function comparePair(member,trainer){
 function overlapNote(member, trainer){
   const both = overlap(member, trainer);
   if (both.days.length && both.times.length){
-    return `겹치는 요일 ${both.days.join("·")}, 겹치는 시간대 ${both.times.join("·")}. 요일과 시간대를 따로 물었기 때문에 이 둘을 합친 시간이 실제로 비어 있는지는 트레이너의 예약표로 확인해야 합니다.`;
+    return `겹치는 요일은 ${both.days.map(day => day + "요일").join("·")}, 겹치는 시간대는 ${both.times.join("·")}입니다. 요일과 시간대를 따로 물었기 때문에 이 둘을 합친 시간이 실제로 비어 있는지는 트레이너의 예약표로 확인해야 합니다.`;
   }
   return "겹치는 요일이나 시간대가 없습니다. 첫 대화에서 가능한 범위를 넓힐 수 있는지 서로 물어보세요.";
 }
