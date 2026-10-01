@@ -79,8 +79,14 @@ def main():
         "Content-Type": "application/json",
     }, payload)
     session_url = result.get("claude_code_session_url", "")
-    if not session_url.startswith("https://claude.ai/code/session/"):
-        raise ValueError("Claude 응답에서 실행 세션 URL을 확인하지 못함")
+    if not (
+        session_url.startswith("https://claude.ai/code/session_")
+        or session_url.startswith("https://claude.ai/code/session/")
+    ):
+        raise ValueError(
+            "Claude 응답에서 실행 세션 URL을 확인하지 못함 "
+            f"(응답 필드: {', '.join(sorted(result))})"
+        )
     summary(f"Claude 후속 검수 시작: {session_url} (대상 main {sha})")
     return 0
 
