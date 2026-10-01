@@ -59,13 +59,12 @@ def main():
     sha = os.environ["SOURCE_SHA"]
     github_token = os.environ["GITHUB_TOKEN"]
     claude_token = os.environ.get("CLAUDE_ROUTINE_FIRE_TOKEN", "")
-    if not claude_token:
-        summary("Claude 즉시 실행 미연결: 저장소 secret CLAUDE_ROUTINE_FIRE_TOKEN이 없습니다.")
-        return 0
-
     reason = decide(sha, github_token)
     if reason:
         summary(reason)
+        return 0
+    if not claude_token:
+        summary("Claude 즉시 실행 미연결: 저장소 secret CLAUDE_ROUTINE_FIRE_TOKEN이 없습니다.")
         return 0
 
     payload = json.dumps({"text": (
