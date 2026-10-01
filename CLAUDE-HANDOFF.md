@@ -37,3 +37,9 @@
 ## 범위의 한계
 
 이 파일을 읽은 첫 Claude 클라우드 실행이 PR #2를 만들었으므로 GitHub 인계 경로는 작동했다. 다만 이 대화가 Claude로 즉시 전송되지는 않는다. 기존 예약의 다음 실행은 2026-10-02 09:06 KST로 표시됐다(정각 예약의 분산 지연). GitHub main push 트리거는 현재 지원되지 않아 만들지 않았다.
+
+## 작업 직후 Claude 호출 준비 (2026-10-01)
+
+- GitHub Actions `.github/workflows/claude-followup.yml`은 `main`의 정적 사이트 검사 성공 후 `.github/scripts/fire_claude_routine.py`를 실행한다. 검사 SHA가 최신 main인지 확인하고, `claude/` 브랜치에서 병합된 PR의 커밋은 제외한다. 오류 시 호출에 실패하며, Claude API가 세션 URL을 반환한 경우에만 시작으로 보고한다.
+- 이 연결은 기존 Claude 클라우드 루틴 `trig_015KYJkVs92uyJCZ85Q1gtU2`를 호출하도록 구성했다. 새로운 Claude 예약을 만들지 않는다. GitHub 저장소 secret `CLAUDE_ROUTINE_FIRE_TOKEN`이 없으면 호출을 건너뛰고 로그에 '미연결'이라고 남긴다. 토큰을 코드·인계·로그에 기록하지 않는다.
+- Claude 루틴의 API 트리거 추가와 토큰 발급·GitHub secret 저장은 아직 확인되지 않았다. 따라서 이 문서가 저장되어도 '작업 직후 자동 실행'이 가동됐다고 보고하지 않는다. 09:00 KST 일일 예약은 별도로 유지한다. API 연결 후에는 성공한 검사 한 건에서 Claude 세션 URL이 생성되고, Claude 자체 병합 뒤 재호출되지 않는지 첫 실전 실행으로 확인한다.
