@@ -18,3 +18,26 @@ jobs:
           node-version: '22'
       - name: Check static pages
         run: python3 check_site.py
+
+  customer-flows:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser test dependency
+        run: npm install --no-save --no-package-lock playwright@1.62.1
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Verify six customer tools and capture results
+        run: node .github/scripts/check_customer_flows.cjs
+      - name: Preserve logs, copied results, traces and readable screenshot tiles
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: customer-flow-evidence-${{ github.sha }}
+          path: customer-flow-artifacts/
+          retention-days: 30
+          if-no-files-found: error
