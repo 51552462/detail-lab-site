@@ -37,7 +37,7 @@
     <a class="brand" href="/" aria-label="디테일랩 처음으로"><span class="brand-mark" aria-hidden="true">DL</span><span>DETAIL LAB</span></a>
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-button><span class="sr-only">메뉴 열기</span><span></span><span></span></button>
     <nav class="site-nav" id="site-nav" aria-label="디테일랩의 네 가지 영역" data-menu>
-      <a href="/center.html">센터 운영 진단</a><a href="/industry.html">업종별 적용</a><a href="/employee-guide.html">직원 지침서</a><a href="/matching.html">트레이너·회원 매칭</a>
+      <a href="/center.html">센터 운영 진단</a><a href="/industry.html">업종별 적용</a><a href="/employee-guide.html">직원 지침서</a><a href="/matching.html">트레이너·회원 조건 대조</a>
     </nav>
   </div>
 </header>
@@ -78,9 +78,10 @@ const button=document.querySelector('[data-menu-button]'),menu=document.querySel
 button.addEventListener('click',()=>{const open=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!open));menu.classList.toggle('is-open',!open);});
 menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{button.setAttribute('aria-expanded','false');menu.classList.remove('is-open');}));
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&button.getAttribute('aria-expanded')==='true'){button.setAttribute('aria-expanded','false');menu.classList.remove('is-open');button.focus();}});
-const areas={brand:'브랜드 전체',center:'센터 운영 진단',industry:'업종별 적용',employee:'직원 지침서',matching:'트레이너·회원 매칭'};
+const areas={brand:'브랜드 전체',center:'센터 운영 진단',industry:'업종별 적용',employee:'직원 지침서',matching:'트레이너·회원 조건 대조'};
 const area=new URLSearchParams(location.search).get('area');
 if(Object.hasOwn(areas,area)){const hint=document.getElementById('area-hint');hint.textContent='방금 보신 영역: '+areas[area]+'. 양식에서 같은 항목을 선택해 주세요.';hint.hidden=false;}
 </script>
 </body>
 </html>
+
