@@ -70,7 +70,7 @@ async function landingPages(page, origin, viewport) {
     ['index.html', '반복되는 일과', '#doors', '.category-grid'],
     ['center.html', '대표에게 묻는 일이', '/owner-structure-check.html', '.path-grid'],
     ['industry.html', '사장님께 확인할게요', '/industry-self-check.html', '.example-output'],
-    ['employee-guide.html', '급여는 이 정도예요', '#worksheet', '.example-output'],
+    ['employee-guide.html', '급여는 들었는데', '#worksheet', '.example-output'],
     ['matching.html', '저녁 가능', '/matching-self-check.html?role=member', '.example-output']
   ]) {
     await page.goto(`${origin}/${file}`);
