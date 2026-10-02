@@ -41,7 +41,7 @@
 - 기존 루틴: `trig_015KYJkVs92uyJCZ85Q1gtU2`. 저장소 secret `CLAUDE_ROUTINE_FIRE_TOKEN`은 사용자 직접 저장 후 실제 호출에 전달됐다. 토큰 값은 읽거나 기록하지 않는다.
 - [GitHub 후속 실행 36865421949](https://github.com/51552462/detail-lab-site/actions/runs/36865421949): main `90d8a24323d14d4a9612033e1ee8fe784a765253` 검사 성공 뒤 Claude 세션 `https://claude.ai/code/cse_01PFLRXXBNEWmysbopzxawiq`을 반환하고 성공했다. 세션 URL 반환은 실행 시작의 증거이며 전체 검수 완료의 증거가 아니다.
 - [main 검사 36944935167](https://github.com/51552462/detail-lab-site/actions/runs/36944935167)는 PR #9 병합 SHA `e0375ab2615e3eb009604caf3334ff46633442fc`에서 성공했다. 이어진 [후속 작업 36944949256](https://github.com/51552462/detail-lab-site/actions/runs/36944949256)의 실제 로그에는 "Claude가 병합한 PR이므로 재호출을 건너뜀"이 있다. `claude/` 브랜치의 자기 병합 반복 차단을 실제 기록으로 확인했다.
-- PR #9는 2026-10-02 09:13 KST에 생성·병합됐다. 예약 실행 시각과 부합하지만 GitHub에는 Claude 루틴의 시간 예약·API·수동 실행을 구분하는 원본 실행 메타데이터가 없으므로 이 PR의 트리거 유형은 독립 확인되지 않았다. `claude/daily-review-20261002`라는 브랜치 이름만으로 예약 실행이라고 확정하지 않는다.
+- PR #9는 2026-10-02 09:13 KST에 생성·병합됐다. 2026-10-02 ChatGPT에서 해당 Claude 원본 세션에 접근했으나 Cloudflare 보안 확인이 한 번 재확인 뒤에도 반복돼 원본 로그를 읽지 못했다. 예약 실행 시각과 부합하지만 GitHub에는 Claude 루틴의 시간 예약·API·수동 실행을 구분하는 원본 실행 메타데이터가 없으므로 이 PR의 트리거 유형은 독립 확인되지 않았다. `claude/daily-review-20261002`라는 브랜치 이름만으로 예약 실행이라고 확정하지 않는다.
 - `.github/workflows/claude-followup.yml`은 첫 번째 성공한 main push 검사가 끝나고 최신 main SHA와 일치할 때만 실행한다. 오래된 검사와 `claude/` PR 병합은 제외한다. GitHub Actions 안의 실행은 직렬화하지만 Claude의 오전 예약과 API 세션을 서로 잠그는 기능까지 구현한 것은 아니다. 실행 시작 때 열린 PR과 최신 main을 확인하고, 병합 전 다시 확인한다.
 
 ## 검증 증거를 남기는 방법

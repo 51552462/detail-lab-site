@@ -50,10 +50,11 @@ async function screenshotResult(page, viewport, name, selector = '#screen .resul
   });
   let i = 0;
   for (let y = Math.max(0, top - headerGap); y < bottom; y += 660) {
-    await page.evaluate(y => { document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo(0, y); }, y);
+    await page.evaluate(y => { document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo({ top: y, behavior: 'instant' }); }, y);
+    await page.waitForFunction(y => Math.abs(window.scrollY - Math.min(y, document.documentElement.scrollHeight - innerHeight)) < 2, y);
     const actualY = await page.evaluate(() => window.scrollY);
     const filename = `${viewport}-${name}-${String(++i).padStart(2, '0')}.png`;
-    await page.screenshot({ path: path.join(out, filename), animations: 'disabled' });
+    await page.screenshot({ path: path.join(out, filename) });
     report.screenshots.push({ viewport, name, filename, scrollY: actualY });
     if (actualY + 800 >= bottom) break;
   }

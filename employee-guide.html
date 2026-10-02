@@ -252,7 +252,7 @@ function buildDecisionSummary(){
   if(!used.length&&!question&&!priority){
     summaryEl.textContent='면접 전이라면 중요한 조건이나 물어볼 질문 하나를, 면접 후라면 들은 답 하나를 적어 주세요.';
     summaryEl.hidden=false;
-    summaryEl.scrollIntoView({block:'nearest',behavior:'smooth'});
+    summaryEl.scrollIntoView({block:'start',behavior:'instant'});
     return false;
   }
   const lines=['직장 선택 기록 · 직접 작성한 내용',''];
@@ -290,7 +290,7 @@ function buildDecisionSummary(){
   lines.push('첫 주: 면접에서 들은 설명과 실제 일과·정산·교육이 같은지 다시 확인하세요.');
   summaryEl.textContent=lines.join('\n');
   summaryEl.hidden=false;
-  summaryEl.scrollIntoView({block:'nearest',behavior:'smooth'});
+  summaryEl.scrollIntoView({block:'start',behavior:'instant'});
   return true;
 }
 
