@@ -197,6 +197,7 @@
   }
   .option-btn:hover{ border-color: rgba(0,169,157,0.5); }
   .option-btn:active{ background: var(--accent-soft); }
+  .option-btn.on{ border-color: rgba(0,169,157,0.95); background: var(--accent-soft); }
 
   .nav-row{
     display:flex;
@@ -573,7 +574,7 @@ function renderQuestion(){
     <div class="q-meta">${state.idx + 1} / ${QUESTIONS.length} · ${catLabel}</div>
     <div class="q-text">${q.text}</div>
     <div class="options">
-      ${q.options.map((o, oi) => `<button class="option-btn" onclick="answer(${oi})">${o.t}</button>`).join('')}
+      ${q.options.map((o,oi)=>{const on=state.texts[state.idx]===o.t;return `<button class="option-btn${on?' on':''}" aria-pressed="${on}" onclick="answer(${oi})">${o.t}</button>`;}).join('')}
     </div>
     <div class="nav-row">
       ${state.idx > 0 ? `<button class="back-link" onclick="goBack()">← 이전 질문</button>` : `<span></span>`}

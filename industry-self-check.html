@@ -72,6 +72,7 @@
   .option-btn{ text-align:left; background:var(--panel); border:1px solid var(--panel-border); color:var(--ink); border-radius:var(--radius); padding:16px; font-size:14.5px; line-height:1.5; cursor:pointer; transition:border-color .12s ease, background .12s ease; }
   .option-btn:hover{ border-color: rgba(217,98,43,0.5); }
   .option-btn:active{ background: var(--accent-soft); }
+  .option-btn.on{ border-color: rgba(217,98,43,0.95); background: var(--accent-soft); }
   .nav-row{ display:flex; justify-content:space-between; align-items:center; margin-top:22px; }
   .back-link{ color:var(--ink-faint); font-size:13px; cursor:pointer; background:none; border:none; padding:8px 0; }
   .back-link:hover{ color:var(--ink-dim); }
@@ -332,7 +333,7 @@ function renderQuestion(){
     ${renderProgress()}
     <div class="q-meta">${state.idx+1} / ${QUESTIONS.length} · ${CATEGORIES[q.cat]}</div>
     <div class="q-text">${q.text}</div>
-    <div class="options">${q.options.map((o,oi)=>`<button class="option-btn" onclick="answer(${oi})">${o.t}</button>`).join('')}</div>
+    <div class="options">${q.options.map((o,oi)=>{const on=state.texts[state.idx]===o.t;return `<button class="option-btn${on?' on':''}" aria-pressed="${on}" onclick="answer(${oi})">${o.t}</button>`;}).join('')}</div>
     <div class="nav-row">${state.idx>0?`<button class="back-link" onclick="goBack()">← 이전 질문</button>`:`<span></span>`}</div>
   `;
   focusScreen();
