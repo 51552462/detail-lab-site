@@ -543,7 +543,7 @@ function renderQuestion(){
   } else {
     screen.innerHTML = `${head}
       <div class="options">
-        ${q.options.map((label, oi) => `<button class="option-btn" onclick="answer(${oi})">${label}</button>`).join("")}
+        ${q.options.map((label, oi) => { const on = state.texts[state.idx] === label; return `<button class="option-btn${on ? " on" : ""}" aria-pressed="${on}" onclick="answer(${oi})">${label}</button>`; }).join("")}
       </div>
       ${back}`;
   }
