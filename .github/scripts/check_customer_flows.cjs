@@ -68,12 +68,17 @@ async function noOverflow(page) {
 async function landingPages(page, origin, viewport) {
   for (const [file, heading, primary, detail] of [
     ['index.html', '반복되는 일과', '#doors', '.category-grid'],
-    ['center.html', '대표님께 물어볼게요', '/owner-structure-check.html', '.path-grid'],
+    ['center.html', '대표에게 묻는 일이', '/owner-structure-check.html', '.path-grid'],
     ['industry.html', '사장님께 확인할게요', '/industry-self-check.html', '.example-output'],
     ['employee-guide.html', '급여는 이 정도예요', '#worksheet', '.example-output'],
     ['matching.html', '저녁 가능', '/matching-self-check.html?role=member', '.example-output']
   ]) {
     await page.goto(`${origin}/${file}`);
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      window.scrollTo(0, 0);
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    });
     assert.ok((await page.locator('h1').innerText()).includes(heading));
     const action = page.locator(`a[href="${primary}"]`).first();
     assert.ok(await action.isVisible());
