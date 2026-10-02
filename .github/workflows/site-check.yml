@@ -31,6 +31,8 @@ jobs:
         run: npm install --no-save --no-package-lock playwright@1.62.1
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
+      - name: Provide Korean glyphs for readable screenshots
+        run: sudo apt-get install -y fonts-noto-cjk
       - name: Verify six customer tools and capture results
         run: node .github/scripts/check_customer_flows.cjs
       - name: Preserve logs, copied results, traces and readable screenshot tiles

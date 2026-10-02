@@ -29,6 +29,7 @@ async function copied(page, button, filename) {
   await page.evaluate(() => navigator.clipboard.writeText(''));
   await button.click();
   await page.waitForFunction(() => /복사/.test(document.querySelector('#toast, #decision-status')?.textContent || ''));
+  await page.waitForFunction(async () => (await navigator.clipboard.readText()).length > 60);
   const text = await page.evaluate(() => navigator.clipboard.readText());
   assert.ok(text.length > 60, 'copy must produce result text');
   await fs.writeFile(path.join(out, filename), text);
@@ -43,8 +44,12 @@ async function screenshotResult(page, viewport, name, selector = '#screen .resul
   const scrollY = await page.evaluate(() => window.scrollY);
   const top = box.y + scrollY;
   const bottom = top + box.height;
+  const headerGap = await page.evaluate(() => {
+    const header = document.querySelector('.site-header');
+    return header && getComputedStyle(header).position === 'fixed' ? header.getBoundingClientRect().height + 24 : 24;
+  });
   let i = 0;
-  for (let y = Math.max(0, top - 24); y < bottom; y += 660) {
+  for (let y = Math.max(0, top - headerGap); y < bottom; y += 660) {
     await page.evaluate(y => { document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo(0, y); }, y);
     const actualY = await page.evaluate(() => window.scrollY);
     const filename = `${viewport}-${name}-${String(++i).padStart(2, '0')}.png`;
@@ -110,6 +115,11 @@ async function employee(page, origin, viewport) {
   assert.match(both, /검증용 A 일정: 월·수 근무 \[문서·메시지로 확인\]/);
   assert.match(both, /검증용 B 일정: 화·목 근무 \[들은 말\]/);
   assert.equal(both, await page.locator('#decision-summary').innerText(), 'employee clipboard equals displayed result');
+  await page.waitForFunction(() => {
+    const result = document.querySelector('#decision-summary').getBoundingClientRect();
+    const header = document.querySelector('.site-header').getBoundingClientRect();
+    return result.top >= header.bottom && result.top < innerHeight;
+  });
   await noOverflow(page);
   await screenshotResult(page, viewport, 'employee-record', '#decision-summary');
   await page.locator('#show-b').uncheck();
@@ -199,7 +209,7 @@ async function matching(page, origin, viewport) {
   for (const width of [360, 1280]) {
     const context = await browser.newContext({ viewport: { width, height: 800 }, permissions: ['clipboard-read', 'clipboard-write'], reducedMotion: 'reduce' });
     await context.route('**/*', route => route.request().url().startsWith(origin) ? route.continue() : route.abort());
-    await context.tracing.start({ screenshots: true, snapshots: true, sources: true });
+    await context.tracing.start({ screenshots: false, snapshots: true, sources: true });
     const page = await context.newPage();
     page.on('pageerror', e => report.errors.push({ viewport: width, url: page.url(), message: e.message }));
     try {
