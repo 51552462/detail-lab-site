@@ -104,6 +104,7 @@
 
   .compare-box{ background:var(--panel); border:1px solid var(--panel-border); border-radius:12px; padding:18px; margin-bottom:28px; font-size:13.5px; color:var(--ink-dim); line-height:1.6; }
   .compare-box b{ color:var(--ink); }
+  .compare-box a{ color:var(--accent); font-weight:700; text-underline-offset:3px; }
 
   .result-actions{ display:flex; flex-direction:column; gap:10px; }
   .feedback-link{display:block;padding:10px;text-align:center;color:var(--accent);font-size:13px;font-weight:700;text-underline-offset:4px}
@@ -275,7 +276,7 @@ function selectionBasis(a){
     const which = a.same.length === CATEGORIES.length ? '모든 영역이 같은 정도로 나왔습니다.' : `같은 정도로 나온 주제: ${a.same.join(', ')}.`;
     tie = ` ${which} 화면 순서상 앞의 주제를 먼저 보여 줄 뿐이니, 어느 업무부터 볼지는 직접 고르세요.`;
   }
-  return `각 영역의 세 답을 가장 좋은 답과 견주어 먼저 표시한 주제는 ${CATEGORIES[a.focus]}입니다. 내 답 중 다시 살펴볼 장면: ${example.q.text} → ${state.texts[example.i]}.${tie} 이 결과는 실제 원인이나 위험도를 판정한 값이 아닙니다.`;
+  return `${CATEGORIES[a.focus]} 영역에서 고른 답이 가장 안정적인 답과 가장 멀어서 먼저 보여 드립니다. 다시 살펴볼 답: ${example.q.text} → ${state.texts[example.i]}.${tie} 이 결과는 실제 원인이나 위험도를 판정한 값이 아닙니다.`;
 }
 
 function copyText(text, okMessage){
@@ -312,7 +313,7 @@ function renderIntro(){
         <div class="fact"><b>저장</b> 직접 복사</div>
       </div>
       <button class="primary" onclick="startQuiz()">우리 가게 점검 시작</button>
-      <p class="fineprint">답변은 브라우저에서만 처리되며 디테일랩이 입력을 보지 않습니다. 이 결과는 가게와 직원을 평가하거나 실제 원인을 확정하지 않습니다. <a href="/#people">디테일랩을 만든 사람과 일하는 방식</a></p>
+      <p class="fineprint">답변은 브라우저에서만 처리되며 디테일랩이 입력을 보지 않습니다. 이 결과는 가게와 직원을 평가하거나 실제 원인을 확정하지 않습니다. <a href="/#people">디테일랩의 시작과 기록 방식</a></p>
       <p class="fineprint"><a href="/feedback.html?area=industry&point=page">시작 전에 부족했던 설명 남기기</a></p>
     </div>
   `;
@@ -356,6 +357,9 @@ function renderResult(){
   const headline = a.allBest
     ? '이번 답변에서는 먼저 손볼 주제가 드러나지 않았습니다. 대신 답한 대로 실제 응대가 되는지 확인하는 카드를 드립니다.'
     : `이번 답변으로 골라 본 첫 확인 주제는 <strong>${CATEGORIES[a.focus]}</strong>입니다. 같은 정도의 주제가 여러 개일 수도 있으며 원인·위험도 판정이 아닙니다.`;
+  const nextBox = !a.allBest && a.focus === 3
+    ? '<div class="compare-box"><strong>더 구체적으로 보고 싶다면</strong><br>일이 끝났다고 보는 시점이 흐리면 교대 때 일이 끊기기 쉽습니다. 교대 메모만 따로 12문으로 점검할 수 있습니다. <a href="/guide-self-check.html">교대 인수인계 12문 점검 →</a></div>'
+    : '';
   screen.innerHTML = `
     <div class="result">
       <div class="result-band band-caution">내 답변으로 만든 7일 확인 카드</div>
@@ -366,6 +370,7 @@ function renderResult(){
       </div>
       <details class="compare-box why-box"><summary>왜 이 주제가 나왔나요?</summary><p>${selectionBasis(a)}</p></details>
       <div class="compare-box"><strong>함께 확인할 사람</strong><br>운영자가 답한 내용만으로 직원이 실제로 어디까지 안내할 수 있는지는 알 수 없습니다. 정한 문장을 직원과 확인하고, 승인할 예외와 책임자를 먼저 정하세요.</div>
+      ${nextBox}
       <div class="cat-block"><h3>내가 고른 12개 답</h3>${rows}</div>
       <div class="result-actions">
         <button class="primary" onclick="copyResult()">7일 카드와 답변 복사하기</button>

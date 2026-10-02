@@ -298,6 +298,9 @@
   }
   .insight-box b{ color: var(--ink); }
   .insight-box .cat-name{ color: #F27A54; font-weight: 700; }
+  .insight-box ol{ margin: 12px 0 0; padding-left: 20px; }
+  .insight-box li{ margin-bottom: 8px; color: var(--ink); }
+  .insight-box li:last-child{ margin-bottom: 0; }
 
   .compare-box{
     background: var(--panel);
@@ -461,13 +464,38 @@ const QUESTIONS = [
   ]},
 ];
 
+// 영역마다 센터 담당자에게 그대로 물어볼 수 있는 질문 3개. 동료가 그만둔 이유는 추측하지 않고 센터의 대응을 묻는다.
 const FOLLOWUPS = [
-  "정산 전에 금액을 계산할 수 있도록 어떤 기준과 자료를 확인해야 하나요?",
-  "회원 배정과 목표를 누가 어떤 기준으로 정하는지 확인해 보세요.",
-  "회원 인계나 불만 접수 시 누구에게 언제 알리고 어떻게 기록하는지 물어보세요.",
-  "입사 후 교육과 다음 역할에 관해 실제 일정과 담당자가 있는지 확인해 보세요.",
-  "대표 부재 때 따를 수 있는 운영 기준과 질문할 사람을 확인해 보세요.",
-  "동료의 퇴사 이유를 추측하기보다, 현재 인수인계와 채용 공백을 어떻게 다루는지 확인해 보세요."
+  [
+    "이번 달 정산 금액은 어떤 자료로, 언제 확인할 수 있나요?",
+    "수수료율이나 정산 기준이 바뀌면 누가 언제 알려 주나요?",
+    "수업 외 업무(청소·상담·대기)는 급여에 어떻게 반영되나요?"
+  ],
+  [
+    "신규 회원은 어떤 기준으로, 누가 트레이너에게 배정하나요?",
+    "이번 달 목표 세션 수(또는 매출 목표)는 어떤 근거로 정해졌나요?",
+    "목표에 못 미친 달에는 배정이나 급여에 어떤 영향이 있나요?"
+  ],
+  [
+    "담당 회원이 다른 트레이너나 센터로 옮겨 갈 때 정해진 절차가 있나요? 담당 트레이너에게는 언제 알려 주나요?",
+    "환불이나 컴플레인이 생기면 누가 사실관계를 확인하고, 트레이너에게는 어떻게 공유하나요?",
+    "그 과정에서 트레이너의 의견은 어디에 기록되나요?"
+  ],
+  [
+    "입사 후 첫 주에는 누가 어떤 내용을 알려 주나요?",
+    "교육이나 피드백은 정해진 일정이 있나요?",
+    "1년 뒤 역할이나 직급이 바뀌는 기준이 있다면 무엇인가요?"
+  ],
+  [
+    "트레이너가 볼 수 있는 업무 기준 문서가 있나요? 마지막으로 고친 때는 언제인가요?",
+    "대표나 점장이 없을 때 회원 요청은 누구에게 물어보면 되나요?",
+    "제가 바로 답해도 되는 범위는 어디까지인가요?"
+  ],
+  [
+    "동료가 그만둘 때 맡던 회원과 업무는 어떻게 넘기나요?",
+    "지금 채용 중인 자리가 있나요? 인원이 비면 수업과 일정은 어떻게 조정하나요?",
+    "최근 1년간 트레이너가 이 센터에서 일한 기간은 보통 어느 정도인가요?"
+  ]
 ];
 
 const state = { idx: 0, answers: new Array(QUESTIONS.length).fill(null), texts: new Array(QUESTIONS.length).fill('') };
@@ -516,7 +544,13 @@ function copyText(text, okMessage){
   }
 }
 
-const STEADY_FOLLOWUP = "들은 설명이 계약서·공지·메시지 같은 문서에도 같은 내용으로 남아 있는지 확인해 보세요.";
+const STEADY_FOLLOWUPS = [
+  "정산 기준과 지급일이 계약서나 공지에도 적혀 있나요?",
+  "수업 외 업무와 근무 시간이 문서나 메시지로도 확인되나요?",
+  "조건이 바뀔 때 어떤 방법으로 알려 주는지 확인했나요?"
+];
+
+function followupsFor(a){ return a.allBest ? STEADY_FOLLOWUPS : FOLLOWUPS[a.focus]; }
 
 function focusNote(a){
   if (a.allBest) return '이번 답변에서는 먼저 손볼 조건이 드러나지 않았습니다. 고른 답이 모두 가장 안정적인 쪽입니다. 이 답은 내 기억에 따른 것이니, 들은 설명과 실제가 같은지는 문서로 확인해 두세요.';
@@ -525,7 +559,7 @@ function focusNote(a){
     const which = a.same.length === CATEGORIES.length ? '모든 영역이 같은 정도로 나왔습니다.' : `같은 정도로 나온 주제: ${a.same.join(', ')}.`;
     tie = ` ${which} 화면 순서상 앞의 주제를 먼저 보여 줄 뿐이니, 가장 급한 주제는 직접 고르세요.`;
   }
-  return `이번 답변으로 고른 첫 확인 주제는 ${CATEGORIES[a.focus]}입니다.${tie} 센터의 등급이나 이직 판단은 아닙니다.`;
+  return `${CATEGORIES[a.focus]} 영역에서 고른 답이 가장 안정적인 답과 가장 멀어서 먼저 확인할 주제로 골랐습니다.${tie} 센터의 등급이나 이직 판단은 아닙니다.`;
 }
 
 function renderIntro(){
@@ -545,7 +579,7 @@ function renderIntro(){
       </div>
 
       <button class="primary" onclick="startQuiz()">근무 조건 확인하기</button>
-      <p class="fineprint">답변은 서버로 전송되지 않아 디테일랩이 읽지 않습니다. 내가 고른 답을 정리하는 도구이며 실제 근무 조건은 센터 담당자에게 확인하세요. <a href="/#people">디테일랩을 만든 사람과 일하는 방식</a></p>
+      <p class="fineprint">답변은 서버로 전송되지 않아 디테일랩이 읽지 않습니다. 내가 고른 답을 정리하는 도구이며 실제 근무 조건은 센터 담당자에게 확인하세요. <a href="/#people">디테일랩의 시작과 기록 방식</a></p>
       <p class="fineprint"><a href="/feedback.html?area=employee&point=page">시작 전에 부족했던 설명 남기기</a></p>
     </div>
   `;
@@ -604,14 +638,15 @@ function goBack(){
 
 function renderResult(){
   const a = analyze();
-  const followup = a.allBest ? STEADY_FOLLOWUP : FOLLOWUPS[a.focus];
+  const followups = followupsFor(a);
+  const followupTitle = a.allBest ? '문서로 한 번 더 확인할 것' : `${CATEGORIES[a.focus]} · 센터 담당자에게 물어볼 질문`;
 
   screen.innerHTML = `
     <div class="result">
       <div class="result-band band-caution">내 답변 정리</div>
       <p class="result-headline">${focusNote(a)}</p>
+      <div class="insight-box"><span class="cat-name">${followupTitle}</span><ol>${followups.map(q => `<li>${q}</li>`).join('')}</ol></div>
       <div class="compare-box"><strong>누구에게 확인하나요?</strong><br>이 결과는 트레이너가 고른 답입니다. 급여·배정·교육·운영 기준의 실제 조건은 센터 담당자에게 묻고, 중요한 답은 관련 문서에서도 확인하세요.</div>
-      <div class="insight-box"><span class="cat-name">다음에 확인할 질문</span><br><br>${followup}</div>
       <div class="cat-block">
         <h3>내가 고른 12개 답</h3>
         ${QUESTIONS.map((q,i)=>`<div class="cat-item"><div class="cat-item-top"><span class="name">${q.text}</span></div><p>${state.texts[i]}</p></div>`).join('')}
@@ -620,7 +655,7 @@ function renderResult(){
         <button class="primary" onclick="copyResult()">내 답변과 질문 복사하기</button>
         <a class="feedback-link" href="/feedback.html?area=employee&point=result" target="_blank" rel="noopener noreferrer">근무 조건 질문이 쓸모 있었는지 남기기 →</a>
         <button class="secondary" onclick="renderIntro()">처음부터 다시 하기</button>
-        <a class="home-link" href="/employee-guide.html">직장 선택 기록지 보기</a>
+        <a class="home-link" href="/employee-guide.html">다른 제안과 비교하려면 직장 선택 기록지 쓰기</a>
       </div>
     </div>
   `;
@@ -631,7 +666,8 @@ function copyResult(){
   const a = analyze();
   const lines = [
     '[디테일랩 · 트레이너 근무 조건 확인]',
-    `먼저 물을 질문: ${a.allBest ? STEADY_FOLLOWUP : FOLLOWUPS[a.focus]}`,
+    a.allBest ? '문서로 한 번 더 확인할 것:' : `먼저 물을 질문 (${CATEGORIES[a.focus]}):`,
+    ...followupsFor(a).map((q,i) => `${i+1}. ${q}`),
     '확인할 사람: 센터 담당자에게 실제 조건을 묻고 관련 문서에서 확인하세요.',
     '',
     ...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]}`)

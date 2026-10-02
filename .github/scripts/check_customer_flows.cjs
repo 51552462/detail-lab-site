@@ -16,8 +16,9 @@ const out = path.resolve(process.argv[2] || path.join(root, 'customer-flow-artif
 const report = { sha: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root }).toString().trim(),
   startedAt: new Date().toISOString(), environment: 'local static preview; synthetic inputs; no form submissions',
   visualReview: 'not performed by this script', sources: {}, checks: [], screenshots: [], errors: [] };
-const pages = ['owner-structure-check.html', 'industry-self-check.html', 'guide-self-check.html',
-  'trainer-self-check.html', 'employee-guide.html', 'matching-self-check.html'];
+const pages = ['index.html', 'center.html', 'industry.html', 'employee-guide.html', 'matching.html',
+  'owner-structure-check.html', 'industry-self-check.html', 'guide-self-check.html',
+  'trainer-self-check.html', 'matching-self-check.html', 'areas.css'];
 const record = (viewport, tool, branch, details) => {
   const item = { viewport, tool, branch, details };
   report.checks.push(item); console.log(JSON.stringify(item));
@@ -62,6 +63,36 @@ async function screenshotResult(page, viewport, name, selector = '#screen .resul
 
 async function noOverflow(page) {
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'horizontal overflow');
+}
+
+async function landingPages(page, origin, viewport) {
+  for (const [file, heading, primary, detail] of [
+    ['index.html', '반복되는 일과', '#doors', '.category-grid'],
+    ['center.html', '대표에게 묻는 일이', '/owner-structure-check.html', '.path-grid'],
+    ['industry.html', '사장님께 확인할게요', '/industry-self-check.html', '.example-output'],
+    ['employee-guide.html', '급여는 이 정도예요', '#worksheet', '.example-output'],
+    ['matching.html', '저녁 가능', '/matching-self-check.html?role=member', '.example-output']
+  ]) {
+    await page.goto(`${origin}/${file}`);
+    await page.evaluate(async () => {
+      await document.fonts.ready;
+      window.scrollTo(0, 0);
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    });
+    assert.ok((await page.locator('h1').innerText()).includes(heading));
+    const action = page.locator(`a[href="${primary}"]`).first();
+    assert.ok(await action.isVisible());
+    assert.ok((await action.boundingBox()).height >= 44, `primary action must be fully readable and tappable: ${file}`);
+    await noOverflow(page);
+    const name = file.replace('.html', '');
+    const first = `${viewport}-page-${name}-hero.png`;
+    await page.screenshot({ path: path.join(out, first) });
+    report.screenshots.push({ viewport, name: `page-${name}-hero`, filename: first, scrollY: 0 });
+    const section = `${viewport}-page-${name}-detail.png`;
+    await page.locator(detail).screenshot({ path: path.join(out, section) });
+    report.screenshots.push({ viewport, name: `page-${name}-detail`, filename: section, selector: detail });
+    record(viewport, name, 'entry page', 'heading, primary action, horizontal layout and visible detail screenshot');
+  }
 }
 
 async function quiz(page, origin, viewport, filename, tool) {
@@ -162,7 +193,7 @@ async function roleQuestions(page, role, day, time) {
 }
 
 async function matching(page, origin, viewport) {
-  for (const overlap of [true, false]) {
+  for (const overlap of [true, false, 'day-only', 'time-only']) {
     await page.goto(`${origin}/matching-self-check.html`);
     await page.getByRole('button', { name: '회원용 시작', exact: true }).click();
     await page.getByRole('button', { name: '시작', exact: true }).click();
@@ -175,7 +206,7 @@ async function matching(page, origin, viewport) {
     await page.locator('button[onclick="acceptPair()"]').click();
     await page.getByRole('button', { name: '트레이너 질문 시작', exact: true }).click();
     await page.getByRole('button', { name: '시작', exact: true }).click();
-    await roleQuestions(page, 'trainer', overlap ? '수' : '목', overlap ? '저녁' : '오전');
+    await roleQuestions(page, 'trainer', overlap === true || overlap === 'day-only' ? '수' : '목', overlap === true || overlap === 'time-only' ? '저녁' : '오전');
     await copied(page, page.getByRole('button', { name: '내 답만 복사하기', exact: true }), `${viewport}-matching-trainer-${overlap}-copy.txt`);
     await page.locator('button[onclick="acceptPair()"]').click();
     assert.equal(await page.locator('.pair-grid').count(), 0, 'both roles must consent');
@@ -183,13 +214,17 @@ async function matching(page, origin, viewport) {
     await page.locator('button[onclick="acceptPair()"]').click();
     const result = await page.locator('#screen').innerText();
     const copy = await copied(page, page.getByRole('button', { name: '대조 결과 복사하기', exact: true }), `${viewport}-matching-pair-${overlap}-copy.txt`);
-    const expected = overlap ? '겹치는 요일은 수요일, 겹치는 시간대는 저녁입니다.' : '겹치는 요일이나 시간대가 없습니다.';
+    const expected = overlap === true ? '겹치는 요일은 수요일, 겹치는 시간대는 저녁입니다.'
+      : overlap === false ? '겹치는 요일이나 시간대가 없습니다.'
+      : overlap === 'day-only' ? '겹치는 요일은 수요일이지만 시간대는 겹치지 않습니다.'
+      : '겹치는 시간대는 저녁이지만 요일은 겹치지 않습니다.';
     assert.ok(result.includes(expected) && copy.includes(expected));
     assert.equal(await page.locator('.pair-row').count(), 6);
     for (const value of await page.locator('.pair-row span, .pair-row em').allTextContents()) assert.ok(copy.includes(value.trim()));
     await noOverflow(page);
-    await screenshotResult(page, viewport, overlap ? 'matching-overlap' : 'matching-no-overlap');
-    record(viewport, 'matching', overlap ? 'shared Wednesday/evening' : 'no shared day/time', '7 questions for each role; empty multi-answer rejection; previous selections; both consents block; display and clipboard agree');
+    const caseName = overlap === true ? 'matching-overlap' : overlap === false ? 'matching-no-overlap' : `matching-${overlap}`;
+    await screenshotResult(page, viewport, caseName);
+    record(viewport, 'matching', caseName, '7 questions for each role; empty multi-answer rejection; previous selections; both consents block; display and clipboard agree');
   }
 }
 
@@ -214,6 +249,7 @@ async function matching(page, origin, viewport) {
     const page = await context.newPage();
     page.on('pageerror', e => report.errors.push({ viewport: width, url: page.url(), message: e.message }));
     try {
+      await landingPages(page, origin, width);
       for (const [filename, tool] of [['owner-structure-check.html', 'center'], ['industry-self-check.html', 'store'], ['guide-self-check.html', 'shift'], ['trainer-self-check.html', 'trainer']]) await quiz(page, origin, width, filename, tool);
       await employee(page, origin, width);
       await matching(page, origin, width);

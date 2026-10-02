@@ -130,7 +130,7 @@
 <body>
 <main id="main">
 <div class="app">
-  <div class="brandline"><a class="mark" href="/" aria-label="디테일랩 홈으로">디테일랩</a><span>인수인계 · 인사평가 아님</span></div>
+  <div class="brandline"><a class="mark" href="/" aria-label="디테일랩 홈으로">디테일랩</a><span>교대 인수인계 12문 점검</span></div>
   <div class="screen" id="screen"></div>
   <noscript><p class="fineprint">이 도구는 브라우저에서 JavaScript가 켜져 있어야 작동합니다. <a href="/">디테일랩 처음으로</a></p></noscript>
 </div>
@@ -142,28 +142,28 @@ const CATEGORIES = ["교대 때 전달하는 방식","다음 행동과 확인 �
 
 const QUESTIONS = [
   { cat:0, text:"최근 7일, 교대 인수인계가 구두로만 이뤄진 횟수는?", options:[
-    {t:"0~1회, 대부분 한 장이 있었다", s:3},
+    {t:"0~1회, 대부분 메모가 남았다", s:3},
     {t:"2~3회", s:2},
     {t:"4~5회", s:1},
     {t:"거의 매번 말로만 넘겼다", s:0},
   ]},
   { cat:0, text:"다음 근무자가 확인해야 할 항목이 문서로 있나요?", options:[
-    {t:"있고 다음 사람이 그 칸을 본다", s:3},
+    {t:"있고 다음 사람이 그 기록을 본다", s:3},
     {t:"대략 있지만 비는 칸이 있다", s:2},
     {t:"단톡·머릿속에만 있다", s:1},
     {t:"없다", s:0},
   ]},
-  { cat:0, text:"교대 5분 전에 한 장을 채우나요?", options:[
-    {t:"매 교대 채운다", s:3},
-    {t:"바쁠 때는 건너뛴다", s:2},
-    {t:"거의 안 채운다", s:1},
-    {t:"그런 한 장이 없다", s:0},
+  { cat:0, text:"교대 전에 처리 중인 요청과 다음 담당자를 적어 두나요?", options:[
+    {t:"매 교대 적고 다음 사람이 확인한다", s:3},
+    {t:"적지만 바쁠 때 빠진다", s:2},
+    {t:"거의 적지 않는다", s:1},
+    {t:"남기는 방식이 없다", s:0},
   ]},
-  { cat:0, text:"다음 사람이 회원 앞에서 그 한 장을 읽고 움직이나요?", options:[
-    {t:"읽고 바로 안내한다", s:3},
-    {t:"반은 되고 반은 다시 묻는다", s:2},
-    {t:"기록은 있는데 행동이 없다", s:1},
-    {t:"회원 앞에서 처음부터 다시 묻는다", s:0},
+  { cat:0, text:"다음 근무자가 메모를 보고 손님에게 이어서 답할 수 있나요?", options:[
+    {t:"메모를 보고 이어서 안내한다", s:3},
+    {t:"때로는 전 근무자에게 다시 묻는다", s:2},
+    {t:"기록은 있지만 다음 행동이 빠져 있다", s:1},
+    {t:"손님에게 처음부터 다시 묻는다", s:0},
   ]},
   { cat:1, text:"최근 4주, 인수인계 누락으로 재작업·재확인이 발생한 횟수는?", options:[
     {t:"0~1회", s:3},
@@ -189,29 +189,29 @@ const QUESTIONS = [
     {t:"거의 없다", s:1},
     {t:"없다", s:0},
   ]},
-  { cat:1, text:"최근 7일, 같은 회원이 같은 질문을 두 번 한 횟수는?", options:[
+  { cat:1, text:"최근 7일, 같은 손님이 같은 요청을 다시 설명한 횟수는?", options:[
     {t:"없었다", s:3},
     {t:"1번", s:2},
     {t:"2~3번", s:1},
     {t:"여러 번, 교대마다 반복됐다", s:0},
   ]},
-  { cat:1, text:"기구·시설이 “나중에 보기”로만 넘어가고, 사용 중지 범위가 없었던 횟수(4주)는?", options:[
+  { cat:1, text:"최근 4주, 장비·시설 문제를 넘기면서 사용 중지나 손님 안내 방법을 남기지 않은 횟수는?", options:[
     {t:"없었다", s:3},
     {t:"1번", s:2},
     {t:"2~3번", s:1},
     {t:"반복됐다", s:0},
   ]},
-  { cat:2, text:"최근 4주, 적혀 있지 않은 예외를 근무자가 새로 연 횟수는?", options:[
+  { cat:2, text:"최근 4주, 정해진 기준 밖의 요청을 승인 확인 없이 손님에게 약속한 횟수는?", options:[
     {t:"없었다", s:3},
     {t:"1번", s:2},
     {t:"여러 번", s:1},
-    {t:"친절한 사람이 조건을 자주 새로 연다", s:0},
+    {t:"거의 매주 기준 밖의 약속이 생겼다", s:0},
   ]},
-  { cat:2, text:"담당자가 출근한 뒤, 밤에 열린 예외를 닫는지 확인하나요?", options:[
+  { cat:2, text:"다음 근무에서 전 근무자가 남긴 예외의 처리 여부를 확인하나요?", options:[
     {t:"확인하고 표시한다", s:3},
     {t:"가끔 한다", s:2},
     {t:"거의 안 한다", s:1},
-    {t:"예외가 열린 줄도 모른다", s:0},
+    {t:"전 근무에서 무엇을 약속했는지 모른다", s:0},
   ]},
 ];
 
@@ -266,7 +266,7 @@ function selectionBasis(a){
     const which = a.same.length === CATEGORIES.length ? '모든 영역이 같은 정도로 나왔습니다.' : `같은 정도로 나온 주제: ${a.same.join(', ')}.`;
     tie = ` ${which} 화면 순서상 앞의 주제를 먼저 보여 줄 뿐이니, 어느 것부터 볼지는 직접 고르세요.`;
   }
-  return `영역별로 고른 답을 가장 좋은 답과 견주어 먼저 표시한 주제는 ${CATEGORIES[a.focus]}입니다. 내 답 중 다시 살펴볼 장면: ${example.q.text} → ${state.texts[example.i]}.${tie} 이 결과는 실제 원인이나 직원의 책임을 판정한 값이 아닙니다.`;
+  return `${CATEGORIES[a.focus]} 영역에서 고른 답이 가장 안정적인 답과 가장 멀어서 먼저 보여 드립니다. 다시 살펴볼 답: ${example.q.text} → ${state.texts[example.i]}.${tie} 이 결과는 실제 원인이나 직원의 책임을 판정한 값이 아닙니다.`;
 }
 
 function copyText(text, okMessage){
@@ -289,7 +289,7 @@ function copyText(text, okMessage){
 const STEADY_CARD = { h:"답한 대로 이어지는지 확인", items:[
   "이번 주 교대 한 번을 골라, 넘긴 내용이 다음 사람의 행동으로 이어졌는지 확인하세요.",
   "'처리 중'으로 끝난 메모가 있었다면 다음 행동·담당자·확인 시각이 적혀 있는지 보세요.",
-  "7일 뒤 같은 회원이 같은 질문을 다시 한 횟수를 세어 보세요.",
+    "7일 뒤 같은 손님이 같은 요청을 다시 설명한 횟수를 세어 보세요.",
 ]};
 
 function renderIntro(){
@@ -306,7 +306,7 @@ function renderIntro(){
         ${CATEGORIES.map(c=>`<div class="cat-preview-item"><span class="dot"></span>${c}</div>`).join('')}
       </div>
       <button class="primary" onclick="startQuiz()">인수인계 점검 시작</button>
-      <p class="fineprint">답변은 서버에 저장되지 않아 디테일랩이 읽지 않습니다. 운영자가 전달 기준을 정하고 실제 교대 담당자와 확인하는 도구입니다. <a href="/#people">디테일랩을 만든 사람과 일하는 방식</a></p>
+      <p class="fineprint">답변은 서버에 저장되지 않아 디테일랩이 읽지 않습니다. 운영자가 전달 기준을 정하고 실제 교대 담당자와 확인하는 도구입니다. <a href="/#people">디테일랩의 시작과 기록 방식</a></p>
       <p class="fineprint"><a href="/feedback.html?area=industry&point=page">시작 전에 부족했던 설명 남기기</a></p>
     </div>
   `;
