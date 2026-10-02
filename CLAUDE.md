@@ -14,7 +14,7 @@
 
 디테일랩은 운영과 선택에서 반복되는 마찰을 구체적인 조건·기록·다음 행동으로 바꾸는 브랜드다. 네 카테고리는 각각 독립적으로 사용할 수 있어야 하고, 고객에게 도움이 되는 접점에서만 연결한다.
 
-1. 센터 운영 진단: `index.html`, `owner-structure-check.html` 및 공개 신청 경로. 12문 자가점검과 사람이 확인하는 18문 신청의 범위를 구분한다.
+1. 센터 운영 진단: `center.html`(소개·신청 안내), `owner-structure-check.html` 및 공개 신청 경로. 12문 자가점검과 사람이 확인하는 18문 신청의 범위를 구분한다. 홈 `index.html`은 네 영역을 고르는 입구이며 센터 진단 설명을 길게 싣지 않는다.
 2. 업종별 적용: `industry.html`, `industry-self-check.html`, `guide-self-check.html`. 작은 가게의 응대·교대·승인 조건과 7일 실행을 실제로 쓸 수 있게 한다.
 3. 직원 지침서: `employee-guide.html`, `trainer-self-check.html`. 직장 선택 기록에서 확인한 사실과 아직 물어봐야 할 조건을 분리한다.
 4. 트레이너·회원 매칭: `matching.html`, `matching-self-check.html`. 두 사람의 조건 대조를 돕되 소개·예약·성사를 보장한다고 쓰지 않는다.

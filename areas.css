@@ -1,7 +1,7 @@
 /* Brand home and product pages. */
 .brand-hero {
-  min-height: 88svh;
-  padding: 140px max(24px, calc((100vw - var(--max)) / 2)) 80px;
+  min-height: 0;
+  padding: 140px max(24px, calc((100vw - var(--max)) / 2)) 72px;
   color: white;
   background: radial-gradient(circle at 88% 8%, rgba(43,114,255,.22), transparent 34%), var(--night);
 }
@@ -392,10 +392,20 @@
   .brand-hero h1 { font-size: 2rem; }
 }
 
+/* The center page headline is long; a smaller phone size keeps the button on the first screen. */
+@media (max-width: 620px) {
+  .hero h1 { font-size: clamp(2rem, 8.6vw, 2.6rem); }
+}
+
+/* A pointer to the neighbouring tool, placed right under a primary button. */
+.offer-sub-link { display: inline-block; margin: 16px 0 0; color: #1459c4; font-weight: 800; text-underline-offset: 5px; }
+
 /* Give small text links a touch target of at least 44px on phones. */
 @media (max-width: 720px) {
   .build-record li a,
   .footer-areas a,
+  .brand-people-work a,
+  .offer-sub-link,
   .privacy-strip a { display: inline-flex; align-items: center; min-height: 44px; }
   .build-record li a { margin-top: 4px; }
 }

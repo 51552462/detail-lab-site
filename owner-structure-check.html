@@ -104,6 +104,7 @@
 
   .compare-box{ background:var(--panel); border:1px solid var(--panel-border); border-radius:12px; padding:18px; margin-bottom:28px; font-size:13.5px; color:var(--ink-dim); line-height:1.6; }
   .compare-box b{ color:var(--ink); }
+  .compare-box a{ color:var(--accent); font-weight:700; text-underline-offset:3px; }
 
   .result-actions{ display:flex; flex-direction:column; gap:10px; }
   .feedback-link{display:block;padding:10px;text-align:center;color:var(--accent);font-size:13px;font-weight:700;text-underline-offset:4px}
@@ -270,8 +271,16 @@ function selectionBasis(a){
     const which = a.same.length === CATEGORIES.length ? '모든 영역이 같은 정도로 나왔습니다.' : `같은 정도로 나온 주제: ${a.same.join(', ')}.`;
     tie = ` ${which} 화면 순서상 앞의 주제를 먼저 보여 줄 뿐이니, 실제로 먼저 다룰 일은 직접 고르세요.`;
   }
-  return `각 영역의 세 답을 가장 좋은 답과 견주어 먼저 표시한 주제는 ${CATEGORIES[a.focus]}입니다. 내 답 중 다시 살펴볼 장면: ${example.q.text} → ${state.texts[example.i]}.${tie} 이 결과는 현장의 위험도를 측정한 값이 아닙니다.`;
+  return `${CATEGORIES[a.focus]} 영역에서 고른 답이 가장 안정적인 답과 가장 멀어서 먼저 보여 드립니다. 다시 살펴볼 답: ${example.q.text} → ${state.texts[example.i]}.${tie} 이 결과는 현장의 위험도를 측정한 값이 아닙니다.`;
 }
+
+// 먼저 살펴볼 주제와 이어지는 다른 점검. 재무·정산에는 이어 볼 도구가 없어 비워 둔다.
+const NEXT_CHECKS = [
+  { href:"/industry-self-check.html", name:"대표 호출·반복 질문 12문 점검", why:"먼저 살펴볼 주제가 대표에게 돌아오는 결정이라면, 손님 앞에서 대표를 부르는 장면을 따로 점검할 수 있습니다." },
+  { href:"/guide-self-check.html", name:"교대 인수인계 12문 점검", why:"역할이 모호하면 교대 때 일이 끊기기 쉽습니다. 교대 메모가 다음 사람의 행동으로 이어지는지 따로 점검할 수 있습니다." },
+  { href:"/industry-self-check.html", name:"대표 호출·반복 질문 12문 점검", why:"기준이 문서에 없으면 직원은 매번 대표에게 묻게 됩니다. 직원이 말해도 되는 범위가 적혀 있는지 따로 점검할 수 있습니다." },
+  null,
+];
 
 function copyText(text, okMessage){
   const fallback = () => {
@@ -354,6 +363,8 @@ function renderResult(){
   const headline = a.allBest
     ? '이번 답변에서는 먼저 손볼 주제가 드러나지 않았습니다. 대신 답한 대로 실제 운영이 되는지 확인하는 카드를 드립니다.'
     : `이번 답변에서 먼저 살펴볼 주제는 <strong>${CATEGORIES[a.focus]}</strong>입니다. 답변의 우선순위를 정리한 것으로 원인이나 위험도를 확정하지 않습니다.`;
+  const next = a.allBest ? null : NEXT_CHECKS[a.focus];
+  const nextBox = next ? `<div class="compare-box"><strong>더 구체적으로 보고 싶다면</strong><br>${next.why} <a href="${next.href}">${next.name} →</a></div>` : '';
   screen.innerHTML = `
     <div class="result">
       <div class="result-band band-caution">내 답변으로 만든 이번 주 카드</div>
@@ -361,13 +372,15 @@ function renderResult(){
       <div class="manual-box"><h4>${card.h}</h4><ul>${card.items.map(item=>`<li>${item}</li>`).join('')}</ul></div>
       <details class="compare-box why-box"><summary>왜 이 주제가 나왔나요?</summary><p>${selectionBasis(a)}</p></details>
       <div class="compare-box"><strong>사람과 함께 확인할 것</strong><br>이 결과에는 센터 대표·관리자가 고른 답만 담겨 있습니다. 실제로 업무를 맡을 직원에게 가능한 범위를 확인하고, 바꿀 일은 센터에서 결정하세요. 디테일랩의 사람 검토는 아래 18문 진단을 별도로 신청한 경우에 진행합니다.</div>
+      ${nextBox}
       <div class="cat-block"><h3>내가 고른 12개 답</h3>${rows}</div>
       <div class="result-actions">
         <a class="cta-link" target="_blank" rel="noopener noreferrer" href="https://wary-crocus-59c.notion.site/3c5f6ead7401804e87d7fbb6d086bba2">무료 센터 운영 진단 신청하기</a>
+        <p class="fineprint" style="margin:0 0 6px">직원 3~10명 헬스·PT 센터 대상 · 이번 모집 3곳 무료 · 신청서는 새 창에서 열립니다.</p>
         <button class="secondary" onclick="copyResult()">이번 주 카드와 답변 복사하기</button>
         <a class="feedback-link" href="/feedback.html?area=center&point=result" target="_blank" rel="noopener noreferrer">결과가 쓸모 있었는지 의견 남기기 →</a>
         <button class="secondary" onclick="renderIntro()">처음부터 다시 하기</button>
-        <a class="home-link" href="/#diagnosis">센터 운영 진단 설명으로 돌아가기</a>
+        <a class="home-link" href="/center.html">센터 운영 진단 설명으로 돌아가기</a>
       </div>
     </div>
   `;

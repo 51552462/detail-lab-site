@@ -7,7 +7,7 @@
   <meta name="description" content="디테일랩의 네 가지 도구를 본 뒤 느낀 점과 사용을 망설인 이유를 익명으로 남겨 주세요.">
   <meta name="robots" content="noindex,follow">
   <link rel="stylesheet" href="styles.css?v=20260930-r2">
-  <link rel="stylesheet" href="areas.css?v=20261001-r1">
+  <link rel="stylesheet" href="areas.css?v=20261002-r2">
   <style>
     .response-hero{padding:132px max(24px,calc((100vw - var(--max))/2)) 68px;background:#132035;color:white}
     .response-hero .kicker{color:#8bb4ff}
@@ -37,7 +37,7 @@
     <a class="brand" href="/" aria-label="디테일랩 처음으로"><span class="brand-mark" aria-hidden="true">DL</span><span>DETAIL LAB</span></a>
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-button><span class="sr-only">메뉴 열기</span><span></span><span></span></button>
     <nav class="site-nav" id="site-nav" aria-label="디테일랩의 네 가지 영역" data-menu>
-      <a href="/#diagnosis">센터 운영 진단</a><a href="/industry.html">업종별 적용</a><a href="/employee-guide.html">직원 지침서</a><a href="/matching.html">트레이너·회원 매칭</a>
+      <a href="/center.html">센터 운영 진단</a><a href="/industry.html">업종별 적용</a><a href="/employee-guide.html">직원 지침서</a><a href="/matching.html">트레이너·회원 매칭</a>
     </nav>
   </div>
 </header>
@@ -72,7 +72,7 @@
     </aside>
   </div>
 </main>
-<footer class="site-footer"><a class="brand brand-footer" href="/"><span class="brand-mark" aria-hidden="true">DL</span><span>DETAIL LAB</span></a><p>일이 어디서 멈추고 되돌아오는지 살펴봅니다.</p><a href="mailto:detailab@naver.com">detailab@naver.com</a></footer>
+<footer class="site-footer"><a class="brand brand-footer" href="/"><span class="brand-mark" aria-hidden="true">DL</span><span>DETAIL LAB</span></a><p>센터·가게의 반복 질문, 직장 선택, 수업 조건을 확인할 질문으로 정리하는 무료 도구.</p><a href="mailto:detailab@naver.com">detailab@naver.com</a></footer>
 <script>
 const button=document.querySelector('[data-menu-button]'),menu=document.querySelector('[data-menu]');
 button.addEventListener('click',()=>{const open=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!open));menu.classList.toggle('is-open',!open);});
