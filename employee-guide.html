@@ -45,7 +45,7 @@
   .decision-sheet .button-outline{color:#1459c4;border-color:#1459c4}
   .decision-sheet .button-outline:hover{background:#eaf0fa}
   .decision-status{margin:-8px 0 0;color:#42536b;font-size:.88rem;min-height:1.2em}
-  .decision-summary{margin:0;padding:22px;background:#f1f5fb;border-left:4px solid #1459c4;color:#07101e;white-space:pre-wrap;line-height:1.7;font-size:.95rem}
+  .decision-summary{margin:0;padding:22px;background:#f1f5fb;border-left:4px solid #1459c4;color:#07101e;white-space:pre-wrap;line-height:1.7;font-size:.95rem;scroll-margin-top:100px}
   .decision-summary[hidden]{display:none}
   @media(max-width:620px){.decision-pair,.decision-names{grid-template-columns:1fr}.decision-sheet{padding:22px 18px}}
   @media print{.site-header,.subhero,.copy-cta-row,.cross-scope,footer,.decision-actions,.decision-status,.decision-fields,.offer-intro,.offer-detail,.copy-scene,.copy-why,.copy-compare,.copy-note,.copy-faq,.copy-cta,.making-note,.people-note,.action-panel,.feedback-ask,.result-feedback,.copy-use>h2,.copy-use>p,.section-head,.offer-result{display:none!important}.sub-section{padding:0}.decision-sheet{background:white;color:black;border:0;padding:0;margin:0}.decision-summary{border:0;padding:0;background:white;font-size:12pt}body{background:white;color:black}}
@@ -252,7 +252,7 @@ function buildDecisionSummary(){
   if(!used.length&&!question&&!priority){
     summaryEl.textContent='면접 전이라면 중요한 조건이나 물어볼 질문 하나를, 면접 후라면 들은 답 하나를 적어 주세요.';
     summaryEl.hidden=false;
-    summaryEl.scrollIntoView({block:'nearest',behavior:'smooth'});
+    summaryEl.scrollIntoView({block:'start',behavior:'instant'});
     return false;
   }
   const lines=['직장 선택 기록 · 직접 작성한 내용',''];
@@ -290,7 +290,7 @@ function buildDecisionSummary(){
   lines.push('첫 주: 면접에서 들은 설명과 실제 일과·정산·교육이 같은지 다시 확인하세요.');
   summaryEl.textContent=lines.join('\n');
   summaryEl.hidden=false;
-  summaryEl.scrollIntoView({block:'nearest',behavior:'smooth'});
+  summaryEl.scrollIntoView({block:'start',behavior:'instant'});
   return true;
 }
 

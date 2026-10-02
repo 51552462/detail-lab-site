@@ -1,0 +1,275 @@
+[
+  {
+    "contact": "360-center-01.webp",
+    "originals": [
+      "360-center-01.png",
+      "360-center-02.png",
+      "360-center-03.png"
+    ],
+    "viewport": 360,
+    "name": "center",
+    "sha256": "fd13b92f8bb5dec70cac1274114a1442b1ecdcc36c07430f5e0419bfb076a8f1",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "360-center-04.webp",
+    "originals": [
+      "360-center-04.png"
+    ],
+    "viewport": 360,
+    "name": "center",
+    "sha256": "560f108ad35d423b0d690beb28de87179cd99ffcef22483831416e1df20b19df",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "360-store-01.webp",
+    "originals": [
+      "360-store-01.png",
+      "360-store-02.png",
+      "360-store-03.png"
+    ],
+    "viewport": 360,
+    "name": "store",
+    "sha256": "b21a4ed2f90a64121259d9d0f99f07ece0625d9b829d041ff018aa8c3f0c9dcb",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "360-shift-01.webp",
+    "originals": [
+      "360-shift-01.png",
+      "360-shift-02.png",
+      "360-shift-03.png"
+    ],
+    "viewport": 360,
+    "name": "shift",
+    "sha256": "f8416bab12824b8e25bcb757f56a35e7929667e521c56c27576c91bfcdd209cd",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "360-trainer-01.webp",
+    "originals": [
+      "360-trainer-01.png",
+      "360-trainer-02.png",
+      "360-trainer-03.png"
+    ],
+    "viewport": 360,
+    "name": "trainer",
+    "sha256": "a18120aa4be4afbb29159decef436c9b233701001dc986456f1f8e81390032c8",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "360-employee-record-01.webp",
+    "originals": [
+      "360-employee-record-01.png",
+      "360-employee-record-02.png",
+      "360-employee-record-03.png"
+    ],
+    "viewport": 360,
+    "name": "employee-record",
+    "sha256": "524b59feeac934545c42f3e82c8f7344b5ad33aab020db90395f67c13810fc4e",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "360-matching-overlap-01.webp",
+    "originals": [
+      "360-matching-overlap-01.png",
+      "360-matching-overlap-02.png",
+      "360-matching-overlap-03.png"
+    ],
+    "viewport": 360,
+    "name": "matching-overlap",
+    "sha256": "57585f95ef6911ad808f3869ef32a733e62c337d9098ffde67455832886a82d1",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "360-matching-no-overlap-01.webp",
+    "originals": [
+      "360-matching-no-overlap-01.png",
+      "360-matching-no-overlap-02.png",
+      "360-matching-no-overlap-03.png"
+    ],
+    "viewport": 360,
+    "name": "matching-no-overlap",
+    "sha256": "7df56de0d6386f5176a59e9d845da14394b397b6a8ec4e2248ea37fdf7fc8022",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "1280-center-01.webp",
+    "originals": [
+      "1280-center-01.png",
+      "1280-center-02.png"
+    ],
+    "viewport": 1280,
+    "name": "center",
+    "sha256": "c6b2ec9221bb9ffba6e073d09efe140a20d0a029eadd1410ab7df19fa6df6db0",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "1280-center-03.webp",
+    "originals": [
+      "1280-center-03.png"
+    ],
+    "viewport": 1280,
+    "name": "center",
+    "sha256": "bf131bd16255695060364ef5baeee0c84146b704d88d68f7f627174006a8f5de",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "1280-store-01.webp",
+    "originals": [
+      "1280-store-01.png",
+      "1280-store-02.png"
+    ],
+    "viewport": 1280,
+    "name": "store",
+    "sha256": "34a4d2da8e6fb0ab647e34dce309e340f3d90dfedf506dc23167682ceedff3fa",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "1280-store-03.webp",
+    "originals": [
+      "1280-store-03.png"
+    ],
+    "viewport": 1280,
+    "name": "store",
+    "sha256": "ac49723f30d01724690498dfbfe8df05ee317db4131d3fd7782596ee1c850734",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "1280-shift-01.webp",
+    "originals": [
+      "1280-shift-01.png",
+      "1280-shift-02.png"
+    ],
+    "viewport": 1280,
+    "name": "shift",
+    "sha256": "ae31c03651ac6b39d826982e9e64ff1c42f5c8000441f350e2a31869efedf42d",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "1280-shift-03.webp",
+    "originals": [
+      "1280-shift-03.png"
+    ],
+    "viewport": 1280,
+    "name": "shift",
+    "sha256": "922a9592e1814bc168e67adc47e80acfee76d780850d69dffac41130e8828572",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "1280-trainer-01.webp",
+    "originals": [
+      "1280-trainer-01.png",
+      "1280-trainer-02.png"
+    ],
+    "viewport": 1280,
+    "name": "trainer",
+    "sha256": "1a15edba7cfa3557156c3327f645c21d14233a026a21032351fdb4678e91d0ae",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "1280-employee-record-01.webp",
+    "originals": [
+      "1280-employee-record-01.png",
+      "1280-employee-record-02.png"
+    ],
+    "viewport": 1280,
+    "name": "employee-record",
+    "sha256": "48d92f4c2a8f4f387f2276c35355382897fa3d1b8b16d29fcb71df39b7904a2c",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "1280-employee-record-03.webp",
+    "originals": [
+      "1280-employee-record-03.png"
+    ],
+    "viewport": 1280,
+    "name": "employee-record",
+    "sha256": "8b6b812174bc2700d765dbff2a9af2d4dd72197c9d7f3431653ee1cfb35693c0",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "1280-matching-overlap-01.webp",
+    "originals": [
+      "1280-matching-overlap-01.png",
+      "1280-matching-overlap-02.png"
+    ],
+    "viewport": 1280,
+    "name": "matching-overlap",
+    "sha256": "27f9804e58842b4d77c0cc80cd6663735ea1ccab78cc7de40ecbe163f0725aa3",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "1280-matching-overlap-03.webp",
+    "originals": [
+      "1280-matching-overlap-03.png"
+    ],
+    "viewport": 1280,
+    "name": "matching-overlap",
+    "sha256": "657679668b8d1a3bddbf160caf66111bfea668296b97815f5a82fe49b06d1635",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "1280-matching-no-overlap-01.webp",
+    "originals": [
+      "1280-matching-no-overlap-01.png",
+      "1280-matching-no-overlap-02.png"
+    ],
+    "viewport": 1280,
+    "name": "matching-no-overlap",
+    "sha256": "0ffbaeead313003259926e99587fcad5e400e59fb003b8ea7729a882d299e77c",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  },
+  {
+    "contact": "1280-matching-no-overlap-03.webp",
+    "originals": [
+      "1280-matching-no-overlap-03.png"
+    ],
+    "viewport": 1280,
+    "name": "matching-no-overlap",
+    "sha256": "70f9ccb11141a03cf9d44965684039da6b30d481017a3f948c0b3d4273380e08",
+    "openedBy": "ChatGPT independent visual review",
+    "reviewDate": "2026-10-02",
+    "coverage": "all listed result tiles opened and read"
+  }
+]
