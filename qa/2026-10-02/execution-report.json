@@ -1,0 +1,405 @@
+{
+  "sha": "ff0a239711440e4463e149d1b2ae073a8f0511f4",
+  "startedAt": "2026-10-02T04:39:00.286Z",
+  "environment": "local static preview; synthetic inputs; no form submissions",
+  "visualReview": "not performed by this script",
+  "sources": {
+    "owner-structure-check.html": "a02c56e9a672f31b5148f32cfe05d74e9676ab5a1725aca9b621f8a8c86d5766",
+    "industry-self-check.html": "7eade8f3b836ae2c14a833c3e2e06b57d1489272bea25ec3d3b924cacdba2919",
+    "guide-self-check.html": "e17c8ad186f0cf5457c35256d0accc9a3f551ba278c2a473f835223a90bb2955",
+    "trainer-self-check.html": "8fcfa53a700cd0a4f3d95f5e9dfde4ed7b8174c433ea60c8c071223c95537498",
+    "employee-guide.html": "77d3dc485f2952d37586549fb2deee1d5844207a4b3c043ed7aaebd0de39dc17",
+    "matching-self-check.html": "2f0f7a90036d0a9e29525d00876556887dc9d3c8061de44ba74f771fba741583"
+  },
+  "checks": [
+    {
+      "viewport": 360,
+      "tool": "center",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "center",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "store",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "store",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "shift",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "shift",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "trainer",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "trainer",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "employee-record",
+      "branch": "empty / before interview / A / A+B / B off",
+      "details": "heard versus document-confirmed; exact displayed-result/clipboard equality; B removed from result and copy"
+    },
+    {
+      "viewport": 360,
+      "tool": "matching",
+      "branch": "shared Wednesday/evening",
+      "details": "7 questions for each role; empty multi-answer rejection; previous selections; both consents block; display and clipboard agree"
+    },
+    {
+      "viewport": 360,
+      "tool": "matching",
+      "branch": "no shared day/time",
+      "details": "7 questions for each role; empty multi-answer rejection; previous selections; both consents block; display and clipboard agree"
+    },
+    {
+      "viewport": 1280,
+      "tool": "center",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "center",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "store",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "store",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "shift",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "shift",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "trainer",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "trainer",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "employee-record",
+      "branch": "empty / before interview / A / A+B / B off",
+      "details": "heard versus document-confirmed; exact displayed-result/clipboard equality; B removed from result and copy"
+    },
+    {
+      "viewport": 1280,
+      "tool": "matching",
+      "branch": "shared Wednesday/evening",
+      "details": "7 questions for each role; empty multi-answer rejection; previous selections; both consents block; display and clipboard agree"
+    },
+    {
+      "viewport": 1280,
+      "tool": "matching",
+      "branch": "no shared day/time",
+      "details": "7 questions for each role; empty multi-answer rejection; previous selections; both consents block; display and clipboard agree"
+    }
+  ],
+  "screenshots": [
+    {
+      "viewport": 360,
+      "name": "center",
+      "filename": "360-center-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "center",
+      "filename": "360-center-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "center",
+      "filename": "360-center-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "center",
+      "filename": "360-center-04.png",
+      "scrollY": 1472
+    },
+    {
+      "viewport": 360,
+      "name": "store",
+      "filename": "360-store-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "store",
+      "filename": "360-store-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "store",
+      "filename": "360-store-03.png",
+      "scrollY": 1311
+    },
+    {
+      "viewport": 360,
+      "name": "shift",
+      "filename": "360-shift-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "shift",
+      "filename": "360-shift-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "shift",
+      "filename": "360-shift-03.png",
+      "scrollY": 1231
+    },
+    {
+      "viewport": 360,
+      "name": "trainer",
+      "filename": "360-trainer-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "trainer",
+      "filename": "360-trainer-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "trainer",
+      "filename": "360-trainer-03.png",
+      "scrollY": 1009
+    },
+    {
+      "viewport": 360,
+      "name": "employee-record",
+      "filename": "360-employee-record-01.png",
+      "scrollY": 8691
+    },
+    {
+      "viewport": 360,
+      "name": "employee-record",
+      "filename": "360-employee-record-02.png",
+      "scrollY": 9351
+    },
+    {
+      "viewport": 360,
+      "name": "employee-record",
+      "filename": "360-employee-record-03.png",
+      "scrollY": 10011
+    },
+    {
+      "viewport": 360,
+      "name": "matching-overlap",
+      "filename": "360-matching-overlap-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "matching-overlap",
+      "filename": "360-matching-overlap-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "matching-overlap",
+      "filename": "360-matching-overlap-03.png",
+      "scrollY": 1272
+    },
+    {
+      "viewport": 360,
+      "name": "matching-no-overlap",
+      "filename": "360-matching-no-overlap-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "matching-no-overlap",
+      "filename": "360-matching-no-overlap-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "matching-no-overlap",
+      "filename": "360-matching-no-overlap-03.png",
+      "scrollY": 1229
+    },
+    {
+      "viewport": 1280,
+      "name": "center",
+      "filename": "1280-center-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "center",
+      "filename": "1280-center-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "center",
+      "filename": "1280-center-03.png",
+      "scrollY": 1026
+    },
+    {
+      "viewport": 1280,
+      "name": "store",
+      "filename": "1280-store-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "store",
+      "filename": "1280-store-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "store",
+      "filename": "1280-store-03.png",
+      "scrollY": 943
+    },
+    {
+      "viewport": 1280,
+      "name": "shift",
+      "filename": "1280-shift-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "shift",
+      "filename": "1280-shift-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "shift",
+      "filename": "1280-shift-03.png",
+      "scrollY": 943
+    },
+    {
+      "viewport": 1280,
+      "name": "trainer",
+      "filename": "1280-trainer-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "trainer",
+      "filename": "1280-trainer-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "employee-record",
+      "filename": "1280-employee-record-01.png",
+      "scrollY": 5347
+    },
+    {
+      "viewport": 1280,
+      "name": "employee-record",
+      "filename": "1280-employee-record-02.png",
+      "scrollY": 6007
+    },
+    {
+      "viewport": 1280,
+      "name": "employee-record",
+      "filename": "1280-employee-record-03.png",
+      "scrollY": 6667
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-overlap",
+      "filename": "1280-matching-overlap-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-overlap",
+      "filename": "1280-matching-overlap-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-overlap",
+      "filename": "1280-matching-overlap-03.png",
+      "scrollY": 1156
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-no-overlap",
+      "filename": "1280-matching-no-overlap-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-no-overlap",
+      "filename": "1280-matching-no-overlap-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-no-overlap",
+      "filename": "1280-matching-no-overlap-03.png",
+      "scrollY": 1156
+    }
+  ],
+  "errors": [],
+  "status": "passed",
+  "finishedAt": "2026-10-02T04:39:31.512Z"
+}
