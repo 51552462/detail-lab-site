@@ -101,6 +101,12 @@
   .manual-box{ background:var(--panel); border:1px solid var(--panel-border); border-left:3px solid var(--accent); border-radius:10px; padding:18px; margin-bottom:28px; }
   .manual-box h4{ margin:0 0 10px; font-size:14px; color:var(--ink); }
   .manual-box ul{ margin:0; padding-left:18px; font-size:13.5px; line-height:1.8; color:var(--ink-dim); }
+  .record-box{ background:var(--panel); border:1px solid var(--panel-border); border-radius:12px; padding:18px; margin-bottom:28px; }
+  .record-box h3{ margin:0 0 6px; font-size:15px; }
+  .record-box p{ margin:0 0 14px; color:var(--ink-dim); font-size:13px; line-height:1.6; }
+  .record-box label{ display:block; margin:0 0 13px; color:var(--ink); font-size:13px; font-weight:700; }
+  .record-box input{ display:block; width:100%; box-sizing:border-box; margin-top:6px; padding:12px; border:1px solid var(--panel-border); border-radius:9px; background:var(--bg); color:var(--ink); font:inherit; }
+  .record-box input:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
   .compare-box{ background:var(--panel); border:1px solid var(--panel-border); border-radius:12px; padding:18px; margin-bottom:28px; font-size:13.5px; color:var(--ink-dim); line-height:1.6; }
   .compare-box b{ color:var(--ink); }
@@ -368,6 +374,13 @@ function renderResult(){
         <h4>7일 동안 먼저 볼 것 · ${card.h}</h4>
         <ul>${card.items.map(item=>`<li>${item}</li>`).join('')}</ul>
       </div>
+      <div class="record-box">
+        <h3>우리 가게의 한 건을 적어 두세요</h3>
+        <p>선택 답만으로 실제 요청은 알 수 없습니다. 최근 한 건과 다음 행동을 적으면 아래 복사본에 함께 들어갑니다. 입력은 이 브라우저에만 있고 새로고침하면 사라집니다.</p>
+        <label>다시 돌아온 요청 한 건<input id="record-case" maxlength="120" placeholder="예: 예약 변경 문의가 교대 뒤 다시 들어옴" autocomplete="off"></label>
+        <label>누가 무엇을 언제까지 확인하나요?<input id="record-action" maxlength="120" placeholder="예: 다음 근무자가 변경 가능 시간 확인 후 손님에게 회신" autocomplete="off"></label>
+        <label>7일 뒤 무엇을 다시 볼까요?<input id="record-review" maxlength="120" placeholder="예: 같은 문의가 다시 대표에게 온 횟수" autocomplete="off"></label>
+      </div>
       <details class="compare-box why-box"><summary>왜 이 주제가 나왔나요?</summary><p>${selectionBasis(a)}</p></details>
       <div class="compare-box"><strong>함께 확인할 사람</strong><br>운영자가 답한 내용만으로 직원이 실제로 어디까지 안내할 수 있는지는 알 수 없습니다. 정한 문장을 직원과 확인하고, 승인할 예외와 책임자를 먼저 정하세요.</div>
       ${nextBox}
@@ -386,7 +399,8 @@ function renderResult(){
 function copyResult(){
   const a = analyze();
   const card = a.allBest ? STEADY_CARD : MANUALS[a.focus];
-  const lines = ['[디테일랩 · 우리 가게 인수인계 점검]','',`주제 선정 근거: ${selectionBasis(a)}`,'확인할 사람: 운영자가 승인할 예외를 정하고 교대 직원과 실제 사용할 문장을 확인하세요.','',`7일 동안 먼저 볼 것: ${card.h}`,...card.items.map((item,i)=>`${i+1}. ${item}`),'','7일 뒤 실제 사용 의견: https://detail-lab-site.onrender.com/feedback.html?area=industry&point=later','','내가 고른 답', ...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
+  const recorded = id => document.getElementById(id).value.trim() || '아직 적지 않음';
+  const lines = ['[디테일랩 · 우리 가게 인수인계 점검]','',`주제 선정 근거: ${selectionBasis(a)}`,'확인할 사람: 운영자가 승인할 예외를 정하고 교대 직원과 실제 사용할 문장을 확인하세요.','',`7일 동안 먼저 볼 것: ${card.h}`,...card.items.map((item,i)=>`${i+1}. ${item}`),'','우리 가게에서 직접 적은 한 건',`다시 돌아온 요청: ${recorded('record-case')}`,`누가 무엇을 언제까지: ${recorded('record-action')}`,`7일 뒤 확인할 것: ${recorded('record-review')}`,'','7일 뒤 실제 사용 의견: https://detail-lab-site.onrender.com/feedback.html?area=industry&point=later','','내가 고른 답', ...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
   copyText(lines.join('\n'), '결과가 복사되었습니다');
 }
 

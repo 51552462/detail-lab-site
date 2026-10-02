@@ -70,7 +70,7 @@ async function landingPages(page, origin, viewport) {
     ['index.html', '반복되는 일과', '#doors', '.category-grid'],
     ['center.html', '대표에게 묻는 일이', '/owner-structure-check.html', '.path-grid'],
     ['industry.html', '사장님께 확인할게요', '/industry-self-check.html', '.example-output'],
-    ['employee-guide.html', '급여는 이 정도예요', '#worksheet', '.example-output'],
+    ['employee-guide.html', '급여는 들었는데', '#worksheet', '.example-output'],
     ['matching.html', '저녁 가능', '/matching-self-check.html?role=member', '.example-output']
   ]) {
     await page.goto(`${origin}/${file}`);
@@ -111,7 +111,15 @@ async function quiz(page, origin, viewport, filename, tool) {
     assert.equal(await page.locator('.option-btn[aria-pressed="true"]').innerText(), changedText);
     for (let i = 0; i < 12; i++) await page.locator('.option-btn').nth(choice).click();
     assert.equal(await page.locator('.cat-item').count(), 12);
+    if (choice === 3 && ['store', 'shift'].includes(tool)) {
+      await page.locator('#record-case').fill('가상 테스트: 교대 뒤 예약 문의 재확인');
+      await page.locator('#record-action').fill('다음 담당자가 오전 11시까지 답변');
+      await page.locator('#record-review').fill('7일 뒤 같은 문의가 돌아온 횟수');
+    }
     const copy = await copied(page, page.locator('button[onclick="copyResult()"]'), `${viewport}-${tool}-${choice}-copy.txt`);
+    if (choice === 3 && ['store', 'shift'].includes(tool)) {
+      for (const entry of ['가상 테스트: 교대 뒤 예약 문의 재확인', '다음 담당자가 오전 11시까지 답변', '7일 뒤 같은 문의가 돌아온 횟수']) assert.ok(copy.includes(entry), `${tool} recorded case must survive copying`);
+    }
     for (const text of await page.locator('.cat-item .name, .cat-item p').allTextContents()) assert.ok(copy.includes(text.trim()));
     outputs.push(copy);
     await noOverflow(page);
