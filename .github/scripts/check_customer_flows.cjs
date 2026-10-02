@@ -16,8 +16,9 @@ const out = path.resolve(process.argv[2] || path.join(root, 'customer-flow-artif
 const report = { sha: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root }).toString().trim(),
   startedAt: new Date().toISOString(), environment: 'local static preview; synthetic inputs; no form submissions',
   visualReview: 'not performed by this script', sources: {}, checks: [], screenshots: [], errors: [] };
-const pages = ['owner-structure-check.html', 'industry-self-check.html', 'guide-self-check.html',
-  'trainer-self-check.html', 'employee-guide.html', 'matching-self-check.html'];
+const pages = ['index.html', 'center.html', 'industry.html', 'employee-guide.html', 'matching.html',
+  'owner-structure-check.html', 'industry-self-check.html', 'guide-self-check.html',
+  'trainer-self-check.html', 'matching-self-check.html', 'areas.css'];
 const record = (viewport, tool, branch, details) => {
   const item = { viewport, tool, branch, details };
   report.checks.push(item); console.log(JSON.stringify(item));
@@ -62,6 +63,29 @@ async function screenshotResult(page, viewport, name, selector = '#screen .resul
 
 async function noOverflow(page) {
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'horizontal overflow');
+}
+
+async function landingPages(page, origin, viewport) {
+  for (const [file, heading, primary, detail] of [
+    ['index.html', '말로만 오가던', '#doors', '.category-grid'],
+    ['center.html', '대표님께 물어볼게요', '/owner-structure-check.html', '.path-grid'],
+    ['industry.html', '사장님께 확인할게요', '/industry-self-check.html', '.example-output'],
+    ['employee-guide.html', '급여는 이 정도예요', '#worksheet', '.example-output'],
+    ['matching.html', '저녁 가능', '/matching-self-check.html?role=member', '.example-output']
+  ]) {
+    await page.goto(`${origin}/${file}`);
+    assert.ok((await page.locator('h1').innerText()).includes(heading));
+    assert.ok(await page.locator(`a[href="${primary}"]`).first().isVisible());
+    await noOverflow(page);
+    const name = file.replace('.html', '');
+    const first = `${viewport}-page-${name}-hero.png`;
+    await page.screenshot({ path: path.join(out, first) });
+    report.screenshots.push({ viewport, name: `page-${name}-hero`, filename: first, scrollY: 0 });
+    const section = `${viewport}-page-${name}-detail.png`;
+    await page.locator(detail).screenshot({ path: path.join(out, section) });
+    report.screenshots.push({ viewport, name: `page-${name}-detail`, filename: section, selector: detail });
+    record(viewport, name, 'entry page', 'heading, primary action, horizontal layout and visible detail screenshot');
+  }
 }
 
 async function quiz(page, origin, viewport, filename, tool) {
@@ -214,6 +238,7 @@ async function matching(page, origin, viewport) {
     const page = await context.newPage();
     page.on('pageerror', e => report.errors.push({ viewport: width, url: page.url(), message: e.message }));
     try {
+      await landingPages(page, origin, width);
       for (const [filename, tool] of [['owner-structure-check.html', 'center'], ['industry-self-check.html', 'store'], ['guide-self-check.html', 'shift'], ['trainer-self-check.html', 'trainer']]) await quiz(page, origin, width, filename, tool);
       await employee(page, origin, width);
       await matching(page, origin, width);
