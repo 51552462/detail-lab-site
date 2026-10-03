@@ -39,6 +39,8 @@ async function copied(page, button, filename) {
 
 async function screenshotResult(page, viewport, name, selector = '#screen .result') {
   await page.evaluate(() => document.fonts.ready);
+  await page.waitForFunction(() => !document.querySelector('#toast.show'));
+  await page.waitForTimeout(350);
   const target = page.locator(selector);
   const box = await target.boundingBox();
   assert.ok(box, `visible result: ${name}`);
@@ -84,6 +86,13 @@ async function landingPages(page, origin, viewport) {
     assert.ok(await action.isVisible());
     assert.ok((await action.boundingBox()).height >= 44, `primary action must be fully readable and tappable: ${file}`);
     await noOverflow(page);
+    if (file === 'index.html') {
+      assert.equal(await page.locator('#privacy-detail dt').count(), 5, 'home must say who answers, reads and decides for each tool');
+      assert.equal(await page.locator('#people .offer-steps li').count(), 4);
+      const people = `${viewport}-page-index-people.png`;
+      await page.locator('#people').screenshot({ path: path.join(out, people) });
+      report.screenshots.push({ viewport, name: 'page-index-people', filename: people, selector: '#people' });
+    }
     const name = file.replace('.html', '');
     const first = `${viewport}-page-${name}-hero.png`;
     await page.screenshot({ path: path.join(out, first) });
@@ -145,6 +154,8 @@ async function employee(page, origin, viewport) {
   await page.locator('#decision-build').click();
   const heard = await page.locator('#decision-summary').innerText();
   assert.match(heard, /검증용 A 일정: 월·수 근무 \[들은 말\]/);
+  assert.match(heard, /A·검증용 A 들은 말만: “검증용 A 일정: 월·수 근무”라고 들었는데, 문서나 메시지로 확인할 수 있을까요\?/, 'heard-only condition must ask for a document, not repeat the open question');
+  assert.match(heard, /급여 산정·정산 시점 \(A·검증용 A 빈칸\): 급여는 어떤 기준으로 계산하고 언제 정산하나요\?/, 'blank condition must keep the open question');
   await copied(page, page.locator('#decision-copy'), `${viewport}-employee-a-copy.txt`);
   await page.locator('input[data-verify="A"][data-topic="0"]').check();
   await page.locator('#show-b').check();
@@ -154,6 +165,8 @@ async function employee(page, origin, viewport) {
   const both = await copied(page, page.locator('#decision-copy'), `${viewport}-employee-ab-copy.txt`);
   assert.match(both, /검증용 A 일정: 월·수 근무 \[문서·메시지로 확인\]/);
   assert.match(both, /검증용 B 일정: 화·목 근무 \[들은 말\]/);
+  assert.match(both, /B·검증용 B 들은 말만: “검증용 B 일정: 화·목 근무”라고 들었는데, 문서나 메시지로 확인할 수 있을까요\?/);
+  assert.ok(!both.includes('A·검증용 A 들은 말만'), 'a document-confirmed condition must not be asked again');
   assert.equal(both, await page.locator('#decision-summary').innerText(), 'employee clipboard equals displayed result');
   await page.waitForFunction(() => {
     const result = document.querySelector('#decision-summary').getBoundingClientRect();
@@ -169,7 +182,7 @@ async function employee(page, origin, viewport) {
   record(viewport, 'employee-record', 'empty / before interview / A / A+B / B off', 'heard versus document-confirmed; exact displayed-result/clipboard equality; B removed from result and copy');
 }
 
-async function roleQuestions(page, role, day, time) {
+async function roleQuestions(page, role, day, time, pick = {}) {
   const questions = role === 'member' ? ['지금 목표', '가능한 요일', '가능한 시간대', '주당 몇 회', '설명은', '피드백은', '대면으로']
     : ['가능한 요일', '가능한 시간대', '한 회원', '수업 방식', '피드백 빈도', '맡기 어려운', '대면 가능'];
   for (let i = 0; i < 7; i++) {
@@ -186,18 +199,40 @@ async function roleQuestions(page, role, day, time) {
         await page.getByRole('button', { name: '다음', exact: true }).click();
       }
     } else {
-      const chosen = await page.locator('.option-btn').first().innerText();
-      await page.locator('.option-btn').first().click();
-      if (i < 6) {
-        await page.getByRole('button', { name: '← 이전 질문', exact: true }).click();
-        assert.equal(await page.locator('.option-btn[aria-pressed="true"]').innerText(), chosen);
-        await page.locator('.option-btn').nth(1).click();
-        await page.getByRole('button', { name: '← 이전 질문', exact: true }).click();
-        assert.equal(await page.locator('.option-btn[aria-pressed="true"]').count(), 1);
-        await page.locator('.option-btn').first().click();
-      }
+      const options = page.locator('.option-btn');
+      const picked = pick[questions[i]] ?? 0;
+      if (i === 6) { await options.nth(picked).click(); continue; }
+      const chosen = await options.first().innerText();
+      await options.first().click();
+      await page.getByRole('button', { name: '← 이전 질문', exact: true }).click();
+      assert.equal(await page.locator('.option-btn[aria-pressed="true"]').innerText(), chosen);
+      await options.nth(1).click();
+      await page.getByRole('button', { name: '← 이전 질문', exact: true }).click();
+      assert.equal(await page.locator('.option-btn[aria-pressed="true"]').count(), 1);
+      await options.nth(picked).click();
     }
   }
+}
+
+async function matchingConflict(page, origin, viewport) {
+  // Member wants 3+ lessons a week, trainer offers 2; both leave the in-person period undecided.
+  await page.goto(`${origin}/matching-self-check.html`);
+  await page.getByRole('button', { name: '회원용 시작', exact: true }).click();
+  await page.getByRole('button', { name: '시작', exact: true }).click();
+  await roleQuestions(page, 'member', '수', '저녁', { '주당 몇 회': 2, '대면으로': 3 });
+  await page.locator('#pair-consent').check();
+  await page.locator('button[onclick="acceptPair()"]').click();
+  await page.getByRole('button', { name: '트레이너 질문 시작', exact: true }).click();
+  await page.getByRole('button', { name: '시작', exact: true }).click();
+  await roleQuestions(page, 'trainer', '수', '저녁', { '한 회원': 1, '대면 가능': 3 });
+  await page.locator('#pair-consent').check();
+  await page.locator('button[onclick="acceptPair()"]').click();
+  const result = await page.locator('#screen').innerText();
+  const copy = await copied(page, page.getByRole('button', { name: '대조 결과 복사하기', exact: true }), `${viewport}-matching-pair-conflict-copy.txt`);
+  for (const line of ['회원이 원하는 횟수가 트레이너 가능 횟수보다 많음 · 조율 필요', '기간 확인 필요', '회원이 원하는 횟수는 3회 이상, 트레이너가 가능한 횟수는 2회입니다. 횟수를 어떻게 맞출까요?', '대면 기간이 미정인 쪽은 언제쯤 정할 수 있나요?']) assert.ok(result.includes(line) && copy.includes(line), `conflict line must match the result: ${line}`);
+  await noOverflow(page);
+  await screenshotResult(page, viewport, 'matching-conflict');
+  record(viewport, 'matching', 'matching-frequency-conflict', 'member 3+ vs trainer 2 per week and undecided period: warning, tailored questions, display and clipboard agree');
 }
 
 async function matching(page, origin, viewport) {
@@ -227,6 +262,12 @@ async function matching(page, origin, viewport) {
       : overlap === 'day-only' ? '겹치는 요일은 수요일이지만 시간대는 겹치지 않습니다.'
       : '겹치는 시간대는 저녁이지만 요일은 겹치지 않습니다.';
     assert.ok(result.includes(expected) && copy.includes(expected));
+    const schedule = overlap === true ? '겹치는 요일(수요일)과 시간대(저녁) 안에서, 트레이너의 예약표상 실제로 비어 있는 수업 시간은 언제인가요?'
+      : overlap === false ? '겹치는 요일과 시간대가 없습니다. 어느 쪽이 요일이나 시간대를 넓힐 수 있나요?'
+      : overlap === 'day-only' ? '겹치는 요일은 수요일뿐이고 시간대가 다릅니다. 그 요일에 서로 맞출 수 있는 시간대가 있나요?'
+      : '겹치는 시간대는 저녁뿐이고 요일이 다릅니다. 요일을 하나 더 넓힐 수 있나요?';
+    for (const line of [`① ${schedule}`, '② 주당 횟수(둘 다 1회)와 대면 기간(둘 다 1개월)이 서로 가능한가요?', '④ 설명 방식(둘 다 짧고 핵심만)과 피드백 빈도(둘 다 동작마다)가 답한 대로 진행되는지 첫 수업에서 확인해 볼까요?', '③ 수업 장소·비용·변경·취소 기준은 무엇인가요?', '첫 수업 뒤']) assert.ok(result.includes(line) && copy.includes(line), `first-conversation line must match the result: ${line}`);
+    assert.ok(copy.includes('수업 예약을 확정하지 않습니다'), 'copy must not imply a confirmed booking');
     assert.equal(await page.locator('.pair-row').count(), 6);
     for (const value of await page.locator('.pair-row span, .pair-row em').allTextContents()) assert.ok(copy.includes(value.trim()));
     await noOverflow(page);
@@ -261,6 +302,7 @@ async function matching(page, origin, viewport) {
       for (const [filename, tool] of [['owner-structure-check.html', 'center'], ['industry-self-check.html', 'store'], ['guide-self-check.html', 'shift'], ['trainer-self-check.html', 'trainer']]) await quiz(page, origin, width, filename, tool);
       await employee(page, origin, width);
       await matching(page, origin, width);
+      await matchingConflict(page, origin, width);
     } finally { await context.tracing.stop({ path: path.join(out, `${width}-trace.zip`) }); await context.close(); }
   }
   assert.equal(report.errors.length, 0, 'browser JS errors');
