@@ -283,7 +283,7 @@ function selectionBasis(a){
     tie = `${which} 화면 순서상 앞의 ${CATEGORIES[a.focus]} 영역을 먼저 보여 줄 뿐이니, 어느 업무부터 볼지는 직접 고르세요. `;
   }
   const lead = tie || `${CATEGORIES[a.focus]} 영역에서 고른 답이 가장 안정적인 답과 가장 멀어서 먼저 보여 드립니다. `;
-  return `${lead}다시 살펴볼 답: ${example.q.text} → ${state.texts[example.i]}.${tie} 이 결과는 실제 원인이나 위험도를 판정한 값이 아닙니다.`;
+  return `${lead}다시 살펴볼 답: ${example.q.text} → ${state.texts[example.i]}. 이 결과는 실제 원인이나 위험도를 판정한 값이 아닙니다.`;
 }
 
 function copyText(text, okMessage){
