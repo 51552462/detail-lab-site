@@ -101,6 +101,7 @@
   .manual-box{ background:var(--panel); border:1px solid var(--panel-border); border-left:3px solid var(--accent); border-radius:10px; padding:18px; margin-bottom:28px; }
   .manual-box h4{ margin:0 0 10px; font-size:14px; color:var(--ink); }
   .manual-box ul{ margin:0; padding-left:18px; font-size:13.5px; line-height:1.8; color:var(--ink-dim); }
+  .manual-box .after-seven{ margin:12px 0 0; font-size:13px; line-height:1.7; color:var(--ink-dim); }
   .record-box{ background:var(--panel); border:1px solid var(--panel-border); border-radius:12px; padding:18px; margin-bottom:28px; }
   .record-box h3{ margin:0 0 6px; font-size:15px; }
   .record-box p{ margin:0 0 14px; color:var(--ink-dim); font-size:13px; line-height:1.6; }
@@ -299,6 +300,8 @@ const STEADY_CARD = { h:"답한 대로 이어지는지 확인", items:[
     "7일 뒤 같은 손님이 같은 요청을 다시 설명한 횟수를 세어 보세요.",
 ]};
 
+const AFTER_SEVEN = "7일 뒤 같은 건을 다시 물은 횟수가 줄었다면 같은 방식을 한 주 더 써 보세요. 그대로이거나 늘었다면 남긴 메모를 다음 근무자가 실제로 읽고 따랐는지부터 확인하세요. 줄었더라도 이 카드 덕분이라고 단정하지는 마세요.";
+
 function renderIntro(){
   screen.innerHTML = `
     <div class="intro">
@@ -361,7 +364,7 @@ function renderResult(){
     <div class="result">
       <div class="result-band band-caution">내 답변으로 만든 7일 확인 카드</div>
       <p class="result-headline">${headline}</p>
-      <div class="manual-box"><h4>7일 동안 해볼 일 · ${card.h}</h4><ul>${card.items.map(item=>`<li>${item}</li>`).join('')}</ul></div>
+      <div class="manual-box"><h4>7일 동안 해볼 일 · ${card.h}</h4><ul>${card.items.map(item=>`<li>${item}</li>`).join('')}</ul><p class="after-seven">${AFTER_SEVEN}</p></div>
       <div class="record-box">
         <h3>다음 교대에 넘길 한 건</h3>
         <p>선택 답만으로 실제 메모는 알 수 없습니다. 최근 한 건을 적으면 아래 복사본에 함께 들어갑니다. 입력은 이 브라우저에만 있고 새로고침하면 사라집니다.</p>
@@ -387,7 +390,7 @@ function copyResult(){
   const a = analyze();
   const card = a.allBest ? STEADY_CARD : MANUALS[a.focus];
   const recorded = id => document.getElementById(id).value.trim() || '아직 적지 않음';
-  const lines = ['[디테일랩 · 인수인계 확인]','',`7일 동안 해볼 일: ${card.h}`,'확인할 사람: 운영자가 담당자·완료 기준을 정하고 교대 직원과 함께 써 보세요.',...card.items.map((item,i)=>`${i+1}. ${item}`),'',`주제 선정 근거: ${selectionBasis(a)}`,'','다음 교대에 직접 적은 한 건',`처리 중인 요청: ${recorded('record-case')}`,`다음 담당자와 시점: ${recorded('record-action')}`,`7일 뒤 확인할 것: ${recorded('record-review')}`,'','7일 뒤 실제 사용 의견: https://detail-lab-site.onrender.com/feedback.html?area=industry&point=later','',...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
+  const lines = ['[디테일랩 · 인수인계 확인]','',`7일 동안 해볼 일: ${card.h}`,'확인할 사람: 운영자가 담당자·완료 기준을 정하고 교대 직원과 함께 써 보세요.',...card.items.map((item,i)=>`${i+1}. ${item}`),AFTER_SEVEN,'',`주제 선정 근거: ${selectionBasis(a)}`,'','다음 교대에 직접 적은 한 건',`처리 중인 요청: ${recorded('record-case')}`,`다음 담당자와 시점: ${recorded('record-action')}`,`7일 뒤 확인할 것: ${recorded('record-review')}`,'','7일 뒤 실제 사용 의견: https://detail-lab-site.onrender.com/feedback.html?area=industry&point=later','',...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
   copyText(lines.join('\n'), '결과가 복사되었습니다');
 }
 
