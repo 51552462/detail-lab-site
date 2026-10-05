@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>디테일랩에 의견 남기기 | 무엇이 이해되고 어디서 멈췄나요?</title>
+  <title>디테일랩에 의견 남기기 | 쓰면서 어려웠던 점</title>
   <meta name="description" content="디테일랩의 네 가지 도구를 본 뒤 느낀 점과 사용을 망설인 이유를 익명으로 남겨 주세요.">
   <meta name="robots" content="noindex,follow">
   <link rel="stylesheet" href="styles.css?v=20260930-r2">
@@ -37,20 +37,20 @@
     <a class="brand" href="/" aria-label="디테일랩 처음으로"><span class="brand-mark" aria-hidden="true">DL</span><span>DETAIL LAB</span></a>
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-button><span class="sr-only">메뉴 열기</span><span></span><span></span></button>
     <nav class="site-nav" id="site-nav" aria-label="디테일랩의 네 가지 영역" data-menu>
-      <a href="/center.html">센터 운영 진단</a><a href="/industry.html">업종별 적용</a><a href="/employee-guide.html">직장 선택 기록지</a><a href="/matching.html">트레이너·회원 조건 대조</a>
+      <a href="/center.html">센터 운영 진단</a><a href="/industry.html">가게 운영 점검</a><a href="/employee-guide.html">직장 선택 기록지</a><a href="/matching.html">수업 조건 맞춰보기</a>
     </nav>
   </div>
 </header>
 <main id="main">
   <section class="response-hero" aria-labelledby="response-title">
     <p class="kicker">디테일랩에 남기는 의견</p>
-    <h1 id="response-title">어디에서 이해됐고,<br>어디에서 멈췄나요?</h1>
-    <p>도구를 쓰기 전이라도 괜찮습니다. 무엇을 제공하는 곳으로 보였는지, 사용이나 신청을 결정할 때 부족했던 것을 알려 주세요.</p>
+    <h1 id="response-title">설명이 헷갈렸나요?<br>쓰다가 막혔나요?</h1>
+    <p>어떤 설명이 어려웠는지, 필요한 항목이 없었는지 알려 주세요. 도구를 끝까지 쓰지 않았어도 의견을 남길 수 있습니다.</p>
   </section>
   <div class="section response-main">
     <div class="response-card">
       <h2>익명 의견 남기기</h2>
-      <p>아래 버튼을 누르면 의견 양식이 열립니다. 페이지를 본 인상, 실제로 어디까지 했는지, 가장 걸린 점과 다음 행동을 선택해 주세요. 유료 이용을 판단할 때 필요한 정보도 선택해서 남길 수 있습니다.</p>
+      <p>아래 양식에서 본 페이지와 사용한 단계를 선택하고, 불편했던 점을 알려 주세요. 한 문장만 적어도 됩니다.</p>
       <p id="area-hint" hidden></p>
       <ol>
         <li>양식의 <strong>어떤 페이지를 봤나요?</strong>에서 방금 본 영역을 선택해 주세요.</li>
@@ -58,7 +58,7 @@
         <li>양식의 <strong>제출</strong> 버튼을 눌러야 의견이 접수됩니다.</li>
       </ol>
       <a class="button button-primary" href="https://wary-crocus-59c.notion.site/1ee8a0d648944e8abf0d7da9897ae80e" target="_blank" rel="noopener noreferrer">의견 양식 열기 →</a>
-      <p class="fine-print">양식은 Notion에서 열리며, 답변은 디테일랩의 비공개 접수함으로 전달됩니다. 로그인은 필요하지 않습니다. 여기에 남긴 응답만으로 도구 사용 완료나 진단 신청이 자동 확인되지는 않습니다.</p>
+      <p class="fine-print">로그인 없이 Notion 양식에서 남길 수 있습니다. 의견은 비공개로 접수하며, 센터 진단 신청과는 별도입니다.</p>
     </div>
     <aside class="response-aside">
       <h2>어떤 의견이 도움이 되나요?</h2>
@@ -72,13 +72,13 @@
     </aside>
   </div>
 </main>
-<footer class="site-footer"><a class="brand brand-footer" href="/"><span class="brand-mark" aria-hidden="true">DL</span><span>DETAIL LAB</span></a><p>센터·가게의 반복 질문, 직장 선택, 수업 조건을 확인할 질문으로 정리하는 무료 도구.</p><a href="mailto:detailab@naver.com">detailab@naver.com</a></footer>
+<footer class="site-footer"><a class="brand brand-footer" href="/"><span class="brand-mark" aria-hidden="true">DL</span><span>DETAIL LAB</span></a><p>일하다 막힌 순간, 결정하기 전 궁금한 조건. 필요한 질문과 기록을 디테일랩에서 정리하세요.</p><a href="mailto:detailab@naver.com">detailab@naver.com</a></footer>
 <script>
 const button=document.querySelector('[data-menu-button]'),menu=document.querySelector('[data-menu]');
 button.addEventListener('click',()=>{const open=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!open));menu.classList.toggle('is-open',!open);});
 menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{button.setAttribute('aria-expanded','false');menu.classList.remove('is-open');}));
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&button.getAttribute('aria-expanded')==='true'){button.setAttribute('aria-expanded','false');menu.classList.remove('is-open');button.focus();}});
-const areas={brand:'브랜드 전체',center:'센터 운영 진단',industry:'업종별 적용',employee:'직장 선택 기록지',matching:'트레이너·회원 조건 대조'};
+const areas={brand:'브랜드 전체',center:'센터 운영 진단',industry:'가게 운영 점검',employee:'직장 선택 기록지',matching:'수업 조건 맞춰보기'};
 const area=new URLSearchParams(location.search).get('area');
 if(Object.hasOwn(areas,area)){const hint=document.getElementById('area-hint');hint.textContent='방금 보신 영역: '+areas[area]+'. 양식에서 같은 항목을 선택해 주세요.';hint.hidden=false;}
 </script>
