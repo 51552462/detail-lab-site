@@ -185,7 +185,7 @@ async function employee(page, origin, viewport) {
 
 async function roleQuestions(page, role, day, time, pick = {}) {
   const questions = role === 'member' ? ['지금 목표', '가능한 요일', '가능한 시간대', '주당 몇 회', '설명은', '피드백은', '대면으로']
-    : ['가능한 요일', '가능한 시간대', '한 회원', '수업 방식', '피드백 빈도', '맡기 어려운', '대면 가능'];
+    : ['가능한 요일', '가능한 시간대', '한 회원', '수업 방식', '피드백은', '맡기 어려운', '대면 가능'];
   for (let i = 0; i < 7; i++) {
     assert.ok((await page.locator('.q-text').innerText()).includes(questions[i]));
     if (questions[i].includes('요일') || questions[i].includes('시간대')) {
