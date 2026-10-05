@@ -3,29 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>교대 인수인계 점검 · 디테일랩</title>
+<title>교대 인수인계 12문 점검 · 디테일랩</title>
 <meta name="description" content="교대할 때 놓치는 칸을 12문으로 확인하고 7일 확인 카드를 받으세요. 인사평가 도구가 아닙니다.">
 <meta name="robots" content="index,follow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0b111c">
 <link rel="canonical" href="https://detail-lab-site.onrender.com/guide-self-check.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="교대 인수인계 점검 · 디테일랩">
+<meta property="og:site_name" content="디테일랩">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="교대 인수인계 12문 점검 · 디테일랩">
 <meta property="og:description" content="교대할 때 놓치는 칸을 12문으로 확인하고 7일 확인 카드를 받으세요. 인사평가 도구가 아닙니다.">
 <meta property="og:image" content="https://detail-lab-site.onrender.com/og-industry.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:description" content="교대할 때 놓치는 칸을 12문으로 확인하고 7일 확인 카드를 받으세요. 인사평가 도구가 아닙니다.">
-<meta name="twitter:title" content="교대 인수인계 점검 · 디테일랩">
+<meta name="twitter:title" content="교대 인수인계 12문 점검 · 디테일랩">
 <meta name="twitter:image" content="https://detail-lab-site.onrender.com/og-industry.png">
 <style>
   :root{
-    --bg: #12141A;
-    --panel: #1A1D24;
+    --bg: #0b111c;
+    --panel: #121a29;
     --panel-border: rgba(255,255,255,0.08);
     --ink: #ECEDEF;
     --ink-dim: #9AA3AF;
     --ink-faint: #8A94A3;
-    --accent: #D9622B;
-    --accent-ink: #1C0D06;
-    --accent-soft: rgba(217,98,43,0.14);
+    --accent: #6fa3ff;
+    --accent-ink: #04122b;
+    --accent-soft: rgba(111,163,255,0.14);
     --danger: #E4572E;
     --danger-soft: rgba(228,87,46,0.16);
     --caution: #E3A008;
@@ -70,16 +74,16 @@
   .q-text{ font-size:21px; line-height:1.45; font-weight:700; margin:0 0 24px; }
   .options{ display:flex; flex-direction:column; gap:10px; }
   .option-btn{ text-align:left; background:var(--panel); border:1px solid var(--panel-border); color:var(--ink); border-radius:var(--radius); padding:16px; font-size:14.5px; line-height:1.5; cursor:pointer; transition:border-color .12s ease, background .12s ease; }
-  .option-btn:hover{ border-color: rgba(217,98,43,0.5); }
+  .option-btn:hover{ border-color: rgba(111,163,255,0.5); }
   .option-btn:active{ background: var(--accent-soft); }
-  .option-btn.on{ border-color: rgba(217,98,43,0.95); background: var(--accent-soft); }
+  .option-btn.on{ border-color: rgba(111,163,255,0.95); background: var(--accent-soft); }
   .nav-row{ display:flex; justify-content:space-between; align-items:center; margin-top:22px; }
   .back-link{ color:var(--ink-faint); font-size:13px; cursor:pointer; background:none; border:none; padding:8px 0; }
   .back-link:hover{ color:var(--ink-dim); }
 
   .result-band{ display:inline-block; font-size:12.5px; font-weight:700; padding:6px 12px; border-radius:100px; margin-bottom:14px; }
   .band-stable{ background:var(--stable-soft); color:var(--stable); }
-  .band-caution{ background:var(--caution-soft); color:var(--caution); }
+  .band-caution{ background:var(--accent-soft); color:var(--accent); }
   .band-danger{ background:var(--danger-soft); color:var(--danger); }
   .score-row{ display:flex; align-items:baseline; gap:10px; margin-bottom:6px; }
   .score-num{ font-size:52px; font-weight:800; letter-spacing:-0.02em; font-variant-numeric: tabular-nums; }
@@ -102,6 +106,7 @@
   .manual-box h4{ margin:0 0 10px; font-size:14px; color:var(--ink); }
   .manual-box ul{ margin:0; padding-left:18px; font-size:13.5px; line-height:1.8; color:var(--ink-dim); }
   .manual-box .after-seven{ margin:12px 0 0; font-size:13px; line-height:1.7; color:var(--ink-dim); }
+  .manual-box .after-seven strong{ color:var(--ink); }
   .record-box{ background:var(--panel); border:1px solid var(--panel-border); border-radius:12px; padding:18px; margin-bottom:28px; }
   .record-box h3{ margin:0 0 6px; font-size:15px; }
   .record-box p{ margin:0 0 14px; color:var(--ink-dim); font-size:13px; line-height:1.6; }
@@ -111,6 +116,7 @@
 
   .compare-box{ background:var(--panel); border:1px solid var(--panel-border); border-radius:12px; padding:18px; margin-bottom:28px; font-size:13.5px; color:var(--ink-dim); line-height:1.6; }
   .compare-box b{ color:var(--ink); }
+  .compare-box a{ color:var(--accent); font-weight:700; text-underline-offset:3px; }
 
   .result-actions{ display:flex; flex-direction:column; gap:10px; }
   .feedback-link{display:block;padding:10px;text-align:center;color:var(--accent);font-size:13px;font-weight:700;text-underline-offset:4px}
@@ -132,6 +138,16 @@
   .why-box[open] summary{ margin-bottom:8px; }
   .why-box p{ margin:0; }
   .why-box summary:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  @media print{
+    html,body{ background:#fff; color:#111; }
+    .app{ padding:0; min-height:auto; }
+    .brandline,.result-actions,.toast,.progress-wrap,.nav-row{ display:none !important; }
+    .screen{ max-width:none; }
+    .result-headline,.manual-box h4,.manual-box li,.after-seven,.after-seven strong,.compare-box,.compare-box b,.compare-box strong,.compare-box a,.insight-box,.insight-box li,.cat-block h3,.cat-item .name,.cat-item p,.record-box,.record-box h3,.record-box p,.record-box label{ color:#111 !important; }
+    .manual-box,.compare-box,.record-box,.insight-box{ background:#fff; border:1px solid #888; break-inside:avoid; }
+    .record-box input{ background:#fff; color:#111; border:1px solid #888; }
+    .result-band{ background:#fff; color:#111; border:1px solid #888; }
+  }
 </style>
 </head>
 <body>
@@ -142,7 +158,7 @@
   <noscript><p class="fineprint">이 도구는 브라우저에서 JavaScript가 켜져 있어야 작동합니다. <a href="/">디테일랩 처음으로</a></p></noscript>
 </div>
 </main>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 const CATEGORIES = ["교대 메모","다음에 할 일과 확인 시간","예외 처리 기록"];
@@ -246,6 +262,26 @@ const toastEl = document.getElementById('toast');
 
 function showToast(msg){ toastEl.textContent = msg; toastEl.classList.add('show'); setTimeout(()=>toastEl.classList.remove('show'), 2600); }
 
+// 받침 유무에 따라 '을/를'을 고른다. 영역 이름이 달라져도 조사가 어색해지지 않게 한다.
+function eulReul(word){
+  const code = word.charCodeAt(word.length - 1) - 0xAC00;
+  return code >= 0 && code < 11172 && code % 28 ? '을' : '를';
+}
+
+// 동점이면 목록 순서상 앞의 주제를 보여 줄 뿐 우선순위가 아니라고 첫 문장에서 밝힌다.
+function focusLead(a){
+  const name = CATEGORIES[a.focus];
+  if (a.same.length === CATEGORIES.length) return `답변만으로는 먼저 볼 주제를 하나로 가리기 어렵습니다. 아래 카드는 목록 순서상 첫 번째에 있는 <strong>${name}</strong> 기준입니다.`;
+  if (a.same.length > 1) return `${a.same.map(n => `<strong>${n}</strong>`).join(', ')} 주제가 같은 정도로 나왔습니다. 아래 카드는 목록 순서상 앞에 있는 <strong>${name}</strong> 기준입니다.`;
+  return `먼저 <strong>${name}</strong>${eulReul(name)} 살펴보세요.`;
+}
+
+// 카드의 '7일 뒤'가 실제로 언제인지 오늘 날짜에서 계산해 보여 준다.
+function sevenDaysLater(){
+  const d = new Date(); d.setDate(d.getDate() + 7);
+  return `${d.getMonth() + 1}월 ${d.getDate()}일 ${'일월화수목금토'[d.getDay()]}요일`;
+}
+
 // 답을 고른 뒤 화면이 바뀌어도 키보드·스크린리더 사용자가 새 화면의 처음으로 이동하도록 한다.
 let interacted = false;
 document.addEventListener('click', () => { interacted = true; }, true);
@@ -271,9 +307,9 @@ function selectionBasis(a){
   let tie = '';
   if (a.same.length > 1){
     const which = a.same.length === CATEGORIES.length ? '답변만으로는 먼저 볼 주제를 하나로 가리기 어렵습니다.' : `함께 살펴볼 주제: ${a.same.join(', ')}.`;
-    tie = `${which} 이 경우 목록에서 앞에 있는 ‘${CATEGORIES[a.focus]}’을 먼저 보여 줍니다. 어느 것부터 볼지는 직접 고르세요. `;
+    tie = `${which} 이 경우 목록에서 앞에 있는 ‘${CATEGORIES[a.focus]}’${eulReul(CATEGORIES[a.focus])} 먼저 보여 줍니다. 어느 것부터 볼지는 직접 고르세요. `;
   }
-  const lead = tie || `고른 답을 항목별로 정리해 ‘${CATEGORIES[a.focus]}’을 먼저 보여 드립니다. `;
+  const lead = tie || `고른 답을 항목별로 정리해 ‘${CATEGORIES[a.focus]}’${eulReul(CATEGORIES[a.focus])} 먼저 보여 드립니다. `;
   return `${lead}다시 볼 질문과 답: ${example.q.text} → ${state.texts[example.i]}. 이 결과는 실제 원인이나 직원의 책임을 판정한 값이 아닙니다.`;
 }
 
@@ -359,12 +395,15 @@ function renderResult(){
   const card = a.allBest ? STEADY_CARD : MANUALS[a.focus];
   const headline = a.allBest
     ? '답변에서는 바로 손볼 일이 보이지 않았습니다. 실제 교대에서도 메모한 대로 일이 이어지는지 확인해 보세요.'
-    : `먼저 <strong>${CATEGORIES[a.focus]}</strong>을 살펴보세요. 아래 카드에 다음 근무자가 알아야 할 내용을 적어 보세요.`;
+    : `${focusLead(a)} ${a.same.length > 1 ? '어느 것부터 볼지는 직접 고르고, 아래 카드에 다음 근무자가 알아야 할 내용을 적어 보세요.' : '아래 카드에 다음 근무자가 알아야 할 내용을 적어 보세요.'}`;
+  const nextBox = !a.allBest && a.focus === 2
+    ? '<div class="compare-box"><strong>더 구체적으로 보고 싶다면</strong><br>손님에게 한 약속의 기준이 흐리면 직원이 어디까지 답해도 되는지부터 정해야 합니다. 직원이 말해도 되는 범위를 따로 12문으로 점검할 수 있습니다. <a href="/industry-self-check.html">가게 운영 점검 12문 →</a></div>'
+    : '';
   screen.innerHTML = `
     <div class="result">
       <div class="result-band band-caution">내 답변으로 만든 7일 확인 카드</div>
       <p class="result-headline">${headline}</p>
-      <div class="manual-box"><h4>7일 동안 해볼 일 · ${card.h}</h4><ul>${card.items.map(item=>`<li>${item}</li>`).join('')}</ul><p class="after-seven">${AFTER_SEVEN}</p></div>
+      <div class="manual-box"><h4>7일 동안 해볼 일 · ${card.h}</h4><ul>${card.items.map(item=>`<li>${item}</li>`).join('')}</ul><p class="after-seven"><strong>확인일은 ${sevenDaysLater()}입니다.</strong> ${AFTER_SEVEN}</p></div>
       <div class="record-box">
         <h3>다음 교대에 넘길 한 건</h3>
         <p>다음 교대에 넘길 요청 한 건을 적어 보세요. 카드와 함께 복사할 수 있습니다. 새로고침하면 내용이 사라집니다.</p>
@@ -374,12 +413,14 @@ function renderResult(){
       </div>
       <details class="compare-box why-box"><summary>왜 이 주제가 나왔나요?</summary><p>${selectionBasis(a)}</p></details>
       <div class="compare-box"><strong>다음 근무자와 함께 읽어 보세요</strong><br>이 메모만 보고 다음 일을 처리할 수 있는지 물어보세요. 담당자, 할 일, 확인 시간 중 빠진 내용이 있다면 함께 적어 두세요.</div>
+      ${nextBox}
       <div class="cat-block"><h3>내가 고른 12개 답</h3>${rows}</div>
       <div class="result-actions">
         <button class="primary" onclick="copyResult()">7일 카드와 답변 복사하기</button>
+        <button class="secondary" onclick="window.print()">7일 카드 인쇄·PDF로 저장</button>
         <a class="feedback-link" href="/feedback.html?area=industry&point=result" target="_blank" rel="noopener noreferrer">교대 확인 카드 의견 남기기 →</a>
         <button class="secondary" onclick="renderIntro()">처음부터 다시 하기</button>
-        <a class="home-link" href="/industry.html">가게 점검 12문 보기</a>
+        <a class="home-link" href="/industry.html">가게 운영 점검 설명으로 돌아가기</a>
       </div>
     </div>
   `;
@@ -390,7 +431,7 @@ function copyResult(){
   const a = analyze();
   const card = a.allBest ? STEADY_CARD : MANUALS[a.focus];
   const recorded = id => document.getElementById(id).value.trim() || '아직 적지 않음';
-  const lines = ['[디테일랩 · 인수인계 확인]','',`7일 동안 해볼 일: ${card.h}`,'확인할 사람: 운영자가 담당자·완료 기준을 정하고 교대 직원과 함께 써 보세요.',...card.items.map((item,i)=>`${i+1}. ${item}`),AFTER_SEVEN,'',`이 주제를 보여 준 이유: ${selectionBasis(a)}`,'','다음 교대에 직접 적은 한 건',`처리 중인 요청: ${recorded('record-case')}`,`다음 담당자와 시점: ${recorded('record-action')}`,`7일 뒤 확인할 것: ${recorded('record-review')}`,'','7일 뒤 실제 사용 의견: https://detail-lab-site.onrender.com/feedback.html?area=industry&point=later','',...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
+  const lines = ['[디테일랩 · 인수인계 확인]','',`7일 동안 해볼 일: ${card.h}`,'확인할 사람: 운영자가 담당자·완료 기준을 정하고 교대 직원과 함께 써 보세요.',...card.items.map((item,i)=>`${i+1}. ${item}`),`7일 뒤 확인일: ${sevenDaysLater()}`,AFTER_SEVEN,'',`이 주제를 보여 준 이유: ${selectionBasis(a)}`,'','다음 교대에 직접 적은 한 건',`처리 중인 요청: ${recorded('record-case')}`,`다음 담당자와 시점: ${recorded('record-action')}`,`7일 뒤 확인할 것: ${recorded('record-review')}`,'','7일 뒤 실제 사용 의견: https://detail-lab-site.onrender.com/feedback.html?area=industry&point=later','',...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
   copyText(lines.join('\n'), '결과가 복사되었습니다');
 }
 

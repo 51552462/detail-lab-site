@@ -3,29 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>트레이너 근무 조건 확인 · 디테일랩</title>
+<title>트레이너 근무 12문 점검 · 디테일랩</title>
 <meta name="description" content="트레이너가 일하는 곳의 정산·회원 배정·교육·운영 기준을 12문으로 확인하고 다음 질문을 정리합니다.">
 <meta name="robots" content="index,follow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0b111c">
 <link rel="canonical" href="https://detail-lab-site.onrender.com/trainer-self-check.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="트레이너 근무 조건 확인 · 디테일랩">
+<meta property="og:site_name" content="디테일랩">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="트레이너 근무 12문 점검 · 디테일랩">
 <meta property="og:description" content="정산·배정·교육 조건을 12문으로 확인하고 다음 질문을 정리하세요.">
 <meta property="og:image" content="https://detail-lab-site.onrender.com/og-employee.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:description" content="정산·배정·교육 조건을 12문으로 확인하고 다음 질문을 정리하세요.">
-<meta name="twitter:title" content="트레이너 근무 조건 확인 · 디테일랩">
+<meta name="twitter:title" content="트레이너 근무 12문 점검 · 디테일랩">
 <meta name="twitter:image" content="https://detail-lab-site.onrender.com/og-employee.png">
 <style>
   :root{
-    --bg: #10141b;
-    --bg-soft: #171c25;
-    --panel: #1b212c;
+    --bg: #0b111c;
+    --bg-soft: #101828;
+    --panel: #121a29;
     --panel-border: rgba(255,255,255,0.08);
     --ink: #ECEDEF;
     --ink-dim: #9AA3AF;
     --ink-faint: #8A94A3;
-    --accent: #00A99D;
-    --accent-soft: rgba(0,169,157,0.14);
+    --accent: #6fa3ff;
+    --accent-soft: rgba(111,163,255,0.14);
     --danger: #E4572E;
     --danger-soft: rgba(228,87,46,0.16);
     --caution: #E3A008;
@@ -129,7 +133,7 @@
   button.primary{
     width: 100%;
     background: var(--accent);
-    color: #06201d;
+    color: #04122b;
     border: none;
     border-radius: 12px;
     padding: 16px;
@@ -195,9 +199,9 @@
     cursor: pointer;
     transition: border-color 0.12s ease, background 0.12s ease;
   }
-  .option-btn:hover{ border-color: rgba(0,169,157,0.5); }
+  .option-btn:hover{ border-color: rgba(111,163,255,0.5); }
   .option-btn:active{ background: var(--accent-soft); }
-  .option-btn.on{ border-color: rgba(0,169,157,0.95); background: var(--accent-soft); }
+  .option-btn.on{ border-color: rgba(111,163,255,0.95); background: var(--accent-soft); }
 
   .nav-row{
     display:flex;
@@ -224,7 +228,7 @@
     margin-bottom: 14px;
   }
   .band-stable{ background: var(--stable-soft); color: var(--stable); }
-  .band-caution{ background: var(--caution-soft); color: var(--caution); }
+  .band-caution{ background: var(--accent-soft); color: var(--accent); }
   .band-danger{ background: var(--danger-soft); color: var(--danger); }
 
   .score-row{
@@ -288,7 +292,7 @@
   .insight-box{
     background: var(--panel);
     border: 1px solid var(--panel-border);
-    border-left: 3px solid var(--danger);
+    border-left: 3px solid var(--accent);
     border-radius: 10px;
     padding: 16px 18px;
     font-size: 14px;
@@ -297,7 +301,7 @@
     margin-bottom: 28px;
   }
   .insight-box b{ color: var(--ink); }
-  .insight-box .cat-name{ color: #F27A54; font-weight: 700; }
+  .insight-box .cat-name{ color: var(--accent); font-weight: 700; }
   .insight-box ol{ margin: 12px 0 0; padding-left: 20px; }
   .insight-box li{ margin-bottom: 8px; color: var(--ink); }
   .insight-box li:last-child{ margin-bottom: 0; }
@@ -313,6 +317,7 @@
     line-height: 1.6;
   }
   .compare-box b{ color: var(--ink); }
+  .compare-box a{ color: var(--accent); font-weight: 700; text-underline-offset: 3px; }
 
   .result-actions{
     display:flex;
@@ -361,6 +366,16 @@
   .brandline a.mark:hover{ color:var(--ink); }
   .home-link{ display:block; padding:10px; text-align:center; color:var(--ink-dim); font-size:13px; text-underline-offset:4px; }
   [tabindex="-1"]:focus{ outline:none; }
+  @media print{
+    html,body{ background:#fff; color:#111; }
+    .app{ padding:0; min-height:auto; }
+    .brandline,.result-actions,.toast,.progress-wrap,.nav-row{ display:none !important; }
+    .screen{ max-width:none; }
+    .result-headline,.manual-box h4,.manual-box li,.after-seven,.after-seven strong,.compare-box,.compare-box b,.compare-box strong,.compare-box a,.insight-box,.insight-box li,.cat-block h3,.cat-item .name,.cat-item p,.record-box,.record-box h3,.record-box p,.record-box label{ color:#111 !important; }
+    .manual-box,.compare-box,.record-box,.insight-box{ background:#fff; border:1px solid #888; break-inside:avoid; }
+    .record-box input{ background:#fff; color:#111; border:1px solid #888; }
+    .result-band{ background:#fff; color:#111; border:1px solid #888; }
+  }
 </style>
 </head>
 <body>
@@ -369,7 +384,7 @@
 <div class="app">
   <div class="brandline">
     <a class="mark" href="/" aria-label="디테일랩 홈으로">디테일랩</a>
-    <span>트레이너 자가점검</span>
+    <span>트레이너 근무 12문 점검</span>
   </div>
 
   <div class="screen" id="screen"></div>
@@ -377,7 +392,7 @@
 </div>
 </main>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 const CATEGORIES = [
@@ -509,6 +524,13 @@ function showToast(msg){
   setTimeout(()=> toastEl.classList.remove('show'), 2600);
 }
 
+// 받침 유무에 따라 '을/를'을 고른다. 영역 이름이 달라져도 조사가 어색해지지 않게 한다.
+function eulReul(word){
+  const code = word.charCodeAt(word.length - 1) - 0xAC00;
+  return code >= 0 && code < 11172 && code % 28 ? '을' : '를';
+}
+
+
 // 답을 고른 뒤 화면이 바뀌어도 키보드·스크린리더 사용자가 새 화면의 처음으로 이동하도록 한다.
 let interacted = false;
 document.addEventListener('click', () => { interacted = true; }, true);
@@ -557,9 +579,9 @@ function focusNote(a){
   let tie = '';
   if (a.same.length > 1){
     const which = a.same.length === CATEGORIES.length ? '답변만으로는 먼저 볼 주제를 하나로 가리기 어렵습니다.' : `함께 살펴볼 주제: ${a.same.join(', ')}.`;
-    tie = `${which} 이 경우 목록에서 앞에 있는 ‘${CATEGORIES[a.focus]}’을 먼저 보여 줍니다. 가장 급한 주제는 직접 고르세요.`;
+    tie = `${which} 이 경우 목록에서 앞에 있는 ‘${CATEGORIES[a.focus]}’${eulReul(CATEGORIES[a.focus])} 먼저 보여 줍니다. 가장 급한 주제는 직접 고르세요.`;
   }
-  const lead = tie || `고른 답을 항목별로 정리해 ‘${CATEGORIES[a.focus]}’을 먼저 보여 드립니다.`;
+  const lead = tie || `고른 답을 항목별로 정리해 ‘${CATEGORIES[a.focus]}’${eulReul(CATEGORIES[a.focus])} 먼저 보여 드립니다.`;
   return `${lead} 결과만으로 센터를 평가하거나 이직을 결정하지 말고, 실제 조건을 확인해 보세요.`;
 }
 
@@ -648,12 +670,14 @@ function renderResult(){
       <p class="result-headline">${focusNote(a)}</p>
       <div class="insight-box"><span class="cat-name">${followupTitle}</span><ol>${followups.map(q => `<li>${q}</li>`).join('')}</ol></div>
       <div class="compare-box"><strong>누구에게 확인하나요?</strong><br>급여·회원 배정·교육을 맡는 센터 담당자에게 물어보세요. 중요한 답은 계약서나 공지, 메시지에도 적혀 있는지 확인해 두세요.</div>
+      <div class="compare-box"><strong>회원과 수업 시간을 정하는 중이라면</strong><br>근무 조건이 아니라 회원과 요일·시간·횟수를 맞추는 일이 고민이라면, 같은 기기에서 회원과 각자 7개 질문에 답하는 도구를 쓸 수 있습니다. <a href="/matching-self-check.html?role=trainer">수업 조건 맞춰보기 (트레이너부터) →</a></div>
       <div class="cat-block">
         <h3>내가 고른 12개 답</h3>
         ${QUESTIONS.map((q,i)=>`<div class="cat-item"><div class="cat-item-top"><span class="name">${q.text}</span></div><p>${state.texts[i]}</p></div>`).join('')}
       </div>
       <div class="result-actions">
         <button class="primary" onclick="copyResult()">내 답변과 질문 복사하기</button>
+        <button class="secondary" onclick="window.print()">질문 인쇄·PDF로 저장</button>
         <a class="feedback-link" href="/feedback.html?area=employee&point=result" target="_blank" rel="noopener noreferrer">근무 조건 질문이 쓸모 있었는지 남기기 →</a>
         <button class="secondary" onclick="renderIntro()">처음부터 다시 하기</button>
         <a class="home-link" href="/employee-guide.html">다른 제안과 비교하려면 직장 선택 기록지 쓰기</a>
@@ -666,7 +690,7 @@ function renderResult(){
 function copyResult(){
   const a = analyze();
   const lines = [
-    '[디테일랩 · 트레이너 근무 조건 확인]',
+    '[디테일랩 · 트레이너 근무 12문 점검]',
     a.allBest ? '문서로 한 번 더 확인할 것:' : `먼저 물을 질문 (${CATEGORIES[a.focus]}):`,
     ...followupsFor(a).map((q,i) => `${i+1}. ${q}`),
     '확인할 사람: 센터 담당자에게 실제 조건을 묻고 관련 문서에서 확인하세요.',

@@ -6,8 +6,12 @@
 <title>회원·트레이너 수업 조건 맞춰보기 · 디테일랩</title>
 <meta name="description" content="회원과 트레이너가 각자 7개 질문에 답하고 동의한 뒤, 수업 일정과 설명·피드백 조건을 함께 확인합니다.">
 <meta name="robots" content="index,follow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0b111c">
 <link rel="canonical" href="https://detail-lab-site.onrender.com/matching-self-check.html">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="디테일랩">
+<meta property="og:locale" content="ko_KR">
 <meta property="og:title" content="회원·트레이너 수업 조건 맞춰보기 · 디테일랩">
 <meta property="og:description" content="같은 기기에서 각자 답하고, 함께 수업 조건을 확인하세요.">
 <meta property="og:image" content="https://detail-lab-site.onrender.com/og-matching.png">
@@ -17,15 +21,15 @@
 <meta name="twitter:image" content="https://detail-lab-site.onrender.com/og-matching.png">
 <style>
   :root{
-    --bg: #10141b;
-    --bg-soft: #171c25;
-    --panel: #1b212c;
+    --bg: #0b111c;
+    --bg-soft: #101828;
+    --panel: #121a29;
     --panel-border: rgba(255,255,255,0.08);
     --ink: #ECEDEF;
     --ink-dim: #9AA3AF;
     --ink-faint: #8A94A3;
-    --accent: #00A99D;
-    --accent-soft: rgba(0,169,157,0.14);
+    --accent: #6fa3ff;
+    --accent-soft: rgba(111,163,255,0.14);
     --danger: #E4572E;
     --danger-soft: rgba(228,87,46,0.16);
     --caution: #E3A008;
@@ -129,7 +133,7 @@
   button.primary{
     width: 100%;
     background: var(--accent);
-    color: #06201d;
+    color: #04122b;
     border: none;
     border-radius: 12px;
     padding: 16px;
@@ -195,9 +199,9 @@
     cursor: pointer;
     transition: border-color 0.12s ease, background 0.12s ease;
   }
-  .option-btn:hover{ border-color: rgba(0,169,157,0.5); }
+  .option-btn:hover{ border-color: rgba(111,163,255,0.5); }
   .option-btn:active{ background: var(--accent-soft); }
-  .option-btn.on{ border-color: rgba(0,169,157,0.95); background: var(--accent-soft); }
+  .option-btn.on{ border-color: rgba(111,163,255,0.95); background: var(--accent-soft); }
   .multi-hint{ font-size:13px; color:var(--ink-dim); margin:-8px 0 16px; }
 
   .nav-row{
@@ -225,7 +229,7 @@
     margin-bottom: 14px;
   }
   .band-stable{ background: var(--stable-soft); color: var(--stable); }
-  .band-caution{ background: var(--caution-soft); color: var(--caution); }
+  .band-caution{ background: var(--accent-soft); color: var(--accent); }
   .band-danger{ background: var(--danger-soft); color: var(--danger); }
 
   .score-row{
@@ -387,14 +391,14 @@
 </div>
 </main>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 const DAYS = ["월","화","수","목","금","토","일"];
 const TIMES = ["오전","오후","저녁"];
 
 const MEMBER_Q = [
-  { text:"지금 목표에 가장 가까운 것은?", options:["체중관리","근력","자세","기타"] },
+  { text:"지금 목표에 가장 가까운 것은?", options:["체중 관리","근력","자세","기타"] },
   { text:"가능한 요일은?", options:DAYS, multi:true, hint:"가능한 요일을 모두 고른 뒤 다음으로 갑니다." },
   { text:"가능한 시간대는?", options:TIMES, multi:true, hint:"수업할 수 있는 시간대를 모두 고른 뒤 다음으로 갑니다." },
   { text:"주당 몇 회를 원하나요?", options:["1회","2회","3회 이상"] },
@@ -495,13 +499,13 @@ function renderRoleIntro(){
         ? "가능한 일정과 선호하는 수업 방식을 골라 주세요. 건강정보는 묻지 않습니다."
         : "현재 제공할 수 있는 일정과 수업 방식을 골라 주세요. 건강정보는 묻지 않습니다."}</p>
       ${waiting}
-      <p class="fineprint">답을 다 고른 뒤 상대에게 공유할지 정할 수 있습니다. 입력한 내용은 서버로 보내지 않습니다. <a href="/#people">디테일랩 소개</a></p>
-      <p class="fineprint"><a href="/feedback.html?area=matching&point=page">시작이 어려웠던 이유 남기기</a></p>
       <div class="facts">
         <div class="fact"><b>${bank().length}</b> 문항</div>
         <div class="fact"><b>대조</b> 두 사람 동의 후 같은 기기</div>
       </div>
       <button class="primary" onclick="startQuiz()">시작</button>
+      <p class="fineprint">답을 다 고른 뒤 상대에게 공유할지 정할 수 있습니다. 입력한 내용은 서버로 보내지 않습니다. <a href="/#people">디테일랩 소개</a></p>
+      <p class="fineprint"><a href="/feedback.html?area=matching&point=page">시작이 어려웠던 이유 남기기</a></p>
       <p class="fineprint"><button class="back-link" onclick="state.role=''; state.pair={member:null,trainer:null}; history.replaceState({},'',location.pathname); renderIntro()">역할 다시 고르기</button></p>
     </div>
   `;

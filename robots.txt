@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://detail-lab-site.onrender.com/sitemap.xml
