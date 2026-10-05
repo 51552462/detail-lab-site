@@ -95,6 +95,9 @@ async function landingPages(page, origin, viewport) {
       report.screenshots.push({ viewport, name: 'page-index-people', filename: people, selector: '#people' });
     }
     const name = file.replace('.html', '');
+    // Element screenshots scroll the page; restore the actual first screen before saving its evidence.
+    await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo({ top: 0, behavior: 'instant' }); });
+    await page.waitForFunction(() => window.scrollY === 0);
     const first = `${viewport}-page-${name}-hero.png`;
     await page.screenshot({ path: path.join(out, first) });
     report.screenshots.push({ viewport, name: `page-${name}-hero`, filename: first, scrollY: 0 });
