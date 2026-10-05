@@ -1,0 +1,589 @@
+{
+  "reviewedBy": "ChatGPT, directly opened and read image tiles",
+  "baseFeatureCommit": "ac86311dd709019d48650de3ef75ae69e23537b5",
+  "baseRun": 37269535884,
+  "baseSourceSha": "a653f58c18e63278379279c520de7ffcc4708090",
+  "screenshots": [
+    {
+      "viewport": 360,
+      "name": "page-index-people",
+      "filename": "360-page-index-people.png",
+      "selector": "#people"
+    },
+    {
+      "viewport": 360,
+      "name": "page-index-hero",
+      "filename": "360-page-index-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 360,
+      "name": "page-index-detail",
+      "filename": "360-page-index-detail.png",
+      "selector": ".category-grid"
+    },
+    {
+      "viewport": 360,
+      "name": "page-center-hero",
+      "filename": "360-page-center-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 360,
+      "name": "page-center-detail",
+      "filename": "360-page-center-detail.png",
+      "selector": ".path-grid"
+    },
+    {
+      "viewport": 360,
+      "name": "page-industry-hero",
+      "filename": "360-page-industry-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 360,
+      "name": "page-industry-detail",
+      "filename": "360-page-industry-detail.png",
+      "selector": ".example-output"
+    },
+    {
+      "viewport": 360,
+      "name": "page-employee-guide-hero",
+      "filename": "360-page-employee-guide-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 360,
+      "name": "page-employee-guide-detail",
+      "filename": "360-page-employee-guide-detail.png",
+      "selector": ".example-output"
+    },
+    {
+      "viewport": 360,
+      "name": "page-matching-hero",
+      "filename": "360-page-matching-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 360,
+      "name": "page-matching-detail",
+      "filename": "360-page-matching-detail.png",
+      "selector": ".example-output"
+    },
+    {
+      "viewport": 360,
+      "name": "page-feedback-hero",
+      "filename": "360-page-feedback-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 360,
+      "name": "page-feedback-detail",
+      "filename": "360-page-feedback-detail.png",
+      "selector": ".response-card"
+    },
+    {
+      "viewport": 360,
+      "name": "center",
+      "filename": "360-center-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "center",
+      "filename": "360-center-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "center",
+      "filename": "360-center-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "center",
+      "filename": "360-center-04.png",
+      "scrollY": 1615
+    },
+    {
+      "viewport": 360,
+      "name": "store",
+      "filename": "360-store-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "store",
+      "filename": "360-store-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "store",
+      "filename": "360-store-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "store",
+      "filename": "360-store-04.png",
+      "scrollY": 1796
+    },
+    {
+      "viewport": 360,
+      "name": "shift",
+      "filename": "360-shift-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "shift",
+      "filename": "360-shift-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "shift",
+      "filename": "360-shift-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "shift",
+      "filename": "360-shift-04.png",
+      "scrollY": 1735
+    },
+    {
+      "viewport": 360,
+      "name": "trainer",
+      "filename": "360-trainer-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "trainer",
+      "filename": "360-trainer-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "trainer",
+      "filename": "360-trainer-03.png",
+      "scrollY": 1111
+    },
+    {
+      "viewport": 360,
+      "name": "employee-record",
+      "filename": "360-employee-record-01.png",
+      "scrollY": 8614
+    },
+    {
+      "viewport": 360,
+      "name": "employee-record",
+      "filename": "360-employee-record-02.png",
+      "scrollY": 9274
+    },
+    {
+      "viewport": 360,
+      "name": "employee-record",
+      "filename": "360-employee-record-03.png",
+      "scrollY": 9934
+    },
+    {
+      "viewport": 360,
+      "name": "matching-overlap",
+      "filename": "360-matching-overlap-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "matching-overlap",
+      "filename": "360-matching-overlap-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "matching-overlap",
+      "filename": "360-matching-overlap-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "matching-overlap",
+      "filename": "360-matching-overlap-04.png",
+      "scrollY": 1579
+    },
+    {
+      "viewport": 360,
+      "name": "matching-no-overlap",
+      "filename": "360-matching-no-overlap-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "matching-no-overlap",
+      "filename": "360-matching-no-overlap-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "matching-no-overlap",
+      "filename": "360-matching-no-overlap-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "matching-no-overlap",
+      "filename": "360-matching-no-overlap-04.png",
+      "scrollY": 1514
+    },
+    {
+      "viewport": 360,
+      "name": "matching-day-only",
+      "filename": "360-matching-day-only-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "matching-day-only",
+      "filename": "360-matching-day-only-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "matching-day-only",
+      "filename": "360-matching-day-only-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "matching-day-only",
+      "filename": "360-matching-day-only-04.png",
+      "scrollY": 1536
+    },
+    {
+      "viewport": 360,
+      "name": "matching-time-only",
+      "filename": "360-matching-time-only-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "matching-time-only",
+      "filename": "360-matching-time-only-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "matching-time-only",
+      "filename": "360-matching-time-only-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "matching-time-only",
+      "filename": "360-matching-time-only-04.png",
+      "scrollY": 1514
+    },
+    {
+      "viewport": 360,
+      "name": "matching-conflict",
+      "filename": "360-matching-conflict-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "matching-conflict",
+      "filename": "360-matching-conflict-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "matching-conflict",
+      "filename": "360-matching-conflict-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "matching-conflict",
+      "filename": "360-matching-conflict-04.png",
+      "scrollY": 1640
+    },
+    {
+      "viewport": 1280,
+      "name": "page-index-people",
+      "filename": "1280-page-index-people.png",
+      "selector": "#people"
+    },
+    {
+      "viewport": 1280,
+      "name": "page-index-hero",
+      "filename": "1280-page-index-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 1280,
+      "name": "page-index-detail",
+      "filename": "1280-page-index-detail.png",
+      "selector": ".category-grid"
+    },
+    {
+      "viewport": 1280,
+      "name": "page-center-hero",
+      "filename": "1280-page-center-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 1280,
+      "name": "page-center-detail",
+      "filename": "1280-page-center-detail.png",
+      "selector": ".path-grid"
+    },
+    {
+      "viewport": 1280,
+      "name": "page-industry-hero",
+      "filename": "1280-page-industry-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 1280,
+      "name": "page-industry-detail",
+      "filename": "1280-page-industry-detail.png",
+      "selector": ".example-output"
+    },
+    {
+      "viewport": 1280,
+      "name": "page-employee-guide-hero",
+      "filename": "1280-page-employee-guide-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 1280,
+      "name": "page-employee-guide-detail",
+      "filename": "1280-page-employee-guide-detail.png",
+      "selector": ".example-output"
+    },
+    {
+      "viewport": 1280,
+      "name": "page-matching-hero",
+      "filename": "1280-page-matching-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 1280,
+      "name": "page-matching-detail",
+      "filename": "1280-page-matching-detail.png",
+      "selector": ".example-output"
+    },
+    {
+      "viewport": 1280,
+      "name": "page-feedback-hero",
+      "filename": "1280-page-feedback-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 1280,
+      "name": "page-feedback-detail",
+      "filename": "1280-page-feedback-detail.png",
+      "selector": ".response-card"
+    },
+    {
+      "viewport": 1280,
+      "name": "center",
+      "filename": "1280-center-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "center",
+      "filename": "1280-center-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "center",
+      "filename": "1280-center-03.png",
+      "scrollY": 1110
+    },
+    {
+      "viewport": 1280,
+      "name": "store",
+      "filename": "1280-store-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "store",
+      "filename": "1280-store-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "store",
+      "filename": "1280-store-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 1280,
+      "name": "shift",
+      "filename": "1280-shift-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "shift",
+      "filename": "1280-shift-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "shift",
+      "filename": "1280-shift-03.png",
+      "scrollY": 1345
+    },
+    {
+      "viewport": 1280,
+      "name": "trainer",
+      "filename": "1280-trainer-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "trainer",
+      "filename": "1280-trainer-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "trainer",
+      "filename": "1280-trainer-03.png",
+      "scrollY": 771
+    },
+    {
+      "viewport": 1280,
+      "name": "employee-record",
+      "filename": "1280-employee-record-01.png",
+      "scrollY": 5324
+    },
+    {
+      "viewport": 1280,
+      "name": "employee-record",
+      "filename": "1280-employee-record-02.png",
+      "scrollY": 5984
+    },
+    {
+      "viewport": 1280,
+      "name": "employee-record",
+      "filename": "1280-employee-record-03.png",
+      "scrollY": 6644
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-overlap",
+      "filename": "1280-matching-overlap-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-overlap",
+      "filename": "1280-matching-overlap-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-overlap",
+      "filename": "1280-matching-overlap-03.png",
+      "scrollY": 1293
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-no-overlap",
+      "filename": "1280-matching-no-overlap-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-no-overlap",
+      "filename": "1280-matching-no-overlap-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-no-overlap",
+      "filename": "1280-matching-no-overlap-03.png",
+      "scrollY": 1250
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-day-only",
+      "filename": "1280-matching-day-only-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-day-only",
+      "filename": "1280-matching-day-only-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-day-only",
+      "filename": "1280-matching-day-only-03.png",
+      "scrollY": 1272
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-time-only",
+      "filename": "1280-matching-time-only-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-time-only",
+      "filename": "1280-matching-time-only-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-time-only",
+      "filename": "1280-matching-time-only-03.png",
+      "scrollY": 1250
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-conflict",
+      "filename": "1280-matching-conflict-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-conflict",
+      "filename": "1280-matching-conflict-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-conflict",
+      "filename": "1280-matching-conflict-03.png",
+      "scrollY": 1315
+    }
+  ],
+  "correctedHomeScreenshots": {
+    "featureCommit": "177b4c343aeaeeb93bdac9a467df7402f67b98c7",
+    "run": 37269916996,
+    "sourceSha": "210f2d79d25fb31d6b14b9fc82b8fe547e38732e",
+    "filenames": [
+      "360-page-index-hero.png",
+      "1280-page-index-hero.png"
+    ]
+  },
+  "sourceHashesEqual": true,
+  "observations": [
+    "6 tools and 5 matching result branches read in 360px and 1280px; question/answer text, wrapping, action buttons and follow-up text readable",
+    "Home first screenshot initially captured the scrolled people section; fixed test to restore scrollY=0 and assert it before saving; corrected two screenshots opened separately",
+    "Element screenshots may show a fixed navigation bar over the captured section; this is a capture artifact, not evidence of a new layout change",
+    "Synthetic fixtures only; no real customer data or submitted forms; CI browser preview is separate from public deployment"
+  ],
+  "customerConversionVerified": false
+}

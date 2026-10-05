@@ -16,7 +16,7 @@ const out = path.resolve(process.argv[2] || path.join(root, 'customer-flow-artif
 const report = { sha: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root }).toString().trim(),
   startedAt: new Date().toISOString(), environment: 'local static preview; synthetic inputs; no form submissions',
   visualReview: 'not performed by this script', sources: {}, checks: [], screenshots: [], errors: [] };
-const pages = ['index.html', 'center.html', 'industry.html', 'employee-guide.html', 'matching.html',
+const pages = ['index.html', 'center.html', 'industry.html', 'employee-guide.html', 'matching.html', 'feedback.html',
   'owner-structure-check.html', 'industry-self-check.html', 'guide-self-check.html',
   'trainer-self-check.html', 'matching-self-check.html', 'areas.css'];
 const record = (viewport, tool, branch, details) => {
@@ -69,11 +69,12 @@ async function noOverflow(page) {
 
 async function landingPages(page, origin, viewport) {
   for (const [file, heading, primary, detail] of [
-    ['index.html', '반복되는 일과', '#doors', '.category-grid'],
-    ['center.html', '대표에게 묻는 일이', '/owner-structure-check.html', '.path-grid'],
+    ['index.html', '일은 계속 돌아오고', '#doors', '.category-grid'],
+    ['center.html', '작은 결정도', '/owner-structure-check.html', '.path-grid'],
     ['industry.html', '사장님께 확인할게요', '/industry-self-check.html', '.example-output'],
     ['employee-guide.html', '급여는 들었는데', '#worksheet', '.example-output'],
-    ['matching.html', '저녁 가능', '/matching-self-check.html?role=member', '.example-output']
+    ['matching.html', '저녁 가능', '/matching-self-check.html?role=member', '.example-output'],
+    ['feedback.html', '설명이 헷갈렸나요', 'https://wary-crocus-59c.notion.site/1ee8a0d648944e8abf0d7da9897ae80e', '.response-card']
   ]) {
     await page.goto(`${origin}/${file}`);
     await page.evaluate(async () => {
@@ -94,6 +95,9 @@ async function landingPages(page, origin, viewport) {
       report.screenshots.push({ viewport, name: 'page-index-people', filename: people, selector: '#people' });
     }
     const name = file.replace('.html', '');
+    // Element screenshots scroll the page; restore the actual first screen before saving its evidence.
+    await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo({ top: 0, behavior: 'instant' }); });
+    await page.waitForFunction(() => window.scrollY === 0);
     const first = `${viewport}-page-${name}-hero.png`;
     await page.screenshot({ path: path.join(out, first) });
     report.screenshots.push({ viewport, name: `page-${name}-hero`, filename: first, scrollY: 0 });
@@ -184,7 +188,7 @@ async function employee(page, origin, viewport) {
 
 async function roleQuestions(page, role, day, time, pick = {}) {
   const questions = role === 'member' ? ['지금 목표', '가능한 요일', '가능한 시간대', '주당 몇 회', '설명은', '피드백은', '대면으로']
-    : ['가능한 요일', '가능한 시간대', '한 회원', '수업 방식', '피드백 빈도', '맡기 어려운', '대면 가능'];
+    : ['가능한 요일', '가능한 시간대', '한 회원', '수업 방식', '피드백은', '맡기 어려운', '대면 가능'];
   for (let i = 0; i < 7; i++) {
     assert.ok((await page.locator('.q-text').innerText()).includes(questions[i]));
     if (questions[i].includes('요일') || questions[i].includes('시간대')) {
