@@ -1,0 +1,831 @@
+{
+  "sha": "210f2d79d25fb31d6b14b9fc82b8fe547e38732e",
+  "startedAt": "2026-10-05T05:56:00.855Z",
+  "environment": "local static preview; synthetic inputs; no form submissions",
+  "visualReview": "not performed by this script",
+  "sources": {
+    "index.html": "6c5053b7d1a0b78a2aaaaa52056b9d2a1fb4c4fedfe898291ccb71c52602ba97",
+    "center.html": "9b2ee0fec00b3575b430cf5bebaec9c829240f437a7b75129d476cb359c6dca0",
+    "industry.html": "84f395a0d25da27eaaf8f69a5542a61286d444a0cf7078bb13ddb8a67baa37d3",
+    "employee-guide.html": "c2698295d464d9fd828553df82c49172cc5a9d926fef96bf640f9dbc79fd00ee",
+    "matching.html": "26096c8cc69b36a81d13481abae965a65c34d0f321c1a30d283724d52a1d255e",
+    "feedback.html": "a24a11b47b0ce3c97629e76a4dbaa343a90269da2d450f4d6bb0d3011d23e327",
+    "owner-structure-check.html": "a567ff3906d7ef42b3cc44b88311447d00be41140607dd1354ef9287352d2adf",
+    "industry-self-check.html": "d3268c05dfb94b3a80b45b84cb1eb03062fd696f7193e33a7a4876467d539994",
+    "guide-self-check.html": "4e5b94b1e797e8e7bd12c1db443da8a093f7aff30c5e6e38b7c2a1c7bc5a12d2",
+    "trainer-self-check.html": "8c19c7a23ad74e559d3f6acd1387cf6504bd85f6cfe15bceb7728a815d0cb29c",
+    "matching-self-check.html": "e062ff41908812727f27fa17e01b7e464ce728ed225afe5be2e66bf9ff13a037",
+    "areas.css": "bb67396075fbe7d6fd4d6e7aaf357d5c944b6a6e92a78278483202165b37be0b"
+  },
+  "checks": [
+    {
+      "viewport": 360,
+      "tool": "index",
+      "branch": "entry page",
+      "details": "heading, primary action, horizontal layout and visible detail screenshot"
+    },
+    {
+      "viewport": 360,
+      "tool": "center",
+      "branch": "entry page",
+      "details": "heading, primary action, horizontal layout and visible detail screenshot"
+    },
+    {
+      "viewport": 360,
+      "tool": "industry",
+      "branch": "entry page",
+      "details": "heading, primary action, horizontal layout and visible detail screenshot"
+    },
+    {
+      "viewport": 360,
+      "tool": "employee-guide",
+      "branch": "entry page",
+      "details": "heading, primary action, horizontal layout and visible detail screenshot"
+    },
+    {
+      "viewport": 360,
+      "tool": "matching",
+      "branch": "entry page",
+      "details": "heading, primary action, horizontal layout and visible detail screenshot"
+    },
+    {
+      "viewport": 360,
+      "tool": "feedback",
+      "branch": "entry page",
+      "details": "heading, primary action, horizontal layout and visible detail screenshot"
+    },
+    {
+      "viewport": 360,
+      "tool": "center",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "center",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "store",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "store",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "shift",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "shift",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "trainer",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "trainer",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 360,
+      "tool": "employee-record",
+      "branch": "empty / before interview / A / A+B / B off",
+      "details": "heard versus document-confirmed; exact displayed-result/clipboard equality; B removed from result and copy"
+    },
+    {
+      "viewport": 360,
+      "tool": "matching",
+      "branch": "matching-overlap",
+      "details": "7 questions for each role; empty multi-answer rejection; previous selections; both consents block; display and clipboard agree"
+    },
+    {
+      "viewport": 360,
+      "tool": "matching",
+      "branch": "matching-no-overlap",
+      "details": "7 questions for each role; empty multi-answer rejection; previous selections; both consents block; display and clipboard agree"
+    },
+    {
+      "viewport": 360,
+      "tool": "matching",
+      "branch": "matching-day-only",
+      "details": "7 questions for each role; empty multi-answer rejection; previous selections; both consents block; display and clipboard agree"
+    },
+    {
+      "viewport": 360,
+      "tool": "matching",
+      "branch": "matching-time-only",
+      "details": "7 questions for each role; empty multi-answer rejection; previous selections; both consents block; display and clipboard agree"
+    },
+    {
+      "viewport": 360,
+      "tool": "matching",
+      "branch": "matching-frequency-conflict",
+      "details": "member 3+ vs trainer 2 per week and undecided period: warning, tailored questions, display and clipboard agree"
+    },
+    {
+      "viewport": 1280,
+      "tool": "index",
+      "branch": "entry page",
+      "details": "heading, primary action, horizontal layout and visible detail screenshot"
+    },
+    {
+      "viewport": 1280,
+      "tool": "center",
+      "branch": "entry page",
+      "details": "heading, primary action, horizontal layout and visible detail screenshot"
+    },
+    {
+      "viewport": 1280,
+      "tool": "industry",
+      "branch": "entry page",
+      "details": "heading, primary action, horizontal layout and visible detail screenshot"
+    },
+    {
+      "viewport": 1280,
+      "tool": "employee-guide",
+      "branch": "entry page",
+      "details": "heading, primary action, horizontal layout and visible detail screenshot"
+    },
+    {
+      "viewport": 1280,
+      "tool": "matching",
+      "branch": "entry page",
+      "details": "heading, primary action, horizontal layout and visible detail screenshot"
+    },
+    {
+      "viewport": 1280,
+      "tool": "feedback",
+      "branch": "entry page",
+      "details": "heading, primary action, horizontal layout and visible detail screenshot"
+    },
+    {
+      "viewport": 1280,
+      "tool": "center",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "center",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "store",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "store",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "shift",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "shift",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "trainer",
+      "branch": "first answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "trainer",
+      "branch": "last answers",
+      "details": "12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow"
+    },
+    {
+      "viewport": 1280,
+      "tool": "employee-record",
+      "branch": "empty / before interview / A / A+B / B off",
+      "details": "heard versus document-confirmed; exact displayed-result/clipboard equality; B removed from result and copy"
+    },
+    {
+      "viewport": 1280,
+      "tool": "matching",
+      "branch": "matching-overlap",
+      "details": "7 questions for each role; empty multi-answer rejection; previous selections; both consents block; display and clipboard agree"
+    },
+    {
+      "viewport": 1280,
+      "tool": "matching",
+      "branch": "matching-no-overlap",
+      "details": "7 questions for each role; empty multi-answer rejection; previous selections; both consents block; display and clipboard agree"
+    },
+    {
+      "viewport": 1280,
+      "tool": "matching",
+      "branch": "matching-day-only",
+      "details": "7 questions for each role; empty multi-answer rejection; previous selections; both consents block; display and clipboard agree"
+    },
+    {
+      "viewport": 1280,
+      "tool": "matching",
+      "branch": "matching-time-only",
+      "details": "7 questions for each role; empty multi-answer rejection; previous selections; both consents block; display and clipboard agree"
+    },
+    {
+      "viewport": 1280,
+      "tool": "matching",
+      "branch": "matching-frequency-conflict",
+      "details": "member 3+ vs trainer 2 per week and undecided period: warning, tailored questions, display and clipboard agree"
+    }
+  ],
+  "screenshots": [
+    {
+      "viewport": 360,
+      "name": "page-index-people",
+      "filename": "360-page-index-people.png",
+      "selector": "#people"
+    },
+    {
+      "viewport": 360,
+      "name": "page-index-hero",
+      "filename": "360-page-index-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 360,
+      "name": "page-index-detail",
+      "filename": "360-page-index-detail.png",
+      "selector": ".category-grid"
+    },
+    {
+      "viewport": 360,
+      "name": "page-center-hero",
+      "filename": "360-page-center-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 360,
+      "name": "page-center-detail",
+      "filename": "360-page-center-detail.png",
+      "selector": ".path-grid"
+    },
+    {
+      "viewport": 360,
+      "name": "page-industry-hero",
+      "filename": "360-page-industry-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 360,
+      "name": "page-industry-detail",
+      "filename": "360-page-industry-detail.png",
+      "selector": ".example-output"
+    },
+    {
+      "viewport": 360,
+      "name": "page-employee-guide-hero",
+      "filename": "360-page-employee-guide-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 360,
+      "name": "page-employee-guide-detail",
+      "filename": "360-page-employee-guide-detail.png",
+      "selector": ".example-output"
+    },
+    {
+      "viewport": 360,
+      "name": "page-matching-hero",
+      "filename": "360-page-matching-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 360,
+      "name": "page-matching-detail",
+      "filename": "360-page-matching-detail.png",
+      "selector": ".example-output"
+    },
+    {
+      "viewport": 360,
+      "name": "page-feedback-hero",
+      "filename": "360-page-feedback-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 360,
+      "name": "page-feedback-detail",
+      "filename": "360-page-feedback-detail.png",
+      "selector": ".response-card"
+    },
+    {
+      "viewport": 360,
+      "name": "center",
+      "filename": "360-center-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "center",
+      "filename": "360-center-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "center",
+      "filename": "360-center-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "center",
+      "filename": "360-center-04.png",
+      "scrollY": 1615
+    },
+    {
+      "viewport": 360,
+      "name": "store",
+      "filename": "360-store-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "store",
+      "filename": "360-store-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "store",
+      "filename": "360-store-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "store",
+      "filename": "360-store-04.png",
+      "scrollY": 1796
+    },
+    {
+      "viewport": 360,
+      "name": "shift",
+      "filename": "360-shift-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "shift",
+      "filename": "360-shift-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "shift",
+      "filename": "360-shift-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "shift",
+      "filename": "360-shift-04.png",
+      "scrollY": 1735
+    },
+    {
+      "viewport": 360,
+      "name": "trainer",
+      "filename": "360-trainer-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "trainer",
+      "filename": "360-trainer-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "trainer",
+      "filename": "360-trainer-03.png",
+      "scrollY": 1111
+    },
+    {
+      "viewport": 360,
+      "name": "employee-record",
+      "filename": "360-employee-record-01.png",
+      "scrollY": 8614
+    },
+    {
+      "viewport": 360,
+      "name": "employee-record",
+      "filename": "360-employee-record-02.png",
+      "scrollY": 9274
+    },
+    {
+      "viewport": 360,
+      "name": "employee-record",
+      "filename": "360-employee-record-03.png",
+      "scrollY": 9934
+    },
+    {
+      "viewport": 360,
+      "name": "matching-overlap",
+      "filename": "360-matching-overlap-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "matching-overlap",
+      "filename": "360-matching-overlap-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "matching-overlap",
+      "filename": "360-matching-overlap-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "matching-overlap",
+      "filename": "360-matching-overlap-04.png",
+      "scrollY": 1579
+    },
+    {
+      "viewport": 360,
+      "name": "matching-no-overlap",
+      "filename": "360-matching-no-overlap-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "matching-no-overlap",
+      "filename": "360-matching-no-overlap-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "matching-no-overlap",
+      "filename": "360-matching-no-overlap-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "matching-no-overlap",
+      "filename": "360-matching-no-overlap-04.png",
+      "scrollY": 1514
+    },
+    {
+      "viewport": 360,
+      "name": "matching-day-only",
+      "filename": "360-matching-day-only-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "matching-day-only",
+      "filename": "360-matching-day-only-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "matching-day-only",
+      "filename": "360-matching-day-only-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "matching-day-only",
+      "filename": "360-matching-day-only-04.png",
+      "scrollY": 1536
+    },
+    {
+      "viewport": 360,
+      "name": "matching-time-only",
+      "filename": "360-matching-time-only-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "matching-time-only",
+      "filename": "360-matching-time-only-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "matching-time-only",
+      "filename": "360-matching-time-only-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "matching-time-only",
+      "filename": "360-matching-time-only-04.png",
+      "scrollY": 1514
+    },
+    {
+      "viewport": 360,
+      "name": "matching-conflict",
+      "filename": "360-matching-conflict-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 360,
+      "name": "matching-conflict",
+      "filename": "360-matching-conflict-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 360,
+      "name": "matching-conflict",
+      "filename": "360-matching-conflict-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 360,
+      "name": "matching-conflict",
+      "filename": "360-matching-conflict-04.png",
+      "scrollY": 1640
+    },
+    {
+      "viewport": 1280,
+      "name": "page-index-people",
+      "filename": "1280-page-index-people.png",
+      "selector": "#people"
+    },
+    {
+      "viewport": 1280,
+      "name": "page-index-hero",
+      "filename": "1280-page-index-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 1280,
+      "name": "page-index-detail",
+      "filename": "1280-page-index-detail.png",
+      "selector": ".category-grid"
+    },
+    {
+      "viewport": 1280,
+      "name": "page-center-hero",
+      "filename": "1280-page-center-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 1280,
+      "name": "page-center-detail",
+      "filename": "1280-page-center-detail.png",
+      "selector": ".path-grid"
+    },
+    {
+      "viewport": 1280,
+      "name": "page-industry-hero",
+      "filename": "1280-page-industry-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 1280,
+      "name": "page-industry-detail",
+      "filename": "1280-page-industry-detail.png",
+      "selector": ".example-output"
+    },
+    {
+      "viewport": 1280,
+      "name": "page-employee-guide-hero",
+      "filename": "1280-page-employee-guide-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 1280,
+      "name": "page-employee-guide-detail",
+      "filename": "1280-page-employee-guide-detail.png",
+      "selector": ".example-output"
+    },
+    {
+      "viewport": 1280,
+      "name": "page-matching-hero",
+      "filename": "1280-page-matching-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 1280,
+      "name": "page-matching-detail",
+      "filename": "1280-page-matching-detail.png",
+      "selector": ".example-output"
+    },
+    {
+      "viewport": 1280,
+      "name": "page-feedback-hero",
+      "filename": "1280-page-feedback-hero.png",
+      "scrollY": 0
+    },
+    {
+      "viewport": 1280,
+      "name": "page-feedback-detail",
+      "filename": "1280-page-feedback-detail.png",
+      "selector": ".response-card"
+    },
+    {
+      "viewport": 1280,
+      "name": "center",
+      "filename": "1280-center-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "center",
+      "filename": "1280-center-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "center",
+      "filename": "1280-center-03.png",
+      "scrollY": 1110
+    },
+    {
+      "viewport": 1280,
+      "name": "store",
+      "filename": "1280-store-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "store",
+      "filename": "1280-store-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "store",
+      "filename": "1280-store-03.png",
+      "scrollY": 1369
+    },
+    {
+      "viewport": 1280,
+      "name": "shift",
+      "filename": "1280-shift-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "shift",
+      "filename": "1280-shift-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "shift",
+      "filename": "1280-shift-03.png",
+      "scrollY": 1345
+    },
+    {
+      "viewport": 1280,
+      "name": "trainer",
+      "filename": "1280-trainer-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "trainer",
+      "filename": "1280-trainer-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "trainer",
+      "filename": "1280-trainer-03.png",
+      "scrollY": 771
+    },
+    {
+      "viewport": 1280,
+      "name": "employee-record",
+      "filename": "1280-employee-record-01.png",
+      "scrollY": 5324
+    },
+    {
+      "viewport": 1280,
+      "name": "employee-record",
+      "filename": "1280-employee-record-02.png",
+      "scrollY": 5984
+    },
+    {
+      "viewport": 1280,
+      "name": "employee-record",
+      "filename": "1280-employee-record-03.png",
+      "scrollY": 6644
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-overlap",
+      "filename": "1280-matching-overlap-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-overlap",
+      "filename": "1280-matching-overlap-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-overlap",
+      "filename": "1280-matching-overlap-03.png",
+      "scrollY": 1293
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-no-overlap",
+      "filename": "1280-matching-no-overlap-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-no-overlap",
+      "filename": "1280-matching-no-overlap-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-no-overlap",
+      "filename": "1280-matching-no-overlap-03.png",
+      "scrollY": 1250
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-day-only",
+      "filename": "1280-matching-day-only-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-day-only",
+      "filename": "1280-matching-day-only-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-day-only",
+      "filename": "1280-matching-day-only-03.png",
+      "scrollY": 1272
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-time-only",
+      "filename": "1280-matching-time-only-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-time-only",
+      "filename": "1280-matching-time-only-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-time-only",
+      "filename": "1280-matching-time-only-03.png",
+      "scrollY": 1250
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-conflict",
+      "filename": "1280-matching-conflict-01.png",
+      "scrollY": 49
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-conflict",
+      "filename": "1280-matching-conflict-02.png",
+      "scrollY": 709
+    },
+    {
+      "viewport": 1280,
+      "name": "matching-conflict",
+      "filename": "1280-matching-conflict-03.png",
+      "scrollY": 1315
+    }
+  ],
+  "errors": [],
+  "status": "passed",
+  "finishedAt": "2026-10-05T05:57:20.796Z"
+}
