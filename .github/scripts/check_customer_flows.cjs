@@ -18,12 +18,12 @@ const report = { sha: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root }).
   visualReview: 'not performed by this script', sources: {}, checks: [], screenshots: [], errors: [] };
 const pages = ['index.html', 'center.html', 'industry.html', 'employee-guide.html', 'matching.html', 'feedback.html',
   'owner-structure-check.html', 'industry-self-check.html', 'guide-self-check.html',
-  'trainer-self-check.html', 'matching-self-check.html', 'areas.css'];
+  'trainer-self-check.html', 'matching-self-check.html', 'areas.css', 'styles.css', 'favicon.svg'];
 const record = (viewport, tool, branch, details) => {
   const item = { viewport, tool, branch, details };
   report.checks.push(item); console.log(JSON.stringify(item));
 };
-const mime = { '.html': 'text/html', '.css': 'text/css', '.png': 'image/png', '.webp': 'image/webp' };
+const mime = { '.html': 'text/html', '.css': 'text/css', '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.xml': 'application/xml', '.txt': 'text/plain' };
 let browser, server;
 
 async function copied(page, button, filename) {
@@ -63,6 +63,13 @@ async function screenshotResult(page, viewport, name, selector = '#screen .resul
   }
 }
 
+// 을/를이 앞 글자의 받침과 맞는지 본다. ‘범위을’처럼 어색한 결과 문장을 잡는다.
+function badJosa(text) {
+  return [...text.matchAll(/([가-힣])’?(을|를)(?![가-힣])/g)]
+    .filter(([, ch, josa]) => (josa === '을') !== ((ch.charCodeAt(0) - 0xAC00) % 28 !== 0))
+    .map(([whole]) => whole);
+}
+
 async function noOverflow(page) {
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'horizontal overflow');
 }
@@ -83,6 +90,9 @@ async function landingPages(page, origin, viewport) {
       await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
     });
     assert.ok((await page.locator('h1').innerText()).includes(heading));
+    assert.equal(await page.locator('link[rel="icon"]').count(), 1, `favicon link: ${file}`);
+    if (file === 'index.html') assert.ok((await page.locator('.brand-lead').innerText()).includes('센터'), 'home lead must speak to center owners too');
+    if (file === 'center.html') assert.equal(await page.locator('.cross-scope .cross-links a').count(), 3, 'center must point to the other three tools');
     const action = page.locator(`a[href="${primary}"]`).first();
     assert.ok(await action.isVisible());
     assert.ok((await action.boundingBox()).height >= 44, `primary action must be fully readable and tappable: ${file}`);
@@ -124,6 +134,12 @@ async function quiz(page, origin, viewport, filename, tool) {
     assert.equal(await page.locator('.option-btn[aria-pressed="true"]').innerText(), changedText);
     for (let i = 0; i < 12; i++) await page.locator('.option-btn').nth(choice).click();
     assert.equal(await page.locator('.cat-item').count(), 12);
+    assert.equal(await page.locator('link[rel="icon"]').count(), 1, `favicon link: ${tool}`);
+    const headline = await page.locator('.result-headline').innerText();
+    assert.match(headline, choice === 3 ? /하나로 가리기 어렵습니다/ : /보이지 않았습니다/, `${tool} headline must say a tie is not a ranking`);
+    assert.deepEqual(badJosa(headline), [], `${tool} headline particle`);
+    if (await page.locator('details.why-box').count()) assert.deepEqual(badJosa(await page.locator('details.why-box p').evaluate(el => el.textContent)), [], `${tool} reason particle`);
+    assert.equal(await page.locator('button[onclick="window.print()"]').count(), 1, `${tool} result must be printable`);
     if (choice === 3 && ['store', 'shift'].includes(tool)) {
       await page.locator('#record-case').fill('가상 테스트: 교대 뒤 예약 문의 재확인');
       await page.locator('#record-action').fill('다음 담당자가 오전 11시까지 답변');
@@ -134,6 +150,10 @@ async function quiz(page, origin, viewport, filename, tool) {
       for (const entry of ['가상 테스트: 교대 뒤 예약 문의 재확인', '다음 담당자가 오전 11시까지 답변', '7일 뒤 같은 문의가 돌아온 횟수']) assert.ok(copy.includes(entry), `${tool} recorded case must survive copying`);
     }
     for (const text of await page.locator('.cat-item .name, .cat-item p').allTextContents()) assert.ok(copy.includes(text.trim()));
+    if (['store', 'shift'].includes(tool)) {
+      assert.match(await page.locator('.after-seven strong').innerText(), /^확인일은 \d{1,2}월 \d{1,2}일 [일월화수목금토]요일입니다\.$/, `${tool} card must say which day is 7 days later`);
+      assert.ok(copy.includes('7일 뒤 확인일: '), `${tool} copy must include the review day`);
+    }
     outputs.push(copy);
     await noOverflow(page);
     if (choice === 3) {
@@ -149,6 +169,11 @@ async function employee(page, origin, viewport) {
   await page.goto(`${origin}/employee-guide.html#worksheet`);
   await page.locator('#decision-build').click();
   assert.match(await page.locator('#decision-summary').innerText(), /質問|질문 하나|들은 답 하나/);
+  await page.locator('#decision-prep').click();
+  const prep = await page.locator('#decision-summary').innerText();
+  assert.match(prep, /면접 전 준비/);
+  assert.match(prep, /⑥ 대기·준비·이동에 드는 시간/, 'pre-interview path must list all six questions without typing');
+  await copied(page, page.locator('#decision-copy'), `${viewport}-employee-prep-copy.txt`);
   await page.locator('#decision-question').fill('검증용 질문: 첫 주 교육은 누가 알려 주나요?');
   await page.locator('#decision-build').click();
   const before = await copied(page, page.locator('#decision-copy'), `${viewport}-employee-before-interview-copy.txt`);
