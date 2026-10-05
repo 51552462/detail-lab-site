@@ -6,8 +6,11 @@
   <title>직장 선택 기록지 | 디테일랩</title>
   <meta name="description" content="작은 서비스업 직원이 면접에서 들은 조건을 기록하고, 한 곳의 제안 또는 두 직장의 일과·정산·교육·결정 권한을 확인하는 무료 기록지입니다.">
   <meta name="robots" content="index,follow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://detail-lab-site.onrender.com/employee-guide.html">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="디테일랩">
+  <meta property="og:locale" content="ko_KR">
   <meta property="og:url" content="https://detail-lab-site.onrender.com/employee-guide.html">
   <meta property="og:title" content="직장 선택 기록지 | 디테일랩">
   <meta property="og:description" content="작은 서비스업 직원이 면접에서 들은 조건을 기록하고, 한 곳의 제안 또는 두 직장의 일과·정산·교육·결정 권한을 확인하는 무료 기록지입니다.">
@@ -17,8 +20,8 @@
   <meta name="twitter:description" content="작은 서비스업 직원이 면접에서 들은 조건을 기록하고, 한 곳의 제안 또는 두 직장의 일과·정산·교육·결정 권한을 확인하는 무료 기록지입니다.">
   <meta name="twitter:image" content="https://detail-lab-site.onrender.com/og-employee.png">
   <meta name="theme-color" content="#070a10">
-  <link rel="stylesheet" href="styles.css?v=20260930-r2">
-  <link rel="stylesheet" href="areas.css?v=20261003-r1">
+  <link rel="stylesheet" href="styles.css?v=20261005-r1">
+  <link rel="stylesheet" href="areas.css?v=20261005-r1">
 <style>
   .decision-sheet{display:grid;gap:22px;margin:24px 0 38px;padding:28px;border:1px solid #c6d4e8;background:#fff;color:#243044}
   .decision-sheet h3{margin:4px 0 0;font-size:1.15rem;color:#173c70}
@@ -39,8 +42,13 @@
   .decision-sheet:not(.show-b) .decision-pair,.decision-sheet:not(.show-b) .decision-names{grid-template-columns:1fr}
   #decision-topics{display:grid;gap:22px}
   .decision-sheet .decision-toggle{font-weight:700;color:#173c70;font-size:.95rem}
-  .decision-sheet .decision-toggle .hint{font-weight:500;color:#526075;font-size:.82rem}
+  .decision-sheet .decision-toggle .hint{display:block;font-weight:500;color:#526075;font-size:.82rem}
+  .decision-sheet .decision-toggle{align-items:flex-start}
+  .decision-sheet .decision-toggle input{margin-top:2px}
   .decision-actions{display:flex;flex-wrap:wrap;gap:12px}
+  .decision-prep{display:grid;gap:12px;justify-items:start;padding:18px 20px;background:#f1f5fb;border-left:4px solid #1459c4}
+  .decision-prep p{margin:0;color:#243044;font-size:.92rem;line-height:1.6}
+  .decision-prep .button{cursor:pointer}
   .decision-sheet .button{cursor:pointer}
   .decision-sheet .button-outline{color:#1459c4;border-color:#1459c4}
   .decision-sheet .button-outline:hover{background:#eaf0fa}
@@ -48,7 +56,7 @@
   .decision-summary{margin:0;padding:22px;background:#f1f5fb;border-left:4px solid #1459c4;color:#07101e;white-space:pre-wrap;line-height:1.7;font-size:.95rem;scroll-margin-top:100px}
   .decision-summary[hidden]{display:none}
   @media(max-width:620px){.decision-pair,.decision-names{grid-template-columns:1fr}.decision-sheet{padding:22px 18px}}
-  @media print{.site-header,.subhero,.copy-cta-row,.cross-scope,footer,.decision-actions,.decision-status,.decision-fields,.offer-intro,.offer-detail,.copy-scene,.copy-why,.example-output,.copy-compare,.copy-note,.copy-faq,.copy-cta,.making-note,.people-note,.action-panel,.feedback-ask,.result-feedback,.copy-use>h2,.copy-use>p,.section-head,.offer-result{display:none!important}.sub-section{padding:0}.decision-sheet{background:white;color:black;border:0;padding:0;margin:0}.decision-summary{border:0;padding:0;background:white;font-size:12pt}body{background:white;color:black}}
+  @media print{.site-header,.subhero,.copy-cta-row,.cross-scope,footer,.decision-actions,.decision-prep,.decision-status,.decision-fields,.offer-intro,.offer-detail,.copy-scene,.copy-why,.example-output,.copy-compare,.copy-note,.copy-faq,.copy-cta,.making-note,.people-note,.action-panel,.feedback-ask,.result-feedback,.copy-use>h2,.copy-use>p,.section-head,.offer-result{display:none!important}.sub-section{padding:0}.decision-sheet{background:white;color:black;border:0;padding:0;margin:0}.decision-summary{border:0;padding:0;background:white;font-size:12pt}body{background:white;color:black}}
 </style>
 </head>
 <body class="subpage">
@@ -68,7 +76,7 @@
 <main id="main">
 <section class="subhero subhero-employee" aria-labelledby="subhero-title">
   <div class="subhero-inner">
-    <p class="copy-badge">작은 서비스업에서 일할 직원을 위한 무료 기록지</p>
+    <p class="copy-badge">서비스업 직원을 위한 무료 기록지</p>
     <h1 id="subhero-title">급여는 들었는데,<br>언제 받고<br>무슨 일을 하나요?</h1>
     <p>면접에서 들은 조건을 적어 보세요. 아직 모르는 것과 문서로 확인한 것이 보입니다. 두 곳을 고민 중이라면 나란히 비교할 수 있습니다.</p>
     <a class="button button-primary subhero-action" href="#worksheet">무료 기록지 쓰기</a>
@@ -130,8 +138,12 @@
     <p>한 곳이면 A에만 적으세요. 두 곳을 비교하려면 B도 켜 주세요. 문서나 메시지로 확인한 내용에만 체크하고, 모르는 칸은 비워 두세요. 면접 전이라면 아래 질문부터 적어도 됩니다. 새로고침하면 내용이 사라지니 결과는 복사하거나 PDF로 저장하세요.</p>
     <div class="decision-sheet" id="decision-sheet">
       <noscript><p>기록지는 브라우저에서 JavaScript가 켜져 있어야 작동합니다.</p></noscript>
+      <div class="decision-prep">
+        <p><strong>아직 면접 전인가요?</strong> 적을 내용이 없어도 괜찮습니다. 아래 버튼을 누르면 면접에서 물어볼 질문 6개가 바로 정리됩니다.</p>
+        <button class="button button-outline" type="button" id="decision-prep">면접 전이에요 · 질문 받기</button>
+      </div>
       <div class="decision-fields">
-        <label class="decision-check decision-toggle"><input type="checkbox" id="show-b"> 두 번째 제안(B)도 비교하기 <span class="hint">제안이 한 곳이면 체크하지 않아도 됩니다</span></label>
+        <label class="decision-check decision-toggle"><input type="checkbox" id="show-b"><span>두 번째 제안(B)도 비교하기 <span class="hint">제안이 한 곳이면 체크하지 않아도 됩니다</span></span></label>
         <div class="decision-names">
           <label>A 제안 이름 <span class="hint">선택 · 나만 알아볼 메모</span><input type="text" id="offer-name-A" maxlength="24" placeholder="예: 첫 번째 제안" autocomplete="off"></label>
           <label class="offer-b">B 제안 이름 <span class="hint">선택 · 나만 알아볼 메모</span><input type="text" id="offer-name-B" maxlength="24" placeholder="예: 두 번째 제안" autocomplete="off"></label>
@@ -243,14 +255,15 @@ function cellLine(cell){
   return cell.text+(cell.verified?' [문서·메시지로 확인]':' [들은 말]');
 }
 
+let prepMode=false;
 function buildDecisionSummary(){
   const rows=TOPICS.map((t,i)=>({t,i,A:readCell('A',i),B:readCell('B',i)}));
   const question=document.getElementById('decision-question').value.trim();
   const priority=document.getElementById('decision-priority').value.trim();
-  const used=OFFERS.filter(o=>rows.some(r=>r[o].text));
+  const used=prepMode?[]:OFFERS.filter(o=>rows.some(r=>r[o].text));
   statusEl.textContent='';
-  if(!used.length&&!question&&!priority){
-    summaryEl.textContent='면접 전이라면 중요한 조건이나 물어볼 질문 하나를, 면접 후라면 들은 답 하나를 적어 주세요.';
+  if(!prepMode&&!used.length&&!question&&!priority){
+    summaryEl.textContent='면접 전이라면 ‘면접 전이에요’ 버튼을 눌러 물어볼 질문을 바로 받을 수 있습니다. 면접 후라면 들은 답 하나를 적어 주세요.';
     summaryEl.hidden=false;
     summaryEl.scrollIntoView({block:'start',behavior:'instant'});
     return false;
@@ -319,7 +332,9 @@ function copyDecisionSummary(){
   else fallback();
 }
 
-document.getElementById('decision-build').addEventListener('click',buildDecisionSummary);
+document.getElementById('decision-build').addEventListener('click',()=>{prepMode=false;buildDecisionSummary();});
+document.getElementById('decision-prep').addEventListener('click',()=>{prepMode=true;buildDecisionSummary();});
+sheetEl.addEventListener('input',()=>{prepMode=false;});
 document.getElementById('decision-copy').addEventListener('click',()=>{if(buildDecisionSummary())copyDecisionSummary();});
 document.getElementById('decision-print').addEventListener('click',()=>{if(buildDecisionSummary())window.print();});
 </script>

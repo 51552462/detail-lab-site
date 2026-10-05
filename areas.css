@@ -419,6 +419,11 @@
   .footer-areas a,
   .brand-people-work a,
   .offer-sub-link,
+  .subhero-link,
+  .origin-link,
+  .feedback-ask-sub a,
+  .result-feedback,
+  .site-footer a[href^="mailto:"],
   .privacy-strip a { display: inline-flex; align-items: center; min-height: 44px; }
   .build-record li a { margin-top: 4px; }
 }

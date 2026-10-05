@@ -56,7 +56,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .observe-card { min-height: 168px; padding: 28px 28px 32px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .observe-card:nth-child(2n) { border-right: 0px; }
 .observe-card:nth-last-child(-n+2) { border-bottom: 0px; }
-.observe-mark { display: block; margin-bottom: 18px; color: var(--blue); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; }
+.observe-mark { display: block; margin-bottom: 18px; color: var(--blue); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.12em; }
 .observe-card h3 { margin: 0px 0px 10px; font-size: 1.18rem; }
 .observe-card p { margin: 0px; color: rgb(86, 100, 119); font-size: 0.95rem; }
 .day-card li { display: grid; grid-template-columns: 7.2em 1fr; gap: 16px; padding: 18px 0px; border-top: 1px solid var(--line); }
@@ -68,7 +68,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .card-label span { width: 7px; height: 7px; border-radius: 50%; background: rgb(135, 146, 160); }
 .day-next .card-label { color: var(--blue); }
 .day-next .card-label span { background: var(--blue); }
-.compare-axis { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; border-left: 1px solid var(--line); border-right: 1px solid var(--line); color: #56657a; font-size: 0.72rem; text-align: center; }
+.compare-axis { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; border-left: 1px solid var(--line); border-right: 1px solid var(--line); color: #56657a; font-size: 0.8rem; text-align: center; }
 .compare-axis i { color: var(--blue); font-size: 2rem; font-style: normal; }
 .principle { width: 100%; padding-left: max(24px, calc((100vw - var(--max)) / 2)); padding-right: max(24px, calc((100vw - var(--max)) / 2)); color: white; background: var(--night-2); }
 .principle h2 span { color: var(--blue-light); }
@@ -94,11 +94,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .check-list li::before { content: "↳"; position: absolute; left: 3px; color: var(--blue); }
 .result-sheet { position: relative; padding: 42px; background: white; box-shadow: var(--shadow); transform: rotate(1deg); }
 .result-sheet::before { content: ""; position: absolute; z-index: -1; inset: 20px -18px -18px 20px; border: 1px solid rgba(43, 114, 255, 0.34); }
-.sheet-top { display: flex; justify-content: space-between; color: #56657a; font-size: 0.65rem; letter-spacing: 0.1em; }
+.sheet-top { display: flex; justify-content: space-between; color: #56657a; font-size: 0.75rem; letter-spacing: 0.1em; }
 .result-sheet h3 { margin: 34px 0px 12px; font-size: 1.55rem; }
 .sheet-rule { height: 3px; margin-bottom: 12px; background: var(--ink); }
 .sheet-row { display: grid; grid-template-columns: 34px 1fr; gap: 14px; padding: 18px 0px; border-bottom: 1px solid var(--line); }
-.sheet-code { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: rgb(232, 240, 255); color: var(--blue); font-size: 0.72rem; font-weight: 900; }
+.sheet-code { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: rgb(232, 240, 255); color: var(--blue); font-size: 0.78rem; font-weight: 900; }
 .sheet-row b { font-size: 0.88rem; }
 .sheet-row p { margin: 3px 0px 0px; color: #56657a; font-size: 0.78rem; }
 .sheet-experiment { margin-top: 24px; padding: 20px; color: white; background: var(--blue); }
@@ -112,14 +112,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .portfolio .section-head p:not(.kicker) { max-width: 600px; margin: 20px 0px 0px; color: rgb(95, 108, 126); }
 .portfolio-grid { display: grid; grid-template-columns: 1fr; gap: 28px; }
 .portfolio-card { padding: 36px 32px; background: white; box-shadow: var(--shadow); border: 1px solid var(--line); }
-.portfolio-label { margin: 0px 0px 12px; color: var(--blue); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; }
+.portfolio-label { margin: 0px 0px 12px; color: var(--blue); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.12em; }
 .portfolio-card h3 { margin: 0px 0px 10px; font-size: 1.28rem; line-height: 1.4; }
 .portfolio-note { margin: 0px 0px 22px; color: #56657a; font-size: 0.82rem; }
 .portfolio-card dl { margin: 0px; }
 .portfolio-card dl > div { display: grid; grid-template-columns: 7.5rem 1fr; gap: 14px; padding: 12px 0px; border-top: 1px solid var(--line); }
 .portfolio-card dt { margin: 0px; color: rgb(82, 96, 117); font-size: 0.78rem; font-weight: 700; }
 .portfolio-card dd { margin: 0px; color: rgb(61, 71, 85); font-size: 0.9rem; line-height: 1.55; }
-.sheet-experiment span { display: block; margin-bottom: 12px; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.12em; }
+.sheet-experiment span { display: block; margin-bottom: 12px; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; }
 .sheet-experiment strong { display: block; font-size: 1rem; }
 .sheet-experiment p { margin: 5px 0px 0px; color: rgba(255, 255, 255, 0.9); font-size: 0.8rem; }
 .fit { padding-top: 80px; }

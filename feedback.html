@@ -6,8 +6,9 @@
   <title>디테일랩에 의견 남기기 | 쓰면서 어려웠던 점</title>
   <meta name="description" content="디테일랩의 네 가지 도구를 본 뒤 느낀 점과 사용을 망설인 이유를 익명으로 남겨 주세요.">
   <meta name="robots" content="noindex,follow">
-  <link rel="stylesheet" href="styles.css?v=20260930-r2">
-  <link rel="stylesheet" href="areas.css?v=20261002-r2">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=20261005-r1">
+  <link rel="stylesheet" href="areas.css?v=20261005-r1">
   <style>
     .response-hero{padding:132px max(24px,calc((100vw - var(--max))/2)) 68px;background:#132035;color:white}
     .response-hero .kicker{color:#8bb4ff}
@@ -79,8 +80,10 @@ button.addEventListener('click',()=>{const open=button.getAttribute('aria-expand
 menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{button.setAttribute('aria-expanded','false');menu.classList.remove('is-open');}));
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&button.getAttribute('aria-expanded')==='true'){button.setAttribute('aria-expanded','false');menu.classList.remove('is-open');button.focus();}});
 const areas={brand:'브랜드 전체',center:'센터 운영 진단',industry:'가게 운영 점검',employee:'직장 선택 기록지',matching:'수업 조건 맞춰보기'};
-const area=new URLSearchParams(location.search).get('area');
-if(Object.hasOwn(areas,area)){const hint=document.getElementById('area-hint');hint.textContent='방금 보신 영역: '+areas[area]+'. 양식에서 같은 항목을 선택해 주세요.';hint.hidden=false;}
+const points={home:'첫 화면',page:'소개 페이지',result:'결과 화면',later:'7일 뒤 사용 후'};
+const params=new URLSearchParams(location.search);
+const area=params.get('area'),point=params.get('point');
+if(Object.hasOwn(areas,area)){const hint=document.getElementById('area-hint');hint.textContent='방금 보신 곳: '+areas[area]+(Object.hasOwn(points,point)?' · '+points[point]:'')+'. 양식에서 같은 항목을 선택해 주세요.';hint.hidden=false;}
 </script>
 </body>
 </html>
