@@ -395,8 +395,8 @@ const TIMES = ["오전","오후","저녁"];
 
 const MEMBER_Q = [
   { text:"지금 목표에 가장 가까운 것은?", options:["체중관리","근력","자세","기타"] },
-  { text:"가능한 요일은?", options:DAYS, multi:true, hint:"가능한 요일을 모두 고른 뒤 다음으로 갑니다." },
-  { text:"가능한 시간대는?", options:TIMES, multi:true, hint:"수업할 수 있는 시간대를 모두 고른 뒤 다음으로 갑니다." },
+  { text:"가능한 요일은?", options:DAYS, multi:true, hint:"퇴근·이동까지 고려해 정기적으로 올 수 있는 요일을 모두 고르세요. 하루만 가능한 일정은 첫 대화에서 따로 확인하세요." },
+  { text:"가능한 시간대는?", options:TIMES, multi:true, hint:"이동·준비 뒤 수업을 시작할 수 있는 시간대를 고르세요. 저녁을 함께 골라도 정확한 시작 시각은 아직 정해지지 않습니다." },
   { text:"주당 몇 회를 원하나요?", options:["1회","2회","3회 이상"] },
   { text:"설명은 어느 쪽이 편한가요?", options:["짧고 핵심만","원리까지","상황마다 다름"] },
   { text:"피드백은 얼마나 자주 듣고 싶나요?", options:["동작마다","세트마다","수업 끝"] },
@@ -405,7 +405,7 @@ const MEMBER_Q = [
 
 const TRAINER_Q = [
   { text:"가능한 요일은?", options:DAYS, multi:true, hint:"수업할 수 있는 요일을 모두 고른 뒤 다음으로 갑니다." },
-  { text:"가능한 시간대는?", options:TIMES, multi:true, hint:"수업할 수 있는 시간대를 모두 고른 뒤 다음으로 갑니다." },
+  { text:"가능한 시간대는?", options:TIMES, multi:true, hint:"이동·준비 뒤 수업을 시작할 수 있는 시간대를 고르세요. 저녁을 함께 골라도 정확한 시작 시각은 아직 정해지지 않습니다." },
   { text:"한 회원과 주당 몇 회까지 가능한가요?", options:["1회","2회","3회 이상"] },
   { text:"수업 방식은 어느 쪽에 가깝나요?", options:["짧고 핵심만","원리설명","회원 반응 따라"] },
   { text:"피드백은 얼마나 자주 하나요?", options:["동작마다","세트마다","수업 끝"] },
@@ -699,6 +699,16 @@ function conversationQuestions(member, trainer){
   ];
 }
 
+
+const BEFORE_AGREEMENT = [
+  "회원이 취소할 때와 트레이너가 취소할 때, 각각 연락 시점·대체 일정·잔여 횟수는 어떻게 확인하나요?",
+  "담당자가 바뀌면 기존 예약·남은 횟수·추가로 약속한 수업을 누가 어떤 기록으로 이어받나요?",
+  "설명한 수업 시간에 상담·정리·개인 운동이 포함되는지, 서로 기대한 범위가 같은가요?"
+];
+function agreementBox(){
+  return '<div class="compare-box"><strong>결제나 다음 예약 전에 놓치기 쉬운 조건</strong>' + BEFORE_AGREEMENT.map(q => '<p class="ask-line">' + q + '</p>').join('') + '<p class="ask-after">이 질문은 계약 조건을 정하거나 환불의 적정성을 판단하지 않습니다. 이미 잘 맞는 일정과 설명 방식은 유지하고, 다른 조건만 직접 확인하세요.</p></div>';
+}
+
 const AFTER_FIRST_LESSON = "첫 수업이 끝나면 설명 방식과 피드백 빈도가 서로 맞았는지, 다음 수업 시간을 정할 수 있는지 한 줄씩 말해 보세요.";
 const CIRCLED = ["①","②","③","④"];
 
@@ -715,6 +725,7 @@ function renderPairResult(){
     <div class="compare-box"><strong>실제 수업 시간 확인</strong><br>${overlapNote(member, trainer)}</div>
     <div class="compare-box"><strong>목표와 일정에서 더 이야기할 것</strong><br>회원이 고른 목표: ${member[0]}<br>트레이너가 수업을 맡기 어려운 일정: ${trainer[5]}<br>목표는 어떤 운동을 뜻하는지, 어려운 일정은 조율할 수 있는지 이야기해 보세요.</div>
     <div class="compare-box"><strong>첫 대화에서 확인할 4가지</strong>${conversationQuestions(member, trainer).map((q, i) => `<p class="ask-line"><span>${CIRCLED[i]}</span> ${q}</p>`).join("")}<p class="ask-after"><strong>첫 수업 뒤에</strong><br>${AFTER_FIRST_LESSON}</p><p class="ask-after">이 표는 추천 점수나 계약 판단이 아니며 수업 예약을 확정하지 않습니다.</p></div>
+    ${agreementBox()}
     <div class="result-actions"><button class="primary" onclick="copyPairResult()">대조 결과 복사하기</button><button class="secondary" onclick="window.print()">인쇄·PDF로 저장</button><a class="feedback-link" href="/feedback.html?area=matching&point=result" target="_blank" rel="noopener noreferrer">함께 쓰면서 어려웠던 점 남기기 →</a><button class="secondary" onclick="clearPair()">대조 결과와 답변 지우기</button><a class="home-link" href="/matching.html">수업 조건 맞춰보기 설명으로 돌아가기</a></div>
   </div>`;
   focusScreen();
@@ -722,7 +733,7 @@ function renderPairResult(){
 
 function copyPairResult(){
   const member = state.pair.member, trainer = state.pair.trainer;
-  const lines=['[디테일랩 · 회원·트레이너 수업 조건 맞춰보기]','두 사람이 각자 공유에 동의한 답입니다. 실제 예약 시간과 비용은 서로 직접 확인하세요.','',...comparePair(member,trainer).map(([label,left,right,read])=>`${label}\n회원: ${left}\n트레이너: ${right}\n확인: ${read}`),'',`실제 수업 시간 확인: ${overlapNote(member, trainer)}`,'',`회원이 고른 목표: ${member[0]}`,`트레이너가 수업을 맡기 어려운 일정: ${trainer[5]}`,'','첫 대화에서 확인할 4가지',...conversationQuestions(member, trainer).map((q,i)=>`${CIRCLED[i]} ${q}`),'',`첫 수업 뒤: ${AFTER_FIRST_LESSON}`,'','이 표는 추천 점수나 계약 판단이 아니며 수업 예약을 확정하지 않습니다.'];
+  const lines=['[디테일랩 · 회원·트레이너 수업 조건 맞춰보기]','두 사람이 각자 공유에 동의한 답입니다. 실제 예약 시간과 비용은 서로 직접 확인하세요.','',...comparePair(member,trainer).map(([label,left,right,read])=>`${label}\n회원: ${left}\n트레이너: ${right}\n확인: ${read}`),'',`실제 수업 시간 확인: ${overlapNote(member, trainer)}`,'',`회원이 고른 목표: ${member[0]}`,`트레이너가 수업을 맡기 어려운 일정: ${trainer[5]}`,'','결제나 다음 예약 전에 놓치기 쉬운 조건',...BEFORE_AGREEMENT,'','첫 대화에서 확인할 4가지',...conversationQuestions(member, trainer).map((q,i)=>`${CIRCLED[i]} ${q}`),'',`첫 수업 뒤: ${AFTER_FIRST_LESSON}`,'','이 표는 추천 점수나 계약 판단이 아니며 수업 예약을 확정하지 않습니다.'];
   copyText(lines.join('\n'), '대조 결과가 복사되었습니다');
 }
 

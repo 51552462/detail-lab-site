@@ -17,7 +17,9 @@ jobs:
         with:
           node-version: '22'
       - name: Check static pages
-        run: python3 check_site.py
+        run: |
+          python3 check_site.py
+          node .github/scripts/check_scenario_content.cjs
 
   customer-flows:
     runs-on: ubuntu-latest
