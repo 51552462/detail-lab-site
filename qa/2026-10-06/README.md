@@ -40,7 +40,7 @@
 
 ### S5 · Tistory 개인 블로그
 
-[공개 원문](https://opm1000.tistory.com/entry/%EB%AF%B8%EC%9A%A9%EC%8B%A4-%EB%85%B8%EC%87%BC-%EB%83%88%EC%A7%80%EB%A7%8C-%EB%8B%B9%EC%9D%BC-%EC%98%88%EC%95%BD-%EB%8B%A4%EC%8B%9C%ED%95%98%EA%B3%A0-%EB%8B%A4%EC%9D%8C%EB%82%A0-%EB%A8%B8%EB%A6%AC%EC%A7%9C%EB%A5%B4%EA%B8%B0) · 게시일 확인 전
+[공개 원문](https://opm1000.tistory.com/entry/%EB%AF%B8%EC%9A%A9%EC%8B%A4-%EB%85%B8%EC%87%BC-%EB%83%88%EC%A7%80%EB%A7%8C-%EB%8B%B9%EC%9D%BC-%EC%98%88%EC%95%BD-%EB%8B%A4%EC%8B%9C%ED%95%98%EA%B3%A0-%EB%8B%A4%EC%9D%8C%EB%82%A0-%EB%A8%B8%EB%A6%AC%EC%A7%9C%EB%A5%B4%EA%B8%B0) · 게시일 2024-12-17
 
 - 관찰: 글쓴이는 예약에 가지 못한 뒤 다시 예약했고, 단골에게 예외를 적용한 응대를 서술했다.
 - 질문 설계에 적용한 추론: 단골 배려를 유지할 부분과 반복 예외로 생긴 혼선을 나눠 확인.
@@ -77,3 +77,16 @@ SNS를 대표성 있는 조사 데이터로 쓰지 않았다. 오래된 게시�
 
 CI 결과 확인 → 360px·1280px 질문/결과/복사 캡처를 실제 열람 → 미확인 경로에 대한 권한 확인 → 승인 범위에서 병합 → 공개 사이트와 Render Live SHA 확인. 현재 수정은 병합·배포됐다고 보고하지 않는다.
 
+## CI와 직접 열람 기록 · 후속 확인
+
+[CI 실행 37458546188](https://github.com/51552462/detail-lab-site/actions/runs/37458546188)은 head 0cfc5ac46bb8f42f9731ded805f353d6b0a6d413의 테스트용 merge SHA 37930fc1fd69058fa4fd65a742ade79d67080b41에서 성공했다. check/customer-flows 모두 통과; 360px·1280px 48개 경로, 실제 테스트 클립보드, JS 오류 0건, 캡처 107장. artifact 11410257373의 SHA256은 e240d203c92a484329920965796329879c5360cd7df8813c6f372e56c4c8e65b다. 공개 사이트 고객 입력이 아니라 CI의 로컬 정적 미리보기·가상 입력이다.
+
+직접 열어 읽은 범위(원본 또는 크기 그대로 이어 붙인 확인용 이미지):
+
+- 360px: center-01~05, store-01~05, shift-01~05, trainer-01~04, employee-record-01~04, matching-overlap-01~04. 결과와 새 기록 3칸·입력 내용·12개 답·복사 버튼을 끝까지 확인했다.
+- 1280px: center-01~04, store-01~04, shift-01~04, trainer-01~03, matching-overlap-01~04의 중앙 결과 영역. 직원 기록지는 employee-record-01~03 원본을 별도로 열어 전체 문구를 읽었다. store-01/shift-01/trainer-01은 원본도 별도로 확인했다.
+- 360px: page-index/center/industry/employee-guide/matching의 hero와 detail. 1280px: page-index/center/industry의 hero.
+- 관찰: 새 입력 칸·값·결과 카드가 읽히고 모바일의 질문·답·버튼에서 가로 넘침이나 겹침을 보지 못했다. 고정 헤더가 상세 요소 캡처 중간에 나타나는 구간은 요소 캡처의 스크롤 위치 영향이어서 실제 첫 화면의 문제로 단정하지 않았다. 기사·게시자의 주장과 실제 고객 성과를 구분하는 문구가 유지돼 있다.
+- 캡처 107장 모두를 열었다는 뜻은 아니다. 미열람: 매칭 안 겹침·요일만·시간만·횟수 충돌 결과 캡처, desktop employee/matching hero와 다섯 소개 페이지의 나머지 상세, feedback hero/detail, home people. unknown 분기는 기능 검사와 복사 검증은 했지만 별도 캡처를 생성·열람하지 않았다. 질문 화면 각 장과 인쇄/PDF 실제 출력은 별도 시각 검수가 남아 있다.
+
+화면 열람 후 소개의 정적 기록 예시·여섯 면접 질문·자가점검 소개/검색 설명에도 기본 표현이 남은 것을 발견해 추가로 심화했다. 그 뒤 customer-flow 기능 코드는 바꾸지 않았고 정적/VM 검사는 다시 통과했다. 최신 head의 CI와 새 소개 예시 캡처는 별도로 확인한다. 수정 PR은 여전히 draft이며 병합·공개 배포 완료가 아니다.
