@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>트레이너 근무 조건 확인 · 디테일랩</title>
-<meta name="description" content="트레이너가 일하는 곳의 정산·회원 배정·교육·운영 기준을 12문으로 확인하고 다음 질문을 정리합니다.">
+<meta name="description" content="수수료뿐 아니라 상담·대기·추가 업무 시간과 취소·담당 변경 때의 실제 적용을 12문으로 돌아보고, 담당자에게 물을 질문을 정리하세요.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://detail-lab-site.onrender.com/trainer-self-check.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="트레이너 근무 조건 확인 · 디테일랩">
-<meta property="og:description" content="정산·배정·교육 조건을 12문으로 확인하고 다음 질문을 정리하세요.">
+<meta property="og:description" content="수수료뿐 아니라 상담·대기·추가 업무 시간과 취소·담당 변경 때의 실제 적용을 12문으로 돌아보고, 담당자에게 물을 질문을 정리하세요.">
 <meta property="og:image" content="https://detail-lab-site.onrender.com/og-employee.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:description" content="정산·배정·교육 조건을 12문으로 확인하고 다음 질문을 정리하세요.">
+<meta name="twitter:description" content="수수료뿐 아니라 상담·대기·추가 업무 시간과 취소·담당 변경 때의 실제 적용을 12문으로 돌아보고, 담당자에게 물을 질문을 정리하세요.">
 <meta name="twitter:title" content="트레이너 근무 조건 확인 · 디테일랩">
 <meta name="twitter:image" content="https://detail-lab-site.onrender.com/og-employee.png">
 <style>
@@ -361,6 +361,12 @@
   .brandline a.mark:hover{ color:var(--ink); }
   .home-link{ display:block; padding:10px; text-align:center; color:var(--ink-dim); font-size:13px; text-underline-offset:4px; }
   [tabindex="-1"]:focus{ outline:none; }
+
+.case-notes{margin:18px 0;padding:18px;border:1px solid var(--line,#303440);border-radius:12px}
+.case-notes h3{font-size:17px;margin:0 0 10px}
+.case-notes label{display:block;margin:12px 0;font-size:14px;line-height:1.6}
+.case-notes input{display:block;width:100%;max-width:100%;box-sizing:border-box;margin-top:6px;padding:11px;border:1px solid var(--line,#303440);border-radius:6px;background:var(--bg,#101216);color:var(--ink,#f1f3f7);font:inherit}
+
 </style>
 </head>
 <body>
@@ -390,111 +396,51 @@ const CATEGORIES = [
 ];
 
 const QUESTIONS = [
-  { cat:0, text:"이번 달 실수령액이 얼마인지, 정산 전에 미리 계산할 수 있나요?", options:[
-    {t:"수수료율·기준을 정확히 알고 있어 계산 가능하다", s:3},
-    {t:"대략은 알지만 정확한 금액은 정산일에 봐야 안다", s:2},
-    {t:"수수료 기준이 자주 바뀌거나 애매하다", s:1},
-    {t:"정산 방식 자체를 제대로 설명 들은 적이 없다", s:0},
-  ]},
-  { cat:0, text:"수업 외 업무(청소·상담·대기)는 급여에 어떻게 반영되는지 정해져 있나요?", options:[
-    {t:"명확히 정해져 있고 대체로 지켜진다", s:3},
-    {t:"있긴 하지만 가끔 안 지켜진다", s:2},
-    {t:"정해진 기준 없이 추가로 맡는다", s:1},
-    {t:"아직 확인해 본 적이 없다", s:0},
-  ]},
-  { cat:1, text:"신규 회원이 들어오면 트레이너 배정 기준이 있나요?", options:[
-    {t:"명확한 기준(순번, 실적 등)이 있다", s:3},
-    {t:"대표·점장 재량이지만 대체로 공정하다", s:2},
-    {t:"특정 트레이너에게 몰리거나 쏠림이 있다", s:1},
-    {t:"기준을 알 수 없고 불만이 반복된다", s:0},
-  ]},
-  { cat:1, text:"이번 달 목표 PT 세션 수 또는 매출 목표가 현실적으로 달성 가능한가요?", options:[
-    {t:"달성 가능한 수준이고 근거도 납득된다", s:3},
-    {t:"빠듯하지만 가능은 하다", s:2},
-    {t:"거의 매달 달성하지 못한다", s:1},
-    {t:"목표만 전달받았고 정한 이유는 모른다", s:0},
-  ]},
-  { cat:2, text:"담당하던 회원이 다른 트레이너나 센터로 옮길 때 절차가 있나요?", options:[
-    {t:"절차·기록이 있고 트레이너 의견도 반영된다", s:3},
-    {t:"절차는 있지만 형식적이다", s:2},
-    {t:"그때그때 다르고 트레이너는 통보만 받는다", s:1},
-    {t:"이런 일이 생겨도 아무 설명이 없다", s:0},
-  ]},
-  { cat:2, text:"환불 요청이나 회원 불만이 생기면 센터는 어떻게 처리하나요?", options:[
-    {t:"사실을 확인하고 트레이너와 상의해 처리한다", s:3},
-    {t:"상황에 따라 다르다", s:2},
-    {t:"대체로 트레이너 책임으로 처리된다", s:1},
-    {t:"트레이너와 상의 없이 일방적으로 처리된다", s:0},
-  ]},
-  { cat:3, text:"입사 후 수업과 업무에 필요한 교육을 받았나요?", options:[
-    {t:"체계적인 교육 과정이 있었다", s:3},
-    {t:"간단히 있었지만 부족했다", s:2},
-    {t:"선배가 짬짬이 알려주는 정도였다", s:1},
-    {t:"아무 교육 없이 바로 투입됐다", s:0},
-  ]},
-  { cat:3, text:"이 센터에서 1년 뒤 내 역할이나 직급이 어떻게 바뀔지 그려지나요?", options:[
-    {t:"명확한 승진·성장 경로가 있다", s:3},
-    {t:"대략 있지만 사람에 따라 다르다", s:2},
-    {t:"역할이 바뀌는 기준을 알지 못한다", s:1},
-    {t:"아직 확인해 본 적이 없다", s:0},
-  ]},
-  { cat:4, text:"센터에 트레이너용 업무 매뉴얼이나 운영 기준 문서가 있나요?", options:[
-    {t:"있고 실제로 참고한다", s:3},
-    {t:"있지만 안 본 지 오래됐다", s:2},
-    {t:"예전에 만들다 만 것 같은 게 있다", s:1},
-    {t:"없다", s:0},
-  ]},
-  { cat:4, text:"대표·점장이 며칠 자리를 비워도 매장이 평소처럼 돌아갈까요?", options:[
-    {t:"담당자와 기준이 정해져 있어 큰 문제 없이 운영된다", s:3},
-    {t:"운영은 되지만 일부 처리가 늦어진다", s:2},
-    {t:"꽤 혼란스러워질 것 같다", s:1},
-    {t:"대표가 없으면 처리하지 못할 일이 많을 것 같다", s:0},
-  ]},
-  { cat:5, text:"최근 6개월 사이 그만둔 동료 트레이너가 몇 명인가요?", options:[
-    {t:"없거나 1명 이하", s:3},
-    {t:"2명 정도", s:2},
-    {t:"3~4명", s:1},
-    {t:"5명 이상이거나 정확히 기억나지 않는다", s:0},
-  ]},
-  { cat:5, text:"동료가 그만둘 때 이유를 주변에서 대체로 알고 있나요?", options:[
-    {t:"대부분 납득 가능한 개인 사유였다", s:3},
-    {t:"일부는 근무 환경 때문이었다", s:2},
-    {t:"대부분 급여·대우 문제였다", s:1},
-    {t:"이유를 들은 적이 없다", s:0},
-  ]},
+  {"cat":0,"text":"환불·담당 변경이 생긴 수업 건의 정산을 실제로 대조할 수 있나요?","options":[{"t":"판매·사용·변경 기록과 내 정산 적용 항목을 맞춰 볼 수 있다","s":3},{"t":"정산 금액은 알지만 개별 변경 사유는 다시 물어봐야 한다","s":2},{"t":"센터가 알려 준 합계만 확인한다","s":1},{"t":"내 예상과 지급 내용이 다른데 적용 기준을 못 찾는다","s":0},{"t":"최근 해당 사례 없음·확인 전","s":null}]},
+  {"cat":0,"text":"상담·청소·대기까지 포함한 지난주 투입 시간과 받은 금액을 비교해 봤나요?","options":[{"t":"수업과 기타 시간을 나눠 적고 지급 항목과 대조했다","s":3},{"t":"수업 시간과 받은 금액만 비교했다","s":2},{"t":"바빴다는 느낌은 있지만 전체 투입 시간은 모른다","s":1},{"t":"비수업 업무가 늘어도 정산 조건을 확인하지 못했다","s":0},{"t":"최근 해당 사례 없음·확인 전","s":null}]},
+  {"cat":1,"text":"센터가 배정해 주는 회원과 내가 데려온 회원의 조건은 어떻게 다른가요?","options":[{"t":"배정 방식·지원 업무·정산 적용을 구분해 확인했다","s":3},{"t":"수수료율은 알지만 센터가 제공하는 지원 범위는 모호하다","s":2},{"t":"회원 유입 경로가 달라도 모두 같은 조건으로 알고 있다","s":1},{"t":"배정 약속과 실제 들어온 상담이 달라도 설명을 못 받았다","s":0},{"t":"최근 해당 사례 없음·확인 전","s":null}]},
+  {"cat":1,"text":"매출 목표를 높인 달에 가능한 상담·수업 시간도 함께 조정됐나요?","options":[{"t":"유입 상담·수업 자리·기타 업무를 보고 목표와 배정을 조율했다","s":3},{"t":"목표 설명은 들었지만 사용할 시간은 그대로였다","s":2},{"t":"기존 수업 사이에 상담을 추가해야 했다","s":1},{"t":"목표를 못 맞춘 이유를 확인하지 않고 같은 압박이 반복됐다","s":0},{"t":"최근 해당 사례 없음·확인 전","s":null}]},
+  {"cat":2,"text":"센터나 담당자가 수업을 취소했을 때 회원 횟수와 내 정산은 어떻게 처리되나요?","options":[{"t":"취소 주체·대체 수업·회원 횟수·정산 적용을 함께 확인했다","s":3},{"t":"회원의 대체 수업은 정했지만 내 정산은 따로 확인해야 한다","s":2},{"t":"직원마다 다른 설명을 해 어떤 기준인지 모른다","s":1},{"t":"회원 기록과 내 정산 내용이 서로 다르게 남았다","s":0},{"t":"최근 해당 사례 없음·확인 전","s":null}]},
+  {"cat":2,"text":"회원 불만이 내 수업과 판매 때 약속의 차이에서 생기면 무엇을 대조하나요?","options":[{"t":"판매 약속·실제 수업·회원 요청을 확인한 뒤 처리 내용을 공유한다","s":3},{"t":"회원 요청은 듣지만 판매 때 약속한 내용은 못 본다","s":2},{"t":"원인을 확인하기 전에 추가 수업을 맡는다","s":1},{"t":"기록 없이 내 책임이라고 정리된다","s":0},{"t":"최근 해당 사례 없음·확인 전","s":null}]},
+  {"cat":3,"text":"체험·무료 상담에 들어간 준비와 사후 연락은 어느 업무·보상에 포함되나요?","options":[{"t":"수업·상담·후속 연락의 맡을 범위와 보상을 확인했다","s":3},{"t":"상담은 맡지만 준비·후속 연락 범위는 불명확하다","s":2},{"t":"회원이 결제할 때만 보상이 있고 나머지 시간은 따로 보지 않는다","s":1},{"t":"체험 상담이 계속 늘어도 내 업무 조건을 확인하지 못했다","s":0},{"t":"최근 해당 사례 없음·확인 전","s":null}]},
+  {"cat":3,"text":"팀장·교육 역할이 추가되면 기존 수업 시간과 정산은 무엇이 달라지나요?","options":[{"t":"추가 역할·투입 시간·기존 수업·보상을 함께 확인했다","s":3},{"t":"역할과 보상은 들었지만 수업을 줄일 수 있는지는 미정이다","s":2},{"t":"기존 수업을 유지한 채 추가 업무도 맡는다","s":1},{"t":"역할만 늘고 조정할 담당자와 기준을 모른다","s":0},{"t":"최근 해당 사례 없음·확인 전","s":null}]},
+  {"cat":4,"text":"판매 담당자가 약속한 추가 수업을 내가 맡을 때 무엇을 확인할 수 있나요?","options":[{"t":"약속·승인·담당 시간·정산 조건을 제공 전에 확인한다","s":3},{"t":"추가 횟수는 알지만 누가 제공하고 정산할지는 미정이다","s":2},{"t":"회원에게 듣고 뒤늦게 센터에 확인한다","s":1},{"t":"각자 다른 약속을 알고 있어 수업이 지연된다","s":0},{"t":"최근 해당 사례 없음·확인 전","s":null}]},
+  {"cat":4,"text":"내 일정은 비어 보여도 이동·준비·회원 기록 때문에 수업을 못 늘릴 때 어떻게 조정하나요?","options":[{"t":"전체 투입 시간을 공유하고 실제 가능한 배정을 정한다","s":3},{"t":"일정 문제는 알리지만 비수업 시간은 배정에 반영되지 않는다","s":2},{"t":"회원 예약을 먼저 받고 뒤 일정을 맞춘다","s":1},{"t":"이동·준비가 다음 수업을 계속 밀리게 한다","s":0},{"t":"최근 해당 사례 없음·확인 전","s":null}]},
+  {"cat":5,"text":"동료의 회원을 인계받으면 기존 약속과 새 일정·정산을 확인할 수 있나요?","options":[{"t":"잔여·예약·특별 약속·정산 적용을 기존 기록과 대조한다","s":3},{"t":"예약과 잔여는 받았지만 특별 약속은 빠졌다","s":2},{"t":"회원에게 이전 내용을 다시 설명해 달라고 한다","s":1},{"t":"기존 담당과 센터의 기록이 달라 인계가 멈춘다","s":0},{"t":"최근 해당 사례 없음·확인 전","s":null}]},
+  {"cat":5,"text":"인원이 비어 동료 업무까지 맡게 되면, 언제까지 어떤 일을 더 맡는지 정해졌나요?","options":[{"t":"임시 담당·조정할 수업·보상·재확인 시점을 함께 정했다","s":3},{"t":"임시 담당은 정했지만 종료 시점과 수업 조정은 미정이다","s":2},{"t":"추가 수업·상담을 기존 일정에 계속 넣는다","s":1},{"t":"업무가 늘어도 조정할 사람이나 확인 시점이 없다","s":0},{"t":"최근 해당 사례 없음·확인 전","s":null}]}
 ];
 
 // 영역마다 센터 담당자에게 그대로 물어볼 수 있는 질문 3개. 동료가 그만둔 이유는 추측하지 않고 센터의 대응을 묻는다.
 const FOLLOWUPS = [
   [
-    "이번 달 정산 금액은 어떤 자료로, 언제 확인할 수 있나요?",
-    "수수료율이나 정산 기준이 바뀌면 누가 언제 알려 주나요?",
-    "수업 외 업무(청소·상담·대기)는 급여에 어떻게 반영되나요?"
+    "환불·담당 변경 한 건의 판매·사용·변경 기록과 제 정산 적용 항목을 함께 볼 수 있을까요?",
+    "상담·청소·대기·이동을 포함한 제 투입 시간은 어느 지급 항목에 포함되나요?",
+    "센터가 배정한 회원과 제가 데려온 회원에서 제공되는 지원과 정산 조건은 무엇이 다른가요?"
   ],
   [
-    "신규 회원은 어떤 기준으로, 누가 트레이너에게 배정하나요?",
-    "이번 달 목표 세션 수(또는 매출 목표)는 어떤 근거로 정해졌나요?",
-    "목표에 못 미친 달에는 배정이나 급여에 어떤 영향이 있나요?"
+    "배정해 준다고 안내한 회원과 실제 상담 유입을 어떤 기록으로 확인할 수 있나요?",
+    "목표를 정할 때 가능한 수업 자리·상담 시간·기타 업무를 함께 볼 수 있을까요?",
+    "목표와 유입 상담이 맞지 않는 달에는 배정이나 업무 시간을 누가 조정하나요?"
   ],
   [
-    "담당 회원이 다른 트레이너나 센터로 옮겨 갈 때 정해진 절차가 있나요? 담당 트레이너에게는 언제 알려 주나요?",
-    "환불이나 컴플레인이 생기면 누가 사실관계를 확인하고, 트레이너에게는 어떻게 공유하나요?",
-    "그 과정에서 트레이너의 의견은 어디에 기록되나요?"
+    "회원 취소와 센터 취소 각각에서 대체 수업·횟수·제 정산에 적용하는 조건을 확인할 수 있을까요?",
+    "판매 때 약속한 내용과 실제 수업이 다르면 어떤 기록을 보고 누가 회원에게 설명하나요?",
+    "추가 수업을 제안하기 전에 담당자 시간과 보상은 어떻게 확인하나요?"
   ],
   [
-    "입사 후 첫 주에는 누가 어떤 내용을 알려 주나요?",
-    "교육이나 피드백은 정해진 일정이 있나요?",
-    "1년 뒤 역할이나 직급이 바뀌는 기준이 있다면 무엇인가요?"
+    "체험 상담의 준비·사후 연락까지 포함하면 어디까지 제 업무이고 보상은 어떻게 적용되나요?",
+    "교육·팀장 역할이 추가되면 기존 수업·투입 시간·정산은 무엇이 달라지나요?",
+    "변경한 역할이 실제로 가능한지 언제 누구와 다시 확인하나요?"
   ],
   [
-    "트레이너가 볼 수 있는 업무 기준 문서가 있나요? 마지막으로 고친 때는 언제인가요?",
-    "대표나 점장이 없을 때 회원 요청은 누구에게 물어보면 되나요?",
-    "제가 바로 답해도 되는 범위는 어디까지인가요?"
+    "판매 담당자가 약속한 추가 수업의 승인·제공 담당·일정·정산 조건을 확인할 수 있을까요?",
+    "이동·준비·회원 기록 시간을 포함한 실제 가능한 예약을 함께 조정할 수 있을까요?",
+    "이미 회원에게 한 약속을 수정해야 하면 누가 언제 안내하나요?"
   ],
   [
-    "동료가 그만둘 때 맡던 회원과 업무는 어떻게 넘기나요?",
-    "지금 채용 중인 자리가 있나요? 인원이 비면 수업과 일정은 어떻게 조정하나요?",
-    "최근 1년간 트레이너가 이 센터에서 일한 기간은 보통 어느 정도인가요?"
+    "동료 회원을 인계받을 때 잔여 횟수·예약·특별 약속·정산 적용을 같이 확인할 수 있을까요?",
+    "인원 공백으로 더 맡는 수업과 상담은 언제까지이며, 기존 업무와 보상은 어떻게 조정하나요?",
+    "누락된 약속이나 추가 부담을 언제 누구와 다시 확인하나요?"
   ]
 ];
 
@@ -520,11 +466,39 @@ function focusScreen(){
 
 // 영역마다 문항 수가 같지 않아도 비교되도록 가장 좋은 답 대비 비율로 주제를 고른다.
 function analyze(){
-  const totals = CATEGORIES.map((_, cat) => QUESTIONS.reduce((sum, q, i) => sum + (q.cat === cat ? state.answers[i] : 0), 0));
-  const counts = CATEGORIES.map((_, cat) => QUESTIONS.filter(q => q.cat === cat).length);
-  const ratios = totals.map((sum, i) => sum / (counts[i] * 3));
-  const focus = ratios.indexOf(Math.min(...ratios));
-  return { focus, allBest: ratios[focus] === 1, same: CATEGORIES.filter((_, i) => ratios[i] === ratios[focus]) };
+  // 사례 없음·확인 전은 문제 점수로 보지 않는다. 숫자는 검토 주제를 고르기 위한 내부 배열값이다.
+  const counts = CATEGORIES.map((_, cat) => QUESTIONS.filter((q, i) => q.cat === cat && Number.isFinite(state.answers[i])).length);
+  const totals = CATEGORIES.map((_, cat) => QUESTIONS.reduce((sum, q, i) => sum + (q.cat === cat && Number.isFinite(state.answers[i]) ? state.answers[i] : 0), 0));
+  const ratios = totals.map((sum, i) => counts[i] ? sum / (counts[i] * 3) : Infinity);
+  const known = state.answers.filter(Number.isFinite);
+  const noneKnown = known.length === 0;
+  const focus = noneKnown ? 0 : ratios.indexOf(Math.min(...ratios));
+  return { focus, noneKnown, unknown: QUESTIONS.length - known.length, allBest: known.length > 0 && known.every(n => n === 3), same: noneKnown ? [] : CATEGORIES.filter((_, i) => ratios[i] === ratios[focus]) };
+}
+
+
+function evidenceBox(){
+  return '<div class="case-notes"><h3>잘되는 점과 바뀐 결과를 함께 남기세요</h3><p class="fineprint">본인이 확인한 내용만 적으세요. 직원·회원 실명이나 연락처는 쓰지 마세요. 새로고침하면 사라지므로 결과와 함께 복사해 두세요.</p><label>유지할 좋은 점과 확인한 근거<input id="dl-keep" maxlength="180" placeholder="예: 예약 확정 안내는 직원 둘이 같은 문장을 쓰고, 최근 기록도 같다"></label><label>바꾸기 전 기록과 다시 볼 것<input id="dl-before" maxlength="180" placeholder="예: 최근 7일 전체 예약·안내 번복 건수·수습 시간. 모르면 확인 전"></label><label>다른 불편이 생기면 멈출 조건<input id="dl-stop" maxlength="180" placeholder="예: 새 안내 뒤 기존 손님이 더 혼란스러워하면 이유를 확인하고 수정"></label></div>';
+}
+function evidenceLines(){
+  const value = id => document.getElementById(id).value.trim() || '확인 전';
+  return ['직접 적은 확인 기록', '유지할 좋은 점·근거: ' + value('dl-keep'), '실행 전 기록·다시 볼 것: ' + value('dl-before'), '멈추거나 수정할 조건: ' + value('dl-stop')];
+}
+
+function preservedAnswers(){
+  return QUESTIONS.filter((q, i) => state.answers[i] === 3).map(q => q.text).slice(0, 2);
+}
+
+function preserveBox(){
+  const kept = preservedAnswers();
+  return '<div class="compare-box"><strong>바꾸기 전에 지킬 점</strong><br>' + (kept.length
+    ? '아래 장면은 잘 처리했다고 답했습니다. 실제 기록과 담당자에게 확인한 뒤, 이 부분까지 한꺼번에 바꾸지는 마세요.<ul>' + kept.map(q => '<li>' + q + '</li>').join('') + '</ul>'
+    : '이번 답만으로 강점을 정할 수는 없습니다. 잘 해결한 실제 한 건을 담당자와 골라, 유지할 응대·약속·기록을 먼저 적어 보세요.') + '</div>';
+}
+
+function preserveLines(){
+  const kept = preservedAnswers();
+  return ['바꾸기 전에 지킬 점: 잘 처리했다고 답한 장면도 실제 기록과 담당자에게 확인한 뒤 유지하세요.', ...(kept.length ? kept.map(q => '확인할 장면: ' + q) : ['확인할 장면: 잘 해결한 실제 한 건을 별도로 고르세요.'])];
 }
 
 function copyText(text, okMessage){
@@ -553,26 +527,27 @@ const STEADY_FOLLOWUPS = [
 function followupsFor(a){ return a.allBest ? STEADY_FOLLOWUPS : FOLLOWUPS[a.focus]; }
 
 function focusNote(a){
-  if (a.allBest) return '답변에서는 바로 확인할 문제가 보이지 않았습니다. 아래 질문으로 들은 설명이 문서에도 같은지 확인해 두세요.';
+  if (a.noneKnown) return '실제 사례에 답한 항목이 없어 근무 조건을 판단하지 않았습니다. 아래 질문은 확인을 시작하는 참고입니다.';
+  if (a.allBest) return '답변에서는 바로 확인할 문제가 보이지 않았습니다. 아래 질문으로 들은 설명이 문서에도 같은지 확인해 두세요.' + (a.unknown ? ` 확인 전·사례 없음 ${a.unknown}개는 비교에서 제외했습니다. 확인한 일부 답만으로 전체 상태를 판단하지 않습니다.` : '');
   let tie = '';
   if (a.same.length > 1){
     const which = a.same.length === CATEGORIES.length ? '답변만으로는 먼저 볼 주제를 하나로 가리기 어렵습니다.' : `함께 살펴볼 주제: ${a.same.join(', ')}.`;
     tie = `${which} 이 경우 목록에서 앞에 있는 ‘${CATEGORIES[a.focus]}’을 먼저 보여 줍니다. 가장 급한 주제는 직접 고르세요.`;
   }
   const lead = tie || `고른 답을 항목별로 정리해 ‘${CATEGORIES[a.focus]}’을 먼저 보여 드립니다.`;
-  return `${lead} 결과만으로 센터를 평가하거나 이직을 결정하지 말고, 실제 조건을 확인해 보세요.`;
+  return `${lead} 결과만으로 센터를 평가하거나 이직을 결정하지 말고, 실제 조건을 확인해 보세요. 확인 전·사례 없음 ${a.unknown}개는 비교에서 제외했습니다.`;
 }
 
 function renderIntro(){
   screen.innerHTML = `
     <div class="intro">
       <h1>지금 일하는 곳에서<br>먼저 확인할 조건은?</h1>
-      <p class="lead">급여 정산, 회원 배정, 교육에 관한 12개 질문에 답하세요. 결과에서 센터 담당자에게 물어볼 질문을 정리해 가져갈 수 있습니다. 약 3분, 무료입니다.</p>
+      <p class="lead">수수료율은 같아도 상담·대기 시간이나 취소 때 적용되는 지급 항목은 다를 수 있습니다. 최근 한 건으로 12문에 답하고, 설명과 실제 적용이 엇갈린 부분을 담당자에게 물어볼 질문으로 가져가세요. 약 5분, 무료입니다.</p>
 
       <div class="facts">
         <div class="fact"><b>12</b> 문항</div>
         <div class="fact"><b>6</b> 영역</div>
-        <div class="fact"><b>3분</b> 내외</div>
+        <div class="fact"><b>5분</b> 내외</div>
       </div>
 
       <div class="cat-preview">
@@ -607,7 +582,7 @@ function renderQuestion(){
   screen.innerHTML = `
     ${renderProgress()}
     <div class="q-meta">${state.idx + 1} / ${QUESTIONS.length} · ${catLabel}</div>
-    <div class="q-text">${q.text}</div>
+    <div class="q-text">${q.text}</div><p class="fineprint">최근 4주 안의 실제 처리에 가장 가까운 답을 고르세요. 해당 사례가 없거나 기억·기록을 확인하지 못했다면 마지막 답을 고르세요.</p>
     <div class="options">
       ${q.options.map((o,oi)=>{const on=state.texts[state.idx]===o.t;return `<button class="option-btn${on?' on':''}" aria-pressed="${on}" onclick="answer(${oi})">${o.t}</button>`;}).join('')}
     </div>
@@ -646,8 +621,10 @@ function renderResult(){
     <div class="result">
       <div class="result-band band-caution">내 답변 정리</div>
       <p class="result-headline">${focusNote(a)}</p>
+      ${preserveBox()}
       <div class="insight-box"><span class="cat-name">${followupTitle}</span><ol>${followups.map(q => `<li>${q}</li>`).join('')}</ol></div>
       <div class="compare-box"><strong>누구에게 확인하나요?</strong><br>급여·회원 배정·교육을 맡는 센터 담당자에게 물어보세요. 중요한 답은 계약서나 공지, 메시지에도 적혀 있는지 확인해 두세요.</div>
+      ${evidenceBox()}
       <div class="cat-block">
         <h3>내가 고른 12개 답</h3>
         ${QUESTIONS.map((q,i)=>`<div class="cat-item"><div class="cat-item-top"><span class="name">${q.text}</span></div><p>${state.texts[i]}</p></div>`).join('')}
@@ -667,6 +644,8 @@ function copyResult(){
   const a = analyze();
   const lines = [
     '[디테일랩 · 트레이너 근무 조건 확인]',
+    focusNote(a),
+    ...preserveLines(),...evidenceLines(),
     a.allBest ? '문서로 한 번 더 확인할 것:' : `먼저 물을 질문 (${CATEGORIES[a.focus]}):`,
     ...followupsFor(a).map((q,i) => `${i+1}. ${q}`),
     '확인할 사람: 센터 담당자에게 실제 조건을 묻고 관련 문서에서 확인하세요.',

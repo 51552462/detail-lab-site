@@ -110,7 +110,7 @@ async function landingPages(page, origin, viewport) {
 
 async function quiz(page, origin, viewport, filename, tool) {
   const outputs = [];
-  for (const choice of [0, 3]) {
+  for (const choice of [0, 3, 4]) {
     await page.goto(`${origin}/${filename}`);
     await page.locator('button[onclick="startQuiz()"]').click();
     const firstText = await page.locator('.option-btn').nth(choice).innerText();
@@ -124,12 +124,16 @@ async function quiz(page, origin, viewport, filename, tool) {
     assert.equal(await page.locator('.option-btn[aria-pressed="true"]').innerText(), changedText);
     for (let i = 0; i < 12; i++) await page.locator('.option-btn').nth(choice).click();
     assert.equal(await page.locator('.cat-item').count(), 12);
+    for (const id of ['dl-keep', 'dl-before', 'dl-stop']) await page.locator(`#${id}`).fill(`가상 검증 기록: ${id}`);
     if (choice === 3 && ['store', 'shift'].includes(tool)) {
       await page.locator('#record-case').fill('가상 테스트: 교대 뒤 예약 문의 재확인');
       await page.locator('#record-action').fill('다음 담당자가 오전 11시까지 답변');
       await page.locator('#record-review').fill('7일 뒤 같은 문의가 돌아온 횟수');
     }
     const copy = await copied(page, page.locator('button[onclick="copyResult()"]'), `${viewport}-${tool}-${choice}-copy.txt`);
+    for (const id of ['dl-keep', 'dl-before', 'dl-stop']) assert.ok(copy.includes(`가상 검증 기록: ${id}`), `${tool}: new evidence fields must survive copying`);
+    assert.ok((await page.locator('.result').innerText()).includes('바꾸기 전에 지킬 점'));
+    if (choice === 4) assert.ok(copy.includes('실제 사례에 답한 항목이 없어'), 'unknown answers must not be treated as a diagnosed problem');
     if (choice === 3 && ['store', 'shift'].includes(tool)) {
       for (const entry of ['가상 테스트: 교대 뒤 예약 문의 재확인', '다음 담당자가 오전 11시까지 답변', '7일 뒤 같은 문의가 돌아온 횟수']) assert.ok(copy.includes(entry), `${tool} recorded case must survive copying`);
     }
@@ -140,7 +144,7 @@ async function quiz(page, origin, viewport, filename, tool) {
       if (await page.locator('details.why-box').count()) await page.locator('details.why-box').evaluate(el => { el.open = true; });
       await screenshotResult(page, viewport, tool);
     }
-    record(viewport, tool, choice === 0 ? 'first answers' : 'last answers', '12 answers → result → real clipboard; previous answer retained and changed; no horizontal overflow');
+    record(viewport, tool, choice === 0 ? 'first answers' : choice === 4 ? 'unknown answers' : 'last scored answers', '12 answers → result → real clipboard; previous answer retained and changed; preservation and evidence fields; no horizontal overflow');
   }
   assert.notEqual(outputs[0], outputs[1], 'different answers must not produce identical copied results');
 }
