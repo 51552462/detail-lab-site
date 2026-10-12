@@ -422,3 +422,13 @@
   .privacy-strip a { display: inline-flex; align-items: center; min-height: 44px; }
   .build-record li a { margin-top: 4px; }
 }
+
+
+/* Owner-authored brand direction, 2026-10-12. */
+.category-card-wide { grid-column: 1 / -1; min-height: 0; border-top: 1px solid var(--line); }
+.category-card-wide > p { max-width: 760px; }
+.category-card-wide .card-links { margin-top: 0; }
+.subhero-business { background: radial-gradient(circle at 83% 15%, rgba(43,114,255,.24), transparent 35%), var(--night); }
+.founder-context { background: var(--paper, #f4f7fb); }
+.business-steps { margin-top: 32px; }
+@media (min-width: 981px) { .site-nav { gap: 16px; } .site-nav a { font-size: .84rem; } }

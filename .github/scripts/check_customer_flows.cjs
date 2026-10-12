@@ -16,7 +16,7 @@ const out = path.resolve(process.argv[2] || path.join(root, 'customer-flow-artif
 const report = { sha: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root }).toString().trim(),
   startedAt: new Date().toISOString(), environment: 'local static preview; synthetic inputs; no form submissions',
   visualReview: 'not performed by this script', sources: {}, checks: [], screenshots: [], errors: [] };
-const pages = ['index.html', 'center.html', 'industry.html', 'employee-guide.html', 'matching.html', 'feedback.html',
+const pages = ['index.html', 'center.html', 'industry.html', 'employee-guide.html', 'matching.html', 'business.html', 'feedback.html',
   'owner-structure-check.html', 'industry-self-check.html', 'guide-self-check.html',
   'trainer-self-check.html', 'matching-self-check.html', 'areas.css'];
 const record = (viewport, tool, branch, details) => {
@@ -69,11 +69,12 @@ async function noOverflow(page) {
 
 async function landingPages(page, origin, viewport) {
   for (const [file, heading, primary, detail] of [
-    ['index.html', '일은 계속 돌아오고', '#doors', '.category-grid'],
+    ['index.html', '반복되는 문제를 줄이고', '#doors', '.category-grid'],
     ['center.html', '작은 결정도', '/owner-structure-check.html', '.path-grid'],
     ['industry.html', '사장님께 확인할게요', '/industry-self-check.html', '.example-output'],
-    ['employee-guide.html', '급여는 들었는데', '#worksheet', '.example-output'],
+    ['employee-guide.html', '면접 때 들은 조건', '#worksheet', '.example-output'],
     ['matching.html', '저녁 가능', '/matching-self-check.html?role=member', '.example-output'],
+    ['business.html', '어디서부터 꼬였는지', '#contact', '.business-steps'],
     ['feedback.html', '설명이 헷갈렸나요', 'https://wary-crocus-59c.notion.site/1ee8a0d648944e8abf0d7da9897ae80e', '.response-card']
   ]) {
     await page.goto(`${origin}/${file}`);
@@ -87,13 +88,7 @@ async function landingPages(page, origin, viewport) {
     assert.ok(await action.isVisible());
     assert.ok((await action.boundingBox()).height >= 44, `primary action must be fully readable and tappable: ${file}`);
     await noOverflow(page);
-    if (file === 'index.html') {
-      assert.equal(await page.locator('#privacy-detail dt').count(), 5, 'home must say who answers, reads and decides for each tool');
-      assert.equal(await page.locator('#people .offer-steps li').count(), 4);
-      const people = `${viewport}-page-index-people.png`;
-      await page.locator('#people').screenshot({ path: path.join(out, people) });
-      report.screenshots.push({ viewport, name: 'page-index-people', filename: people, selector: '#people' });
-    }
+
     const name = file.replace('.html', '');
     // Element screenshots scroll the page; restore the actual first screen before saving its evidence.
     await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo({ top: 0, behavior: 'instant' }); });
@@ -101,9 +96,27 @@ async function landingPages(page, origin, viewport) {
     const first = `${viewport}-page-${name}-hero.png`;
     await page.screenshot({ path: path.join(out, first) });
     report.screenshots.push({ viewport, name: `page-${name}-hero`, filename: first, scrollY: 0 });
+    if (file === 'index.html') {
+      assert.equal(await page.locator('#privacy-detail dt').count(), 5, 'home must say who answers, reads and decides for each tool');
+      assert.equal(await page.locator('#people .offer-steps li').count(), 4);
+      const people = `${viewport}-page-index-people.png`;
+      await page.locator('#people').screenshot({ path: path.join(out, people), style: '.site-header, .skip-link { visibility: hidden !important; }' });
+      report.screenshots.push({ viewport, name: 'page-index-people', filename: people, selector: '#people' });
+    }
     const section = `${viewport}-page-${name}-detail.png`;
-    await page.locator(detail).screenshot({ path: path.join(out, section) });
+    await page.locator(detail).screenshot({ path: path.join(out, section), style: '.site-header, .skip-link { visibility: hidden !important; }' });
     report.screenshots.push({ viewport, name: `page-${name}-detail`, filename: section, selector: detail });
+    const additionalSections = {
+      'center.html': ['.founder-context'],
+      'industry.html': ['.offer-intro', '.copy-why'],
+      'employee-guide.html': ['.offer-intro', '.copy-scene', '.copy-why', '.copy-compare', '.offer-detail'],
+      'business.html': ['.offer-intro', '.copy-why', '#contact', '.copy-faq']
+    }[file] || [];
+    for (const [index, selector] of additionalSections.entries()) {
+      const filename = `${viewport}-page-${name}-answer-${index + 1}.png`;
+      await page.locator(selector).screenshot({ path: path.join(out, filename), style: '.site-header, .skip-link { visibility: hidden !important; }' });
+      report.screenshots.push({ viewport, name: `page-${name}-answer-${index + 1}`, filename, selector });
+    }
     record(viewport, name, 'entry page', 'heading, primary action, horizontal layout and visible detail screenshot');
   }
 }
@@ -318,3 +331,4 @@ async function matching(page, origin, viewport) {
   await fs.writeFile(path.join(out, 'report.json'), JSON.stringify(report, null, 2));
   console.log(`Customer flow check: ${report.status}; ${report.checks.length} paths; ${report.screenshots.length} readable screenshot tiles; ${report.errors.length} JS errors`);
 });
+
