@@ -92,7 +92,7 @@ async function landingPages(page, origin, viewport) {
       assert.equal(await page.locator('#privacy-detail dt').count(), 5, 'home must say who answers, reads and decides for each tool');
       assert.equal(await page.locator('#people .offer-steps li').count(), 4);
       const people = `${viewport}-page-index-people.png`;
-      await page.locator('#people').screenshot({ path: path.join(out, people) });
+      await page.locator('#people').screenshot({ path: path.join(out, people), style: '.site-header { visibility: hidden !important; }' });
       report.screenshots.push({ viewport, name: 'page-index-people', filename: people, selector: '#people' });
     }
     const name = file.replace('.html', '');
@@ -103,8 +103,19 @@ async function landingPages(page, origin, viewport) {
     await page.screenshot({ path: path.join(out, first) });
     report.screenshots.push({ viewport, name: `page-${name}-hero`, filename: first, scrollY: 0 });
     const section = `${viewport}-page-${name}-detail.png`;
-    await page.locator(detail).screenshot({ path: path.join(out, section) });
+    await page.locator(detail).screenshot({ path: path.join(out, section), style: '.site-header { visibility: hidden !important; }' });
     report.screenshots.push({ viewport, name: `page-${name}-detail`, filename: section, selector: detail });
+    const additionalSections = {
+      'center.html': ['.founder-context'],
+      'industry.html': ['.offer-intro', '.copy-why'],
+      'employee-guide.html': ['.offer-intro', '.copy-scene', '.copy-why', '.copy-compare', '.offer-detail'],
+      'business.html': ['.offer-intro', '.copy-why', '#contact', '.copy-faq']
+    }[file] || [];
+    for (const [index, selector] of additionalSections.entries()) {
+      const filename = `${viewport}-page-${name}-answer-${index + 1}.png`;
+      await page.locator(selector).screenshot({ path: path.join(out, filename), style: '.site-header { visibility: hidden !important; }' });
+      report.screenshots.push({ viewport, name: `page-${name}-answer-${index + 1}`, filename, selector });
+    }
     record(viewport, name, 'entry page', 'heading, primary action, horizontal layout and visible detail screenshot');
   }
 }

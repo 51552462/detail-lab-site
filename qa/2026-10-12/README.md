@@ -23,3 +23,11 @@ E1~E4와 숫자 질문의 미작성 부분은 새 내용의 근거로 쓰지 않
 - 이 환경에서는 Playwright 브라우저 설치 파일을 정상적으로 다운로드하지 못했다. 로컬 브라우저 검증을 완료했다고 쓰지 않는다. PR CI로 실제 입력·결과·복사 경로와 화면 캡처를 검증하고, 화면을 직접 열어 읽은 범위를 후속 기록한다.
 - PR #19는 별도의 draft로 남아 있다. 이번 작업에 그 변경을 병합하거나 검증 완료로 취급하지 않았다.
 - 병합과 공개 배포는 각각 실제 결과를 확인한 뒤 기록한다.
+
+## 1차 CI와 화면 검토
+
+PR head `a45d38ecde2ebbf43158bd9945b7d9810673cc06`의 CI `38249000071`에서 check·customer-flows 성공. 테스트용 merge SHA `286dc666deb7484d317a5fea74b57b0aead4cf3f`, 360px·1280px 42개 경로, 캡처 98장, JS 오류 0건. ZIP artifact `11747866168`의 SHA256 `4ae8df1db0d5189d31e463d07a938dddbfbfa8c476ee88966bcf6f221054ee5e`를 확인했다.
+
+직접 열어 읽은 것: 홈·센터·가게·직장·전 업종의 모바일/PC 첫 화면, 홈의 두 폭 category-grid, 모바일 #people 전체, 전 업종의 두 폭 사업 방향 카드. 파일명은 각각 `360/1280-page-{index,center,industry,employee-guide,business}-hero.png`, `360/1280-page-index-detail.png`, `360-page-index-people.png`, `360/1280-page-business-detail.png`다.
+
+관찰: 모바일 홈 설명이 길어 CTA가 아래로 밀리고, PC 다섯 번째 카드가 기존 최소 높이 때문에 빈 공간을 크게 남겼다. 홈의 무료/신청 안내를 줄이고 다섯 번째 카드 최소 높이를 없앴다. 요소 캡처에 고정 헤더가 끼어 글을 가리는 현상은 캡처용 style로 해결했다. 운영자 답변으로 추가한 본문·문의·FAQ가 1차 캡처에 없었으므로 해당 구간을 추가 캡처하도록 검사 스크립트를 보완했다. 최신 head 검사는 별도로 확인한다.
