@@ -16,7 +16,7 @@ const out = path.resolve(process.argv[2] || path.join(root, 'customer-flow-artif
 const report = { sha: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root }).toString().trim(),
   startedAt: new Date().toISOString(), environment: 'local static preview; synthetic inputs; no form submissions',
   visualReview: 'not performed by this script', sources: {}, checks: [], screenshots: [], errors: [] };
-const pages = ['index.html', 'center.html', 'industry.html', 'employee-guide.html', 'matching.html', 'feedback.html',
+const pages = ['index.html', 'center.html', 'industry.html', 'employee-guide.html', 'matching.html', 'business.html', 'feedback.html',
   'owner-structure-check.html', 'industry-self-check.html', 'guide-self-check.html',
   'trainer-self-check.html', 'matching-self-check.html', 'areas.css'];
 const record = (viewport, tool, branch, details) => {
@@ -69,11 +69,12 @@ async function noOverflow(page) {
 
 async function landingPages(page, origin, viewport) {
   for (const [file, heading, primary, detail] of [
-    ['index.html', '일은 계속 돌아오고', '#doors', '.category-grid'],
+    ['index.html', '반복되는 문제를 줄이고', '#doors', '.category-grid'],
     ['center.html', '작은 결정도', '/owner-structure-check.html', '.path-grid'],
     ['industry.html', '사장님께 확인할게요', '/industry-self-check.html', '.example-output'],
-    ['employee-guide.html', '급여는 들었는데', '#worksheet', '.example-output'],
+    ['employee-guide.html', '면접 때 들은 조건', '#worksheet', '.example-output'],
     ['matching.html', '저녁 가능', '/matching-self-check.html?role=member', '.example-output'],
+    ['business.html', '어디서부터 꼬였는지', '#contact', '.business-steps'],
     ['feedback.html', '설명이 헷갈렸나요', 'https://wary-crocus-59c.notion.site/1ee8a0d648944e8abf0d7da9897ae80e', '.response-card']
   ]) {
     await page.goto(`${origin}/${file}`);
@@ -318,3 +319,4 @@ async function matching(page, origin, viewport) {
   await fs.writeFile(path.join(out, 'report.json'), JSON.stringify(report, null, 2));
   console.log(`Customer flow check: ${report.status}; ${report.checks.length} paths; ${report.screenshots.length} readable screenshot tiles; ${report.errors.length} JS errors`);
 });
+
