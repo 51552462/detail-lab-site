@@ -88,13 +88,7 @@ async function landingPages(page, origin, viewport) {
     assert.ok(await action.isVisible());
     assert.ok((await action.boundingBox()).height >= 44, `primary action must be fully readable and tappable: ${file}`);
     await noOverflow(page);
-    if (file === 'index.html') {
-      assert.equal(await page.locator('#privacy-detail dt').count(), 5, 'home must say who answers, reads and decides for each tool');
-      assert.equal(await page.locator('#people .offer-steps li').count(), 4);
-      const people = `${viewport}-page-index-people.png`;
-      await page.locator('#people').screenshot({ path: path.join(out, people), style: '.site-header { visibility: hidden !important; }' });
-      report.screenshots.push({ viewport, name: 'page-index-people', filename: people, selector: '#people' });
-    }
+
     const name = file.replace('.html', '');
     // Element screenshots scroll the page; restore the actual first screen before saving its evidence.
     await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo({ top: 0, behavior: 'instant' }); });
@@ -102,8 +96,15 @@ async function landingPages(page, origin, viewport) {
     const first = `${viewport}-page-${name}-hero.png`;
     await page.screenshot({ path: path.join(out, first) });
     report.screenshots.push({ viewport, name: `page-${name}-hero`, filename: first, scrollY: 0 });
+    if (file === 'index.html') {
+      assert.equal(await page.locator('#privacy-detail dt').count(), 5, 'home must say who answers, reads and decides for each tool');
+      assert.equal(await page.locator('#people .offer-steps li').count(), 4);
+      const people = `${viewport}-page-index-people.png`;
+      await page.locator('#people').screenshot({ path: path.join(out, people), style: '.site-header, .skip-link { visibility: hidden !important; }' });
+      report.screenshots.push({ viewport, name: 'page-index-people', filename: people, selector: '#people' });
+    }
     const section = `${viewport}-page-${name}-detail.png`;
-    await page.locator(detail).screenshot({ path: path.join(out, section), style: '.site-header { visibility: hidden !important; }' });
+    await page.locator(detail).screenshot({ path: path.join(out, section), style: '.site-header, .skip-link { visibility: hidden !important; }' });
     report.screenshots.push({ viewport, name: `page-${name}-detail`, filename: section, selector: detail });
     const additionalSections = {
       'center.html': ['.founder-context'],
@@ -113,7 +114,7 @@ async function landingPages(page, origin, viewport) {
     }[file] || [];
     for (const [index, selector] of additionalSections.entries()) {
       const filename = `${viewport}-page-${name}-answer-${index + 1}.png`;
-      await page.locator(selector).screenshot({ path: path.join(out, filename), style: '.site-header { visibility: hidden !important; }' });
+      await page.locator(selector).screenshot({ path: path.join(out, filename), style: '.site-header, .skip-link { visibility: hidden !important; }' });
       report.screenshots.push({ viewport, name: `page-${name}-answer-${index + 1}`, filename, selector });
     }
     record(viewport, name, 'entry page', 'heading, primary action, horizontal layout and visible detail screenshot');
