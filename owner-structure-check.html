@@ -126,6 +126,14 @@
   .why-box[open] summary{ margin-bottom:8px; }
   .why-box p{ margin:0; }
   .why-box summary:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+.next-step-record { margin: 24px 0; padding: 22px; border: 1px solid rgba(130,150,175,.45); border-radius: 12px; }
+.next-step-record h3 { margin: 0 0 12px; font-size: 1.1rem; }
+.next-step-record p { font-size: .9rem; line-height: 1.65; }
+.next-step-record label { display: block; margin: 18px 0 6px; font-weight: 700; font-size: .92rem; }
+.next-step-record textarea { display: block; width: 100%; box-sizing: border-box; min-height: 84px; padding: 12px; border: 1px solid #8b9bab; border-radius: 6px; font: inherit; line-height: 1.6; resize: vertical; color: #182739; background: #fff; }
+.next-step-record textarea:focus { outline: 3px solid #8bb4ff; outline-offset: 2px; }
+.next-step-record textarea::placeholder { color: #536576; }
 </style>
 </head>
 <body>
@@ -374,6 +382,16 @@ function renderResult(){
       <details class="compare-box why-box"><summary>왜 이 주제가 나왔나요?</summary><p>${selectionBasis(a)}</p></details>
       <div class="compare-box"><strong>직원과 함께 확인하세요</strong><br>실제로 일을 맡는 직원에게 이 방법을 쓸 수 있는지 물어보세요. 디테일랩이 답변을 검토하는 진단은 아래에서 별도로 신청할 수 있습니다.</div>
       ${nextBox}
+<section class="next-step-record" id="owner-next-steps" aria-labelledby="next-step-title">
+        <h3 id="next-step-title">확인한 내용을 다음 행동으로</h3>
+        <p>선택 · 함께 확인할 내용과 역할, 먼저 할 일, 다시 볼 기록을 적어 보세요. 이름 대신 역할로 적어도 됩니다. 복사본에 함께 담기며 새로고침하면 사라집니다.</p>
+        <label for="next-check">더 확인할 내용과 함께 볼 사람</label>
+        <textarea id="next-check" maxlength="400" placeholder="예: 앞선 안내를 누가 했는지 담당자와 기록으로 확인"></textarea>
+        <label for="next-action">먼저 할 일과 결정·실행 담당</label>
+        <textarea id="next-action" maxlength="400" placeholder="예: 책임자와 처리 범위를 정하고 다음 담당자가 안내"></textarea>
+        <label for="next-review">다시 볼 때와 비교할 기록</label>
+        <textarea id="next-review" maxlength="400" placeholder="예: 실제로 썼는지와 같은 문의가 다시 온 횟수"></textarea>
+      </section>
       <div class="cat-block"><h3>내가 고른 12개 답</h3>${rows}</div>
       <div class="result-actions">
         <a class="cta-link" target="_blank" rel="noopener noreferrer" href="https://wary-crocus-59c.notion.site/3c5f6ead7401804e87d7fbb6d086bba2">무료 센터 운영 진단 신청하기</a>
@@ -388,10 +406,18 @@ function renderResult(){
   focusScreen();
 }
 
+function nextStepLines(){
+  const fields=[['next-check','더 확인할 내용과 함께 볼 사람'],['next-action','먼저 할 일과 결정·실행 담당'],['next-review','다시 볼 때와 비교할 기록']];
+  const entries=fields.map(([id,label])=>({label,value:document.getElementById(id).value.trim()}));
+  if(!entries.some(e=>e.value))return [];
+  return ['', '내가 직접 정한 다음 행동', ...entries.map(e=>`${e.label}: ${e.value||'아직 적지 않음'}`)];
+}
+
 function copyResult(){
   const a = analyze();
   const card = a.allBest ? STEADY_CARD : MANUALS[a.focus];
   const lines = ['[디테일랩 · 센터 운영 확인]','',`이 주제를 보여 준 이유: ${selectionBasis(a)}`,'확인할 사람: 센터에서 실제 업무를 맡는 직원에게 가능한 범위를 확인하세요. 디테일랩의 사람 검토는 별도 18문 진단 신청 시 진행합니다.','',card.h,...card.items.map((item,i)=>`${i+1}. ${item}`),'',...QUESTIONS.map((q,i)=>`${q.text}\n→ ${state.texts[i]||''}`)];
+  lines.push(...nextStepLines());
   copyText(lines.join('\n'), '결과가 복사되었습니다');
 }
 
@@ -399,3 +425,4 @@ renderIntro();
 </script>
 </body>
 </html>
+
