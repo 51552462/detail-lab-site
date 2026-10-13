@@ -18,7 +18,7 @@ const report = { sha: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root }).
   visualReview: 'not performed by this script', sources: {}, checks: [], screenshots: [], errors: [] };
 const pages = ['index.html', 'center.html', 'industry.html', 'employee-guide.html', 'matching.html', 'business.html', 'feedback.html',
   'owner-structure-check.html', 'industry-self-check.html', 'guide-self-check.html',
-  'trainer-self-check.html', 'matching-self-check.html', 'areas.css'];
+  'trainer-self-check.html', 'matching-self-check.html', 'areas.css', 'og-home.png'];
 const record = (viewport, tool, branch, details) => {
   const item = { viewport, tool, branch, details };
   report.checks.push(item); console.log(JSON.stringify(item));
