@@ -36,8 +36,8 @@
   <div class="nav-shell">
     <a class="brand" href="/" aria-label="디테일랩 처음으로"><span class="brand-mark" aria-hidden="true">DL</span><span>DETAIL LAB</span></a>
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" data-menu-button><span class="sr-only">메뉴 열기</span><span></span><span></span></button>
-    <nav class="site-nav" id="site-nav" aria-label="디테일랩의 다섯 가지 영역" data-menu>
-      <a href="/center.html">센터 운영 진단</a><a href="/industry.html">가게 운영 점검</a><a href="/employee-guide.html">직장 선택 기록지</a><a href="/matching.html">수업 조건 맞춰보기</a>
+    <nav class="site-nav" id="site-nav" aria-label="디테일랩의 네 가지 영역" data-menu>
+      <a href="/center.html">센터 운영 진단</a><a href="/industry.html">가게 운영 점검</a><a href="/employee-guide.html">직장 선택 기록지</a>
         <a href="/business.html">전 업종 분석·개선</a>
       </nav>
   </div>
@@ -69,7 +69,7 @@
         <li>“두 사람이 같은 기기를 써야 해서 시작하지 못했다.”</li>
       </ul>
       <p>위 문장은 실제 고객 의견이 아닌 작성 예시입니다. 받은 의견을 공개 후기나 성과로 사용하지 않고, 설명과 도구를 고칠 때 살핍니다.</p>
-      <a href="/#doors">네 가지 도구 다시 보기 →</a>
+      <a href="/#doors">네 가지 도움 다시 보기 →</a>
     </aside>
   </div>
 </main>
@@ -81,7 +81,7 @@ menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{butt
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&button.getAttribute('aria-expanded')==='true'){button.setAttribute('aria-expanded','false');menu.classList.remove('is-open');button.focus();}});
 const areas={brand:'브랜드 전체',center:'센터 운영 진단',industry:'가게 운영 점검',employee:'직장 선택 기록지',matching:'수업 조건 맞춰보기'};
 const area=new URLSearchParams(location.search).get('area');
-if(Object.hasOwn(areas,area)){const hint=document.getElementById('area-hint');hint.textContent='방금 보신 영역: '+areas[area]+'. 양식에서 같은 항목을 선택해 주세요.';hint.hidden=false;}
+if(Object.hasOwn(areas,area)){const hint=document.getElementById('area-hint');hint.textContent=area==='matching'?'방금 보신 페이지는 센터 운영 진단의 수업 준비 도구입니다. 의견 양식에서는 ‘수업 조건 맞춰보기’를 선택해 주세요.':'방금 보신 영역: '+areas[area]+'. 양식에서 같은 항목을 선택해 주세요.';hint.hidden=false;}
 </script>
 </body>
 </html>

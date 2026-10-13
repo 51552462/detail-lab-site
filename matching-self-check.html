@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>회원·트레이너 수업 조건 맞춰보기 · 디테일랩</title>
+<title>센터 운영 진단 베네핏 · 수업 조건 맞춰보기 · 디테일랩</title>
 <meta name="description" content="회원과 트레이너가 각자 7개 질문에 답하고 동의한 뒤, 수업 일정과 설명·피드백 조건을 함께 확인합니다.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://detail-lab-site.onrender.com/matching-self-check.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="회원·트레이너 수업 조건 맞춰보기 · 디테일랩">
+<meta property="og:title" content="센터 운영 진단 베네핏 · 수업 조건 맞춰보기 · 디테일랩">
 <meta property="og:description" content="같은 기기에서 각자 답하고, 함께 수업 조건을 확인하세요.">
 <meta property="og:image" content="https://detail-lab-site.onrender.com/og-matching.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:description" content="같은 기기에서 각자 답하고, 함께 수업 조건을 확인하세요.">
-<meta name="twitter:title" content="회원·트레이너 수업 조건 맞춰보기 · 디테일랩">
+<meta name="twitter:title" content="센터 운영 진단 베네핏 · 수업 조건 맞춰보기 · 디테일랩">
 <meta name="twitter:image" content="https://detail-lab-site.onrender.com/og-matching.png">
 <style>
   :root{
@@ -379,7 +379,7 @@
 <div class="app">
   <div class="brandline">
     <a class="mark" href="/" aria-label="디테일랩 홈으로">디테일랩</a>
-    <span>수업 조건 맞춰보기 · 무료</span>
+    <span>센터 베네핏 · 수업 준비 도구</span>
   </div>
 
   <div class="screen" id="screen"></div>
@@ -470,7 +470,7 @@ function renderIntro(){
       </div>
       <button class="primary" onclick="pickRole('member')">회원용 시작</button>
       <button class="secondary" style="margin-top:10px" onclick="pickRole('trainer')">트레이너용 시작</button>
-      <p class="fineprint">새로고침하거나 화면을 닫으면 답변이 사라집니다. 수업 예약이나 상대 소개는 이 도구에서 진행하지 않습니다. <a href="/matching.html">사용 순서 보기</a></p>
+      <p class="fineprint">새로고침하거나 화면을 닫으면 답변이 사라집니다. 수업 예약이나 상대 소개는 이 도구에서 진행하지 않습니다. <a href="/matching.html">베네핏 사용 순서 보기</a></p>
     </div>
   `;
   focusScreen();
@@ -715,7 +715,7 @@ function renderPairResult(){
     <div class="compare-box"><strong>실제 수업 시간 확인</strong><br>${overlapNote(member, trainer)}</div>
     <div class="compare-box"><strong>목표와 일정에서 더 이야기할 것</strong><br>회원이 고른 목표: ${member[0]}<br>트레이너가 수업을 맡기 어려운 일정: ${trainer[5]}<br>목표는 어떤 운동을 뜻하는지, 어려운 일정은 조율할 수 있는지 이야기해 보세요.</div>
     <div class="compare-box"><strong>첫 대화에서 확인할 4가지</strong>${conversationQuestions(member, trainer).map((q, i) => `<p class="ask-line"><span>${CIRCLED[i]}</span> ${q}</p>`).join("")}<p class="ask-after"><strong>첫 수업 뒤에</strong><br>${AFTER_FIRST_LESSON}</p><p class="ask-after">이 표는 추천 점수나 계약 판단이 아니며 수업 예약을 확정하지 않습니다.</p></div>
-    <div class="result-actions"><button class="primary" onclick="copyPairResult()">대조 결과 복사하기</button><button class="secondary" onclick="window.print()">인쇄·PDF로 저장</button><a class="feedback-link" href="/feedback.html?area=matching&point=result" target="_blank" rel="noopener noreferrer">함께 쓰면서 어려웠던 점 남기기 →</a><button class="secondary" onclick="clearPair()">대조 결과와 답변 지우기</button><a class="home-link" href="/matching.html">수업 조건 맞춰보기 설명으로 돌아가기</a></div>
+    <div class="result-actions"><button class="primary" onclick="copyPairResult()">대조 결과 복사하기</button><button class="secondary" onclick="window.print()">인쇄·PDF로 저장</button><a class="feedback-link" href="/feedback.html?area=matching&point=result" target="_blank" rel="noopener noreferrer">함께 쓰면서 어려웠던 점 남기기 →</a><button class="secondary" onclick="clearPair()">대조 결과와 답변 지우기</button><a class="home-link" href="/matching.html">수업 준비 베네핏 설명으로 돌아가기</a></div>
   </div>`;
   focusScreen();
 }

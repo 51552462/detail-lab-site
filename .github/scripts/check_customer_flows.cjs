@@ -84,6 +84,7 @@ async function landingPages(page, origin, viewport) {
       await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
     });
     assert.ok((await page.locator('h1').innerText()).includes(heading));
+    assert.deepEqual(await page.locator('#site-nav a').evaluateAll(links => links.map(link => link.getAttribute('href'))), ['/center.html','/industry.html','/employee-guide.html','/business.html'], 'four categories in the main menu');
     const action = page.locator(`a[href="${primary}"]`).first();
     assert.ok(await action.isVisible());
     assert.ok((await action.boundingBox()).height >= 44, `primary action must be fully readable and tappable: ${file}`);
@@ -97,6 +98,7 @@ async function landingPages(page, origin, viewport) {
     await page.screenshot({ path: path.join(out, first) });
     report.screenshots.push({ viewport, name: `page-${name}-hero`, filename: first, scrollY: 0 });
     if (file === 'index.html') {
+      assert.deepEqual(await page.locator('.category-card h3').allTextContents(), ['센터 운영 진단','가게 운영 점검','직장 선택 기록지','전 업종 분석·개선']);
       assert.equal(await page.locator('#privacy-detail dt').count(), 5, 'home must say who answers, reads and decides for each tool');
       assert.equal(await page.locator('#people .offer-steps li').count(), 4);
       const people = `${viewport}-page-index-people.png`;
@@ -107,8 +109,8 @@ async function landingPages(page, origin, viewport) {
     await page.locator(detail).screenshot({ path: path.join(out, section), style: '.site-header, .skip-link { visibility: hidden !important; }' });
     report.screenshots.push({ viewport, name: `page-${name}-detail`, filename: section, selector: detail });
     const additionalSections = {
-      'index.html': ['.brand-criteria'],
-      'center.html': ['.founder-context'],
+      'index.html': ['.brand-criteria', '.category-benefit-preview'],
+      'center.html': ['.founder-context', '#benefit'],
       'industry.html': ['.offer-intro', '.copy-why'],
       'employee-guide.html': ['.offer-intro', '.copy-scene', '.copy-why', '.copy-compare', '.offer-detail', '#decision-next-steps'],
       'business.html': ['.offer-intro', '.copy-why', '#contact', '.copy-faq']
@@ -120,6 +122,26 @@ async function landingPages(page, origin, viewport) {
     }
     record(viewport, name, 'entry page', 'heading, primary action, horizontal layout and visible detail screenshot');
   }
+}
+
+async function centerBenefit(page, origin, viewport) {
+  await page.goto(`${origin}/index.html`);
+  await page.locator('.category-benefit-preview a').click();
+  await page.waitForURL(`${origin}/center.html#benefit`);
+  assert.ok(await page.locator('#benefit-title').isVisible());
+  assert.ok((await page.locator('#benefit').innerText()).includes('준비하고 있습니다'));
+  assert.ok((await page.locator('#benefit').innerText()).includes('무료 도구'));
+  await noOverflow(page);
+  await page.locator('.benefit-actions a[href="/matching.html"]').click();
+  await page.waitForURL(`${origin}/matching.html`);
+  assert.equal(await page.locator('#site-nav a[aria-current="page"]').getAttribute('href'), '/center.html');
+  await page.locator('.benefit-backlink').click();
+  await page.waitForURL(`${origin}/center.html#benefit`);
+  await page.locator('.benefit-actions a[href="/matching-self-check.html?role=member"]').click();
+  await page.waitForURL(`${origin}/matching-self-check.html?role=member`);
+  assert.ok((await page.locator('.brandline').innerText()).includes('센터 베네핏'));
+  await noOverflow(page);
+  record(viewport, 'center-benefit', 'home → center benefit → explanation → center → free tool', 'four categories; benefit is prepared inside center; existing free tool and back link remain accessible');
 }
 
 async function quiz(page, origin, viewport, filename, tool) {
@@ -333,6 +355,7 @@ async function matching(page, origin, viewport) {
     page.on('pageerror', e => report.errors.push({ viewport: width, url: page.url(), message: e.message }));
     try {
       await landingPages(page, origin, width);
+      await centerBenefit(page, origin, width);
       for (const [filename, tool] of [['owner-structure-check.html', 'center'], ['industry-self-check.html', 'store'], ['guide-self-check.html', 'shift'], ['trainer-self-check.html', 'trainer']]) await quiz(page, origin, width, filename, tool);
       await employee(page, origin, width);
       await matching(page, origin, width);
