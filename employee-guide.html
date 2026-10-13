@@ -18,7 +18,7 @@
   <meta name="twitter:image" content="https://detail-lab-site.onrender.com/og-employee.png">
   <meta name="theme-color" content="#070a10">
   <link rel="stylesheet" href="styles.css?v=20260930-r2">
-  <link rel="stylesheet" href="areas.css?v=20261012-r1">
+  <link rel="stylesheet" href="areas.css?v=20261013-r1">
 <style>
   .decision-sheet{display:grid;gap:22px;margin:24px 0 38px;padding:28px;border:1px solid #c6d4e8;background:#fff;color:#243044}
   .decision-sheet h3{margin:4px 0 0;font-size:1.15rem;color:#173c70}
@@ -49,6 +49,14 @@
   .decision-summary[hidden]{display:none}
   @media(max-width:620px){.decision-pair,.decision-names{grid-template-columns:1fr}.decision-sheet{padding:22px 18px}}
   @media print{.site-header,.subhero,.copy-cta-row,.cross-scope,footer,.decision-actions,.decision-status,.decision-fields,.offer-intro,.offer-detail,.copy-scene,.copy-why,.example-output,.copy-compare,.copy-note,.copy-faq,.copy-cta,.making-note,.people-note,.action-panel,.feedback-ask,.result-feedback,.copy-use>h2,.copy-use>p,.section-head,.offer-result{display:none!important}.sub-section{padding:0}.decision-sheet{background:white;color:black;border:0;padding:0;margin:0}.decision-summary{border:0;padding:0;background:white;font-size:12pt}body{background:white;color:black}}
+
+.next-step-record { margin: 24px 0; padding: 22px; border: 1px solid rgba(130,150,175,.45); border-radius: 12px; }
+.next-step-record h3 { margin: 0 0 12px; font-size: 1.1rem; }
+.next-step-record p { font-size: .9rem; line-height: 1.65; }
+.next-step-record label { display: block; margin: 18px 0 6px; font-weight: 700; font-size: .92rem; }
+.next-step-record textarea { display: block; width: 100%; box-sizing: border-box; min-height: 84px; padding: 12px; border: 1px solid #8b9bab; border-radius: 6px; font: inherit; line-height: 1.6; resize: vertical; color: #182739; background: #fff; }
+.next-step-record textarea:focus { outline: 3px solid #8bb4ff; outline-offset: 2px; }
+.next-step-record textarea::placeholder { color: #536576; }
 </style>
 </head>
 <body class="subpage">
@@ -95,7 +103,7 @@
   </div>
   <div class="copy-why">
     <h2>급여 외에 확인할 조건도 있습니다</h2>
-    <p>당직 횟수와 휴무, 수업 외 업무, 근무 중 운동할 수 있는 조건까지. 처음 들은 설명과 실제 적용이 같은지 항목별로 남겨 보세요. 분위기만 보고 단정하기보다 담당자의 설명과 받은 기록을 함께 확인합니다.</p>
+    <p>당직 횟수와 휴무, 수업 외 업무까지. 맡은 자리에서 미처 확인하지 못한 조건을 항목별로 남겨 보세요. 어떤 설명을 누구에게 확인할지 정리하고, 처음 들은 말과 실제 적용을 함께 살펴 판단할 근거를 만듭니다.</p>
   </div>
   <div class="example-output" aria-label="가상 제안의 기록 예시">
     <p class="example-label">기록 예시 · 실제 채용 제안 아님</p>
@@ -140,7 +148,17 @@
         <h3>제안별로 확인한 내용</h3>
         <div id="decision-topics"></div>
         <label>결정 전에 직접 확인할 질문<textarea id="decision-question" placeholder="예: 손님 응대 외 업무는 하루에 얼마나 되나요?"></textarea></label>
-        <label>내가 중요하게 보는 조건<textarea id="decision-priority" placeholder="예: 교육 시간, 일정 예측 가능성"></textarea></label>
+<label>내가 중요하게 보는 조건<textarea id="decision-priority" placeholder="예: 교육 시간, 일정 예측 가능성"></textarea></label>
+<section class="next-step-record" id="decision-next-steps" aria-labelledby="next-step-title">
+        <h3 id="next-step-title">확인한 내용을 다음 행동으로</h3>
+        <p>선택 · 함께 확인할 내용과 역할, 먼저 할 일, 다시 볼 기록을 적어 보세요. 이름 대신 역할로 적어도 됩니다. 복사본에 함께 담기며 새로고침하면 사라집니다.</p>
+        <label for="next-check">더 확인할 내용과 함께 볼 사람</label>
+        <textarea id="next-check" maxlength="400" placeholder="예: 앞선 안내를 누가 했는지 담당자와 기록으로 확인"></textarea>
+        <label for="next-action">먼저 할 일과 결정·실행 담당</label>
+        <textarea id="next-action" maxlength="400" placeholder="예: 책임자와 처리 범위를 정하고 다음 담당자가 안내"></textarea>
+        <label for="next-review">다시 볼 때와 비교할 기록</label>
+        <textarea id="next-review" maxlength="400" placeholder="예: 실제로 썼는지와 같은 문의가 다시 온 횟수"></textarea>
+      </section>
       </div>
       <div class="decision-actions">
         <button class="button button-primary" type="button" id="decision-build">내 기록 정리하기</button>
@@ -152,7 +170,7 @@
       <a class="result-feedback" href="/feedback.html?area=employee&point=result" target="_blank" rel="noopener noreferrer">기록지를 써 보고 어려웠던 점 남기기 →</a>
     </div>
   </div>
-  <div class="offer-result"><h3>정리한 기록은 이렇게 쓰세요</h3><p>내가 적은 내용, 문서로 확인한 조건과 들은 말뿐인 조건, 결정 전에 물을 질문을 한 화면에서 확인합니다. 복사하거나 인쇄·PDF로 저장할 수 있습니다. 어느 직장이 더 좋다는 자동 판정은 하지 않습니다. 계약·임금의 법적 판단이 필요하면 전문 상담을 받으세요.</p></div>
+  <div class="offer-result"><h3>정리한 기록은 이렇게 쓰세요</h3><p>내가 적은 조건, 문서로 받은 설명, 결정 전에 물어볼 질문과 직접 정한 다음 행동을 함께 봅니다. 담당자에게 확인하고 입사 후 실제 적용과 비교할 때 쓰세요. 복사·인쇄·PDF로 저장할 수 있습니다. 계약·임금의 법적 판단이 필요하면 전문 상담을 받으세요.</p></div>
   <div class="action-panel">
     <p class="kicker">이미 일하고 있다면</p>
     <h2>현재 PT 트레이너로 일하고 있나요?</h2>
@@ -244,13 +262,21 @@ function cellLine(cell){
   return cell.text+(cell.verified?' [문서·메시지로 확인]':' [들은 말]');
 }
 
+function nextStepLines(){
+  const fields=[['next-check','더 확인할 내용과 함께 볼 사람'],['next-action','먼저 할 일과 결정·실행 담당'],['next-review','다시 볼 때와 비교할 기록']];
+  const entries=fields.map(([id,label])=>({label,value:document.getElementById(id).value.trim()}));
+  if(!entries.some(e=>e.value))return [];
+  return ['', '내가 직접 정한 다음 행동', ...entries.map(e=>`${e.label}: ${e.value||'아직 적지 않음'}`)];
+}
+
 function buildDecisionSummary(){
   const rows=TOPICS.map((t,i)=>({t,i,A:readCell('A',i),B:readCell('B',i)}));
   const question=document.getElementById('decision-question').value.trim();
   const priority=document.getElementById('decision-priority').value.trim();
+  const nextLines=nextStepLines();
   const used=OFFERS.filter(o=>rows.some(r=>r[o].text));
   statusEl.textContent='';
-  if(!used.length&&!question&&!priority){
+  if(!used.length&&!question&&!priority&&!nextLines.length){
     summaryEl.textContent='면접 전이라면 중요한 조건이나 물어볼 질문 하나를, 면접 후라면 들은 답 하나를 적어 주세요.';
     summaryEl.hidden=false;
     summaryEl.scrollIntoView({block:'start',behavior:'instant'});
@@ -298,6 +324,7 @@ function buildDecisionSummary(){
   lines.push('중요하게 보는 조건: '+(priority||'적지 않음'));
   lines.push('확인할 상대: 채용 담당자에게 빈칸과 들은 말뿐인 조건을 묻고, 들은 말과 문서 내용을 직접 구분하세요.');
   lines.push('첫 주: 면접에서 들은 설명과 실제 일과·정산·교육이 같은지 다시 확인하세요.');
+  lines.push(...nextLines);
   summaryEl.textContent=lines.join('\n');
   summaryEl.hidden=false;
   summaryEl.scrollIntoView({block:'start',behavior:'instant'});

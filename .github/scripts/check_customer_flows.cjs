@@ -69,12 +69,12 @@ async function noOverflow(page) {
 
 async function landingPages(page, origin, viewport) {
   for (const [file, heading, primary, detail] of [
-    ['index.html', '반복되는 문제를 줄이고', '#doors', '.category-grid'],
+    ['index.html', '놓치고 있던 일을 짚고', '#doors', '.category-grid'],
     ['center.html', '작은 결정도', '/owner-structure-check.html', '.path-grid'],
     ['industry.html', '사장님께 확인할게요', '/industry-self-check.html', '.example-output'],
     ['employee-guide.html', '면접 때 들은 조건', '#worksheet', '.example-output'],
     ['matching.html', '저녁 가능', '/matching-self-check.html?role=member', '.example-output'],
-    ['business.html', '어디서부터 꼬였는지', '#contact', '.business-steps'],
+    ['business.html', '혼자 보기 어려운 부분을', '#contact', '.business-steps'],
     ['feedback.html', '설명이 헷갈렸나요', 'https://wary-crocus-59c.notion.site/1ee8a0d648944e8abf0d7da9897ae80e', '.response-card']
   ]) {
     await page.goto(`${origin}/${file}`);
@@ -107,9 +107,10 @@ async function landingPages(page, origin, viewport) {
     await page.locator(detail).screenshot({ path: path.join(out, section), style: '.site-header, .skip-link { visibility: hidden !important; }' });
     report.screenshots.push({ viewport, name: `page-${name}-detail`, filename: section, selector: detail });
     const additionalSections = {
+      'index.html': ['.brand-criteria'],
       'center.html': ['.founder-context'],
       'industry.html': ['.offer-intro', '.copy-why'],
-      'employee-guide.html': ['.offer-intro', '.copy-scene', '.copy-why', '.copy-compare', '.offer-detail'],
+      'employee-guide.html': ['.offer-intro', '.copy-scene', '.copy-why', '.copy-compare', '.offer-detail', '#decision-next-steps'],
       'business.html': ['.offer-intro', '.copy-why', '#contact', '.copy-faq']
     }[file] || [];
     for (const [index, selector] of additionalSections.entries()) {
@@ -142,11 +143,20 @@ async function quiz(page, origin, viewport, filename, tool) {
       await page.locator('#record-action').fill('다음 담당자가 오전 11시까지 답변');
       await page.locator('#record-review').fill('7일 뒤 같은 문의가 돌아온 횟수');
     }
+    if (choice === 3 && tool === 'center') {
+      await page.locator('#next-check').fill('검증용: 이전 안내를 담당자와 확인');
+      await page.locator('#next-action').fill('검증용: 관리자 결정 후 다음 담당자가 안내');
+      await page.locator('#next-review').fill('검증용: 다음 주 실제 사용 기록 비교');
+    }
     const copy = await copied(page, page.locator('button[onclick="copyResult()"]'), `${viewport}-${tool}-${choice}-copy.txt`);
     if (choice === 3 && ['store', 'shift'].includes(tool)) {
       for (const entry of ['가상 테스트: 교대 뒤 예약 문의 재확인', '다음 담당자가 오전 11시까지 답변', '7일 뒤 같은 문의가 돌아온 횟수']) assert.ok(copy.includes(entry), `${tool} recorded case must survive copying`);
     }
     for (const text of await page.locator('.cat-item .name, .cat-item p').allTextContents()) assert.ok(copy.includes(text.trim()));
+    if (tool === 'center') {
+      if (choice === 0) assert.ok(!copy.includes('내가 직접 정한 다음 행동'), 'blank notes must not invent an action');
+      else for (const entry of ['검증용: 이전 안내를 담당자와 확인','검증용: 관리자 결정 후 다음 담당자가 안내','검증용: 다음 주 실제 사용 기록 비교']) assert.ok(copy.includes(entry));
+    }
     outputs.push(copy);
     await noOverflow(page);
     if (choice === 3) {
@@ -179,11 +189,15 @@ async function employee(page, origin, viewport) {
   await page.locator('#offer-name-B').fill('검증용 B');
   await page.locator('textarea[data-offer="B"][data-topic="0"]').fill('검증용 B 일정: 화·목 근무');
   await page.locator('#decision-build').click();
+  await page.locator('#next-check').fill('검증용: 당직 횟수를 담당자와 확인');
+  await page.locator('#next-action').fill('검증용: 면접 후 받은 조건을 비교');
+  await page.locator('#next-review').fill('검증용: 첫 주 실제 당직 기록');
   const both = await copied(page, page.locator('#decision-copy'), `${viewport}-employee-ab-copy.txt`);
   assert.match(both, /검증용 A 일정: 월·수 근무 \[문서·메시지로 확인\]/);
   assert.match(both, /검증용 B 일정: 화·목 근무 \[들은 말\]/);
   assert.match(both, /B·검증용 B 들은 말만: “검증용 B 일정: 화·목 근무”라고 들었는데, 문서나 메시지로 확인할 수 있을까요\?/);
   assert.ok(!both.includes('A·검증용 A 들은 말만'), 'a document-confirmed condition must not be asked again');
+  for (const entry of ['검증용: 당직 횟수를 담당자와 확인','검증용: 면접 후 받은 조건을 비교','검증용: 첫 주 실제 당직 기록']) assert.ok(both.includes(entry));
   assert.equal(both, await page.locator('#decision-summary').innerText(), 'employee clipboard equals displayed result');
   await page.waitForFunction(() => {
     const result = document.querySelector('#decision-summary').getBoundingClientRect();
@@ -193,9 +207,12 @@ async function employee(page, origin, viewport) {
   await noOverflow(page);
   await screenshotResult(page, viewport, 'employee-record', '#decision-summary');
   await page.locator('#show-b').uncheck();
+  await page.locator('#next-action').fill('검증용: 수정한 다음 행동');
   const aOnly = await copied(page, page.locator('#decision-copy'), `${viewport}-employee-b-off-copy.txt`);
   assert.ok(!aOnly.includes('검증용 B'));
   assert.ok(aOnly.includes('검증용 A'));
+  assert.ok(aOnly.includes('검증용: 수정한 다음 행동'));
+  assert.ok(!aOnly.includes('검증용: 면접 후 받은 조건을 비교'));
   record(viewport, 'employee-record', 'empty / before interview / A / A+B / B off', 'heard versus document-confirmed; exact displayed-result/clipboard equality; B removed from result and copy');
 }
 
