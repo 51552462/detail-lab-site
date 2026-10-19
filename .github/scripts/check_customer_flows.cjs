@@ -69,12 +69,12 @@ async function noOverflow(page) {
 
 async function landingPages(page, origin, viewport) {
   for (const [file, heading, primary, detail] of [
-    ['index.html', '놓치고 있던 일을 짚고', '#doors', '.category-grid'],
+    ['index.html', '운영하면서 걸리는 일', '/business.html#contact', '.category-grid'],
     ['center.html', '작은 결정도', '/owner-structure-check.html', '.path-grid'],
     ['industry.html', '사장님께 확인할게요', '/industry-self-check.html', '.example-output'],
     ['employee-guide.html', '면접 때 들은 조건', '#worksheet', '.example-output'],
     ['matching.html', '저녁 가능', '/matching-self-check.html?role=member', '.example-output'],
-    ['business.html', '혼자 보기 어려운 부분을', '#contact', '.business-steps'],
+    ['business.html', '운영 상황부터 듣고', '#contact', '.business-steps'],
     ['feedback.html', '설명이 헷갈렸나요', 'https://wary-crocus-59c.notion.site/1ee8a0d648944e8abf0d7da9897ae80e', '.response-card']
   ]) {
     await page.goto(`${origin}/${file}`);
@@ -84,8 +84,8 @@ async function landingPages(page, origin, viewport) {
       await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
     });
     assert.ok((await page.locator('h1').innerText()).includes(heading));
-    assert.deepEqual(await page.locator('#site-nav a').evaluateAll(links => links.map(link => link.getAttribute('href'))), ['/center.html','/industry.html','/employee-guide.html','/business.html'], 'four categories in the main menu');
-    const action = page.locator(`a[href="${primary}"]`).first();
+    assert.deepEqual(await page.locator('#site-nav a').evaluateAll(links => links.map(link => link.getAttribute('href'))), ['/business.html#contact','/#process','/#tools','/center.html'], 'unified entry and retained beta in the main menu');
+    const action = file === 'index.html' ? page.locator('.brand-hero a[href="/business.html#contact"]') : page.locator(`a[href="${primary}"]`).first();
     assert.ok(await action.isVisible());
     assert.ok((await action.boundingBox()).height >= 44, `primary action must be fully readable and tappable: ${file}`);
     await noOverflow(page);
@@ -98,7 +98,7 @@ async function landingPages(page, origin, viewport) {
     await page.screenshot({ path: path.join(out, first) });
     report.screenshots.push({ viewport, name: `page-${name}-hero`, filename: first, scrollY: 0 });
     if (file === 'index.html') {
-      assert.deepEqual(await page.locator('.category-card h3').allTextContents(), ['센터 운영 진단','가게 운영 점검','직장 선택 기록지','전 업종 분석·개선']);
+      assert.deepEqual(await page.locator('.category-card h3').allTextContents(), ['센터 자가점검','가게·교대 점검','직장 선택 기록','수업 준비 도구']);
       assert.equal(await page.locator('#privacy-detail dt').count(), 5, 'home must say who answers, reads and decides for each tool');
       assert.equal(await page.locator('#people .offer-steps li').count(), 4);
       const people = `${viewport}-page-index-people.png`;
@@ -109,7 +109,7 @@ async function landingPages(page, origin, viewport) {
     await page.locator(detail).screenshot({ path: path.join(out, section), style: '.site-header, .skip-link { visibility: hidden !important; }' });
     report.screenshots.push({ viewport, name: `page-${name}-detail`, filename: section, selector: detail });
     const additionalSections = {
-      'index.html': ['.brand-criteria', '.category-benefit-preview'],
+      'index.html': ['.brand-criteria', '.category-benefit-preview', '#beta', '#faq'],
       'center.html': ['.founder-context', '#benefit'],
       'industry.html': ['.offer-intro', '.copy-why'],
       'employee-guide.html': ['.offer-intro', '.copy-scene', '.copy-why', '.copy-compare', '.offer-detail', '#decision-next-steps'],
