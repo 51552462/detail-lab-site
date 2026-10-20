@@ -1,0 +1,31 @@
+{
+  "version": "2026-10-20-ops-1",
+  "verified_on": "2026-10-20",
+  "public_website": {
+    "pr": 25,
+    "merge_sha": "d3ab5be0d3a45a3598fa7c1f3df1c3e53ec31a0b",
+    "source_state": "merged",
+    "content_observed": true,
+    "render_admin_sha": null,
+    "version_marker": null,
+    "evidence": [
+      "index #concerns 7",
+      "index #faq 11",
+      "business #contact existing email"
+    ]
+  },
+  "services": {
+    "email_inquiry": "public",
+    "free_tools": "public_existing",
+    "center_beta": "public_existing_3_centers_18_human_questions",
+    "online_intake": "synthetic_loopback_only",
+    "workflow": "synthetic_loopback_only",
+    "customer_upload": "not_public",
+    "dashboard": "synthetic_loopback_only",
+    "macro_api": "not_connected",
+    "ai_api": "not_connected",
+    "paid_products": "not_launched",
+    "real_customer_validation": "unverified"
+  },
+  "notion_report": "https://app.notion.com/p/3fff6ead74018197b686d0d72ca7305d"
+}

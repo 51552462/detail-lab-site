@@ -3,241 +3,265 @@
     "id": "R01",
     "title": "운영자 존재 이유",
     "intent": "운영자를 위한 브랜드",
-    "current_home": "index #people",
-    "current_notion": "전환안",
+    "current_home": "index.html #people 존재 이유",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "왜 필요한지 짧음",
     "add_home": "존재 이유·운영 장면",
     "add_notion": "12철학·업무증거",
     "priority": "P0",
     "verify": "장면과 행동 연결",
     "doc": "02",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "index #people",
+    "baseline_current_notion": "전환안"
   },
   {
     "id": "R02",
     "title": "유지할 강점",
     "intent": "문제와 강점을 함께 본다",
-    "current_home": "index 기준",
-    "current_notion": "v1 U05",
+    "current_home": "index.html #philosophy 강점 유지",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "보존 근거 부족",
     "add_home": "강점 유지 이유",
     "add_notion": "좋은 사건 대조",
     "priority": "P0",
     "verify": "유지할 방식 칸",
     "doc": "03",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "index 기준",
+    "baseline_current_notion": "v1 U05"
   },
   {
     "id": "R03",
     "title": "업종 차이",
     "intent": "성공 일반화 금지",
-    "current_home": "business 소개",
-    "current_notion": "전환안",
+    "current_home": "index.html #philosophy / business.html #approach",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "차이 질문 부족",
     "add_home": "복사하지 않는 이유",
     "add_notion": "업종별 추가질문",
     "priority": "P0",
     "verify": "5업종 차이",
     "doc": "04",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "business 소개",
+    "baseline_current_notion": "전환안"
   },
   {
     "id": "R04",
     "title": "사실·진술·가설",
     "intent": "확인과 추측 분리",
-    "current_home": "index 기준",
-    "current_notion": "v1 매뉴얼",
+    "current_home": "index.html #philosophy / business.html #deliverables",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "근거 관리 미구현",
     "add_home": "진단 기록 예시",
     "add_notion": "F/T/H/U·반증",
     "priority": "P0",
     "verify": "출처 없는 사실 금지",
     "doc": "03",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "index 기준",
+    "baseline_current_notion": "v1 매뉴얼"
   },
   {
     "id": "R05",
     "title": "설립자 경험",
     "intent": "경험은 출발점",
-    "current_home": "center·business",
-    "current_notion": "대시보드",
+    "current_home": "index.html #about",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "홈 경험 없음",
     "add_home": "#about",
     "add_notion": "공개 경험 범위",
     "priority": "P1",
     "verify": "타업종 실적 과장없음",
     "doc": "02",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "center·business",
+    "baseline_current_notion": "대시보드"
   },
   {
     "id": "R06",
     "title": "의존도 줄이기",
     "intent": "운영자 스스로 이해",
-    "current_home": "없음",
-    "current_notion": "명시 부족",
+    "current_home": "index.html #people / #about 자립 판단",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "종료기준 없음",
     "add_home": "스스로 고치는 설명",
     "add_notion": "종료 인계",
     "priority": "P1",
     "verify": "최신본·다음담당",
     "doc": "05",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "없음",
+    "baseline_current_notion": "명시 부족"
   },
   {
     "id": "R07",
     "title": "B+C 연결",
     "intent": "실행을 기록·시스템에 축적",
-    "current_home": "#system",
-    "current_notion": "구조도",
+    "current_home": "index.html #system / business.html #data",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "방향 수준",
     "add_home": "데이터 관계",
     "add_notion": "목표→자료→보고",
     "priority": "P0",
     "verify": "ID·버전 추적",
     "doc": "06",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "#system",
+    "baseline_current_notion": "구조도"
   },
   {
     "id": "R08",
     "title": "현재·예정",
     "intent": "미출시 판매 금지",
-    "current_home": "#privacy-detail",
-    "current_notion": "v1 문서3",
+    "current_home": "index.html #privacy-detail / business.html 첫 화면",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "최신홈 미반영",
     "add_home": "상태 안내",
     "add_notion": "S01~S07",
     "priority": "P0",
     "verify": "업로드·정기 준비중",
     "doc": "02",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "#privacy-detail",
+    "baseline_current_notion": "v1 문서3"
   },
   {
     "id": "R09",
     "title": "고민 장면",
     "intent": "고객이 상황을 떠올림",
-    "current_home": "홈 없음",
-    "current_notion": "예시 일부",
+    "current_home": "index.html #concerns 가상 고민7",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "현실장면 부족",
     "add_home": "클릭7장면",
     "add_notion": "진단모듈 연결",
     "priority": "P1",
     "verify": "링크·가상 표시",
     "doc": "04",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "홈 없음",
+    "baseline_current_notion": "예시 일부"
   },
   {
     "id": "R10",
     "title": "사고방식 이유",
     "intent": "정답 유보의 과정",
-    "current_home": "기준3개",
-    "current_notion": "철학 일부",
+    "current_home": "index.html #philosophy 판단 이유5",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "이유 설명 부족",
     "add_home": "5가지 판단 이유",
     "add_notion": "12철학 표",
     "priority": "P1",
     "verify": "새로운 정보",
     "doc": "02",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "기준3개",
+    "baseline_current_notion": "철학 일부"
   },
   {
     "id": "R11",
     "title": "진행 과정",
     "intent": "문의→이해→목표→실행",
-    "current_home": "홈4단계",
-    "current_notion": "접수v1",
+    "current_home": "index.html #process / business.html #approach",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "현재/지향 혼재",
     "add_home": "단계 상태",
     "add_notion": "완료 기준",
     "priority": "P0",
     "verify": "미합의 실행금지",
     "doc": "05",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "홈4단계",
+    "baseline_current_notion": "접수v1"
   },
   {
     "id": "R12",
     "title": "최초 접수",
     "intent": "5~10분 최소질문",
-    "current_home": "이메일 질문",
-    "current_notion": "v1 9문",
+    "current_home": "business.html #contact 이메일·질문 양식 복사 (온라인 저장 미제공)",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "Form·응답검증 없음",
     "add_home": "질문양식 복사",
     "add_notion": "필수·후속·목적",
     "priority": "P0",
     "verify": "민감파일 제외·복사실패",
     "doc": "03",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "이메일 질문",
+    "baseline_current_notion": "v1 9문"
   },
   {
     "id": "R13",
@@ -257,7 +281,9 @@
     "code_state": "해당 없음. 업무 문서 초안",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "운영자 검토·허용된 첫 고객 시험"
+    "next_condition": "운영자 검토·허용된 첫 고객 시험",
+    "baseline_current_home": "설명 수준",
+    "baseline_current_notion": "v1 12문"
   },
   {
     "id": "R14",
@@ -277,7 +303,9 @@
     "code_state": "해당 없음. 업무 문서 초안",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "운영자 검토·허용된 첫 고객 시험"
+    "next_condition": "운영자 검토·허용된 첫 고객 시험",
+    "baseline_current_home": "없음",
+    "baseline_current_notion": "v1 6모듈"
   },
   {
     "id": "R15",
@@ -297,167 +325,185 @@
     "code_state": "해당 없음. 업무 문서 초안",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "운영자 검토·허용된 첫 고객 시험"
+    "next_condition": "운영자 검토·허용된 첫 고객 시험",
+    "baseline_current_home": "일반 설명",
+    "baseline_current_notion": "합의 필드"
   },
   {
     "id": "R16",
     "title": "책임 분담",
     "intent": "대표 판단권 존중",
-    "current_home": "business 문장",
-    "current_notion": "전환안",
+    "current_home": "business.html #responsibility",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "역할표 없음",
     "add_home": "책임3카드",
     "add_notion": "역할표",
     "priority": "P0",
     "verify": "매출목표≠보장",
     "doc": "02",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "business 문장",
+    "baseline_current_notion": "전환안"
   },
   {
     "id": "R17",
     "title": "결과물",
     "intent": "받는 기록이 보임",
-    "current_home": "미정 FAQ",
-    "current_notion": "1장양식",
+    "current_home": "business.html #deliverables 준비 중 구성3종",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "출력모습 없음",
     "add_home": "3종 구성",
     "add_notion": "진단·합의·실행",
     "priority": "P0",
     "verify": "미판매 표시",
     "doc": "05",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "미정 FAQ",
+    "baseline_current_notion": "1장양식"
   },
   {
     "id": "R18",
     "title": "가상4사례",
     "intent": "매출·부재·직원·브랜드",
-    "current_home": "센터2종",
-    "current_notion": "짧은 예시",
+    "current_home": "business.html #cases 가상4사례",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "4종 없음",
     "add_home": "#cases",
     "add_notion": "모듈 연결",
     "priority": "P1",
     "verify": "6개 필수내용",
     "doc": "04",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "센터2종",
+    "baseline_current_notion": "짧은 예시"
   },
   {
     "id": "R19",
     "title": "실패 재검토",
     "intent": "사용·효과·중단 분리",
-    "current_home": "중단 한줄",
-    "current_notion": "v1 기준",
+    "current_home": "business.html #responsibility 수정·중단",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "실패·복구 부족",
     "add_home": "재검토 설명",
     "add_notion": "실패 분류",
     "priority": "P0",
     "verify": "미사용/무효과 구분",
     "doc": "05",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "중단 한줄",
+    "baseline_current_notion": "v1 기준"
   },
   {
     "id": "R20",
     "title": "도구 위치",
     "intent": "핵심·도구·베타 구분",
-    "current_home": "자료실",
-    "current_notion": "옛분류 잔존",
+    "current_home": "index.html #tools 기존 무료자료",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "독립사업 충돌",
     "add_home": "역할 설명",
     "add_notion": "분류 이력",
     "priority": "P0",
     "verify": "기존12URL 보존",
     "doc": "02",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "자료실",
+    "baseline_current_notion": "옛분류 잔존"
   },
   {
     "id": "R21",
     "title": "직장 기록지",
     "intent": "고객층 분리",
-    "current_home": "별도대상",
-    "current_notion": "추천 충돌",
+    "current_home": "index.html #tools 개인용 별도대상",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "경력우선 미결정",
     "add_home": "개인용 안내",
     "add_notion": "대안·충돌 기록",
     "priority": "P1",
     "verify": "고용주 평가 아님",
     "doc": "07",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "별도대상",
+    "baseline_current_notion": "추천 충돌"
   },
   {
     "id": "R22",
     "title": "베타 보존",
     "intent": "18문·1장·30일행동",
-    "current_home": "center·홈",
-    "current_notion": "베타안내",
+    "current_home": "index.html #beta / center.html 기존조건 유지",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "잔여수 미확인",
     "add_home": "기존약속 유지",
     "add_notion": "자동편입 금지",
     "priority": "P0",
     "verify": "조건·링크 대조",
     "doc": "02",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "center·홈",
+    "baseline_current_notion": "베타안내"
   },
   {
     "id": "R23",
     "title": "FAQ",
     "intent": "최소10질문",
-    "current_home": "홈4문",
-    "current_notion": "일부",
+    "current_home": "index.html #faq 11문",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "비용·온라인 부족",
     "add_home": "FAQ11",
     "add_notion": "서비스정의 일치",
     "priority": "P1",
     "verify": "필수10주제",
     "doc": "02",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "PR25 고객용 설명·해당 화면 구현, 360/1280 정의한 흐름 검수",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "개정안 공개 승인. 고객 이해·사용 검증 별도"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "홈4문",
+    "baseline_current_notion": "일부"
   },
   {
     "id": "R24",
@@ -477,7 +523,9 @@
     "code_state": "SYN- 합성 전용 로컬 CSV/XLSX·지표/버전/승인 13시험 통과",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "실제 고객용 인증·자료권한·보안·운영환경 필요"
+    "next_condition": "실제 고객용 인증·자료권한·보안·운영환경 필요",
+    "baseline_current_home": "없음",
+    "baseline_current_notion": "데이터v1"
   },
   {
     "id": "R25",
@@ -497,7 +545,9 @@
     "code_state": "SYN- 합성 전용 로컬 CSV/XLSX·지표/버전/승인 13시험 통과",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "실제 고객용 인증·자료권한·보안·운영환경 필요"
+    "next_condition": "실제 고객용 인증·자료권한·보안·운영환경 필요",
+    "baseline_current_home": "#system",
+    "baseline_current_notion": "설계"
   },
   {
     "id": "R26",
@@ -517,7 +567,9 @@
     "code_state": "실고객 인증·권한·동의·저장 체계 미구현",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "운영자의 실제 자료·계정/처리 조건·고객 증거 필요"
+    "next_condition": "운영자의 실제 자료·계정/처리 조건·고객 증거 필요",
+    "baseline_current_home": "미제공",
+    "baseline_current_notion": "권한설계"
   },
   {
     "id": "R27",
@@ -537,7 +589,9 @@
     "code_state": "SYN- 합성 전용 로컬 CSV/XLSX·지표/버전/승인 13시험 통과",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "실제 고객용 인증·자료권한·보안·운영환경 필요"
+    "next_condition": "실제 고객용 인증·자료권한·보안·운영환경 필요",
+    "baseline_current_home": "미제공",
+    "baseline_current_notion": "계획"
   },
   {
     "id": "R28",
@@ -557,7 +611,9 @@
     "code_state": "절차·제약 설계. 실제 자동수집·AI/경제 API·고객운영 구현 아님",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인"
+    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인",
+    "baseline_current_home": "없음",
+    "baseline_current_notion": "v1 설계"
   },
   {
     "id": "R29",
@@ -577,7 +633,9 @@
     "code_state": "해당 없음. 업무 문서 초안",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "운영자 검토·허용된 첫 고객 시험"
+    "next_condition": "운영자 검토·허용된 첫 고객 시험",
+    "baseline_current_home": "없음",
+    "baseline_current_notion": "운영확인"
   },
   {
     "id": "R30",
@@ -597,7 +655,9 @@
     "code_state": "해당 없음. 업무 문서 초안",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "운영자 검토·허용된 첫 고객 시험"
+    "next_condition": "운영자 검토·허용된 첫 고객 시험",
+    "baseline_current_home": "없음",
+    "baseline_current_notion": "계획"
   },
   {
     "id": "R31",
@@ -617,7 +677,9 @@
     "code_state": "해당 없음. 업무 문서 초안",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "운영자 검토·허용된 첫 고객 시험"
+    "next_condition": "운영자 검토·허용된 첫 고객 시험",
+    "baseline_current_home": "없음",
+    "baseline_current_notion": "계획"
   },
   {
     "id": "R32",
@@ -637,7 +699,9 @@
     "code_state": "절차·제약 설계. 실제 자동수집·AI/경제 API·고객운영 구현 아님",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인"
+    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인",
+    "baseline_current_home": "없음",
+    "baseline_current_notion": "후보"
   },
   {
     "id": "R33",
@@ -657,7 +721,9 @@
     "code_state": "절차·제약 설계. 실제 자동수집·AI/경제 API·고객운영 구현 아님",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인"
+    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인",
+    "baseline_current_home": "없음",
+    "baseline_current_notion": "원인유보"
   },
   {
     "id": "R34",
@@ -677,7 +743,9 @@
     "code_state": "절차·제약 설계. 실제 자동수집·AI/경제 API·고객운영 구현 아님",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인"
+    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인",
+    "baseline_current_home": "없음",
+    "baseline_current_notion": "AI역할표"
   },
   {
     "id": "R35",
@@ -697,7 +765,9 @@
     "code_state": "절차·제약 설계. 실제 자동수집·AI/경제 API·고객운영 구현 아님",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인"
+    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인",
+    "baseline_current_home": "공개불필요",
+    "baseline_current_notion": "베네핏표"
   },
   {
     "id": "R36",
@@ -717,7 +787,9 @@
     "code_state": "절차·제약 설계. 실제 자동수집·AI/경제 API·고객운영 구현 아님",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인"
+    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인",
+    "baseline_current_home": "범위표시",
+    "baseline_current_notion": "v1"
   },
   {
     "id": "R37",
@@ -737,7 +809,9 @@
     "code_state": "실고객 인증·권한·동의·저장 체계 미구현",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "운영자의 실제 자료·계정/처리 조건·고객 증거 필요"
+    "next_condition": "운영자의 실제 자료·계정/처리 조건·고객 증거 필요",
+    "baseline_current_home": "privacy",
+    "baseline_current_notion": "v1"
   },
   {
     "id": "R38",
@@ -757,7 +831,9 @@
     "code_state": "해당 없음. 업무 문서 초안",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "운영자 검토·허용된 첫 고객 시험"
+    "next_condition": "운영자 검토·허용된 첫 고객 시험",
+    "baseline_current_home": "미정",
+    "baseline_current_notion": "희망가격"
   },
   {
     "id": "R39",
@@ -777,7 +853,9 @@
     "code_state": "38개 ID→12관리묶음·DB12행 대응 확인",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "내용 변경 때 대응/중복 검사"
+    "next_condition": "내용 변경 때 대응/중복 검사",
+    "baseline_current_home": "일부 도구",
+    "baseline_current_notion": "38원문"
   },
   {
     "id": "R40",
@@ -797,7 +875,9 @@
     "code_state": "고객 사용·유료 거래 증거 없음",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "운영자의 실제 자료·계정/처리 조건·고객 증거 필요"
+    "next_condition": "운영자의 실제 자료·계정/처리 조건·고객 증거 필요",
+    "baseline_current_home": "성과없음",
+    "baseline_current_notion": "10/1표"
   },
   {
     "id": "R41",
@@ -817,7 +897,9 @@
     "code_state": "절차·제약 설계. 실제 자동수집·AI/경제 API·고객운영 구현 아님",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인"
+    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인",
+    "baseline_current_home": "없음",
+    "baseline_current_notion": "주2~3회 희망"
   },
   {
     "id": "R42",
@@ -837,7 +919,9 @@
     "code_state": "절차·제약 설계. 실제 자동수집·AI/경제 API·고객운영 구현 아님",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인"
+    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인",
+    "baseline_current_home": "없음",
+    "baseline_current_notion": "수정구상"
   },
   {
     "id": "R43",
@@ -857,7 +941,9 @@
     "code_state": "절차·제약 설계. 실제 자동수집·AI/경제 API·고객운영 구현 아님",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인"
+    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인",
+    "baseline_current_home": "어제개편",
+    "baseline_current_notion": "옛규칙"
   },
   {
     "id": "R44",
@@ -877,27 +963,31 @@
     "code_state": "요구48행·고유ID48·필수항목 확인",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "내용 변경 때 대응/중복 검사"
+    "next_condition": "내용 변경 때 대응/중복 검사",
+    "baseline_current_home": "없음",
+    "baseline_current_notion": "없음"
   },
   {
     "id": "R45",
     "title": "PR·승인",
     "intent": "안전한 공개변경",
-    "current_home": "PR24배포",
-    "current_notion": "갱신누락",
+    "current_home": "PR25 병합 + 공개 홈/서비스 확인",
+    "current_notion": "v2 기준서·매뉴얼과 최신 상태 상단 갱신; 이전 기록 보존",
     "gap": "새승인 필요",
     "add_home": "별도PR 미배포",
     "add_notion": "검수·승인표",
     "priority": "P0",
     "verify": "main 변경없음",
     "doc": "01",
-    "status": "검수 완료",
+    "status": "공개 반영 완료",
     "completed": false,
     "document_status": "v2 초안·운영자 검토 전",
     "code_state": "별도 PR25·세 CI job 성공·공개승인 경계 유지",
-    "public_state": "이번 심화안 승인 전",
+    "public_state": "PR25 병합 d3ab5be0 + 공개 홈/서비스 내용 재확인",
     "customer_state": "미검증",
-    "next_condition": "사용자 공개 승인 전 main 병합·Render 배포 대기"
+    "next_condition": "실고객 이해·사용 검증 별도. 신규 기능은 별도 공개 승인.",
+    "baseline_current_home": "PR24배포",
+    "baseline_current_notion": "갱신누락"
   },
   {
     "id": "R46",
@@ -917,7 +1007,9 @@
     "code_state": "360/1280px48흐름·오류0·직접 읽은 화면 범위 QA 기록",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "실기기·인앱·전체 인쇄는 미검증"
+    "next_condition": "실기기·인앱·전체 인쇄는 미검증",
+    "baseline_current_home": "기존CI",
+    "baseline_current_notion": "과거기록"
   },
   {
     "id": "R47",
@@ -937,7 +1029,9 @@
     "code_state": "C01~05 충돌·이력/최신 기준 분리. 공개/가격 등 최종 결정 대기",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "운영자 미결정 선택을 기록"
+    "next_condition": "운영자 미결정 선택을 기록",
+    "baseline_current_home": "일부약속",
+    "baseline_current_notion": "누적기록"
   },
   {
     "id": "R48",
@@ -957,6 +1051,8 @@
     "code_state": "절차·제약 설계. 실제 자동수집·AI/경제 API·고객운영 구현 아님",
     "public_state": "이번 심화안 승인 전",
     "customer_state": "미검증",
-    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인"
+    "next_condition": "관련 실제 고객 수요·자료·권한·계정·운영조건 확인",
+    "baseline_current_home": "일부공개",
+    "baseline_current_notion": "초안3"
   }
 ]

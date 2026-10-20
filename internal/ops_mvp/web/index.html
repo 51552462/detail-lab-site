@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>디테일랩 · 합성 운영 시험실</title>
+<link rel="stylesheet" href="/app.css"><script src="/app.js" defer></script></head>
+<body><a class="skip" href="#main">본문으로 바로가기</a>
+<header><div class="brand">DL <span>DETAIL LAB</span></div><span class="badge">비공개 합성 시험 · 실고객 입력 금지</span></header>
+<main id="main"><section id="login" class="card narrow">
+<p class="eyebrow">접수에서 다음 판단까지</p><h1>만든 양식을,<br>실제로 이어 보는 곳</h1>
+<p>가상의 사업장으로 접수·인터뷰·합의·실행·자료 검수·보고를 시험합니다. 공개 홈페이지의 고객 접수와 연결되지 않습니다.</p>
+<form id="login-form"><label for="token">이 실행에서 발급한 시험용 키</label><input id="token" type="password" required autocomplete="off" maxlength="100" aria-describedby="token-help">
+<p id="token-help" class="muted">서버를 실행한 컴퓨터의 test-credentials.json에서 운영자 또는 합성 고객 A/B의 키를 확인하세요. 실제 계정 비밀번호를 입력하지 마세요.</p>
+<button>시험실 열기</button></form></section>
+<div id="workspace" hidden><nav class="toolbar" aria-label="시험실 메뉴"><div><strong id="identity"></strong><p class="muted">권한은 서버에서 확인합니다. 다른 고객 코드로 바꿔도 자료를 열 수 없습니다.</p></div><button id="logout" class="secondary">시험 종료</button></nav>
+<section class="notice"><strong>현재는 시험 기능입니다.</strong> 합성 고객 2곳·고객별 사업장 2곳만 등록돼 있습니다. 외부 발송·AI 호출·결제는 하지 않습니다. 개인정보를 판별하는 완전한 차단 장치는 아니므로 실제 자료를 넣지 마세요.</section>
+<div class="layout"><aside><button id="new-intake" class="wide">업장 상황 이야기하기</button><h2>진행 목록</h2><div id="case-list"></div><button id="refresh" class="secondary wide">목록 새로고침</button></aside>
+<div id="content"></div></div></div>
+<div id="message" role="status" aria-live="polite" tabindex="-1" hidden></div>
+</main><footer>합성 데이터로 정의한 흐름을 시험하는 버전입니다. 실제 고객 운영·보안 승인·사업성 검증과 구분합니다.</footer></body></html>

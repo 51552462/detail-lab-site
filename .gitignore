@@ -5,3 +5,10 @@ customer-flow-artifacts/
 *.sqlite3-*
 __pycache__/
 customer-data/
+
+# Synthetic workflow runtime is never source
+__pycache__/
+*.pyc
+ops-flow-artifacts/
+test-credentials.json
+ops-runtime*/
