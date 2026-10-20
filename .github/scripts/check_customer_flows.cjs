@@ -129,6 +129,17 @@ async function landingPages(page, origin, viewport) {
         await screenshotResult(page, viewport, 'new-' + id, '#' + id);
       }
       assert.ok((await page.locator('#cases').innerText()).includes('실제 고객'));
+      const actions = await page.locator('.subhero-actions .button').all();
+      const firstBox = await actions[0].boundingBox(), secondBox = await actions[1].boundingBox();
+      assert.ok(Math.max(secondBox.x - firstBox.x - firstBox.width, secondBox.y - firstBox.y - firstBox.height) >= 8, 'hero buttons need a visible gap');
+      const contrast = await page.evaluate(() => {
+        const rgb = value => value.match(/[\d.]+/g).slice(0, 3).map(Number);
+        const light = color => rgb(color).map(v => { v /= 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }).reduce((s, v, i) => s + v * [.2126, .7152, .0722][i], 0);
+        const a = light(getComputedStyle(document.querySelector('.dl-contact-prompts')).color);
+        const b = light(getComputedStyle(document.querySelector('.action-panel')).backgroundColor);
+        return (Math.max(a, b) + .05) / (Math.min(a, b) + .05);
+      });
+      assert.ok(contrast >= 4.5, 'contact question contrast');
       await page.locator('[data-copy-intake]').click();
       await page.waitForFunction(() => document.querySelector('#intake-copy-status').textContent.includes('복사했습니다'));
       assert.ok((await page.evaluate(() => navigator.clipboard.readText())).includes('최근 걸린 한 장면'));
