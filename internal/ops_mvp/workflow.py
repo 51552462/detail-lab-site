@@ -183,6 +183,8 @@ class Workflow:
 
     def contact(self, actor, case_id):
         self.case(actor, case_id, operator=True)
+        with self.db:
+            self.event(actor, case_id, 'contact_viewed', {'purpose': '합성 문의 회신 수단 확인'}, bump=False)
         return dict(self.db.execute('SELECT * FROM private.contacts WHERE case_id=?', (case_id,)).fetchone())
 
     def transition(self, actor, case_id, target, expected, owner, next_action, due, notice):
@@ -260,7 +262,8 @@ class Workflow:
                 clean['falsification'] = text(body.get('falsification', ''))
             if kind == 'U':
                 clean['next_question'] = text(body.get('next_question', ''))
-            clean['conflict_with'] = text(body.get('conflict_with', ''), False, 100)
+            clean['conflict_with'] = body.get('conflict_with', '')
+            require(isinstance(clean['conflict_with'], str) and (not clean['conflict_with'] or re.fullmatch(r'SYN-CLAIM-[0-9a-f]{32}', clean['conflict_with'])), 'INVALID_CLAIM_REFERENCE')
             if clean['conflict_with']:
                 require(self.db.execute('SELECT 1 FROM claims WHERE id=? AND case_id=?', (clean['conflict_with'], case_id)).fetchone() is not None, 'CONFLICT_CLAIM_NOT_FOUND')
             claim_id = uid('CLAIM')
@@ -328,7 +331,9 @@ class Workflow:
             case = self.case(actor, case_id, operator=True)
             require(case['state'] == 'in_progress', 'PROJECT_NOT_STARTED', 409)
             goal = self.agreed(case_id)
-            clean = {k: text(body.get(k, '')) for k in ('problem', 'hypothesis_id', 'reason', 'action', 'owner', 'user_role', 'risk', 'rollback', 'check_on')}
+            clean = {k: text(body.get(k, '')) for k in ('problem', 'reason', 'action', 'owner', 'user_role', 'risk', 'rollback', 'check_on')}
+            clean['hypothesis_id'] = body.get('hypothesis_id', '')
+            require(isinstance(clean['hypothesis_id'], str) and re.fullmatch(r'SYN-CLAIM-[0-9a-f]{32}', clean['hypothesis_id']), 'INVALID_CLAIM_REFERENCE')
             clean['check_on'] = iso_date(clean['check_on'])
             require(self.db.execute('SELECT 1 FROM claims WHERE id=? AND case_id=? AND kind=?', (clean['hypothesis_id'], case_id, 'H')).fetchone() is not None, 'HYPOTHESIS_REQUIRED')
             clean['metric'] = json.loads(goal['body'])['metric']
@@ -375,6 +380,8 @@ class Workflow:
             clean = {k: text(body.get(k, '')) for k in ('reason', 'handover', 'owner', 'next_review')}
             clean.update(choice=body['choice'], next_review=iso_date(clean['next_review']), decided_by=actor.id)
             self.db.execute('UPDATE experiments SET decision=?,state=? WHERE id=?', (dumps(clean), 'reviewed', experiment_id))
+            self.db.execute('INSERT INTO tasks VALUES (?,?,?,?,?,?)', (uid('TASK'), case_id, 'followup:' + experiment_id, clean['owner'], clean['next_review'], 'open'))
+            self.db.execute('UPDATE cases SET next_action=?,due=? WHERE id=?', ('인계 후 합성 재점검: ' + clean['choice'], clean['next_review'], case_id))
             self.event(actor, case_id, 'client_decision', {'experiment_id': experiment_id, 'decision': clean})
 
     def upload(self, actor, case_id, source_id, filename, content, origin, start, end, declared_unit):

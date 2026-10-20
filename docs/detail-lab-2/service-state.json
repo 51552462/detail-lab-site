@@ -27,5 +27,14 @@
     "paid_products": "not_launched",
     "real_customer_validation": "unverified"
   },
-  "notion_report": "https://app.notion.com/p/3fff6ead74018197b686d0d72ca7305d"
+  "notion_report": "https://app.notion.com/p/3fff6ead74018197b686d0d72ca7305d",
+  "private_trial": {
+    "pr": 26,
+    "branch": "codex/detail-lab-ops-flow-20261020",
+    "state": "development_and_synthetic_test",
+    "published": false,
+    "real_customer_data_permitted": false,
+    "notion_sync": "manual_status_and_synthetic_evidence_only",
+    "external_ai_or_macro_api": "not_connected"
+  }
 }

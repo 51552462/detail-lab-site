@@ -67,6 +67,7 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(len(traces), 14)
         self.assertEqual(sum(int(t['value']) for t in traces), 28)
         self.assertTrue(result['synthetic_only'])
+        self.assertEqual(len([t for t in result['tasks'] if t['kind'].startswith('followup:')]), 1)
 
     def test_idempotent_receipt_and_changed_payload_conflict(self):
         r = self.flow.submit(A, scenario.intake(), 'synthetic-test-key-001')
@@ -246,6 +247,14 @@ class WorkflowTests(unittest.TestCase):
         self.project()
         self.flow.add_claim(O,self.case,'U',{'statement':'새로운 합성 미확인','next_question':'새 자료 확인 필요'})
         self.assertCode('GOAL_BASIS_CHANGED',self.flow.agreed,self.case)
+
+    def test_generated_reference_is_not_personal_text(self):
+        from unittest.mock import patch
+        from internal.ops_mvp.workflow import uid
+        generated = 'SYN-CLAIM-' + ('abcd01012345678' + 'e'*32)[:32]
+        with patch('internal.ops_mvp.workflow.uid',side_effect=lambda prefix:generated if prefix=='CLAIM' else uid(prefix)):
+            self.project()
+        self.flow.create_experiment(O,self.case,scenario.experiment(generated))
 
 
 if __name__ == '__main__': unittest.main()
