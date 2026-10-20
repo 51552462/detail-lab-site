@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import patch
 
 from internal.ops_mvp.server import TestServer
-from internal.ops_mvp.workflow import OPERATOR, CLIENT_A, CLIENT_B
+from internal.ops_mvp.workflow import Workflow, OPERATOR, CLIENT_A, CLIENT_B
 from internal.ops_mvp import scenario
 
 
@@ -125,6 +125,22 @@ class HTTPTests(unittest.TestCase):
             self.assertEqual(json.loads(response.read())['error'],'INTERRUPTED_REQUEST')
         finally:conn.close()
         self.assertEqual(self.request('GET','/api/cases')[1]['cases'],[])
+
+    def test_http_experiment_payload_after_agreed_goal(self):
+        flow=Workflow(self.temp.name)
+        try:
+            case=flow.submit(CLIENT_A,scenario.intake(),'synthetic-api-exp-001')['id']
+            for state in ('reviewing','eligible','interview_scheduled'):scenario.step(flow,case,state)
+            flow.interview(OPERATOR,case,scenario.interview(),flow.case(OPERATOR,case)['revision'])
+            flow.confirm_interview(CLIENT_A,case);flow.diagnose(OPERATOR,case,scenario.diagnosis(),flow.case(OPERATOR,case)['revision'])
+            h=flow.add_claim(OPERATOR,case,'H',{'statement':'합성 가설','falsification':'반증 사례'})
+            flow.save_goal(OPERATOR,case,scenario.goal(),flow.case(OPERATOR,case)['revision']);g=flow.latest_goal(case)
+            for actor in (OPERATOR,CLIENT_A):flow.approve_goal(actor,case,g['version'],g['digest'])
+            for state in ('proposal','customer_decision','in_progress'):scenario.step(flow,case,state)
+        finally:flow.close()
+        self.login('operator-test')
+        status,data,_=self.request('POST',f'/api/cases/{case}/experiments',scenario.experiment(h))
+        self.assertEqual(status,201,data)
 
 
 if __name__=='__main__':unittest.main()
