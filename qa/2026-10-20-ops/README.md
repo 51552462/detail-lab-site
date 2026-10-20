@@ -48,3 +48,11 @@
 정의된 2가지 일별 가산 지표·2합성 고객·고객별2사업장만 시험합니다. 비율·매출 인식·광범위 업종 대시보드·외부 API·실기기·인앱·스크린리더·운영 장애 대응은 시험하지 않았습니다. 실제 고객 참여·목표·반응·유료 거래/구매 의사 행동·서비스 제작시간/직접비가 없어 사업성 완료로 표시하지 않습니다.
 
 다음 우선순위는 실제 참여자가 있는 작은 한 업무의 B 파일럿 준비입니다. 자료 처리/권한/보관·지원·비용/범위가 합의되기 전 현재 시험실에 실제 정보를 넣지 않습니다. 공개 접수의 저장 환경과 실제 동의/권한 준비는 그 뒤 별도 검토·승인합니다.
+
+## 최종 동작 검수 근거
+
+[CI run93](https://github.com/51552462/detail-lab-site/actions/runs/39383669757): head 5fb851fbc38618085d480b395019ad25e6158d5f, 테스트 merge fb845af1409a91275971e9c52d98807e2724cea6. check / synthetic-data / customer-flows / ops-workflows 네 작업 모두 성공. 새45 단위/HTTP + 기존13자료 시험. 신규360/1280 각25개, 총50흐름·브라우저 오류0·30캡처. 기존 도구48흐름도 성공. 수정한 공개 파일은 없으며 로컬의 공개 HTML12·CSS2·자산1, 합계15파일이 확인한 main의 Git blob과 일치함.
+
+신규 artifact12246442933 ZIP SHA256 84ac85563f311125e5fe68c1b210e0dea1b9676c2831aed3108617fe191e76e8. 생성된 report.json의50흐름/errors[]/30파일을 읽음. 직접 열람: 360 login/intake-start/receipt/interview-task/interview-card/diagnosis-module/goal-version/dual-approval-guard/observed-use/upload-review/weekly-report/stale-report/handover-closed와 1280 weekly-report. 이전 run89의4개 및 run91의3개도 앞서 읽음. 뷰포트 캡처가 긴 폼·모든 항목의 전 영역을 담는 것은 아니며 전체30캡처·모든 질문/분기를 직접 읽었다고 하지 않음.
+
+시각 검수 후 U/I 코드만 보이던 카드에 실제 질문을, 실험/관측/보고 항목에 한국어 명칭을 붙이고 목표를 고객 목표→제공물 순으로 표시하는 편집을 추가함. 수치·권한·데이터 처리 로직은 그대로이며 최종 head CI와 해당 화면 재확인은 PR26·노션의 최신 기록을 따름. 신규 공개 반영·실제 현장 사용·유료 사업성은 여전히 미완료임.
