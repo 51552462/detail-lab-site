@@ -1,2 +1,7 @@
 node_modules/
 customer-flow-artifacts/
+
+*.sqlite3
+*.sqlite3-*
+__pycache__/
+customer-data/

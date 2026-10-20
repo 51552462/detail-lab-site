@@ -502,3 +502,21 @@
   .dl-faq dt { margin-bottom: 8px; }
   .dl-panel-actions { width: 100%; }
 }
+
+/* Detail Lab 2.0 depth: readable examples, scope and progressive disclosure. */
+.dl-concern-grid,.dl-case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.dl-concern{display:flex;flex-direction:column;align-items:flex-start;padding:26px;border:1px solid #cbd2e0;background:#fff;text-decoration:none;color:#111827;min-height:190px;transition:border-color .2s,transform .2s}
+.dl-concern:hover{border-color:#1b55be;transform:translateY(-2px)}
+.dl-concern h3{font-size:clamp(20px,2.2vw,27px);line-height:1.45;margin:0 0 12px;word-break:keep-all;overflow-wrap:anywhere}
+.dl-concern p{margin:0 0 14px;color:#4a5366;line-height:1.8}.dl-concern>span{font-weight:700;color:#154fae;margin-top:auto;line-height:1.8}
+.dl-status-note{padding:20px 24px;background:#e8edf8;border-left:4px solid #2155ac;line-height:1.9;color:#24344f;margin:30px 0}
+.dl-text-link{display:inline-flex;align-items:center;min-height:44px;color:#164da3;font-weight:700;line-height:1.6}
+.dl-reading{max-width:850px;line-height:1.95;font-size:18px;color:#3b4557}.dl-reading p+p{margin-top:18px}
+.dl-output-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.dl-output-grid>article{padding:28px;background:#fff;border:1px solid #cbd2e0;color:#243044;line-height:1.85}.dl-output-grid h3{font-size:24px;line-height:1.5;margin:8px 0 18px;color:#10192a}.dl-output-grid ul{padding-left:21px}.dl-output-grid li+li{margin-top:10px}
+.dl-case{padding:30px;background:#fff;border:1px solid #cbd2e0;scroll-margin-top:100px;line-height:1.85}.dl-case h3{font-size:clamp(23px,2.5vw,31px);line-height:1.5;margin:10px 0 18px;word-break:keep-all;overflow-wrap:anywhere}.dl-case dt{font-size:14px;color:#164da3;font-weight:800;margin-top:20px}.dl-case dd{margin:5px 0 0;color:#394358}.dl-case .dl-text-link{margin-top:20px}
+.dl-environment{max-width:900px;margin-top:38px;border-top:1px solid #cbd2e0;padding-top:28px;line-height:1.9}.dl-environment h3{font-size:25px;line-height:1.5;margin:0 0 15px}
+.dl-accordion details{padding:0;border-bottom:1px solid #c5ccda}.dl-accordion summary{padding:23px 12px;cursor:pointer;font-size:20px;font-weight:700;line-height:1.6;min-height:44px}.dl-accordion details p{padding:0 12px 24px;line-height:1.9;max-width:900px;color:#3b4557}
+.dl-hero-status{font-size:15px!important;line-height:1.8!important;color:#cbd8ed!important;margin-top:22px!important}.dl-intake-template{margin-top:25px;text-align:left}.dl-intake-template summary{cursor:pointer;padding:15px 0;min-height:44px}.dl-intake-template pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fff;color:#172336;padding:20px;line-height:1.9;font:inherit}.action-panel .button{white-space:normal;cursor:pointer;font:inherit;font-weight:700}.action-panel #intake-copy-status{min-height:1.8em}
+.dl-scenes,.dl-deliverables,.dl-cases,.dl-founder{background:#f4f6fb}.dl-concern:focus-visible,.dl-text-link:focus-visible,.dl-accordion summary:focus-visible,.dl-intake-template summary:focus-visible{outline:3px solid #185ed6;outline-offset:5px}
+@media(max-width:760px){.dl-concern-grid,.dl-case-grid,.dl-output-grid{grid-template-columns:1fr}.dl-concern,.dl-case,.dl-output-grid>article{padding:23px}.dl-status-note{padding:18px}.dl-reading{font-size:16px}.dl-accordion summary{font-size:18px;padding:20px 4px}.dl-accordion details p{padding-left:4px;padding-right:4px}.dl-case{scroll-margin-top:90px}}
+@media(prefers-reduced-motion:reduce){.dl-concern{transition:none}.dl-concern:hover{transform:none}}
