@@ -428,6 +428,21 @@ class Workflow:
         finally:
             store.close()
 
+    def preview_upload(self, actor, case_id, source_id, version):
+        case = self.case(actor, case_id, operator=True)
+        require(self.db.execute('SELECT 1 FROM uploads WHERE case_id=? AND source_id=? AND version=?', (case_id, source_id, version)).fetchone() is not None, 'NOT_FOUND', 404)
+        store = Store(self.root / 'data', case['client_id'])
+        try:
+            source = store.db.execute('SELECT * FROM sources WHERE source_id=? AND version=?', (source_id, version)).fetchone()
+            require(source is not None, 'NOT_FOUND', 404)
+            count = store.db.execute('SELECT COUNT(*) FROM observations WHERE source_id=? AND version=?', (source_id, version)).fetchone()[0]
+            rows = [dict(r) for r in store.db.execute('SELECT o.row_key,o.observed_on,o.value,m.unit,m.definition FROM observations o JOIN metrics m USING(site_id,metric_id,definition_version) WHERE source_id=? AND version=? ORDER BY observed_on,row_key LIMIT 100', (source_id, version))]
+            with self.db:
+                self.event(actor, case_id, 'upload_previewed', {'source_id': source_id, 'version': version, 'row_count': count, 'preview_count': len(rows)}, bump=False)
+            return {'source': dict(source), 'rows': rows, 'row_count': count, 'truncated': count > len(rows)}
+        finally:
+            store.close()
+
     def sources(self, case_id):
         case = dict(self.db.execute('SELECT * FROM cases WHERE id=?', (case_id,)).fetchone())
         store = Store(self.root / 'data', case['client_id'])

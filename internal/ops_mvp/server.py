@@ -163,6 +163,8 @@ class Handler(BaseHTTPRequestHandler):
                     self.send(200, result)
                 elif action == 'contact':
                     self.send(200, flow.contact(actor, case_id))
+                elif len(parts) == 7 and parts[3] == 'uploads' and parts[6] == 'preview':
+                    self.send(200, flow.preview_upload(actor, case_id, parts[4], int(parts[5])))
                 else:
                     raise FlowError('NOT_FOUND', 404)
                 return

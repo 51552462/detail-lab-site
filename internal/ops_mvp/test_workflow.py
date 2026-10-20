@@ -256,5 +256,19 @@ class WorkflowTests(unittest.TestCase):
             self.project()
         self.flow.create_experiment(O,self.case,scenario.experiment(generated))
 
+    def test_pending_upload_preview_preserves_review_boundary(self):
+        self.uploaded()
+        preview=self.flow.preview_upload(O,self.case,'SYN-data',1)
+        self.assertEqual(preview['row_count'],14);self.assertEqual(len(preview['rows']),14)
+        self.assertEqual(preview['source']['state'],'pending')
+        self.assertFalse(preview['truncated']);self.assertEqual(preview['rows'][0]['unit'],'건')
+        self.assertCode('LATEST_SOURCES_NOT_APPROVED',self.flow.draft_report,O,self.case,'weekly','2026-10-05','2026-10-18')
+
+    def test_pending_preview_is_operator_only_and_case_scoped(self):
+        self.uploaded()
+        self.assertCode('OPERATOR_REQUIRED',self.flow.preview_upload,A,self.case,'SYN-data',1)
+        self.assertCode('OPERATOR_REQUIRED',self.flow.preview_upload,B,self.case,'SYN-data',1)
+        self.assertCode('NOT_FOUND',self.flow.preview_upload,O,self.case,'SYN-other',1)
+
 
 if __name__ == '__main__': unittest.main()
