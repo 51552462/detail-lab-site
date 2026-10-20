@@ -235,7 +235,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
     server = TestServer(args.root, args.port)
     if args.seed_complete_case:
-        scenario.run(Path(args.root) / 'completed-scenario')  # Separate reference; never mislabel an open case.
+        check = Workflow(args.root)
+        empty = not check.list_cases(OPERATOR)
+        check.close()
+        if empty:
+            scenario.run(args.root)
     credentials_path = Path(args.root) / 'test-credentials.json'
     credentials_path.write_text(json.dumps({actor.id: token for token, actor in server.profiles.items()}, indent=2))
     os.chmod(credentials_path, 0o600)

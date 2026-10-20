@@ -31,6 +31,7 @@ class WorkflowTests(unittest.TestCase):
 
     def project(self):
         self.understood()
+        self.hypothesis = self.flow.add_claim(O, self.case, 'H', {'statement': '합성 가설', 'falsification': '반대 사례 확인'})
         self.flow.save_goal(O, self.case, scenario.goal(), self.rev())
         g = self.flow.latest_goal(self.case)
         for actor in (O, A):
@@ -151,8 +152,8 @@ class WorkflowTests(unittest.TestCase):
         self.assertCode('DUAL_APPROVAL_REQUIRED', self.flow.agreed, self.case)
 
     def test_experiment_client_approval_and_nonuse_reason(self):
-        self.project(); h = self.flow.add_claim(O, self.case, 'H', {'statement': '합성 가설', 'falsification': '반대 사례 확인'})
-        exp = self.flow.create_experiment(O, self.case, scenario.experiment(h))
+        self.project()
+        exp = self.flow.create_experiment(O, self.case, scenario.experiment(self.hypothesis))
         self.assertCode('EXECUTION_NOT_APPROVED', self.flow.observe, O, self.case, exp, scenario.observation())
         self.flow.approve_experiment(A, self.case, exp)
         note = scenario.observation('not_used'); note['not_used_reason'] = ''
@@ -240,6 +241,11 @@ class WorkflowTests(unittest.TestCase):
         self.project();book=Workbook();book.active['A1']='외부 링크';book.active['A1'].hyperlink='https://example.invalid'
         data=io.BytesIO();book.save(data);book.close()
         self.assertCode('EXTERNAL_RELATIONSHIP_REJECTED',self.flow.upload,A,self.case,'SYN-ext','x.xlsx',data.getvalue(),'합성','2026-10-05','2026-10-18','건')
+
+    def test_changed_diagnostic_basis_blocks_old_approved_goal(self):
+        self.project()
+        self.flow.add_claim(O,self.case,'U',{'statement':'새로운 합성 미확인','next_question':'새 자료 확인 필요'})
+        self.assertCode('GOAL_BASIS_CHANGED',self.flow.agreed,self.case)
 
 
 if __name__ == '__main__': unittest.main()

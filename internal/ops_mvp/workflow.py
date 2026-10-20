@@ -283,10 +283,11 @@ class Workflow:
             require(clean['start'] <= clean['end'] <= clean['review_on'], 'GOAL_DATE_ORDER')
             require(clean['metric'] in ('missed_handover:v1:건:sum', 'handling_minutes:v1:분:sum'), 'REGISTERED_METRIC_REQUIRED')
             version = self.db.execute('SELECT COALESCE(MAX(version),0)+1 FROM goals WHERE case_id=?', (case_id,)).fetchone()[0]
-            self.db.execute('INSERT INTO goals(case_id,version,body,digest) VALUES (?,?,?,?)', (case_id, version, dumps(clean), digest(clean)))
+            agreement_digest = digest({'goal': clean, 'basis': self.diagnostic_basis(case_id)})
+            self.db.execute('INSERT INTO goals(case_id,version,body,digest) VALUES (?,?,?,?)', (case_id, version, dumps(clean), agreement_digest))
             # Any scope revision pauses running experiments until the new agreement is approved.
             self.db.execute('UPDATE experiments SET state=? WHERE case_id=? AND state=?', ('paused_scope_change', case_id, 'running'))
-            self.event(actor, case_id, 'goal_version_created', {'version': version, 'digest': digest(clean)})
+            self.event(actor, case_id, 'goal_version_created', {'version': version, 'digest': agreement_digest})
         return version
 
     def latest_goal(self, case_id):
@@ -299,6 +300,7 @@ class Workflow:
             self.case(actor, case_id)
             goal = self.latest_goal(case_id)
             require(goal['version'] == version and goal['digest'] == expected_digest, 'STALE_GOAL', 409)
+            self.check_goal_basis(case_id, goal)
             column = 'lab_approved' if actor.role == 'operator' else 'client_approved'
             require(not goal[column], 'ALREADY_APPROVED', 409)
             self.db.execute(f'UPDATE goals SET {column}=1 WHERE case_id=? AND version=?', (case_id, version))
@@ -306,8 +308,20 @@ class Workflow:
 
     def agreed(self, case_id):
         goal = self.latest_goal(case_id)
+        self.check_goal_basis(case_id, goal)
         require(goal['lab_approved'] and goal['client_approved'], 'DUAL_APPROVAL_REQUIRED', 409)
         return goal
+
+    def diagnostic_basis(self, case_id):
+        case = self.db.execute('SELECT answers,interview,interview_confirmed FROM cases WHERE id=?', (case_id,)).fetchone()
+        basis = {'case': dict(case)}
+        for table in ('claims', 'evidence', 'modules'):
+            basis[table] = [dict(row) for row in self.db.execute(f'SELECT * FROM {table} WHERE case_id=? ORDER BY rowid', (case_id,))]
+        return basis
+
+    def check_goal_basis(self, case_id, goal):
+        current = digest({'goal': json.loads(goal['body']), 'basis': self.diagnostic_basis(case_id)})
+        require(current == goal['digest'], 'GOAL_BASIS_CHANGED', 409)
 
     def create_experiment(self, actor, case_id, body):
         with self.db:
