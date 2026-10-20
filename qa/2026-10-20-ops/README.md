@@ -56,3 +56,7 @@
 신규 artifact12246442933 ZIP SHA256 84ac85563f311125e5fe68c1b210e0dea1b9676c2831aed3108617fe191e76e8. 생성된 report.json의50흐름/errors[]/30파일을 읽음. 직접 열람: 360 login/intake-start/receipt/interview-task/interview-card/diagnosis-module/goal-version/dual-approval-guard/observed-use/upload-review/weekly-report/stale-report/handover-closed와 1280 weekly-report. 이전 run89의4개 및 run91의3개도 앞서 읽음. 뷰포트 캡처가 긴 폼·모든 항목의 전 영역을 담는 것은 아니며 전체30캡처·모든 질문/분기를 직접 읽었다고 하지 않음.
 
 시각 검수 후 U/I 코드만 보이던 카드에 실제 질문을, 실험/관측/보고 항목에 한국어 명칭을 붙이고 목표를 고객 목표→제공물 순으로 표시하는 편집을 추가함. 수치·권한·데이터 처리 로직은 그대로이며 최종 head CI와 해당 화면 재확인은 PR26·노션의 최신 기록을 따름. 신규 공개 반영·실제 현장 사용·유료 사업성은 여전히 미완료임.
+
+## 승인 전 행 검토 보강
+
+업로드를 받은 운영자가 승인 전에 값과 단위를 대조할 수 있도록 운영자 전용 검수 미리보기(최대100행·전체 행 수·출처 버전)를 추가했다.100행을 넘는 자료는 화면 승인을 막고 추가 검토를 요구한다. 미리보기가 자료 승인으로 바뀌지 않음을 별도 시험한다. 이 보강 뒤 로컬47단위/HTTP 시험 통과. 브라우저에는 pending14행 보기 경로/캡처를 추가했으며, 최종 head의52흐름/32캡처 여부와 직접 읽은 파일은 PR26·노션 최신 검수 기록에서 확인한다. 이전45/50/30은 run93~94 당시 결과로 보존한다.
