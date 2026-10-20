@@ -11,8 +11,8 @@ class PipelineTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)
         self.store = Store(self.root, 'SYN-A')
-        self.store.add_metric('SYN-A', 'SITE1', 'CONTACTS', 'v1', '건', '같은 날 유효 문의 건수, 테스트 정의')
-        self.row = ['r1', 'SITE1', 'CONTACTS', 'v1', '2026-10-01', '10.5']
+        self.store.add_metric('SYN-A', 'SITE1', 'HANDLE_MIN', 'v1', '분', '가상 업무의 처리 시간, 소수 분 허용')
+        self.row = ['r1', 'SITE1', 'HANDLE_MIN', 'v1', '2026-10-01', '10.5']
 
     def tearDown(self):
         self.store.close()
@@ -36,7 +36,7 @@ class PipelineTests(unittest.TestCase):
         self.store.review('SYN-A', 'SRC1', result['version'], 'reviewer')
         report = self.store.report('SYN-A', 'SRC1')
         self.assertEqual(report['records'][0]['value'], '10.5')
-        self.assertEqual(report['records'][0]['unit'], '건')
+        self.assertEqual(report['records'][0]['unit'], '분')
         self.assertEqual(report['source']['period_start'], '2026-10-01')
         self.assertEqual(len(report['source']['sha256']), 64)
         self.assertEqual(report['state'], 'draft')
