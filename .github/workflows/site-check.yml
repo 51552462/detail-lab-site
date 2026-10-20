@@ -9,6 +9,18 @@ permissions:
   contents: read
 
 jobs:
+  synthetic-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install openpyxl==3.1.5
+      - name: Verify synthetic import, tenant boundary, versions and approval
+        working-directory: internal/data_mvp
+        run: python -m unittest -v
+
   check:
     runs-on: ubuntu-latest
     steps:
@@ -43,3 +55,4 @@ jobs:
           path: customer-flow-artifacts/
           retention-days: 30
           if-no-files-found: error
+

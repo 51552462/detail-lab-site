@@ -108,6 +108,52 @@ async function landingPages(page, origin, viewport) {
     const section = `${viewport}-page-${name}-detail.png`;
     await page.locator(detail).screenshot({ path: path.join(out, section), style: '.site-header, .skip-link { visibility: hidden !important; }' });
     report.screenshots.push({ viewport, name: `page-${name}-detail`, filename: section, selector: detail });
+    if (file === 'index.html') {
+      assert.equal(await page.locator('.dl-concern').count(), 7);
+      assert.equal(await page.locator('#faq details').count(), 11);
+      assert.equal(await page.locator('form, input, textarea').count(), 0, 'no new personal-data intake');
+      for (const section of ['#concerns','#philosophy','#system','#about','#faq']) {
+        await screenshotResult(page, viewport, 'new-home-' + section.slice(1), section);
+      }
+      const question = page.locator('#faq summary').first();
+      await question.focus();
+      await page.keyboard.press('Enter');
+      assert.ok(await page.locator('#faq details').first().getAttribute('open') !== null);
+      await noOverflow(page);
+      record(viewport, 'unified-home', '7 concerns; 11 FAQs; keyboard disclosure', 'new content and no added intake');
+    }
+    if (file === 'business.html') {
+      assert.equal(await page.locator('.dl-case').count(), 4);
+      for (const id of ['case-sales','case-away','case-team','case-brand']) {
+        assert.equal(await page.locator('#' + id + ' dt').count(), 6);
+        await screenshotResult(page, viewport, 'new-' + id, '#' + id);
+      }
+      assert.ok((await page.locator('#cases').innerText()).includes('실제 고객'));
+      const actions = await page.locator('.subhero-actions .button').all();
+      const firstBox = await actions[0].boundingBox(), secondBox = await actions[1].boundingBox();
+      assert.ok(Math.max(secondBox.x - firstBox.x - firstBox.width, secondBox.y - firstBox.y - firstBox.height) >= 8, 'hero buttons need a visible gap');
+      const contrast = await page.evaluate(() => {
+        const rgb = value => value.match(/[\d.]+/g).slice(0, 3).map(Number);
+        const light = color => rgb(color).map(v => { v /= 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }).reduce((s, v, i) => s + v * [.2126, .7152, .0722][i], 0);
+        const a = light(getComputedStyle(document.querySelector('.dl-contact-prompts')).color);
+        const b = light(getComputedStyle(document.querySelector('.action-panel')).backgroundColor);
+        return (Math.max(a, b) + .05) / (Math.min(a, b) + .05);
+      });
+      assert.ok(contrast >= 4.5, 'contact question contrast');
+      await page.locator('[data-copy-intake]').click();
+      await page.waitForFunction(() => document.querySelector('#intake-copy-status').textContent.includes('복사했습니다'));
+      assert.ok((await page.evaluate(() => navigator.clipboard.readText())).includes('최근 걸린 한 장면'));
+      await page.evaluate(() => Object.defineProperty(navigator.clipboard, 'writeText', { configurable: true, value: async () => { throw new Error('synthetic clipboard denial'); } }));
+      await page.locator('[data-copy-intake]').click();
+      await page.waitForFunction(() => document.querySelector('#intake-copy-status').textContent.includes('직접 선택'));
+      assert.ok(await page.locator('.dl-intake-template').getAttribute('open') !== null);
+      await noOverflow(page);
+      await screenshotResult(page, viewport, 'new-contact', '#contact');
+      for (const section of ['#deliverables','#responsibility','#data','#market']) {
+        await screenshotResult(page, viewport, 'new-' + section.slice(1), section);
+      }
+      record(viewport, 'service-details', '4 fictional cases; 3 outputs; responsibility; template copy and failure fallback', 'no new submission or file collection');
+    }
     const additionalSections = {
       'index.html': ['.brand-criteria', '.category-benefit-preview', '#beta', '#faq'],
       'center.html': ['.founder-context', '#benefit'],
@@ -371,4 +417,5 @@ async function matching(page, origin, viewport) {
   await fs.writeFile(path.join(out, 'report.json'), JSON.stringify(report, null, 2));
   console.log(`Customer flow check: ${report.status}; ${report.checks.length} paths; ${report.screenshots.length} readable screenshot tiles; ${report.errors.length} JS errors`);
 });
+
 
