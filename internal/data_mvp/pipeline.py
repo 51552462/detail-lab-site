@@ -63,6 +63,11 @@ def read_rows(path):
                     raise DataError('ACTIVE_WORKBOOK_REJECTED')
                 if sum(z.file_size for z in archive.infolist()) > 20_000_000:
                     raise DataError('WORKBOOK_EXPANSION_LIMIT')
+                if any(z.flag_bits & 1 for z in archive.infolist()):
+                    raise DataError('ENCRYPTED_WORKBOOK_REJECTED')
+                for name in names:
+                    if name.lower().endswith('.rels') and re.search(br'TargetMode\s*=\s*[\x22\x27]External[\x22\x27]', archive.read(name), re.I):
+                        raise DataError('EXTERNAL_RELATIONSHIP_REJECTED')
             from openpyxl import load_workbook
             book = load_workbook(io.BytesIO(raw), read_only=True, data_only=False, keep_links=False)
             try:
@@ -79,7 +84,7 @@ def read_rows(path):
                 book.close()
         except ImportError:
             raise DataError('XLSX_DEPENDENCY_MISSING') from None
-        except (zipfile.BadZipFile, KeyError, OSError, ValueError) as exc:
+        except Exception as exc:
             if isinstance(exc, DataError):
                 raise
             raise DataError('INVALID_WORKBOOK') from None

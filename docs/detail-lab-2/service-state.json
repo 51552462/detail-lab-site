@@ -1,0 +1,56 @@
+{
+  "version": "2026-10-21-hosted-1",
+  "verified_on": "2026-10-21",
+  "public_website": {
+    "pr": 25,
+    "merge_sha": "d3ab5be0d3a45a3598fa7c1f3df1c3e53ec31a0b",
+    "source_state": "merged",
+    "content_observed": true,
+    "render_admin_sha": "d3ab5be0d3a45a3598fa7c1f3df1c3e53ec31a0b",
+    "version_marker": null,
+    "evidence": [
+      "index #concerns 7",
+      "index #faq 11",
+      "business #contact existing email"
+    ]
+  },
+  "services": {
+    "email_inquiry": "public",
+    "free_tools": "public_existing",
+    "center_beta": "public_existing_3_centers_18_human_questions",
+    "online_intake": "synthetic_loopback_only",
+    "workflow": "synthetic_loopback_only",
+    "customer_upload": "not_public",
+    "dashboard": "synthetic_loopback_only",
+    "hosted_rehearsal": "public_fixed_synthetic_fixtures_only",
+    "macro_api": "not_connected",
+    "ai_api": "not_connected",
+    "paid_products": "not_launched",
+    "real_customer_validation": "unverified"
+  },
+  "notion_report": "https://app.notion.com/p/3fff6ead74018197b686d0d72ca7305d",
+  "hosted_rehearsal": {
+    "url": "https://detail-lab-ops-trial.onrender.com/",
+    "service_id": "srv-dbc6s38n74is73fj6r6g",
+    "first_live_deploy": "dep-dbc6s3on74is73fj6rt0",
+    "source_sha": "acae73566d757babdda0b5a872adc64058a1552e",
+    "latest_live_deploy": "dep-dbc6vmcs728c73e7g0rg",
+    "plan": "free",
+    "region": "singapore",
+    "auto_deploy": false,
+    "state": "first_live_verified_homepage_link_pending",
+    "real_customer_data_permitted": false,
+    "accepts_free_text_or_files": false,
+    "retention": "temporary_max_1h_or_earlier_process_restart",
+    "authentication": "per_browser_cookie_demo_role_switch_not_real_customer_accounts"
+  },
+  "private_trial": {
+    "pr": 26,
+    "branch": "codex/detail-lab-ops-flow-20261020",
+    "state": "development_and_synthetic_test",
+    "published": false,
+    "real_customer_data_permitted": false,
+    "notion_sync": "manual_status_and_synthetic_evidence_only",
+    "external_ai_or_macro_api": "not_connected"
+  }
+}

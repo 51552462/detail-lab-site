@@ -1,0 +1,560 @@
+{
+  "synthetic_only": true,
+  "executed_on": "2026-10-20",
+  "case_id": "SYN-CASE-c7470b363d4d4783a9df931be7884224",
+  "client_id": "SYN-A",
+  "site_id": "SYN-A-SITE-1",
+  "final_state": "closed",
+  "event_count": 32,
+  "events": [
+    {
+      "at": "2026-10-20T06:50:34.702498+00:00",
+      "action": "received",
+      "actor": "client"
+    },
+    {
+      "at": "2026-10-20T06:50:34.711966+00:00",
+      "action": "state_changed",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.720823+00:00",
+      "action": "state_changed",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.724468+00:00",
+      "action": "state_changed",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.729947+00:00",
+      "action": "interview_recorded",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.732131+00:00",
+      "action": "interview_confirmed",
+      "actor": "client"
+    },
+    {
+      "at": "2026-10-20T06:50:34.739245+00:00",
+      "action": "diagnosis_selected",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.742510+00:00",
+      "action": "evidence_reviewed",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.745524+00:00",
+      "action": "claim_recorded",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.748999+00:00",
+      "action": "claim_recorded",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.751253+00:00",
+      "action": "claim_recorded",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.753587+00:00",
+      "action": "claim_recorded",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.757079+00:00",
+      "action": "goal_version_created",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.759931+00:00",
+      "action": "goal_approved",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.762696+00:00",
+      "action": "goal_approved",
+      "actor": "client"
+    },
+    {
+      "at": "2026-10-20T06:50:34.765588+00:00",
+      "action": "state_changed",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.767179+00:00",
+      "action": "state_changed",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.769523+00:00",
+      "action": "state_changed",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.772348+00:00",
+      "action": "experiment_planned",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.775251+00:00",
+      "action": "experiment_approved",
+      "actor": "client"
+    },
+    {
+      "at": "2026-10-20T06:50:34.778826+00:00",
+      "action": "use_recorded",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.788014+00:00",
+      "action": "upload_pending",
+      "actor": "client"
+    },
+    {
+      "at": "2026-10-20T06:50:34.795711+00:00",
+      "action": "upload_reviewed",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.798262+00:00",
+      "action": "client_decision",
+      "actor": "client"
+    },
+    {
+      "at": "2026-10-20T06:50:34.800725+00:00",
+      "action": "work_logged",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.811137+00:00",
+      "action": "report_drafted",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.814086+00:00",
+      "action": "report_approved",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.822388+00:00",
+      "action": "report_drafted",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.826954+00:00",
+      "action": "report_approved",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.837567+00:00",
+      "action": "report_drafted",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.841316+00:00",
+      "action": "report_approved",
+      "actor": "operator"
+    },
+    {
+      "at": "2026-10-20T06:50:34.844166+00:00",
+      "action": "state_changed",
+      "actor": "operator"
+    }
+  ],
+  "claims": [
+    {
+      "kind": "F",
+      "statement": "합성 기준표 발췌에 완료 칸이 없다."
+    },
+    {
+      "kind": "T",
+      "statement": "대표는 교대 후 다시 묻는다고 설명함."
+    },
+    {
+      "kind": "H",
+      "statement": "완료 뜻의 차이가 인계 누락에 영향을 줄 수 있다."
+    },
+    {
+      "kind": "U",
+      "statement": "다른 교대의 같은 문제 빈도"
+    }
+  ],
+  "reports": [
+    {
+      "id": "SYN-REPORT-1c04992af8744892808907e62b8e8bd8",
+      "kind": "weekly",
+      "state": "approved",
+      "stale": false,
+      "period": [
+        "2026-10-05",
+        "2026-10-18"
+      ],
+      "groups": [
+        {
+          "period": "2026-10-05",
+          "total": "21",
+          "unit": "건",
+          "observed_days": 7,
+          "trace": [
+            {
+              "observed_on": "2026-10-05",
+              "row_key": "SYN-row-5",
+              "source_id": "SYN-handover",
+              "value": "3",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-06",
+              "row_key": "SYN-row-6",
+              "source_id": "SYN-handover",
+              "value": "2",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-07",
+              "row_key": "SYN-row-7",
+              "source_id": "SYN-handover",
+              "value": "4",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-08",
+              "row_key": "SYN-row-8",
+              "source_id": "SYN-handover",
+              "value": "3",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-09",
+              "row_key": "SYN-row-9",
+              "source_id": "SYN-handover",
+              "value": "2",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-10",
+              "row_key": "SYN-row-10",
+              "source_id": "SYN-handover",
+              "value": "3",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-11",
+              "row_key": "SYN-row-11",
+              "source_id": "SYN-handover",
+              "value": "4",
+              "version": 1
+            }
+          ]
+        },
+        {
+          "period": "2026-10-12",
+          "total": "7",
+          "unit": "건",
+          "observed_days": 7,
+          "trace": [
+            {
+              "observed_on": "2026-10-12",
+              "row_key": "SYN-row-12",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-13",
+              "row_key": "SYN-row-13",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-14",
+              "row_key": "SYN-row-14",
+              "source_id": "SYN-handover",
+              "value": "0",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-15",
+              "row_key": "SYN-row-15",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-16",
+              "row_key": "SYN-row-16",
+              "source_id": "SYN-handover",
+              "value": "2",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-17",
+              "row_key": "SYN-row-17",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-18",
+              "row_key": "SYN-row-18",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            }
+          ]
+        }
+      ],
+      "limits": "합성 사례. 전후 차이의 원인·고객 만족·장기 지속성·매출 효과는 검증하지 않음."
+    },
+    {
+      "id": "SYN-REPORT-5793271ac9924344a1d194f7ec02ddda",
+      "kind": "monthly",
+      "state": "approved",
+      "stale": false,
+      "period": [
+        "2026-10-05",
+        "2026-10-18"
+      ],
+      "groups": [
+        {
+          "period": "2026-10",
+          "total": "28",
+          "unit": "건",
+          "observed_days": 14,
+          "trace": [
+            {
+              "observed_on": "2026-10-05",
+              "row_key": "SYN-row-5",
+              "source_id": "SYN-handover",
+              "value": "3",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-06",
+              "row_key": "SYN-row-6",
+              "source_id": "SYN-handover",
+              "value": "2",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-07",
+              "row_key": "SYN-row-7",
+              "source_id": "SYN-handover",
+              "value": "4",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-08",
+              "row_key": "SYN-row-8",
+              "source_id": "SYN-handover",
+              "value": "3",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-09",
+              "row_key": "SYN-row-9",
+              "source_id": "SYN-handover",
+              "value": "2",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-10",
+              "row_key": "SYN-row-10",
+              "source_id": "SYN-handover",
+              "value": "3",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-11",
+              "row_key": "SYN-row-11",
+              "source_id": "SYN-handover",
+              "value": "4",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-12",
+              "row_key": "SYN-row-12",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-13",
+              "row_key": "SYN-row-13",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-14",
+              "row_key": "SYN-row-14",
+              "source_id": "SYN-handover",
+              "value": "0",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-15",
+              "row_key": "SYN-row-15",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-16",
+              "row_key": "SYN-row-16",
+              "source_id": "SYN-handover",
+              "value": "2",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-17",
+              "row_key": "SYN-row-17",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-18",
+              "row_key": "SYN-row-18",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            }
+          ]
+        }
+      ],
+      "limits": "합성 사례. 전후 차이의 원인·고객 만족·장기 지속성·매출 효과는 검증하지 않음."
+    },
+    {
+      "id": "SYN-REPORT-b8b2a6e3ab7e4a5493acd07a660c9eec",
+      "kind": "annual",
+      "state": "approved",
+      "stale": false,
+      "period": [
+        "2026-10-05",
+        "2026-10-18"
+      ],
+      "groups": [
+        {
+          "period": "2026-10",
+          "total": "28",
+          "unit": "건",
+          "observed_days": 14,
+          "trace": [
+            {
+              "observed_on": "2026-10-05",
+              "row_key": "SYN-row-5",
+              "source_id": "SYN-handover",
+              "value": "3",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-06",
+              "row_key": "SYN-row-6",
+              "source_id": "SYN-handover",
+              "value": "2",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-07",
+              "row_key": "SYN-row-7",
+              "source_id": "SYN-handover",
+              "value": "4",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-08",
+              "row_key": "SYN-row-8",
+              "source_id": "SYN-handover",
+              "value": "3",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-09",
+              "row_key": "SYN-row-9",
+              "source_id": "SYN-handover",
+              "value": "2",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-10",
+              "row_key": "SYN-row-10",
+              "source_id": "SYN-handover",
+              "value": "3",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-11",
+              "row_key": "SYN-row-11",
+              "source_id": "SYN-handover",
+              "value": "4",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-12",
+              "row_key": "SYN-row-12",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-13",
+              "row_key": "SYN-row-13",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-14",
+              "row_key": "SYN-row-14",
+              "source_id": "SYN-handover",
+              "value": "0",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-15",
+              "row_key": "SYN-row-15",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-16",
+              "row_key": "SYN-row-16",
+              "source_id": "SYN-handover",
+              "value": "2",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-17",
+              "row_key": "SYN-row-17",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            },
+            {
+              "observed_on": "2026-10-18",
+              "row_key": "SYN-row-18",
+              "source_id": "SYN-handover",
+              "value": "1",
+              "version": 1
+            }
+          ]
+        }
+      ],
+      "limits": "합성 사례. 전후 차이의 원인·고객 만족·장기 지속성·매출 효과는 검증하지 않음."
+    }
+  ],
+  "execution_elapsed_seconds": 0.3373,
+  "elapsed_meaning": "소프트웨어 합성 시험 경과시간. 고객 업무시간·자동화 절감 효과가 아님.",
+  "real_customer_validation": false,
+  "business_validation": false
+}
