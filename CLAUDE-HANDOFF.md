@@ -1,4 +1,14 @@
-# 2026-10-20 현재 상태 — PR25 공개, PR26 비공개 시험
+# 2026-10-21 현재 상태 — PR26 병합·가상 온라인 체험 공개
+
+사용자의 배포 지시와 Render 공간 확인에 따라 PR26을 main`c95d7f14a2bfa9dae470e3ee08dba6965ff9ba60`로 병합했고 기존 홈페이지 Render live`dep-dbc72eh5efls73bepl3g`와 실제 홈→체험 링크를 확인했다. 최종 CI run99의4작업 success. 별도 https://detail-lab-ops-trial.onrender.com/ 은 free/Singapore/자동배포off, 앱 소스acae7356 / live dep-dbc6vmcs728c73e7g0rg다. 실제 공개 서버에서14단계·가상14행·승인 보고3종·종료를 시험했다.
+
+온라인 앱은 준비된 가상 자료만 처리하며 자유 입력·실제 파일·실계정·영구 저장을 제공하지 않는다. `server.py` 자유입력/업로드 시험실은 계속 루프백 전용이고 외부로 프록시하지 않았다. 체험의 역할 전환은 실제 고객 동의가 아니다. 실고객 도입·유료 인프라·외부 AI/경제 API·고객 발송은 아직 실행하지 않았다. 새 고정 유료 요금제를 선택하지 않았지만 공유 무료 시간/빌드/전송량을 소비한다. 실제 청구액은 미확인이다.
+
+최신 기준: `docs/detail-lab-2/service-state.json`, `internal/ops_mvp/HOSTED-TRIAL.md`, `qa/2026-10-21-hosted/README.md`. 아래 ‘미배포/배포 승인 전’은 각 과거 시점의 기록이다.
+
+---
+
+# 2026-10-20 당시 상태 — PR25 공개, PR26 비공개 시험
 
 PR25는 사용자 승인 후 main `d3ab5be0d3a45a3598fa7c1f3df1c3e53ec31a0b`로 병합됐고 공개 홈·통합 문의 경로를 재확인했습니다. 아래 과거의 PR25 승인 대기는 당시 기록입니다. 새 [PR26](https://github.com/51552462/detail-lab-site/pull/26)은 합성 전용 접수→인터뷰→진단→같은 목표 버전 양쪽 승인→실험→CSV/XLSX 검수→보고→인계 시험입니다. 별도 브랜치·draft이며 공개 기능으로 안내하지 않습니다. 새 수집/실고객 저장/유료 서비스/외부 AI·경제 API/배포는 승인 전 진행하지 않습니다.
 
