@@ -187,8 +187,8 @@ class App:
                 self.sweep()
                 if method == 'GET' and path == '/health':
                     payload = {'ok': True, 'mode': 'fixture-only', 'revision': os.environ.get('RENDER_GIT_COMMIT', 'local')[:12]}
-                elif method == 'GET' and path in ('/', '/app.css', '/trial.js', '/robots.txt'):
-                    file, kind = {'/': ('index.html', 'text/html; charset=utf-8'), '/trial.js': ('trial.js', 'text/javascript; charset=utf-8'), '/app.css': ('app.css', 'text/css; charset=utf-8'), '/robots.txt': ('robots.txt', 'text/plain; charset=utf-8')}[path]
+                elif method == 'GET' and path in ('/', '/app.css', '/trial.css', '/trial.js', '/robots.txt'):
+                    file, kind = {'/': ('index.html', 'text/html; charset=utf-8'), '/trial.js': ('trial.js', 'text/javascript; charset=utf-8'), '/app.css': ('app.css', 'text/css; charset=utf-8'), '/trial.css': ('trial.css', 'text/css; charset=utf-8'), '/robots.txt': ('robots.txt', 'text/plain; charset=utf-8')}[path]
                     asset = Path(__file__).with_name('web') / file if file == 'app.css' else WEB / file
                     payload = asset.read_bytes()
                 elif path in ('/api/trial', '/api/preview') and method == 'GET':
