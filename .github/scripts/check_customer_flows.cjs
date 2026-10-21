@@ -99,7 +99,13 @@ async function landingPages(page, origin, viewport) {
     report.screenshots.push({ viewport, name: `page-${name}-hero`, filename: first, scrollY: 0 });
     if (file === 'index.html') {
       assert.deepEqual(await page.locator('.category-card h3').allTextContents(), ['센터 자가점검','가게·교대 점검','직장 선택 기록','수업 준비 도구']);
-      assert.equal(await page.locator('#privacy-detail dt').count(), 5, 'home must say who answers, reads and decides for each tool');
+      const availableServices = await page.locator('#privacy-detail dt').allTextContents();
+      for (const service of ['전 업종 운영 문의','센터 무료 베타','무료 자가점검·기록지','맞춤 적용·정기 관리','고객별 데이터 시스템']) {
+        assert.ok(availableServices.includes(service), `existing service scope must remain: ${service}`);
+      }
+      const trialEntry = page.locator('#privacy-detail dd').filter({ has: page.locator('a[href="https://detail-lab-ops-trial.onrender.com/"]') });
+      assert.ok((await trialEntry.innerText()).includes('준비된 가상 자료만 사용'), 'hosted rehearsal must disclose fixture-only scope');
+      assert.ok((await trialEntry.innerText()).includes('실제 문의 접수나 고객 자료 저장은 하지 않습니다'), 'rehearsal must not imply real customer intake');
       assert.equal(await page.locator('#people .offer-steps li').count(), 4);
       const people = `${viewport}-page-index-people.png`;
       await page.locator('#people').screenshot({ path: path.join(out, people), style: '.site-header, .skip-link { visibility: hidden !important; }' });
