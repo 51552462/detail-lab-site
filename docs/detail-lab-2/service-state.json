@@ -1,17 +1,19 @@
 {
-  "version": "2026-10-21-hosted-1",
+  "version": "2026-10-21-hosted-2",
   "verified_on": "2026-10-21",
   "public_website": {
-    "pr": 25,
-    "merge_sha": "d3ab5be0d3a45a3598fa7c1f3df1c3e53ec31a0b",
+    "pr": 26,
+    "merge_sha": "c95d7f14a2bfa9dae470e3ee08dba6965ff9ba60",
     "source_state": "merged",
     "content_observed": true,
-    "render_admin_sha": "d3ab5be0d3a45a3598fa7c1f3df1c3e53ec31a0b",
+    "render_admin_sha": "c95d7f14a2bfa9dae470e3ee08dba6965ff9ba60",
+    "render_live_deploy": "dep-dbc72eh5efls73bepl3g",
     "version_marker": null,
     "evidence": [
       "index #concerns 7",
       "index #faq 11",
-      "business #contact existing email"
+      "business #contact existing email",
+      "index #privacy-detail fixture-only rehearsal link clicked and destination observed"
     ]
   },
   "services": {
@@ -38,7 +40,9 @@
     "plan": "free",
     "region": "singapore",
     "auto_deploy": false,
-    "state": "first_live_verified_homepage_link_pending",
+    "state": "public_fixture_rehearsal_verified_homepage_link_live",
+    "final_review_head": "acea0f43c1a863dd88381a5800e1cff249e16a29",
+    "final_ci": "https://github.com/51552462/detail-lab-site/actions/runs/39565788574",
     "real_customer_data_permitted": false,
     "accepts_free_text_or_files": false,
     "retention": "temporary_max_1h_or_earlier_process_restart",
@@ -47,7 +51,7 @@
   "private_trial": {
     "pr": 26,
     "branch": "codex/detail-lab-ops-flow-20261020",
-    "state": "development_and_synthetic_test",
+    "state": "code_merged_loopback_synthetic_only_not_public_runtime",
     "published": false,
     "real_customer_data_permitted": false,
     "notion_sync": "manual_status_and_synthetic_evidence_only",
