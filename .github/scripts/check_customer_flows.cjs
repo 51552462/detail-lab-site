@@ -157,6 +157,7 @@ async function centerBenefit(page, origin, viewport) {
   await page.goto(`${origin}/index.html`);
   await page.locator('#beta a[href="/center.html"]').click();
   await page.waitForURL(`${origin}/center.html`);
+  await page.locator('summary').filter({hasText:'수업 준비 베네핏은 어떻게 이용하나요?'}).click();
   await page.locator('a[href="#benefit"]').first().click();
   await page.waitForURL(`${origin}/center.html#benefit`);
   assert.ok(await page.locator('#benefit-title').isVisible());
