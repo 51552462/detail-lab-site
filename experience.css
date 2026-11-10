@@ -1,6 +1,6 @@
 /* Detail Lab customer experience, 2026-11-10 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap');
-:root{--dl-ink:#192b28;--dl-muted:#65726c;--dl-green:#254e41;--dl-paper:#f6f4ee;--dl-line:#d9ded5;--dl-gold:#9b8156;--max:1180px}
+:root{--dl-ink:#192b28;--dl-muted:#58675f;--dl-green:#254e41;--dl-paper:#f6f4ee;--dl-line:#d9ded5;--dl-gold:#7e6944;--max:1180px}
 body.editorial{margin:0;background:var(--dl-paper);color:var(--dl-ink);font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif;line-height:1.8;word-break:keep-all;-webkit-font-smoothing:antialiased}
 .editorial *{box-sizing:border-box}.editorial a{color:inherit}.editorial button{font:inherit}.editorial .site-header{position:relative;color:var(--dl-ink);background:var(--dl-paper);border-bottom:1px solid var(--dl-line)}
 .editorial .nav-shell{max-width:var(--max);margin:auto;width:calc(100% - 80px);height:92px;display:flex;align-items:center;justify-content:space-between}.editorial .brand{text-decoration:none;display:flex;align-items:center;gap:12px;font-size:12px;font-weight:800;letter-spacing:.14em}.editorial .brand-mark{width:38px;height:38px;border:1px solid #85938b;display:grid;place-items:center;font-size:12px}.editorial .site-nav{display:flex;gap:30px;align-items:center}.editorial .site-nav a{text-decoration:none;color:var(--dl-muted);font-size:13px}.editorial .site-nav a:last-child{padding:9px 18px;border:1px solid var(--dl-green);color:var(--dl-green)}
