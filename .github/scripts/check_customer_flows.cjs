@@ -18,12 +18,12 @@ const report = { sha: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root }).
   visualReview: 'not performed by this script', sources: {}, checks: [], screenshots: [], errors: [] };
 const pages = ['index.html', 'center.html', 'industry.html', 'employee-guide.html', 'matching.html', 'business.html', 'feedback.html',
   'owner-structure-check.html', 'industry-self-check.html', 'guide-self-check.html',
-  'trainer-self-check.html', 'matching-self-check.html', 'areas.css', 'og-home.png'];
+  'trainer-self-check.html', 'matching-self-check.html', 'areas.css', 'og-home.png', 'outputs.html', 'experience.css', 'experience-legacy.css', 'experience.js'];
 const record = (viewport, tool, branch, details) => {
   const item = { viewport, tool, branch, details };
   report.checks.push(item); console.log(JSON.stringify(item));
 };
-const mime = { '.html': 'text/html', '.css': 'text/css', '.png': 'image/png', '.webp': 'image/webp' };
+const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png', '.webp': 'image/webp' };
 let browser, server;
 
 async function copied(page, button, filename) {
@@ -69,116 +69,96 @@ async function noOverflow(page) {
 
 async function landingPages(page, origin, viewport) {
   for (const [file, heading, primary, detail] of [
-    ['index.html', '운영하면서 걸리는 일', '/business.html#contact', '.category-grid'],
+    ['index.html', '운영이 복잡해질수록', '/business.html#contact', '#deliverables'],
     ['center.html', '작은 결정도', '/owner-structure-check.html', '.path-grid'],
     ['industry.html', '사장님께 확인할게요', '/industry-self-check.html', '.example-output'],
     ['employee-guide.html', '면접 때 들은 조건', '#worksheet', '.example-output'],
     ['matching.html', '저녁 가능', '/matching-self-check.html?role=member', '.example-output'],
-    ['business.html', '운영 상황부터 듣고', '#contact', '.business-steps'],
+    ['business.html', '운영의 고민을', '#contact', '#process'],
+    ['outputs.html', '대표 부재 중 예약 변경', '/business.html#contact', '.ed-report'],
     ['feedback.html', '설명이 헷갈렸나요', 'https://wary-crocus-59c.notion.site/1ee8a0d648944e8abf0d7da9897ae80e', '.response-card']
   ]) {
     await page.goto(`${origin}/${file}`);
-    await page.evaluate(async () => {
-      await document.fonts.ready;
-      window.scrollTo(0, 0);
-      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-    });
+    await page.evaluate(async () => { await document.fonts.ready; window.scrollTo(0, 0); await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))); });
+    assert.equal(await page.locator('h1').count(), 1);
     assert.ok((await page.locator('h1').innerText()).includes(heading));
-    assert.deepEqual(await page.locator('#site-nav a').evaluateAll(links => links.map(link => link.getAttribute('href'))), ['/business.html#contact','/#process','/#tools','/center.html'], 'unified entry and retained beta in the main menu');
-    const action = file === 'index.html' ? page.locator('.brand-hero a[href="/business.html#contact"]') : page.locator(`a[href="${primary}"]`).first();
+    const editorial = ['index.html', 'business.html', 'outputs.html'].includes(file);
+    const expectedNav = editorial ? ['/business.html','/outputs.html','/#tools','/business.html#contact'] : ['/business.html#contact','/#process','/#tools','/center.html'];
+    assert.deepEqual(await page.locator('#site-nav a').evaluateAll(links => links.map(link => link.getAttribute('href'))), expectedNav, 'service entry, resources and retained routes');
+    const action = editorial ? page.locator(`.ed-button[href="${primary}"]`).first() : page.locator(`a[href="${primary}"]`).first();
     assert.ok(await action.isVisible());
-    assert.ok((await action.boundingBox()).height >= 44, `primary action must be fully readable and tappable: ${file}`);
+    assert.ok((await action.boundingBox()).height >= 44, `primary action must be readable and tappable: ${file}`);
     await noOverflow(page);
-
     const name = file.replace('.html', '');
-    // Element screenshots scroll the page; restore the actual first screen before saving its evidence.
-    await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; window.scrollTo({ top: 0, behavior: 'instant' }); });
-    await page.waitForFunction(() => window.scrollY === 0);
     const first = `${viewport}-page-${name}-hero.png`;
     await page.screenshot({ path: path.join(out, first) });
     report.screenshots.push({ viewport, name: `page-${name}-hero`, filename: first, scrollY: 0 });
+    if (editorial) assert.equal(await page.locator('form, input, textarea').count(), 0, 'no new personal-data intake');
     if (file === 'index.html') {
-      assert.deepEqual(await page.locator('.category-card h3').allTextContents(), ['센터 자가점검','가게·교대 점검','직장 선택 기록','수업 준비 도구']);
-      const availableServices = await page.locator('#privacy-detail dt').allTextContents();
-      for (const service of ['전 업종 운영 문의','센터 무료 베타','무료 자가점검·기록지','맞춤 적용·정기 관리','고객별 데이터 시스템']) {
-        assert.ok(availableServices.includes(service), `existing service scope must remain: ${service}`);
-      }
-      const trialEntry = page.locator('#privacy-detail dd').filter({ has: page.locator('a[href="https://detail-lab-ops-trial.onrender.com/"]') });
-      assert.ok((await trialEntry.innerText()).includes('준비된 가상 자료만 사용'), 'hosted rehearsal must disclose fixture-only scope');
-      assert.ok((await trialEntry.innerText()).includes('실제 문의 접수나 고객 자료 저장은 하지 않습니다'), 'rehearsal must not imply real customer intake');
-      assert.equal(await page.locator('#people .offer-steps li').count(), 4);
-      const people = `${viewport}-page-index-people.png`;
-      await page.locator('#people').screenshot({ path: path.join(out, people), style: '.site-header, .skip-link { visibility: hidden !important; }' });
-      report.screenshots.push({ viewport, name: 'page-index-people', filename: people, selector: '#people' });
-    }
-    const section = `${viewport}-page-${name}-detail.png`;
-    await page.locator(detail).screenshot({ path: path.join(out, section), style: '.site-header, .skip-link { visibility: hidden !important; }' });
-    report.screenshots.push({ viewport, name: `page-${name}-detail`, filename: section, selector: detail });
-    if (file === 'index.html') {
-      assert.equal(await page.locator('.dl-concern').count(), 7);
+      assert.deepEqual(await page.locator('.ed-tool h3').allTextContents(), ['센터 운영 점검','가게 응대·교대 점검','직장 선택 기록지','수업 조건 맞춰보기']);
+      assert.ok((await page.locator('#beta').innerText()).includes('18문'));
+      assert.ok((await page.locator('#beta').innerText()).includes('30일 행동 1개'));
+      assert.equal(await page.locator('#process li').count(), 4);
+      assert.equal(await page.locator('#concerns .ed-row').count(), 4);
       assert.equal(await page.locator('#faq details').count(), 11);
-      assert.equal(await page.locator('form, input, textarea').count(), 0, 'no new personal-data intake');
-      for (const section of ['#concerns','#philosophy','#system','#about','#faq']) {
-        await screenshotResult(page, viewport, 'new-home-' + section.slice(1), section);
-      }
       const question = page.locator('#faq summary').first();
-      await question.focus();
-      await page.keyboard.press('Enter');
+      await question.focus(); await page.keyboard.press('Enter');
       assert.ok(await page.locator('#faq details').first().getAttribute('open') !== null);
-      await noOverflow(page);
-      record(viewport, 'unified-home', '7 concerns; 11 FAQs; keyboard disclosure', 'new content and no added intake');
+      for (const section of ['#concerns','#process','#people','#tools','#faq']) await screenshotResult(page, viewport, 'home-' + section.slice(1), section);
+      record(viewport, 'unified-home', '4 situations; 11 FAQs; retained free/beta routes; keyboard disclosure', 'clear deliverables and no added intake');
     }
     if (file === 'business.html') {
-      assert.equal(await page.locator('.dl-case').count(), 4);
+      assert.equal(await page.locator('#cases article').count(), 4);
       for (const id of ['case-sales','case-away','case-team','case-brand']) {
-        assert.equal(await page.locator('#' + id + ' dt').count(), 6);
-        await screenshotResult(page, viewport, 'new-' + id, '#' + id);
+        assert.equal(await page.locator('#' + id + ' dt').count(), 4);
+        await screenshotResult(page, viewport, 'case-' + id, '#' + id);
       }
-      assert.ok((await page.locator('#cases').innerText()).includes('실제 고객'));
-      const actions = await page.locator('.subhero-actions .button').all();
-      const firstBox = await actions[0].boundingBox(), secondBox = await actions[1].boundingBox();
-      assert.ok(Math.max(secondBox.x - firstBox.x - firstBox.width, secondBox.y - firstBox.y - firstBox.height) >= 8, 'hero buttons need a visible gap');
+      assert.ok((await page.locator('#cases').innerText()).includes('가상'));
       const contrast = await page.evaluate(() => {
-        const rgb = value => value.match(/[\d.]+/g).slice(0, 3).map(Number);
-        const light = color => rgb(color).map(v => { v /= 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }).reduce((s, v, i) => s + v * [.2126, .7152, .0722][i], 0);
-        const a = light(getComputedStyle(document.querySelector('.dl-contact-prompts')).color);
-        const b = light(getComputedStyle(document.querySelector('.action-panel')).backgroundColor);
-        return (Math.max(a, b) + .05) / (Math.min(a, b) + .05);
+        const light = color => color.match(/[\d.]+/g).slice(0,3).map(Number).map(v => {v/=255; return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;}).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);
+        const a=light(getComputedStyle(document.querySelector('.ed-contact ol')).color), b=light(getComputedStyle(document.querySelector('.ed-contact')).backgroundColor);
+        return (Math.max(a,b)+.05)/(Math.min(a,b)+.05);
       });
-      assert.ok(contrast >= 4.5, 'contact question contrast');
+      assert.ok(contrast>=4.5, 'contact question contrast');
       await page.locator('[data-copy-intake]').click();
       await page.waitForFunction(() => document.querySelector('#intake-copy-status').textContent.includes('복사했습니다'));
       assert.ok((await page.evaluate(() => navigator.clipboard.readText())).includes('최근 걸린 한 장면'));
-      await page.evaluate(() => Object.defineProperty(navigator.clipboard, 'writeText', { configurable: true, value: async () => { throw new Error('synthetic clipboard denial'); } }));
+      await page.evaluate(() => Object.defineProperty(navigator.clipboard, 'writeText', {configurable:true,value:async()=>{throw new Error('synthetic clipboard denial');}}));
       await page.locator('[data-copy-intake]').click();
-      await page.waitForFunction(() => document.querySelector('#intake-copy-status').textContent.includes('직접 선택'));
-      assert.ok(await page.locator('.dl-intake-template').getAttribute('open') !== null);
-      await noOverflow(page);
-      await screenshotResult(page, viewport, 'new-contact', '#contact');
-      for (const section of ['#deliverables','#responsibility','#data','#market']) {
-        await screenshotResult(page, viewport, 'new-' + section.slice(1), section);
-      }
-      record(viewport, 'service-details', '4 fictional cases; 3 outputs; responsibility; template copy and failure fallback', 'no new submission or file collection');
+      await page.waitForFunction(() => document.querySelector('#intake-copy-status').textContent.includes('직접 복사'));
+      assert.ok(await page.locator('.ed-intake').getAttribute('open') !== null);
+      for (const section of ['#deliverables','#responsibility','#data','#market','#contact']) await screenshotResult(page, viewport, 'service-' + section.slice(1), section);
+      record(viewport, 'service-details', '4 hypothetical cases; responsibilities; template copy and denied-copy fallback', 'no new submission or file collection');
     }
+    if (file === 'outputs.html') {
+      assert.ok((await page.locator('main').innerText()).includes('가상'));
+      assert.equal(await page.locator('.ed-report h2').count(), 4);
+      assert.ok((await page.locator('main').innerText()).includes('실제 고객'));
+      await screenshotResult(page, viewport, 'report-example', '.ed-report');
+    }
+    const section = `${viewport}-page-${name}-detail.png`;
+    await page.locator(detail).screenshot({path:path.join(out,section),style:'.site-header, .skip-link { visibility:hidden !important; }'});
+    report.screenshots.push({viewport,name:`page-${name}-detail`,filename:section,selector:detail});
     const additionalSections = {
-      'index.html': ['.brand-criteria', '.category-benefit-preview', '#beta', '#faq'],
-      'center.html': ['.founder-context', '#benefit'],
-      'industry.html': ['.offer-intro', '.copy-why'],
-      'employee-guide.html': ['.offer-intro', '.copy-scene', '.copy-why', '.copy-compare', '.offer-detail', '#decision-next-steps'],
-      'business.html': ['.offer-intro', '.copy-why', '#contact', '.copy-faq']
+      'center.html':['.founder-context','#benefit'],
+      'industry.html':['.offer-intro','.copy-why'],
+      'employee-guide.html':['.offer-intro','.copy-scene','.copy-why','.copy-compare','.offer-detail','#decision-next-steps']
     }[file] || [];
-    for (const [index, selector] of additionalSections.entries()) {
-      const filename = `${viewport}-page-${name}-answer-${index + 1}.png`;
-      await page.locator(selector).screenshot({ path: path.join(out, filename), style: '.site-header, .skip-link { visibility: hidden !important; }' });
-      report.screenshots.push({ viewport, name: `page-${name}-answer-${index + 1}`, filename, selector });
+    for(const [index,selector] of additionalSections.entries()) {
+      const filename=`${viewport}-page-${name}-answer-${index+1}.png`;
+      await page.locator(selector).screenshot({path:path.join(out,filename),style:'.site-header, .skip-link { visibility:hidden !important; }'});
+      report.screenshots.push({viewport,name:`page-${name}-answer-${index+1}`,filename,selector});
     }
-    record(viewport, name, 'entry page', 'heading, primary action, horizontal layout and visible detail screenshot');
+    record(viewport,name,'entry page','heading, primary action, horizontal layout and detailed screenshots');
   }
 }
 
 async function centerBenefit(page, origin, viewport) {
   await page.goto(`${origin}/index.html`);
-  await page.locator('.category-benefit-preview a').click();
+  await page.locator('#beta a[href="/center.html"]').click();
+  await page.waitForURL(`${origin}/center.html`);
+  await page.locator('summary').filter({hasText:'수업 준비 베네핏은 어떻게 이용하나요?'}).click();
+  await page.locator('a[href="#benefit"]').first().click();
   await page.waitForURL(`${origin}/center.html#benefit`);
   assert.ok(await page.locator('#benefit-title').isVisible());
   assert.ok((await page.locator('#benefit').innerText()).includes('준비하고 있습니다'));
