@@ -18,12 +18,12 @@ const report = { sha: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root }).
   visualReview: 'not performed by this script', sources: {}, checks: [], screenshots: [], errors: [] };
 const pages = ['index.html', 'center.html', 'industry.html', 'employee-guide.html', 'matching.html', 'business.html', 'feedback.html',
   'owner-structure-check.html', 'industry-self-check.html', 'guide-self-check.html',
-  'trainer-self-check.html', 'matching-self-check.html', 'areas.css', 'og-home.png', 'outputs.html', 'beta.html', 'experience.css', 'experience-legacy.css', 'experience.js'];
+  'trainer-self-check.html', 'matching-self-check.html', 'areas.css', 'og-home.png', 'outputs.html', 'beta.html', 'experience.css', 'experience-legacy.css', 'experience.js', 'impact-preview.css', 'impact-preview.js', 'assets/operating-cycle.svg', 'assets/operating-goals.svg', 'assets/operating-goals-mobile.svg'];
 const record = (viewport, tool, branch, details) => {
   const item = { viewport, tool, branch, details };
   report.checks.push(item); console.log(JSON.stringify(item));
 };
-const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png', '.webp': 'image/webp' };
+const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp' };
 let browser, server;
 
 async function copied(page, button, filename) {
@@ -84,7 +84,7 @@ async function landingPages(page, origin, viewport) {
     assert.equal(await page.locator('h1').count(), 1);
     assert.ok((await page.locator('h1').innerText()).includes(heading));
     const editorial = ['index.html', 'business.html', 'outputs.html', 'beta.html'].includes(file);
-    const expectedNav = editorial ? ['/business.html','/outputs.html','/#tools','/business.html#contact'] : ['/business.html#contact','/#process','/#tools','/center.html'];
+    const expectedNav = editorial ? ['/business.html','/outputs.html','/#impact','/#tools','/business.html#contact'] : ['/business.html#contact','/#process','/#tools','/center.html'];
     assert.deepEqual(await page.locator('#site-nav a').evaluateAll(links => links.map(link => link.getAttribute('href'))), expectedNav, 'service entry, resources and retained routes');
     const action = editorial ? page.locator(`.ed-button[href="${primary}"]`).first() : page.locator(`a[href="${primary}"]`).first();
     assert.ok(await action.isVisible());
@@ -106,6 +106,32 @@ async function landingPages(page, origin, viewport) {
       await question.focus(); await page.keyboard.press('Enter');
       assert.ok(await page.locator('#faq details').first().getAttribute('open') !== null);
       for (const section of ['#concerns','#process','#people','#tools','#faq']) await screenshotResult(page, viewport, 'home-' + section.slice(1), section);
+      const tabs=page.locator('[data-impact-tab]');
+      assert.equal(await tabs.count(),3);
+      for(let i=0;i<3;i++){
+        await tabs.nth(i).click();
+        assert.equal(await tabs.nth(i).getAttribute('aria-selected'),'true');
+        const panel=page.locator('#'+await tabs.nth(i).getAttribute('aria-controls'));
+        assert.ok(await panel.isVisible());
+        assert.equal(await page.locator('.iv-panel:visible').count(),1);
+        assert.equal(await panel.locator('.iv-metric').count(),3);
+        assert.ok((await page.locator('#impact').innerText()).includes('가상 상황'));
+        await noOverflow(page);
+      }
+      await tabs.nth(2).focus();await page.keyboard.press('Home');
+      assert.equal(await tabs.nth(0).getAttribute('aria-selected'),'true');
+      await page.keyboard.press('ArrowRight');
+      assert.equal(await tabs.nth(1).getAttribute('aria-selected'),'true');
+      const directionImages=page.locator('#direction img');
+      assert.equal(await directionImages.count(),2);
+      for (const image of await directionImages.all()) {
+        await image.scrollIntoViewIfNeeded();
+        await page.waitForFunction(el=>el.complete && el.naturalWidth>0,await image.elementHandle());
+      }
+      assert.ok(await directionImages.evaluateAll(images=>images.every(image=>image.complete && image.naturalWidth>0 && image.alt.length>10)));
+      await screenshotResult(page,viewport,'operations-preview','#impact');
+      await screenshotResult(page,viewport,'business-direction','#direction');
+      record(viewport,'visual-story','3 accessible scenario panels; keyboard selection; images loaded; no added intake','illustrative content; no customer outcome figures');
       record(viewport, 'unified-home', '4 situations; 11 FAQs; retained free/beta routes; keyboard disclosure', 'clear deliverables and no added intake');
     }
     if (file === 'business.html') {
