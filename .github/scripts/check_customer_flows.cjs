@@ -69,14 +69,14 @@ async function noOverflow(page) {
 
 async function landingPages(page, origin, viewport) {
   for (const [file, heading, primary, detail] of [
-    ['index.html', '운영이 복잡해질수록', '/business.html#contact', '#deliverables'],
+    ['index.html', '혼자 붙들고 있던 고민을', '/business.html#contact', '#deliverables'],
     ['center.html', '작은 결정도', '/owner-structure-check.html', '.path-grid'],
     ['industry.html', '사장님께 확인할게요', '/industry-self-check.html', '.example-output'],
     ['employee-guide.html', '면접 때 들은 조건', '#worksheet', '.example-output'],
     ['matching.html', '저녁 가능', '/matching-self-check.html?role=member', '.example-output'],
     ['business.html', '운영의 고민을', '#contact', '#process'],
     ['beta.html', '업종보다', '#contact', '#deliverables'],
-    ['outputs.html', '대표 부재 중 예약 변경', '/business.html#contact', '.ed-report'],
+    ['outputs.html', '가격을 바꾸기 전', '/business.html#contact', '.ed-report'],
     ['feedback.html', '설명이 헷갈렸나요', 'https://wary-crocus-59c.notion.site/1ee8a0d648944e8abf0d7da9897ae80e', '.response-card']
   ]) {
     await page.goto(`${origin}/${file}`);
@@ -101,14 +101,14 @@ async function landingPages(page, origin, viewport) {
       assert.ok((await page.locator('#tools').innerText()).includes('30일 행동 1개'));
       assert.equal(await page.locator('#process li').count(), 4);
       assert.equal(await page.locator('#concerns .ed-row').count(), 4);
-      assert.equal(await page.locator('#faq details').count(), 11);
+      assert.equal(await page.locator('#faq details').count(), 12);
       const question = page.locator('#faq summary').first();
       await question.focus(); await page.keyboard.press('Enter');
       assert.ok(await page.locator('#faq details').first().getAttribute('open') !== null);
-      for (const section of ['#concerns','#process','#people','#tools','#faq']) await screenshotResult(page, viewport, 'home-' + section.slice(1), section);
+      for (const section of ['#concerns','#alongside','#process','#people','#tools','#faq']) await screenshotResult(page, viewport, 'home-' + section.slice(1), section);
       const tabs=page.locator('[data-impact-tab]');
-      assert.equal(await tabs.count(),3);
-      for(let i=0;i<3;i++){
+      assert.equal(await tabs.count(),4);
+      for(let i=0;i<4;i++){
         await tabs.nth(i).click();
         assert.equal(await tabs.nth(i).getAttribute('aria-selected'),'true');
         const panel=page.locator('#'+await tabs.nth(i).getAttribute('aria-controls'));
@@ -118,7 +118,7 @@ async function landingPages(page, origin, viewport) {
         assert.ok((await page.locator('#impact').innerText()).includes('가상 상황'));
         await noOverflow(page);
       }
-      await tabs.nth(2).focus();await page.keyboard.press('Home');
+      await tabs.nth(3).focus();await page.keyboard.press('Home');
       assert.equal(await tabs.nth(0).getAttribute('aria-selected'),'true');
       await page.keyboard.press('ArrowRight');
       assert.equal(await tabs.nth(1).getAttribute('aria-selected'),'true');
@@ -131,12 +131,12 @@ async function landingPages(page, origin, viewport) {
       assert.ok(await directionImages.evaluateAll(images=>images.every(image=>image.complete && image.naturalWidth>0 && image.alt.length>10)));
       await screenshotResult(page,viewport,'operations-preview','#impact');
       await screenshotResult(page,viewport,'business-direction','#direction');
-      record(viewport,'visual-story','3 accessible scenario panels; keyboard selection; images loaded; no added intake','illustrative content; no customer outcome figures');
-      record(viewport, 'unified-home', '4 situations; 11 FAQs; retained free/beta routes; keyboard disclosure', 'clear deliverables and no added intake');
+      record(viewport,'visual-story','4 accessible scenario panels; keyboard selection; images loaded; no added intake','illustrative content; no customer outcome figures');
+      record(viewport, 'unified-home', '4 situations; 12 FAQs; retained free/beta routes; keyboard disclosure', 'clear deliverables and no added intake');
     }
     if (file === 'business.html') {
-      assert.equal(await page.locator('#cases article').count(), 4);
-      for (const id of ['case-sales','case-away','case-team','case-brand']) {
+      assert.equal(await page.locator('#cases article').count(), 5);
+      for (const id of ['case-sales','case-away','case-team','case-brand','case-execution']) {
         assert.equal(await page.locator('#' + id + ' dt').count(), 4);
         await screenshotResult(page, viewport, 'case-' + id, '#' + id);
       }
@@ -155,7 +155,7 @@ async function landingPages(page, origin, viewport) {
       await page.waitForFunction(() => document.querySelector('#intake-copy-status').textContent.includes('직접 복사'));
       assert.ok(await page.locator('.ed-intake').getAttribute('open') !== null);
       for (const section of ['#deliverables','#responsibility','#data','#market','#contact']) await screenshotResult(page, viewport, 'service-' + section.slice(1), section);
-      record(viewport, 'service-details', '4 hypothetical cases; responsibilities; template copy and denied-copy fallback', 'no new submission or file collection');
+      record(viewport, 'service-details', '5 hypothetical cases; responsibilities; template copy and denied-copy fallback', 'no new submission or file collection');
     }
     if (file === 'beta.html') {
       assert.ok((await page.locator('#scope').innerText()).includes('업종을 정해두지 않습니다'));

@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 520" role="img" aria-labelledby="title desc">
-<title id="title">사람과 현장을 중심으로 이어지는 운영 개선</title><desc id="desc">대표와 목표를 정하고 현장에서 쓸 기준을 만든다. 실제 사용한 방식과 기록을 다시 보며 목표와 기준을 다듬는 구조.</desc>
+<title id="title">대표 곁에서 생각과 실행을 연결하는 운영 파트너</title><desc id="desc">대표의 고민을 듣고 자료와 선택지를 찾아본다. 나눠 맡아 실행한 뒤 반응을 보고 다음 판단으로 이어가는 구조.</desc>
 <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#829276" stroke-width="1.1"/></marker></defs>
 <rect width="620" height="520" fill="#edf0e7"/>
 <g fill="none" stroke="#a4b095" stroke-width="2" marker-end="url(#arrow)"><path d="M263 113H349"/><path d="M492 179V335"/><path d="M353 405H271"/><path d="M128 339V185"/></g>
 <circle cx="310" cy="259" r="72" fill="none" stroke="#c9d2c0" stroke-dasharray="3 7"/>
 <g font-family="Noto Sans KR,Apple SD Gothic Neo,Malgun Gothic,sans-serif" text-anchor="middle">
-<g><rect x="20" y="44" width="243" height="135" rx="2" fill="#fffefa" stroke="#cbd5c2"/><text x="141" y="88" font-size="13" fill="#7e6944" letter-spacing="2">DEFINE</text><text x="141" y="128" font-size="27" fill="#254e41">함께 정한 목표</text><text x="141" y="157" font-size="15" fill="#58675f">원하는 변화 · 맡길 일</text></g>
-<g><rect x="353" y="44" width="243" height="135" rx="2" fill="#254e41"/><text x="475" y="88" font-size="13" fill="#d5c59e" letter-spacing="2">MAKE</text><text x="475" y="128" font-size="27" fill="#fffefa">현장에서 쓸 기준</text><text x="475" y="157" font-size="15" fill="#dbe4d7">담당 · 안내 · 인계</text></g>
-<g><rect x="353" y="339" width="243" height="135" rx="2" fill="#fffefa" stroke="#cbd5c2"/><text x="475" y="382" font-size="13" fill="#7e6944" letter-spacing="2">APPLY</text><text x="475" y="422" font-size="27" fill="#254e41">실제로 쓴 방식</text><text x="475" y="451" font-size="15" fill="#58675f">사용 여부 · 현장 반응</text></g>
-<g><rect x="20" y="339" width="243" height="135" rx="2" fill="#fffefa" stroke="#cbd5c2"/><text x="141" y="382" font-size="13" fill="#7e6944" letter-spacing="2">REVIEW</text><text x="141" y="422" font-size="27" fill="#254e41">다시 볼 기록</text><text x="141" y="451" font-size="15" fill="#58675f">유지 · 수정 · 다음 판단</text></g>
-<text x="310" y="250" font-size="14" fill="#7e6944" letter-spacing="2">DETAIL LAB</text><text x="310" y="280" font-size="25" fill="#254e41">사람과 현장</text>
+<g><rect x="20" y="44" width="243" height="135" rx="2" fill="#fffefa" stroke="#cbd5c2"/><text x="141" y="88" font-size="13" fill="#7e6944" letter-spacing="2">LISTEN</text><text x="141" y="128" font-size="27" fill="#254e41">같이 짚은 고민</text><text x="141" y="157" font-size="15" fill="#58675f">상황 · 강점 · 원하는 변화</text></g>
+<g><rect x="353" y="44" width="243" height="135" rx="2" fill="#254e41"/><text x="475" y="88" font-size="13" fill="#d5c59e" letter-spacing="2">LOOK CLOSER</text><text x="475" y="128" font-size="27" fill="#fffefa">찾아보고 정한 일</text><text x="475" y="157" font-size="15" fill="#dbe4d7">조사 · 비교 · 선택</text></g>
+<g><rect x="353" y="339" width="243" height="135" rx="2" fill="#fffefa" stroke="#cbd5c2"/><text x="475" y="382" font-size="13" fill="#7e6944" letter-spacing="2">APPLY</text><text x="475" y="422" font-size="27" fill="#254e41">나눠 맡은 실행</text><text x="475" y="451" font-size="15" fill="#58675f">정리 · 제작 · 적용</text></g>
+<g><rect x="20" y="339" width="243" height="135" rx="2" fill="#fffefa" stroke="#cbd5c2"/><text x="141" y="382" font-size="13" fill="#7e6944" letter-spacing="2">REVIEW</text><text x="141" y="422" font-size="27" fill="#254e41">반응과 다음 판단</text><text x="141" y="451" font-size="15" fill="#58675f">관찰 · 기록 · 수정</text></g>
+<text x="310" y="250" font-size="14" fill="#7e6944" letter-spacing="2">DETAIL LAB</text><text x="310" y="280" font-size="25" fill="#254e41">대표 곁에서</text>
 </g></svg>
