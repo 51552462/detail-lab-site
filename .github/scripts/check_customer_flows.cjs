@@ -18,12 +18,12 @@ const report = { sha: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root }).
   visualReview: 'not performed by this script', sources: {}, checks: [], screenshots: [], errors: [] };
 const pages = ['index.html', 'center.html', 'industry.html', 'employee-guide.html', 'matching.html', 'business.html', 'feedback.html',
   'owner-structure-check.html', 'industry-self-check.html', 'guide-self-check.html',
-  'trainer-self-check.html', 'matching-self-check.html', 'areas.css', 'og-home.png', 'outputs.html', 'experience.css', 'experience-legacy.css', 'experience.js'];
+  'trainer-self-check.html', 'matching-self-check.html', 'areas.css', 'og-home.png', 'outputs.html', 'beta.html', 'experience.css', 'experience-legacy.css', 'experience.js', 'impact-preview.css', 'impact-preview.js', 'assets/operating-cycle.svg', 'assets/operating-goals.svg', 'assets/operating-goals-mobile.svg'];
 const record = (viewport, tool, branch, details) => {
   const item = { viewport, tool, branch, details };
   report.checks.push(item); console.log(JSON.stringify(item));
 };
-const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png', '.webp': 'image/webp' };
+const mime = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp' };
 let browser, server;
 
 async function copied(page, button, filename) {
@@ -75,6 +75,7 @@ async function landingPages(page, origin, viewport) {
     ['employee-guide.html', '면접 때 들은 조건', '#worksheet', '.example-output'],
     ['matching.html', '저녁 가능', '/matching-self-check.html?role=member', '.example-output'],
     ['business.html', '운영의 고민을', '#contact', '#process'],
+    ['beta.html', '업종보다', '#contact', '#deliverables'],
     ['outputs.html', '대표 부재 중 예약 변경', '/business.html#contact', '.ed-report'],
     ['feedback.html', '설명이 헷갈렸나요', 'https://wary-crocus-59c.notion.site/1ee8a0d648944e8abf0d7da9897ae80e', '.response-card']
   ]) {
@@ -82,8 +83,8 @@ async function landingPages(page, origin, viewport) {
     await page.evaluate(async () => { await document.fonts.ready; window.scrollTo(0, 0); await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))); });
     assert.equal(await page.locator('h1').count(), 1);
     assert.ok((await page.locator('h1').innerText()).includes(heading));
-    const editorial = ['index.html', 'business.html', 'outputs.html'].includes(file);
-    const expectedNav = editorial ? ['/business.html','/outputs.html','/#tools','/business.html#contact'] : ['/business.html#contact','/#process','/#tools','/center.html'];
+    const editorial = ['index.html', 'business.html', 'outputs.html', 'beta.html'].includes(file);
+    const expectedNav = editorial ? ['/business.html','/outputs.html','/#impact','/#tools','/business.html#contact'] : ['/business.html#contact','/#process','/#tools','/center.html'];
     assert.deepEqual(await page.locator('#site-nav a').evaluateAll(links => links.map(link => link.getAttribute('href'))), expectedNav, 'service entry, resources and retained routes');
     const action = editorial ? page.locator(`.ed-button[href="${primary}"]`).first() : page.locator(`a[href="${primary}"]`).first();
     assert.ok(await action.isVisible());
@@ -96,8 +97,8 @@ async function landingPages(page, origin, viewport) {
     if (editorial) assert.equal(await page.locator('form, input, textarea').count(), 0, 'no new personal-data intake');
     if (file === 'index.html') {
       assert.deepEqual(await page.locator('.ed-tool h3').allTextContents(), ['센터 운영 점검','가게 응대·교대 점검','직장 선택 기록지','수업 조건 맞춰보기']);
-      assert.ok((await page.locator('#beta').innerText()).includes('18문'));
-      assert.ok((await page.locator('#beta').innerText()).includes('30일 행동 1개'));
+      assert.ok((await page.locator('#tools').innerText()).includes('18문'));
+      assert.ok((await page.locator('#tools').innerText()).includes('30일 행동 1개'));
       assert.equal(await page.locator('#process li').count(), 4);
       assert.equal(await page.locator('#concerns .ed-row').count(), 4);
       assert.equal(await page.locator('#faq details').count(), 11);
@@ -105,6 +106,32 @@ async function landingPages(page, origin, viewport) {
       await question.focus(); await page.keyboard.press('Enter');
       assert.ok(await page.locator('#faq details').first().getAttribute('open') !== null);
       for (const section of ['#concerns','#process','#people','#tools','#faq']) await screenshotResult(page, viewport, 'home-' + section.slice(1), section);
+      const tabs=page.locator('[data-impact-tab]');
+      assert.equal(await tabs.count(),3);
+      for(let i=0;i<3;i++){
+        await tabs.nth(i).click();
+        assert.equal(await tabs.nth(i).getAttribute('aria-selected'),'true');
+        const panel=page.locator('#'+await tabs.nth(i).getAttribute('aria-controls'));
+        assert.ok(await panel.isVisible());
+        assert.equal(await page.locator('.iv-panel:visible').count(),1);
+        assert.equal(await panel.locator('.iv-metric').count(),3);
+        assert.ok((await page.locator('#impact').innerText()).includes('가상 상황'));
+        await noOverflow(page);
+      }
+      await tabs.nth(2).focus();await page.keyboard.press('Home');
+      assert.equal(await tabs.nth(0).getAttribute('aria-selected'),'true');
+      await page.keyboard.press('ArrowRight');
+      assert.equal(await tabs.nth(1).getAttribute('aria-selected'),'true');
+      const directionImages=page.locator('#direction img');
+      assert.equal(await directionImages.count(),2);
+      for (const image of await directionImages.all()) {
+        await image.scrollIntoViewIfNeeded();
+        await page.waitForFunction(el=>el.complete && el.naturalWidth>0,await image.elementHandle());
+      }
+      assert.ok(await directionImages.evaluateAll(images=>images.every(image=>image.complete && image.naturalWidth>0 && image.alt.length>10)));
+      await screenshotResult(page,viewport,'operations-preview','#impact');
+      await screenshotResult(page,viewport,'business-direction','#direction');
+      record(viewport,'visual-story','3 accessible scenario panels; keyboard selection; images loaded; no added intake','illustrative content; no customer outcome figures');
       record(viewport, 'unified-home', '4 situations; 11 FAQs; retained free/beta routes; keyboard disclosure', 'clear deliverables and no added intake');
     }
     if (file === 'business.html') {
@@ -129,6 +156,15 @@ async function landingPages(page, origin, viewport) {
       assert.ok(await page.locator('.ed-intake').getAttribute('open') !== null);
       for (const section of ['#deliverables','#responsibility','#data','#market','#contact']) await screenshotResult(page, viewport, 'service-' + section.slice(1), section);
       record(viewport, 'service-details', '4 hypothetical cases; responsibilities; template copy and denied-copy fallback', 'no new submission or file collection');
+    }
+    if (file === 'beta.html') {
+      assert.ok((await page.locator('#scope').innerText()).includes('업종을 정해두지 않습니다'));
+      assert.ok((await page.locator('main').innerText()).includes('1인 사업'));
+      assert.ok((await page.locator('#records').innerText()).includes('선택 사항'));
+      assert.ok((await page.locator('#contact a').getAttribute('href')).startsWith('mailto:detailab@naver.com?'));
+      assert.ok((await page.locator('#intake-template').innerText()).includes('실명·명단·민감한 원본 파일은 제외'));
+      assert.ok((await page.locator('main').innerText()).includes('기존 3곳·18문 사람 검토'));
+      record(viewport, 'open-industry-beta', 'single-problem scope; email inquiry; optional case publication; existing beta preserved', 'no new form or upload endpoint');
     }
     if (file === 'outputs.html') {
       assert.ok((await page.locator('main').innerText()).includes('가상'));
@@ -155,7 +191,7 @@ async function landingPages(page, origin, viewport) {
 
 async function centerBenefit(page, origin, viewport) {
   await page.goto(`${origin}/index.html`);
-  await page.locator('#beta a[href="/center.html"]').click();
+  await page.locator('#tools a[href="/center.html"]').click();
   await page.waitForURL(`${origin}/center.html`);
   await page.locator('summary').filter({hasText:'수업 준비 베네핏은 어떻게 이용하나요?'}).click();
   await page.locator('a[href="#benefit"]').first().click();
